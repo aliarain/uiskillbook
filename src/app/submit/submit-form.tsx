@@ -2,24 +2,29 @@
 
 import { useState } from "react";
 
+const REPO = "aliarain/uiskillbook";
+
 export function SubmitForm() {
   const [repo, setRepo] = useState("");
   const [path, setPath] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
 
-  const subject = encodeURIComponent(`Skill submission: ${repo || "untitled"}`);
-  const body = encodeURIComponent(
-    `Repository: ${repo}\nSkill path: ${path}\nAuthor: ${author}\n\nDescription:\n${description}`
-  );
-  const mailtoHref = `mailto:submit@uiskillbook.com?subject=${subject}&body=${body}`;
+  const issueUrl = `https://github.com/${REPO}/issues/new?${new URLSearchParams({
+    template: "skill-submission.yml",
+    title: `Skill: ${path || repo || "untitled"}`,
+    repo,
+    path,
+    author,
+    description,
+  }).toString()}`;
 
   return (
     <form
       className="mt-8 space-y-5"
       onSubmit={(e) => {
         e.preventDefault();
-        window.location.href = mailtoHref;
+        window.open(issueUrl, "_blank", "noreferrer");
       }}
     >
       <Field label="GitHub repository URL">
@@ -29,7 +34,7 @@ export function SubmitForm() {
           value={repo}
           onChange={(e) => setRepo(e.target.value)}
           placeholder="https://github.com/user/repo"
-          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
         />
       </Field>
 
@@ -40,7 +45,7 @@ export function SubmitForm() {
           value={path}
           onChange={(e) => setPath(e.target.value)}
           placeholder="skills/optical-alignment/SKILL.md"
-          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
         />
       </Field>
 
@@ -51,7 +56,7 @@ export function SubmitForm() {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Your name or handle"
-          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
         />
       </Field>
 
@@ -62,19 +67,19 @@ export function SubmitForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="What does this skill teach an agent to do?"
-          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
         />
       </Field>
 
-      <button
-        type="submit"
-        className="rounded-md border border-accent bg-accent-subtle px-4 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/10"
-      >
-        Submit for review
+      <button type="submit" className="btn btn-primary">
+        Open a GitHub issue →
       </button>
       <p className="text-xs text-muted">
-        Opens your email client with the submission pre-filled. We review every skill before
-        it&apos;s published — see our curation criteria in the About page.
+        Opens a pre-filled issue in{" "}
+        <a href={`https://github.com/${REPO}`} target="_blank" rel="noreferrer" className="underline">
+          {REPO}
+        </a>
+        . We review every submission against the curation criteria above before it&apos;s added.
       </p>
     </form>
   );

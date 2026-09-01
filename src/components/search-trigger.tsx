@@ -23,7 +23,7 @@ export function SearchBar({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={() => setOpen(true)}
-      className={`flex w-full items-center justify-between gap-3 rounded-md border border-border bg-surface px-4 py-3 text-left text-sm text-muted hover:border-accent/40 transition-colors ${className}`}
+      className={`card flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-muted ${className}`}
     >
       <span className="flex items-center gap-2">
         <SearchIcon />

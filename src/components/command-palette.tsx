@@ -43,12 +43,12 @@ export function CommandPalette({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-[#181817]/30 px-4 pt-[12vh]"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-[#181817]/40 px-4 pt-[12vh] backdrop-blur-sm"
       onClick={() => onOpenChange(false)}
     >
       <Command
         label="Search the Skillbook"
-        className="w-full max-w-xl overflow-hidden rounded-lg border border-border bg-surface shadow-2xl"
+        className="w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl"
         onClick={(e) => e.stopPropagation()}
         shouldFilter={true}
       >

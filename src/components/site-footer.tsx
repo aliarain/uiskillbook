@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { AGENTS } from "@/lib/taxonomy";
 
-const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
+const GITHUB_URL = "https://github.com/aliarain/uiskillbook";
+
+const COLUMNS: { title: string; links: { href: string; label: string; external?: boolean }[] }[] = [
   {
     title: "Browse",
     links: [
@@ -21,7 +23,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Resources",
     links: [
-      { href: "https://github.com", label: "GitHub" },
+      { href: GITHUB_URL, label: "GitHub", external: true },
       { href: "/llms.txt", label: "llms.txt" },
       { href: "/submit", label: "Submit a skill" },
       { href: "/about", label: "About" },
@@ -31,8 +33,8 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto max-w-[1140px] px-6 py-12">
+    <footer className="border-t border-border/60">
+      <div className="mx-auto max-w-[1140px] px-6 py-14">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div>
             <span className="font-mono text-sm font-semibold tracking-wide text-primary">
@@ -48,22 +50,56 @@ export function SiteFooter() {
                 {col.title}
               </h3>
               <ul className="mt-3 space-y-2">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-secondary transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) =>
+                  link.external ? (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm text-secondary transition-colors hover:text-primary"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ) : (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-secondary transition-colors hover:text-primary"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-10 border-t border-border pt-6 font-mono text-[11px] text-muted">
-          © 2026 UI Skillbook
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-border/60 pt-6 font-mono text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between">
+          <span>© 2026 UI Skillbook</span>
+          <span>
+            Built by{" "}
+            <a
+              href="https://aliarain.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-secondary transition-colors hover:text-accent"
+            >
+              Ali Arain
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://x.com/realaliarain"
+              target="_blank"
+              rel="noreferrer"
+              className="text-secondary transition-colors hover:text-accent"
+            >
+              @realaliarain
+            </a>
+          </span>
         </div>
       </div>
     </footer>

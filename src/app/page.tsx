@@ -24,14 +24,14 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-[1140px] px-6">
       {/* Hero */}
-      <section className="border-b border-border py-16 sm:py-20">
+      <section className="card mt-8 px-8 py-16 sm:mt-12 sm:px-14 sm:py-20">
         <p className="font-mono text-xs uppercase tracking-widest text-muted">
           Field guide 001
         </p>
-        <h1 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
+        <h1 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
           The field guide for building better interfaces with AI.
         </h1>
-        <p className="mt-4 max-w-xl text-base text-secondary">
+        <p className="mt-5 max-w-xl text-lg text-secondary">
           Curated UI skills, rules, and patterns for humans and coding agents.
           Search what you need, not what&apos;s trending.
         </p>
@@ -48,7 +48,7 @@ export default function Home() {
       </section>
 
       {/* What are you building */}
-      <section className="border-b border-border py-12">
+      <section className="py-14">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
           What are you building?
         </h2>
@@ -58,7 +58,7 @@ export default function Home() {
       </section>
 
       {/* Recommended */}
-      <section className="border-b border-border py-12">
+      <section className="py-8">
         <div className="flex items-baseline justify-between">
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
             Recommended
@@ -67,7 +67,7 @@ export default function Home() {
             Browse all skills →
           </Link>
         </div>
-        <div className="mt-2">
+        <div className="mt-3 space-y-0.5">
           {recommended.map((skill, i) => (
             <SkillRow key={skill.slug} skill={skill} index={i + 1} />
           ))}
@@ -75,11 +75,11 @@ export default function Home() {
       </section>
 
       {/* Latest additions */}
-      <section className="border-b border-border py-12">
+      <section className="py-8">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
           Latest additions
         </h2>
-        <div className="mt-2">
+        <div className="mt-3 space-y-0.5">
           {latest.map((skill, i) => (
             <SkillRow key={skill.slug} skill={skill} index={i + 1} />
           ))}
@@ -87,7 +87,7 @@ export default function Home() {
       </section>
 
       {/* Chapters */}
-      <section className="border-b border-border py-12">
+      <section className="py-14">
         <div className="flex items-baseline justify-between">
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
             Chapters
@@ -98,11 +98,7 @@ export default function Home() {
         </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {chapters.map((chapter) => (
-            <Link
-              key={chapter.slug}
-              href={`/chapters/${chapter.slug}`}
-              className="group rounded-md border border-border p-5 transition-colors hover:border-accent/40"
-            >
+            <Link key={chapter.slug} href={`/chapters/${chapter.slug}`} className="card block p-6">
               <span className="font-mono text-xs text-muted">
                 Chapter {String(chapter.number).padStart(2, "0")}
               </span>
@@ -118,16 +114,16 @@ export default function Home() {
       </section>
 
       {/* Browse by subject */}
-      <section className="py-12">
+      <section className="py-14">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
           Browse by subject
         </h2>
-        <div className="mt-4 grid gap-x-8 gap-y-1 sm:grid-cols-2">
+        <div className="mt-4 grid gap-x-4 gap-y-1 sm:grid-cols-2">
           {categoryCounts.map((cat, i) => (
             <Link
               key={cat.slug}
               href={`/skills?category=${cat.slug}`}
-              className="flex items-center justify-between border-b border-border py-2.5 text-sm transition-colors hover:text-accent"
+              className="row flex items-center justify-between px-3 py-3 text-sm"
             >
               <span className="text-secondary group-hover:text-primary">
                 <span className="mr-3 font-mono text-xs text-muted tabular-nums">

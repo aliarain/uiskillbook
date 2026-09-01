@@ -8,7 +8,7 @@ export function TaskSelector() {
         <Link
           key={task.slug}
           href={`/skills?task=${task.slug}`}
-          className="rounded-full border border-border px-3.5 py-1.5 text-sm text-secondary transition-colors hover:border-accent/40 hover:text-accent"
+          className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm text-secondary transition-colors hover:border-accent/30 hover:bg-accent-subtle hover:text-accent"
         >
           {task.label}
         </Link>

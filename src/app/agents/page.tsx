@@ -20,11 +20,7 @@ export default function AgentsPage() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {agents.map((agent) => (
-          <Link
-            key={agent.slug}
-            href={`/agents/${agent.slug}`}
-            className="rounded-md border border-border p-5 transition-colors hover:border-accent/40"
-          >
+          <Link key={agent.slug} href={`/agents/${agent.slug}`} className="card p-6">
             <h2 className="text-base font-medium text-primary">{agent.label}</h2>
             <p className="mt-2 font-mono text-xs text-muted">
               {getSkillsByAgent(agent.slug).length} compatible skills

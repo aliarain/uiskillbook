@@ -1,0 +1,55 @@
+name: Skill submission
+description: Submit a UI skill to be curated into UI Skillbook
+title: "Skill: "
+labels: ["skill-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Point us at a skill in your repository. We review every submission against
+        the curation criteria before it's added — see uiskillbook.com/about.
+
+  - type: input
+    id: repo
+    attributes:
+      label: GitHub repository URL
+      placeholder: https://github.com/user/repo
+    validations:
+      required: true
+
+  - type: input
+    id: path
+    attributes:
+      label: Skill path
+      description: Path to the SKILL.md (or equivalent) file in that repository.
+      placeholder: skills/optical-alignment/SKILL.md
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      placeholder: Your name or GitHub handle
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: What does this skill teach an agent to do?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Curation checklist
+      options:
+        - label: Has a concrete purpose and gives a usable instruction, not generic AI filler
+          required: true
+        - label: Doesn't duplicate a skill already in the Skillbook
+          required: true
+        - label: Preserves attribution, links its source repository, and states its license
+          required: true

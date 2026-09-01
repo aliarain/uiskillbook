@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { AgentSlug, CategorySlug, TaskSlug } from "./taxonomy";
+import externalSkillsData from "../../content/external-skills.json";
 
 const SKILLS_DIR = path.join(process.cwd(), "content", "skills");
 
@@ -10,7 +11,7 @@ export type SkillFrontmatter = {
   title: string;
   description: string;
   author: { name: string; url?: string };
-  source?: { repository?: string; path?: string };
+  source?: { repository?: string; path?: string; rawUrl?: string };
   categories: CategorySlug[];
   agents: AgentSlug[];
   tasks?: TaskSlug[];
@@ -19,25 +20,25 @@ export type SkillFrontmatter = {
   updated_at: string;
   license?: string;
   curated?: boolean;
+  /** True for skills indexed from an external repository — no local body, links out to source instead. */
+  external?: boolean;
 };
 
 export type Skill = SkillFrontmatter & {
   slug: string;
-  body: string;
+  body?: string;
 };
 
 let cache: Skill[] | null = null;
 
-export function getAllSkills(): Skill[] {
-  if (cache) return cache;
-
+function readLocalSkills(): Skill[] {
   const slugs = fs.existsSync(SKILLS_DIR)
     ? fs.readdirSync(SKILLS_DIR).filter((entry) =>
         fs.statSync(path.join(SKILLS_DIR, entry)).isDirectory()
       )
     : [];
 
-  const skills = slugs.map((slug) => {
+  return slugs.map((slug) => {
     const filePath = path.join(SKILLS_DIR, slug, "SKILL.md");
     const raw = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(raw);
@@ -47,6 +48,15 @@ export function getAllSkills(): Skill[] {
       ...(data as SkillFrontmatter),
     };
   });
+}
+
+export function getAllSkills(): Skill[] {
+  if (cache) return cache;
+
+  const skills: Skill[] = [
+    ...readLocalSkills(),
+    ...(externalSkillsData as Skill[]),
+  ];
 
   skills.sort((a, b) => a.title.localeCompare(b.title));
   cache = skills;

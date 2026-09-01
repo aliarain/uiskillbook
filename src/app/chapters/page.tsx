@@ -17,12 +17,12 @@ export default function ChaptersPage() {
         A chapter combines multiple skills into a practical lesson.
       </p>
 
-      <div className="mt-8">
+      <div className="mt-8 space-y-3">
         {chapters.map((chapter) => (
           <Link
             key={chapter.slug}
             href={`/chapters/${chapter.slug}`}
-            className="group flex items-start justify-between gap-4 border-b border-border py-6 transition-colors hover:bg-surface"
+            className="card group flex items-start justify-between gap-4 p-6"
           >
             <div>
               <span className="font-mono text-xs text-muted">

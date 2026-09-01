@@ -25,18 +25,27 @@ export function CopyButtons({
 
   return (
     <div className="flex flex-wrap gap-2">
-      <button
-        onClick={() => copy("skill", raw)}
-        className="rounded-md border border-border px-3.5 py-2 text-sm text-secondary transition-colors hover:border-accent/40 hover:text-primary"
-      >
+      <button onClick={() => copy("skill", raw)} className="btn btn-secondary">
         {copied === "skill" ? "Copied" : "Copy skill"}
       </button>
-      <button
-        onClick={() => copy("agent", agentPrompt)}
-        className="rounded-md border border-accent bg-accent-subtle px-3.5 py-2 text-sm text-accent transition-colors hover:bg-accent/10"
-      >
+      <button onClick={() => copy("agent", agentPrompt)} className="btn btn-primary">
         {copied === "agent" ? "Copied" : "Copy for agent"}
       </button>
     </div>
+  );
+}
+
+export function ExternalCopyButton({
+  agentPrompt,
+}: {
+  slug: string;
+  agentPrompt: string;
+}) {
+  const { copied, copy } = useClipboard();
+
+  return (
+    <button onClick={() => copy("agent", agentPrompt)} className="btn btn-secondary">
+      {copied === "agent" ? "Copied" : "Copy for agent"}
+    </button>
   );
 }

@@ -23,7 +23,7 @@ export default function SubmitPage() {
         Point us at a skill in your repository. We&apos;ll review it before it&apos;s published.
       </p>
 
-      <div className="mt-8 rounded-md border border-border bg-surface p-5">
+      <div className="card mt-8 p-6">
         <p className="font-mono text-xs uppercase tracking-wider text-muted">
           What gets curated
         </p>

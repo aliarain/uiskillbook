@@ -49,11 +49,11 @@ export default async function ChapterDetailPage({
         dangerouslySetInnerHTML={{ __html: html }}
       />
 
-      <div className="mt-10 border-t border-border pt-8">
+      <div className="mt-14">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
           Skills in this chapter
         </h2>
-        <div className="mt-2">
+        <div className="mt-3 space-y-0.5">
           {skills.map((skill, i) => (
             <SkillRow key={skill.slug} skill={skill} index={i + 1} />
           ))}

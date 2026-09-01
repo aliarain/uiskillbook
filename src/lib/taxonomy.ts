@@ -37,6 +37,7 @@ export type AgentSlug =
   | "cursor"
   | "opencode"
   | "copilot"
+  | "command-code"
   | "universal";
 
 export const AGENTS: { slug: AgentSlug; label: string }[] = [
@@ -45,6 +46,7 @@ export const AGENTS: { slug: AgentSlug; label: string }[] = [
   { slug: "cursor", label: "Cursor" },
   { slug: "opencode", label: "OpenCode" },
   { slug: "copilot", label: "Copilot" },
+  { slug: "command-code", label: "Command Code" },
   { slug: "universal", label: "Universal" },
 ];
 

@@ -41,7 +41,7 @@ export default async function AgentDetailPage({
         and use &ldquo;Copy for agent&rdquo; to paste it directly into your session.
       </p>
 
-      <div className="mt-6 rounded-md border border-border bg-surface p-5">
+      <div className="card mt-6 p-6">
         <p className="font-mono text-xs uppercase tracking-wider text-muted">
           Coming soon
         </p>
@@ -52,7 +52,7 @@ export default async function AgentDetailPage({
         </p>
       </div>
 
-      <div className="mt-10 border-t border-border pt-2">
+      <div className="mt-10 space-y-0.5">
         {skills.length === 0 ? (
           <p className="py-10 text-sm text-muted">No skills tagged for {label} yet.</p>
         ) : (

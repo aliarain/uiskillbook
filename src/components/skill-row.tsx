@@ -9,14 +9,21 @@ export function SkillRow({ skill, index }: { skill: Skill; index: number }) {
   return (
     <Link
       href={`/skills/${skill.slug}`}
-      className="group flex items-start gap-4 border-b border-border px-1 py-5 transition-colors hover:bg-surface sm:items-center sm:px-2"
+      className="row group flex items-start gap-4 px-3 py-4 sm:items-center"
     >
       <span className="w-6 shrink-0 pt-0.5 font-mono text-xs text-muted tabular-nums sm:pt-0">
         {String(index).padStart(2, "0")}
       </span>
 
       <div className="min-w-0 flex-1">
-        <h3 className="font-mono text-sm font-medium text-primary">{skill.slug}</h3>
+        <h3 className="flex items-center gap-2 font-mono text-sm font-medium text-primary">
+          {skill.slug}
+          {skill.external && (
+            <span className="rounded-full border border-border px-1.5 py-0.5 font-sans text-[10px] font-normal text-muted">
+              External
+            </span>
+          )}
+        </h3>
         <p className="mt-1 text-sm text-secondary line-clamp-2">{skill.description}</p>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
           <span>{skill.categories.map(categoryLabel).join(" · ")}</span>

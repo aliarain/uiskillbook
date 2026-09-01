@@ -129,11 +129,9 @@ export default async function SkillsPage({
         </p>
       )}
 
-      <div className="mt-6">
+      <div className="mt-8 space-y-0.5">
         {skills.length === 0 ? (
-          <p className="border-t border-border py-10 text-sm text-muted">
-            No skills match these filters yet.
-          </p>
+          <p className="py-10 text-sm text-muted">No skills match these filters yet.</p>
         ) : (
           skills.map((skill, i) => <SkillRow key={skill.slug} skill={skill} index={i + 1} />)
         )}

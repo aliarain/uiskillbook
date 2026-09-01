@@ -19,11 +19,7 @@ export default function CollectionsPage() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {collections.map((collection) => (
-          <Link
-            key={collection.slug}
-            href={`/collections/${collection.slug}`}
-            className="group rounded-md border border-border p-5 transition-colors hover:border-accent/40"
-          >
+          <Link key={collection.slug} href={`/collections/${collection.slug}`} className="card p-6">
             <h2 className="text-base font-medium text-primary">{collection.title}</h2>
             <p className="mt-2 text-sm text-secondary">{collection.description}</p>
             <p className="mt-3 font-mono text-xs text-muted">

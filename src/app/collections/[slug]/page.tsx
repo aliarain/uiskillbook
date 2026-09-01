@@ -45,7 +45,7 @@ export default async function CollectionDetailPage({
       <p className="mt-3 text-secondary">{collection.description}</p>
       <p className="mt-2 font-mono text-xs text-muted">{skills.length} skills</p>
 
-      <div className="mt-8 border-t border-border pt-2">
+      <div className="mt-10 space-y-0.5">
         {skills.map((skill, i) => (
           <SkillRow key={skill.slug} skill={skill} index={i + 1} />
         ))}
