@@ -11,6 +11,22 @@
 
   --accent: #315ce7;
   --accent-subtle: #ebefff;
+
+  color-scheme: light;
+}
+
+.dark {
+  --background: #141412;
+  --surface: #1b1b18;
+  --text-primary: #f3f3ee;
+  --text-secondary: #a3a39a;
+  --text-muted: #6f6f66;
+  --border: #2d2d28;
+
+  --accent: #6f91f5;
+  --accent-subtle: #1c2440;
+
+  color-scheme: dark;
 }
 
 @theme inline {

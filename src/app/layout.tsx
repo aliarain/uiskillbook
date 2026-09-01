@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { buildSearchIndex } from "@/lib/search-index";
 
 const geistSans = Geist({
@@ -32,14 +33,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <CommandPaletteProvider items={searchIndex}>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </CommandPaletteProvider>
+        <ThemeProvider>
+          <CommandPaletteProvider items={searchIndex}>
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </CommandPaletteProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

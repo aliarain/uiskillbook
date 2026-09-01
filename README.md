@@ -22,6 +22,30 @@ agent know before touching the code?"* Not: here are five thousand random prompt
   page", "Audit accessibility").
 - **Agents** — per-agent pages (Claude Code, Codex, Cursor, OpenCode, Copilot,
   Command Code) showing which skills work where.
+- **CLI** and **MCP server** — the same catalog, reachable from a terminal or
+  directly by an agent over Model Context Protocol.
+
+## CLI
+
+```bash
+npx uiskillbook start
+npx uiskillbook categories
+npx uiskillbook list --category motion
+npx uiskillbook get pressed-button-feedback
+```
+
+A thin client over `uiskillbook.com/skills/registry.json` and each skill's
+`llms.txt` — no local content bundle. Source: [`bin/uiskillbook.ts`](bin/uiskillbook.ts).
+
+## MCP
+
+```
+https://uiskillbook.com/mcp
+```
+
+Hand-rolled JSON-RPC 2.0 over HTTP (`initialize`, `tools/list`, `tools/call`) —
+no SDK dependency. Tools: `list_skills`, `get_skill`. Source:
+[`src/app/mcp/route.ts`](src/app/mcp/route.ts).
 
 ## Tech stack
 

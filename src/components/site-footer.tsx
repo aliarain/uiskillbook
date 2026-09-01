@@ -24,7 +24,9 @@ const COLUMNS: { title: string; links: { href: string; label: string; external?:
     title: "Resources",
     links: [
       { href: GITHUB_URL, label: "GitHub", external: true },
-      { href: "/llms.txt", label: "llms.txt" },
+      { href: "/llms.txt", label: "llms.txt", external: true },
+      { href: "/skills/registry.json", label: "registry.json", external: true },
+      { href: "/mcp", label: "MCP", external: true },
       { href: "/submit", label: "Submit a skill" },
       { href: "/about", label: "About" },
     ],

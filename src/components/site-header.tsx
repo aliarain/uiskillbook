@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SearchTrigger } from "./search-trigger";
+import { ThemeToggle } from "./theme-toggle";
 
 const NAV = [
   { href: "/skills", label: "Skills" },
@@ -41,6 +42,7 @@ export function SiteHeader() {
           >
             <GitHubIcon />
           </a>
+          <ThemeToggle />
           <SearchTrigger />
         </div>
       </div>

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { AGENTS, agentLabel } from "@/lib/taxonomy";
 import { getSkillsByAgent } from "@/lib/skills";
 import { SkillRow } from "@/components/skill-row";
+import { CopyCodeBlock } from "@/components/copy-code-block";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -41,14 +42,31 @@ export default async function AgentDetailPage({
         and use &ldquo;Copy for agent&rdquo; to paste it directly into your session.
       </p>
 
-      <div className="card mt-6 p-6">
-        <p className="font-mono text-xs uppercase tracking-wider text-muted">
-          Coming soon
-        </p>
-        <p className="mt-2 text-sm text-secondary">
-          A CLI and MCP server for one-command installs are on the roadmap. For now,
-          skills are copy-paste — every skill page has a &ldquo;Copy for agent&rdquo; button
-          formatted for direct use.
+      <div className="card mt-6 space-y-5 p-6">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-wider text-muted">CLI</p>
+          <p className="mt-1.5 text-sm text-secondary">
+            Browse and fetch skills from a terminal or an agent&apos;s shell tool.
+          </p>
+          <div className="mt-2">
+            <CopyCodeBlock code={`npx uiskillbook start\nnpx uiskillbook list --category motion\nnpx uiskillbook get pressed-button-feedback`} />
+          </div>
+        </div>
+        <div>
+          <p className="font-mono text-xs uppercase tracking-wider text-muted">MCP</p>
+          <p className="mt-1.5 text-sm text-secondary">
+            Connect {label} to the catalog over Model Context Protocol —{" "}
+            <code className="text-primary">list_skills</code> and{" "}
+            <code className="text-primary">get_skill</code> tools. Setup varies by agent;
+            point it at the endpoint below.
+          </p>
+          <div className="mt-2">
+            <CopyCodeBlock code="https://uiskillbook.com/mcp" />
+          </div>
+        </div>
+        <p className="text-xs text-muted">
+          Or skip both — every skill page has a &ldquo;Copy for agent&rdquo; button you can
+          paste directly into a session.
         </p>
       </div>
 

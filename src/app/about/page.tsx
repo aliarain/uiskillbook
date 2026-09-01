@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -33,10 +34,14 @@ export default function AboutPage() {
           Skill content is stored as plain markdown with a predictable schema — see any skill&apos;s
           &ldquo;View raw&rdquo; link. GitHub is the source of truth; the site indexes it at build time.
         </p>
-        <h2>What&apos;s next</h2>
+        <h2>CLI and MCP</h2>
         <p>
-          The website comes first. A CLI and MCP server for pulling skills directly into an
-          agent session are planned once the core library and usage patterns prove out.
+          <code>npx uiskillbook</code> is a thin client over the same catalog this site
+          serves — <code>start</code>, <code>categories</code>, <code>list</code>, and{" "}
+          <code>get &lt;slug&gt;</code>. The MCP server at{" "}
+          <a href="/mcp">uiskillbook.com/mcp</a> exposes the same catalog as{" "}
+          <code>list_skills</code> and <code>get_skill</code> tools for agents that speak
+          Model Context Protocol directly. See any <Link href="/agents">agent page</Link> for setup.
         </p>
       </div>
     </div>
