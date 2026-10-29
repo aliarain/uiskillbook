@@ -7,6 +7,7 @@ import { SkillRow } from "@/components/skill-row";
 import { CopyCodeBlock } from "@/components/copy-code-block";
 import { MCP_URL } from "@/lib/site";
 import { pageMetadata } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -39,7 +40,7 @@ export default async function AgentDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="label">Agent</span>
+      <Breadcrumbs items={[{ label: "Agents", href: "/agents" }, { label }]} />
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         UI Skillbook for {label}
       </h1>
