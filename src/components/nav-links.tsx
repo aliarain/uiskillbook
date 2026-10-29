@@ -18,7 +18,7 @@ export function NavLinks({ mobile = false }: { mobile?: boolean }) {
       aria-label={mobile ? "Main (mobile)" : "Main"}
       className={
         mobile
-          ? "scroll-thin -mx-6 flex gap-0.5 overflow-x-auto px-5 pb-2 md:hidden"
+          ? "-mx-6 flex gap-0.5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
           : "hidden items-center gap-0.5 md:flex"
       }
     >

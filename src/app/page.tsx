@@ -7,7 +7,6 @@ import { CATEGORIES, categoryLabel } from "@/lib/taxonomy";
 import { SkillCard } from "@/components/skill-card";
 import { SectionHeading } from "@/components/section-heading";
 import { TaskSelector } from "@/components/task-selector";
-import { SearchBar } from "@/components/search-trigger";
 import { InlineCode } from "@/components/inline-code";
 import { JsonLd } from "@/components/json-ld";
 import { AddToAgent } from "@/components/add-to-agent";
@@ -45,28 +44,42 @@ export default function Home() {
           },
         }}
       />
-      {/* Hero */}
-      <section className="dot-grid mt-6 rounded-feature border border-border px-6 py-14 sm:mt-10 sm:px-12 sm:py-20">
-        <h1 className="display max-w-2xl text-4xl sm:text-5xl">
-          The field guide for building better interfaces with AI.
-        </h1>
-        <p className="mt-5 max-w-xl text-lg text-secondary text-pretty">
-          Curated UI skills, rules and patterns for humans and coding agents.
+      <header className="mt-10 sm:mt-14">
+        <h1 className="display text-3xl">UI skills for coding agents</h1>
+        <p className="mt-2 text-secondary tabular-nums">
+          {skills.length} skills from {authors.length} authors, {designMds.length} Design.md files and{" "}
+          {chapters.length} short guides.
         </p>
-        <div className="mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
-          <SearchBar className="flex-1" />
-          <Link href="/skills" className="btn btn-primary h-11 px-5">
-            Browse skills
-          </Link>
+      </header>
+
+      {/* Recommended */}
+      <section className="mt-10">
+        <SectionHeading
+          title="Recommended"
+          href="/skills"
+          description="Hand-picked skills to start with."
+          allLabel="View all"
+        />
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {recommended.map((skill) => (
+            <SkillCard key={skill.slug} skill={skill} />
+          ))}
         </div>
-        <p className="mt-6 text-sm text-muted tabular-nums">
-          {skills.length} skills from {authors.length} authors, {designMds.length} Design.md files
-        </p>
       </section>
 
-      <div className="mt-16">
-        <AddToAgent />
-      </div>
+      {/* Latest additions */}
+      <section className="mt-16">
+        <SectionHeading
+          title="Latest additions"
+          href="/skills?sort=newest"
+          allLabel="View all"
+        />
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {latest.map((skill) => (
+            <SkillCard key={skill.slug} skill={skill} />
+          ))}
+        </div>
+      </section>
 
       {/* Design.md */}
       <section className="mt-16">
@@ -101,35 +114,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recommended */}
-      <section className="mt-16">
-        <SectionHeading
-          title="Recommended"
-          href="/skills"
-          description="Hand-picked skills to start with."
-          allLabel="View all"
-        />
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {recommended.map((skill) => (
-            <SkillCard key={skill.slug} skill={skill} />
-          ))}
-        </div>
-      </section>
-
-      {/* Latest additions */}
-      <section className="mt-16">
-        <SectionHeading
-          title="Latest additions"
-          href="/skills?sort=newest"
-          allLabel="View all"
-        />
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {latest.map((skill) => (
-            <SkillCard key={skill.slug} skill={skill} />
-          ))}
-        </div>
-      </section>
-
       {/* Learn */}
       <section className="mt-16">
         <SectionHeading
@@ -149,6 +133,10 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <div className="mt-16">
+        <AddToAgent />
+      </div>
 
       {/* Browse by topic */}
       <section className="mt-16 mb-8">
