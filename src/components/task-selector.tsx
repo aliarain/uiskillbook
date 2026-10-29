@@ -1,17 +1,13 @@
-import Link from "next/link";
+import { FilterChip } from "./filter-chip";
 import { TASKS } from "@/lib/taxonomy";
 
 export function TaskSelector() {
   return (
     <div className="flex flex-wrap gap-2">
       {TASKS.map((task) => (
-        <Link
-          key={task.slug}
-          href={`/skills?task=${task.slug}`}
-          className="pill"
-        >
+        <FilterChip key={task.slug} href={`/skills?task=${task.slug}`} active={false}>
           {task.label}
-        </Link>
+        </FilterChip>
       ))}
     </div>
   );

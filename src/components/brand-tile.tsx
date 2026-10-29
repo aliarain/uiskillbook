@@ -26,7 +26,7 @@ export function BrandTile({ entry, size = "md" }: { entry: DesignMd; size?: "md"
     return (
       <span
         aria-hidden
-        className={`flex shrink-0 items-center justify-center border border-border bg-surface transition-colors duration-150 group-hover:border-border-strong ${box}`}
+        className={`flex shrink-0 items-center justify-center border border-line bg-panel transition-colors duration-150 group-hover:border-line-strong ${box}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={entry.logo.light} alt="" className={`${img} ${NEUTRAL} ${entry.logo.dark ? "dark:hidden" : ""}`} />
@@ -43,7 +43,7 @@ export function BrandTile({ entry, size = "md" }: { entry: DesignMd; size?: "md"
       style={
         { "--brand": entry.color, "--brand-foreground": foregroundFor(entry.color) } as React.CSSProperties
       }
-      className={`flex shrink-0 items-center justify-center border border-border bg-surface font-medium text-muted transition-colors duration-150 group-hover:border-(--brand) group-hover:bg-(--brand) group-hover:text-(--brand-foreground) group-focus-visible:border-(--brand) group-focus-visible:bg-(--brand) group-focus-visible:text-(--brand-foreground) ${box}`}
+      className={`flex shrink-0 items-center justify-center border border-line bg-panel font-medium text-ink-3 transition-colors duration-150 group-hover:border-(--brand) group-hover:bg-(--brand) group-hover:text-(--brand-foreground) group-focus-visible:border-(--brand) group-focus-visible:bg-(--brand) group-focus-visible:text-(--brand-foreground) ${box}`}
       aria-hidden
     >
       {entry.icon && getSimpleIcon(entry.icon) ? (

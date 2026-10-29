@@ -60,13 +60,13 @@ export default async function DesignMdDetailPage({
             href={entry.website}
             target="_blank"
             rel="noreferrer"
-            className="rounded-input text-sm text-accent underline-offset-2 hover:underline"
+            className="rounded-input text-sm text-link underline-offset-2 hover:underline"
           >
             {entry.website.replace(/^https?:\/\/(www\.)?/, "")}
           </a>
         </div>
       </div>
-      <p className="mt-4 text-base text-secondary">{entry.description}</p>
+      <p className="mt-4 text-base text-ink-2">{entry.description}</p>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <CopyButtons raw={raw} agentPrompt={agentPrompt} rawLabel="Copy DESIGN.md" />

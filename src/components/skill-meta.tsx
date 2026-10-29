@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/siteplane/components/avatar";
 import type { Skill } from "@/lib/skills";
 import { authorAvatar, skillStars } from "@/lib/skills";
 
@@ -7,25 +8,11 @@ const compact = new Intl.NumberFormat("en", { notation: "compact", maximumFracti
 export function AuthorBadge({ skill }: { skill: Skill }) {
   const avatar = authorAvatar(skill);
   return (
-    <span className="flex min-w-0 items-center gap-2 text-sm text-secondary">
-      {avatar ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={avatar}
-          alt=""
-          width={20}
-          height={20}
-          loading="lazy"
-          className="size-5 shrink-0 rounded-full border border-border bg-surface"
-        />
-      ) : (
-        <span
-          aria-hidden
-          className="flex size-5 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-[11px] font-medium text-muted"
-        >
-          {skill.author.name.charAt(0)}
-        </span>
-      )}
+    <span className="flex min-w-0 items-center gap-2 text-sm text-ink-2">
+      <Avatar className="size-5 shrink-0 text-[11px]">
+        {avatar && <AvatarImage src={avatar} alt="" loading="lazy" />}
+        <AvatarFallback>{skill.author.name.charAt(0)}</AvatarFallback>
+      </Avatar>
       <span className="truncate">{skill.author.name}</span>
     </span>
   );
@@ -37,7 +24,7 @@ export function StarCount({ skill }: { skill: Skill }) {
   if (stars === undefined) return null;
   return (
     <span
-      className="flex shrink-0 items-center gap-1 text-sm text-muted tabular-nums"
+      className="flex shrink-0 items-center gap-1 text-sm text-ink-3 tabular-nums"
       title={`${stars.toLocaleString("en")} GitHub stars on the source repository`}
     >
       <Star size={14} strokeWidth={1.75} aria-hidden className="fill-current" />

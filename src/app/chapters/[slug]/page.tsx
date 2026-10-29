@@ -50,7 +50,7 @@ export default async function ChapterDetailPage({
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         {chapter.title}
       </h1>
-      <p className="mt-2 text-[13px] text-muted">
+      <p className="mt-2 text-[13px] text-ink-3">
         {chapter.minutes} min read, {skills.length} skills
       </p>
 

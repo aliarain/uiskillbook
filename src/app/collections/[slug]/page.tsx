@@ -46,8 +46,8 @@ export default async function CollectionDetailPage({
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         {collection.title}
       </h1>
-      <p className="mt-3 text-secondary">{collection.description}</p>
-      <p className="mt-2 text-[13px] text-muted">{skills.length} skills</p>
+      <p className="mt-3 text-ink-2">{collection.description}</p>
+      <p className="mt-2 text-[13px] text-ink-3">{skills.length} skills</p>
 
       <div className="mt-10 space-y-0.5">
         {skills.map((skill, i) => (

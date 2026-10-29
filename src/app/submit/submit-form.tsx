@@ -1,5 +1,9 @@
 "use client";
 
+import { Button } from "@/siteplane/components/button";
+import { Field, FieldDescription, FieldLabel } from "@/siteplane/components/field";
+import { Input } from "@/siteplane/components/input";
+import { Textarea } from "@/siteplane/components/textarea";
 import { useState } from "react";
 
 const REPO = "aliarain/uiskillbook";
@@ -27,54 +31,55 @@ export function SubmitForm() {
         window.open(issueUrl, "_blank", "noreferrer");
       }}
     >
-      <Field label="GitHub repository URL">
-        <input
+      <Field>
+        <FieldLabel>GitHub repository URL</FieldLabel>
+        <Input
           required
           type="url"
           value={repo}
           onChange={(e) => setRepo(e.target.value)}
           placeholder="https://github.com/user/repo"
-          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
-      <Field label="Skill path" hint="e.g. skills/optical-alignment/SKILL.md">
-        <input
+      <Field>
+        <FieldLabel>Skill path</FieldLabel>
+        <FieldDescription>e.g. skills/optical-alignment/SKILL.md</FieldDescription>
+        <Input
           required
           type="text"
           value={path}
           onChange={(e) => setPath(e.target.value)}
           placeholder="skills/optical-alignment/SKILL.md"
-          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
-      <Field label="Author">
-        <input
+      <Field>
+        <FieldLabel>Author</FieldLabel>
+        <Input
           required
           type="text"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Your name or handle"
-          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
-      <Field label="Description">
-        <textarea
+      <Field>
+        <FieldLabel>Description</FieldLabel>
+        <Textarea
           required
           rows={4}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="What does this skill teach an agent to do?"
-          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
-      <button type="submit" className="btn btn-primary">
+      <Button type="submit">
         Open a GitHub issue
-      </button>
-      <p className="text-xs text-muted">
+      </Button>
+      <p className="text-xs text-ink-3">
         Opens a pre-filled issue in{" "}
         <a href={`https://github.com/${REPO}`} target="_blank" rel="noreferrer" className="underline">
           {REPO}
@@ -82,23 +87,5 @@ export function SubmitForm() {
         . We review every submission against the curation criteria above before it&apos;s added.
       </p>
     </form>
-  );
-}
-
-function Field({
-  label,
-  hint,
-  children,
-}: {
-  label: string;
-  hint?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className="block">
-      <span className="label">{label}</span>
-      {hint && <span className="ml-2 text-xs text-muted">{hint}</span>}
-      <div className="mt-1.5">{children}</div>
-    </label>
   );
 }

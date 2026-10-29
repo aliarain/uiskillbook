@@ -44,7 +44,7 @@ export default async function AgentDetailPage({
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         UI Skillbook for {label}
       </h1>
-      <p className="mt-3 max-w-lg text-secondary">
+      <p className="mt-3 max-w-lg text-ink-2">
         Give {label} access to UI Skillbook&apos;s design knowledge. Open any skill below
         and use &ldquo;Copy for agent&rdquo; to paste it directly into your session.
       </p>
@@ -52,7 +52,7 @@ export default async function AgentDetailPage({
       <div className="card mt-6 space-y-5 p-5">
         <div>
           <p className="label">CLI</p>
-          <p className="mt-1.5 text-sm text-secondary">
+          <p className="mt-1.5 text-sm text-ink-2">
             Browse and fetch skills from a terminal or an agent&apos;s shell tool.
           </p>
           <div className="mt-2">
@@ -61,17 +61,17 @@ export default async function AgentDetailPage({
         </div>
         <div>
           <p className="label">MCP</p>
-          <p className="mt-1.5 text-sm text-secondary">
+          <p className="mt-1.5 text-sm text-ink-2">
             Connect {label} to the catalog over Model Context Protocol —{" "}
-            <code className="text-primary">list_skills</code> and{" "}
-            <code className="text-primary">get_skill</code> tools. Setup varies by agent;
+            <code className="text-ink">list_skills</code> and{" "}
+            <code className="text-ink">get_skill</code> tools. Setup varies by agent;
             point it at the endpoint below.
           </p>
           <div className="mt-2">
             <CopyCodeBlock code={MCP_URL} />
           </div>
         </div>
-        <p className="text-xs text-muted">
+        <p className="text-xs text-ink-3">
           Or skip both — every skill page has a &ldquo;Copy for agent&rdquo; button you can
           paste directly into a session.
         </p>
@@ -79,7 +79,7 @@ export default async function AgentDetailPage({
 
       <div className="mt-10 space-y-0.5">
         {skills.length === 0 ? (
-          <p className="py-10 text-sm text-muted">No skills tagged for {label} yet.</p>
+          <p className="py-10 text-sm text-ink-3">No skills tagged for {label} yet.</p>
         ) : (
           skills.map((skill, i) => <SkillRow key={skill.slug} skill={skill} index={i + 1} />)
         )}

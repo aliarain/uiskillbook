@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { categorySlug, getAllDesignMds, getDesignMdCategories } from "@/lib/design-md";
 import { BrandTile } from "@/components/brand-tile";
+import { FilterChip } from "@/components/filter-chip";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -23,26 +24,25 @@ export default async function DesignMdIndexPage({
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-12">
       <h1 className="display text-4xl">Design.md</h1>
-      <p className="mt-2 max-w-2xl text-secondary">
+      <p className="mt-2 max-w-2xl text-ink-2">
         Drop-in DESIGN.md files that describe a brand&apos;s colors, type, spacing and components,
         so your coding agent can work in that style. Independent write-ups, not official brand
         assets.
       </p>
 
       <nav aria-label="Filter by category" className="mt-8 flex flex-wrap gap-1.5">
-        <Link href="/design-md" aria-current={active ? undefined : "page"} className="pill">
+        <FilterChip href="/design-md" active={!active}>
           All
-        </Link>
+        </FilterChip>
         {categories.map((c) => (
-          <Link
+          <FilterChip
             key={c.slug}
             href={active?.slug === c.slug ? "/design-md" : `/design-md?category=${c.slug}`}
-            aria-current={active?.slug === c.slug ? "page" : undefined}
-            className="pill"
+            active={active?.slug === c.slug}
           >
             {c.label}
             <span className="tabular-nums opacity-60">{c.count}</span>
-          </Link>
+          </FilterChip>
         ))}
       </nav>
 
@@ -55,9 +55,9 @@ export default async function DesignMdIndexPage({
           >
             <BrandTile entry={entry} />
             <div className="min-w-0">
-              <h2 className="text-base font-medium text-primary">{entry.name}</h2>
-              <p className="text-xs text-muted">{entry.category}</p>
-              <p className="mt-2 line-clamp-2 text-sm text-secondary">{entry.description}</p>
+              <h2 className="text-base font-medium text-ink">{entry.name}</h2>
+              <p className="text-xs text-ink-3">{entry.category}</p>
+              <p className="mt-2 line-clamp-2 text-sm text-ink-2">{entry.description}</p>
             </div>
           </Link>
         ))}

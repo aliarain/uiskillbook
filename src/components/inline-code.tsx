@@ -6,7 +6,7 @@ export function InlineCode({ text }: { text: string }) {
         part.startsWith("`") && part.endsWith("`") ? (
           <code
             key={i}
-            className="rounded-input border border-border bg-surface px-1 py-px font-mono text-[0.85em] text-primary"
+            className="rounded-input border border-line bg-panel px-1 py-px font-mono text-[0.85em] text-ink"
           >
             {part.slice(1, -1)}
           </code>
