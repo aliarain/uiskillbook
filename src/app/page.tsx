@@ -5,6 +5,7 @@ import { CATEGORIES, categoryLabel } from "@/lib/taxonomy";
 import { SkillRow } from "@/components/skill-row";
 import { TaskSelector } from "@/components/task-selector";
 import { SearchBar } from "@/components/search-trigger";
+import { InlineCode } from "@/components/inline-code";
 
 export default function Home() {
   const skills = getAllSkills();
@@ -86,27 +87,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chapters */}
+      {/* Learn */}
       <section className="py-14">
-        <div className="flex items-baseline justify-between">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-            Chapters
-          </h2>
-          <Link href="/chapters" className="text-sm text-secondary hover:text-primary">
-            All chapters →
-          </Link>
-        </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/chapters"
+          className="group inline-flex items-center gap-1.5 text-xl font-semibold tracking-tight text-primary"
+        >
+          Learn
+          <span aria-hidden className="text-muted transition-transform group-hover:translate-x-0.5">
+            ›
+          </span>
+        </Link>
+        <p className="mt-1 text-sm text-secondary">
+          Short playbook guides for the details agents usually miss.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {chapters.map((chapter) => (
-            <Link key={chapter.slug} href={`/chapters/${chapter.slug}`} className="card block p-6">
-              <span className="font-mono text-xs text-muted">
-                Chapter {String(chapter.number).padStart(2, "0")}
-              </span>
-              <h3 className="mt-1.5 text-base font-medium text-primary">
+            <Link key={chapter.slug} href={`/chapters/${chapter.slug}`} className="card block p-5">
+              <h3 className="text-base font-medium text-primary text-balance">
                 {chapter.title}
               </h3>
-              <p className="mt-2 font-mono text-xs text-muted">
-                {chapter.minutes} min · {chapter.skills.length} skills
+              <p className="mt-1.5 text-sm leading-relaxed text-secondary">
+                <InlineCode text={chapter.tip} />
               </p>
             </Link>
           ))}

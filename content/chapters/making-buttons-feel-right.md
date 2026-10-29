@@ -2,6 +2,8 @@
 number: 1
 title: Making buttons feel right
 description: A button is the most-clicked element in most interfaces. Small mistakes here compound across every screen it appears on.
+tip: "Give presses instant feedback with `:active` and a visible `:focus-visible` ring."
+updated_at: "2026-09-01"
 minutes: 7
 skills:
   - pressed-button-feedback

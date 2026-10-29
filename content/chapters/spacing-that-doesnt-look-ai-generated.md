@@ -2,6 +2,8 @@
 number: 2
 title: Spacing that doesn't look AI-generated
 description: Inconsistent spacing is the fastest way to make a layout feel unplanned. Here's how to fix it systematically.
+tip: "Pick spacing from one scale like `gap-4` / `gap-8` instead of one-off values."
+updated_at: "2026-09-01"
 minutes: 9
 skills:
   - spacing-rhythm
