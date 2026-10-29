@@ -24,6 +24,11 @@ export type SkillFrontmatter = {
   curated?: boolean;
   /** True for skills indexed from an external repository — no local body, links out to source instead. */
   external?: boolean;
+  /**
+   * Safety review of a submitted skill: scripts/scan-skill.mjs plus a manual
+   * read, against the pinned `commit` that source URLs point at.
+   */
+  review?: { commit: string; date: string; result: "pass"; issue?: string };
   /** Set on the generated Siteplane UI component entries (scripts/generate-siteplane-skills.mjs). */
   siteplane?: SiteplaneComponent;
 };
