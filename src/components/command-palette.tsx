@@ -1,6 +1,7 @@
 "use client";
 
 import { Command } from "cmdk";
+import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { SearchItem } from "@/lib/search-index";
@@ -77,14 +78,7 @@ export function CommandPalette({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex h-12 shrink-0 items-center gap-2.5 border-b border-border px-4">
-          <svg width="16" height="16" viewBox="0 0 15 15" fill="none" aria-hidden="true" className="shrink-0 text-muted">
-            <path
-              d="M6.5 11a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM13 13l-3.15-3.15"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <Search size={16} strokeWidth={1.75} aria-hidden className="shrink-0 text-muted" />
           <Command.Input
             autoFocus
             placeholder="Search skills and guides…"

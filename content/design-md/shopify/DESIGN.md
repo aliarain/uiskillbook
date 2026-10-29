@@ -4,6 +4,7 @@ description: "Polaris: a calm, merchant-focused admin with a deep green brand, c
 website: https://www.shopify.com
 color: "#008060"
 category: Commerce
+icon: shopify
 updated_at: "2026-10-29"
 ---
 

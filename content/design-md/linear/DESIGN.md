@@ -4,6 +4,7 @@ description: "Dark-first, keyboard-driven product UI with crisp Inter type, low-
 website: https://linear.app
 color: "#5E6AD2"
 category: Productivity
+icon: linear
 updated_at: "2026-10-29"
 ---
 

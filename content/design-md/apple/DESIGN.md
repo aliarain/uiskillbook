@@ -4,6 +4,7 @@ description: "Product-first marketing with huge photography, SF Pro headlines an
 website: https://www.apple.com
 color: "#1D1D1F"
 category: Consumer
+icon: apple
 updated_at: "2026-10-29"
 ---
 

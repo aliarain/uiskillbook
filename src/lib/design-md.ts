@@ -12,8 +12,8 @@ export type DesignMdFrontmatter = {
   color: string;
   category: string;
   updated_at: string;
-  /** Optional logo path under /public. Without one the tile shows the brand initial. */
-  logo?: string;
+  /** Simple Icons slug for the brand mark. Without one the tile shows the brand initial. */
+  icon?: string;
 };
 
 export type DesignMd = DesignMdFrontmatter & {

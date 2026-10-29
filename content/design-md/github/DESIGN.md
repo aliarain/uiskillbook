@@ -4,6 +4,7 @@ description: "Primer: a functional, information-dense system with neutral grays,
 website: https://github.com
 color: "#1F2328"
 category: Developer tools
+icon: github
 updated_at: "2026-10-29"
 ---
 

@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import type { Skill } from "@/lib/skills";
 import { authorAvatar, skillStars } from "@/lib/skills";
 
@@ -39,9 +40,7 @@ export function StarCount({ skill }: { skill: Skill }) {
       className="flex shrink-0 items-center gap-1 text-sm text-muted tabular-nums"
       title={`${stars.toLocaleString("en")} GitHub stars on the source repository`}
     >
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M8 .9a.6.6 0 0 1 .54.33l1.86 3.77 4.16.6a.6.6 0 0 1 .33 1.03l-3 2.93.7 4.14a.6.6 0 0 1-.87.63L8 12.38l-3.72 1.95a.6.6 0 0 1-.87-.63l.71-4.14-3.01-2.93a.6.6 0 0 1 .33-1.03l4.16-.6L7.46 1.23A.6.6 0 0 1 8 .9Z" />
-      </svg>
+      <Star size={14} strokeWidth={1.75} aria-hidden className="fill-current" />
       <span className="sr-only">GitHub stars: </span>
       {compact.format(stars)}
     </span>

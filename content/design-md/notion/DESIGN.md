@@ -4,6 +4,7 @@ description: "Document-first minimalism: warm off-black text, almost no chrome, 
 website: https://www.notion.so
 color: "#37352F"
 category: Productivity
+icon: notion
 updated_at: "2026-10-29"
 ---
 

@@ -4,6 +4,7 @@ description: "Playful multi-color brand around a quiet, compact editor UI with a
 website: https://www.figma.com
 color: "#A259FF"
 category: Design tools
+icon: figma
 updated_at: "2026-10-29"
 ---
 

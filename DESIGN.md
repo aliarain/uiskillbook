@@ -45,8 +45,8 @@ violet `tag-violet` on `tag-violet-bg`.
 
 ## Typography
 
-- **Inter** for all text. **Geist Mono** only for real code, such as commands, file names and URLs.
-- **Display** (`.display`): 30–48px, weight 500, `-0.02em` tracking, line height about 1.08, balanced wrapping. Never below 30px.
+- **IBM Plex Sans** (500/600) for headings (`h1`–`h3`, `.display`). **Inter** for body and UI text. **Geist Mono** only for real code, such as commands, file names and URLs.
+- **Display** (`.display`): IBM Plex Sans, 30–48px, weight 500, `-0.02em` tracking, line height about 1.08, balanced wrapping. Never below 30px.
 - **Section title**: 20px, weight 600.
 - **Body**: 16px at 1.5. **Dense UI**: 14px at 1.43. **Labels** (`.label`): 13px, weight 500, sentence case, untracked. No tracked capitals.
 - **Scale**: 11, 13, 14, 16, 18, 20, 24, 30, 36, 48.
@@ -74,7 +74,7 @@ Used rarely:
 - **Inputs**: white background, 1px border, 6px radius, 8×12px padding, and 16px text on mobile.
 - **Cards** (`.card`): 1px border, 12px radius, no shadow. On hover only the border darkens.
 - **Rows** (`.row`): dense list items that fill with `hover` on hover.
-- **Logo tiles**: neutral until hovered or focused, then the brand color.
+- **Logo tiles**: monochrome Simple Icons marks (CC0) drawn with a CSS mask, neutral until hovered or focused, then the brand color. Brands without a mark show their initial.
 - **Hero**: optional faint dotted grid (`.dot-grid`).
 
 ## Interaction

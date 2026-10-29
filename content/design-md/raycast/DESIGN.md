@@ -4,6 +4,7 @@ description: "Keyboard-first launcher aesthetic: dark glass panels, compact list
 website: https://www.raycast.com
 color: "#FF6363"
 category: Developer tools
+icon: raycast
 updated_at: "2026-10-29"
 ---
 

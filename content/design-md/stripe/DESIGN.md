@@ -4,6 +4,7 @@ description: "Precise, confident fintech UI: deep navy text, a single blurple ac
 website: https://stripe.com
 color: "#635BFF"
 category: Fintech
+icon: stripe
 updated_at: "2026-10-29"
 ---
 

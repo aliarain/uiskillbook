@@ -102,6 +102,7 @@
   --color-tag-violet-bg: var(--tag-violet-bg);
 
   --font-sans: var(--font-inter);
+  --font-heading: var(--font-plex);
   --font-mono: var(--font-geist-mono);
 
   /* The only radii in the system */
@@ -139,6 +140,13 @@
     line-height: 1.5;
   }
 
+  h1,
+  h2,
+  h3,
+  .display {
+    font-family: var(--font-heading), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+
   .font-mono,
   code,
   kbd,
@@ -158,7 +166,7 @@
 }
 
 @layer components {
-  /* Display type: 30px and up only. Inter 500 with tight tracking. */
+  /* Display type: 30px and up only. IBM Plex Sans 500 with tight tracking. */
   .display {
     font-weight: 500;
     letter-spacing: -0.02em;

@@ -4,6 +4,7 @@ description: "Dark, album-art-forward media UI with a signature green and bold, 
 website: https://www.spotify.com
 color: "#1DB954"
 category: Media
+icon: spotify
 updated_at: "2026-10-29"
 ---
 

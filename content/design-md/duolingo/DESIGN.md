@@ -4,6 +4,7 @@ description: "Bright, gamified learning UI with chunky 3D buttons, rounded type 
 website: https://www.duolingo.com
 color: "#58CC02"
 category: Education
+icon: duolingo
 updated_at: "2026-10-29"
 ---
 

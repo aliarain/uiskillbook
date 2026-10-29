@@ -1,11 +1,8 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export function Chevron({ className = "" }: { className?: string }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
-      <path d="m6 3.5 4.5 4.5L6 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <ChevronRight size={16} strokeWidth={1.75} aria-hidden className={className} />;
 }
 
 /** Section title (20px, links to its index) with an optional one-line description. */

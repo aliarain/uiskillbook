@@ -4,6 +4,7 @@ description: "Strict black-and-white developer aesthetic built on Geist, hairlin
 website: https://vercel.com
 color: "#000000"
 category: Developer tools
+icon: vercel
 updated_at: "2026-10-29"
 ---
 

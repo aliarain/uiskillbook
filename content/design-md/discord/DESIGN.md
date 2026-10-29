@@ -4,6 +4,7 @@ description: "Friendly chat UI on layered dark grays, with a blurple accent and 
 website: https://discord.com
 color: "#5865F2"
 category: Community
+icon: discord
 updated_at: "2026-10-29"
 ---
 

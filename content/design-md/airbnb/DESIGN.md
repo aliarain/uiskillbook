@@ -4,6 +4,7 @@ description: "Warm, photo-led marketplace UI with rounded cards, a coral accent 
 website: https://www.airbnb.com
 color: "#FF385C"
 category: Marketplace
+icon: airbnb
 updated_at: "2026-10-29"
 ---
 
