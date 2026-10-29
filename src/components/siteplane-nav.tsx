@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { Button } from "@/siteplane/components/button";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@/siteplane/components/collapsible";
+import { Button } from "@/raptrx-ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@/raptrx-ui/components/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "@/siteplane/components/sidebar";
+} from "@/raptrx-ui/components/sidebar";
 
 export type NavGroup = { group: string; anchor: string; count: number };
 

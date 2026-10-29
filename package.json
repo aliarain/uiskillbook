@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate:siteplane": "node scripts/generate-siteplane-skills.mjs",
-    "check:siteplane": "node scripts/check-siteplane-overlap.mjs"
+    "check:siteplane": "node scripts/check-siteplane-overlap.mjs",
+    "build:cli": "node packages/cli/build.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -28,7 +29,10 @@
     "remark-gfm": "^4.0.1",
     "remark-rehype": "11.1.2",
     "simple-icons": "16.35.0",
-    "tailwind-merge": "3.6.0"
+    "tailwind-merge": "3.6.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/siteplane/components/button";
+import { Button } from "@/raptrx-ui/components/button";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
 import { getSiteplaneSkills } from "@/lib/skills";

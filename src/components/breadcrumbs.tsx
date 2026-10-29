@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/siteplane/components/breadcrumb";
+} from "@/raptrx-ui/components/breadcrumb";
 import { Fragment } from "react";
 
 /** Linked trail above a detail page title. The last crumb may be plain text. */

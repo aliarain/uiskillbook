@@ -10,4 +10,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # UI work
 
-The site is built on Siteplane UI (`src/siteplane`, registry in `components.json`). Load the siteplane-ui skill before any UI work, and read DESIGN.md. The Siteplane UI catalog entries in `content/skills/siteplane-*` are generated: edit `content/siteplane-ui/guidance/*.json` and run `npm run generate:siteplane`.
+The site is built on raptrx-ui, the raptrx design system (`src/raptrx-ui`, `@raptrx` registry in `components.json`). Load the raptrx-ui skill before any UI work, and read DESIGN.md. Installing or updating components needs `RAPTRX_UI_URL` and `RAPTRX_UI_TOKEN` in `.env.local`; never commit the token.
+
+The public component catalog in `content/skills/siteplane-*` describes the upstream kit raptrx-ui is built on, and is generated: edit `content/siteplane-ui/guidance/*.json` and run `npm run generate:siteplane`.

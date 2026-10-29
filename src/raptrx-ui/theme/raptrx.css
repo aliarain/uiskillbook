@@ -1,0 +1,74 @@
+/* raptrx brand tokens. Imported into the kit's `siteplane` cascade layer
+ * after its own tokens (see index.css), so these values win over the kit's
+ * and an application's utilities still win over both. Tokens only: component
+ * styles stay as the kit ships them. Light comes first so the dark scope,
+ * which also matches the root element, wins when it applies. */
+
+:root,
+:is(.light, [data-theme="light"]) {
+  --raptrx-accent: #4132c8;
+  --raptrx-accent-hover: #34279e;
+  --raptrx-accent-light: #7b6ff0;
+
+  --raptrx-font-body:
+    "Inter Variable", "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    ui-sans-serif, system-ui, sans-serif;
+  --raptrx-font-heading:
+    "IBM Plex Sans Variable", "IBM Plex Sans", "SF Pro Display", -apple-system,
+    BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --raptrx-font-mono:
+    "Geist Mono Variable", "Geist Mono", "SF Mono", ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+  --raptrx-letter-spacing-heading: -0.01em;
+
+  /* Accent roles the kit's components read (Theming: Override component colors). */
+  --sp-rw-bg-accent: var(--raptrx-accent);
+  --sp-rw-fg-accent: var(--raptrx-accent);
+  --sp-rw-fg-on-accent: #ffffff;
+  --sp-rw-bg-accent-translucent: rgb(65 50 200 / 12%);
+  --sp-rw-border-accent: rgb(65 50 200 / 40%);
+  --sp-rw-border-focus: var(--raptrx-accent);
+  --sp-semantic-color-focus: var(--raptrx-accent);
+  --sp-semantic-color-primary-hover: var(--raptrx-accent-hover);
+
+  /* Typeface: Inter keeps the kit's own tracking and weights. */
+  --sp-rw-font-family-default: var(--raptrx-font-body);
+  --sp-semantic-font-family-mono: var(--raptrx-font-mono);
+  --sp-primitive-font-mono: var(--raptrx-font-mono);
+  --font-sans: var(--raptrx-font-body);
+  --font-mono: var(--raptrx-font-mono);
+}
+
+:is(.dark, [data-theme="dark"]) {
+  --sp-rw-bg-accent: var(--raptrx-accent);
+  /* 5.3:1 on the dark card; the brand light alone is 3.7:1, too low for text.
+   * Same values as raptrx.com. */
+  --sp-rw-fg-accent: #9b91f5;
+  --sp-rw-bg-accent-translucent: rgb(123 111 240 / 20%);
+  --sp-rw-border-accent: rgb(123 111 240 / 60%);
+  --sp-rw-border-focus: var(--raptrx-accent-light);
+  --sp-semantic-color-focus: var(--raptrx-accent-light);
+  --sp-semantic-color-primary-hover: var(--raptrx-accent-hover);
+}
+
+/* Headings and the kit's title slots read the heading family. :is() keeps
+ * this at or above the kit's title selectors, and the layer keeps it below
+ * utilities, so `className="font-mono"` on a title still works. */
+:root
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .sp-card-title,
+    .sp-dialog-title,
+    .sp-sheet-title,
+    .sp-drawer-title,
+    .sp-alert-dialog-title,
+    [data-raptrx-heading]
+  ) {
+  font-family: var(--raptrx-font-heading);
+  letter-spacing: var(--raptrx-letter-spacing-heading);
+}

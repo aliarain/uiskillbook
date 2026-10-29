@@ -2,9 +2,9 @@
 
 import { useSyncExternalStore, type ReactNode } from "react";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
-import { SiteplaneUIProvider } from "@/siteplane/system/provider/siteplane-ui-provider";
-import { TooltipProvider } from "@/siteplane/components/tooltip";
-import { ToastProvider } from "@/siteplane/components/toast";
+import { SiteplaneUIProvider } from "@/raptrx-ui/system/provider/siteplane-ui-provider";
+import { TooltipProvider } from "@/raptrx-ui/components/tooltip";
+import { ToastProvider } from "@/raptrx-ui/components/toast";
 
 const subscribe = () => () => {};
 

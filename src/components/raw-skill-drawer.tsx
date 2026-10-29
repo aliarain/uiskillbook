@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/siteplane/components/button";
-import { CopyButton } from "@/siteplane/components/copy-button";
+import { Button } from "@/raptrx-ui/components/button";
+import { CopyButton } from "@/raptrx-ui/components/copy-button";
 import {
   DetailDrawer,
   DetailDrawerBody,
@@ -11,7 +11,7 @@ import {
   DetailDrawerPopup,
   DetailDrawerTitle,
   DetailDrawerTrigger,
-} from "@/siteplane/components/detail-drawer";
+} from "@/raptrx-ui/components/detail-drawer";
 
 /** Opens the raw SKILL.md beside the page in a kit DetailDrawer. */
 export function RawSkillDrawer({ slug, raw }: { slug: string; raw: string }) {

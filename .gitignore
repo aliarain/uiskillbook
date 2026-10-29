@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CLI package build output
+/packages/cli/dist/
+/packages/cli/LICENSE

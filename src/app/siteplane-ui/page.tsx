@@ -4,11 +4,11 @@ import { getSiteplaneSkills } from "@/lib/skills";
 import { groupAnchor } from "@/lib/siteplane";
 import { pageMetadata } from "@/lib/site";
 import { SiteplaneNav } from "@/components/siteplane-nav";
-import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@/siteplane/components/accordion";
-import { Badge } from "@/siteplane/components/badge";
-import { Button } from "@/siteplane/components/button";
-import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/siteplane/components/card";
-import { CodeBlock } from "@/siteplane/components/code";
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@/raptrx-ui/components/accordion";
+import { Badge } from "@/raptrx-ui/components/badge";
+import { Button } from "@/raptrx-ui/components/button";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/raptrx-ui/components/card";
+import { CodeBlock } from "@/raptrx-ui/components/code";
 
 export const metadata: Metadata = pageMetadata({
   title: "Siteplane UI",
@@ -20,7 +20,7 @@ const COMPONENTS_JSON = `"registries": {
   "@siteplane": "https://ui.siteplane.io/registry/{name}.json"
 }`;
 
-const GLOBALS_CSS = `@import "../siteplane/system/styles/base.css";
+const GLOBALS_CSS = `@import "../raptrx-ui/system/styles/base.css";
 @source "..";`;
 
 export default function SiteplaneUIPage() {

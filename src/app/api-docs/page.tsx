@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CopyCodeBlock } from "@/components/copy-code-block";
-import { Code } from "@/siteplane/components/code";
+import { Code } from "@/raptrx-ui/components/code";
 import { MCP_URL, pageMetadata, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
