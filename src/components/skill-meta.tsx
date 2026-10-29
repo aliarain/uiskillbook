@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/siteplane/components/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/raptrx-ui/components/avatar";
 import type { Skill } from "@/lib/skills";
 import { authorAvatar, skillStars } from "@/lib/skills";
 

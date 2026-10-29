@@ -16,9 +16,14 @@
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks",
-    "utils": "@/siteplane/system/utils/cn"
+    "utils": "@/raptrx-ui/system/utils/cn"
   },
   "registries": {
-    "@siteplane": "https://ui.siteplane.io/registry/{name}.json"
+    "@raptrx": {
+      "url": "${RAPTRX_UI_URL}/r/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${RAPTRX_UI_TOKEN}"
+      }
+    }
   }
 }

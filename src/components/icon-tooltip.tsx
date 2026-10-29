@@ -1,6 +1,6 @@
 "use client";
 
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@/siteplane/components/tooltip";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@/raptrx-ui/components/tooltip";
 
 /** Wraps an icon-only control so its accessible name also shows as a kit Tooltip. */
 export function IconTooltip({ label, children }: { label: string; children: React.ReactElement }) {

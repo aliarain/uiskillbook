@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/siteplane/components/button";
-import { Form } from "@/siteplane/components/form";
-import { Field, FieldDescription, FieldLabel } from "@/siteplane/components/field";
-import { Input } from "@/siteplane/components/input";
-import { Textarea } from "@/siteplane/components/textarea";
-import { toastManager } from "@/siteplane/components/toast";
+import { Button } from "@/raptrx-ui/components/button";
+import { Form } from "@/raptrx-ui/components/form";
+import { Field, FieldDescription, FieldLabel } from "@/raptrx-ui/components/field";
+import { Input } from "@/raptrx-ui/components/input";
+import { Textarea } from "@/raptrx-ui/components/textarea";
+import { toastManager } from "@/raptrx-ui/components/toast";
 import { useState } from "react";
 
 const REPO = "aliarain/uiskillbook";

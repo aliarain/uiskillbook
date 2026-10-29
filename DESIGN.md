@@ -1,20 +1,20 @@
 ---
 name: UI Skillbook
-description: UI Skillbook on the Siteplane UI design system. Calm neutral surfaces, Inter body text, IBM Plex Sans headings, kit components for every control.
-updated_at: "2026-10-29"
+description: UI Skillbook on raptrx-ui, the raptrx design system. Calm neutral surfaces, the raptrx accent, Inter body text, IBM Plex Sans headings, kit components for every control.
+updated_at: "2026-10-30"
 ---
 
 # UI Skillbook — DESIGN.md
 
-uiskillbook.com is built on [Siteplane UI](https://ui.siteplane.io). The kit's source lives in
-`src/siteplane` and is installed with the shadcn CLI from the `@siteplane` registry, as set in
-`components.json`. Its license is in `LICENSE.siteplane-ui`. Every control on the site is a kit
-component. The live catalogue is at [/design-system](https://www.uiskillbook.com/design-system).
+uiskillbook.com is built on raptrx-ui, the raptrx design system (repo `aliarain/raptrx-ui`), which
+is built on Siteplane UI's free kit. The source lives in `src/raptrx-ui` and is installed with the
+shadcn CLI from the token-protected `@raptrx` registry, as set in `components.json`. The upstream
+license is in `LICENSE.siteplane-ui`. Every control on the site is a raptrx-ui component. The live catalogue is at [/design-system](https://www.uiskillbook.com/design-system).
 
 ## Foundations
 
-- **Stylesheet.** `src/app/globals.css` imports `siteplane/system/styles/base.css` first. That
-  file owns the cascade layers (`theme, base, components, siteplane, utilities`), the tokens and
+- **Stylesheet.** `src/app/globals.css` imports `raptrx-ui/theme/index.css` first: the kit styles,
+  then the raptrx brand layer (`theme/raptrx.css`). It owns the cascade layers (`theme, base, components, siteplane, utilities`), the tokens and
   the component styles. Our own rules come after it.
 - **Theme.** next-themes writes `.dark` and `data-theme` on `<html>`. `SiteplaneUIProvider` passes
   the same value to kit portals (`src/components/theme-provider.tsx`). The theme menu offers
@@ -42,9 +42,12 @@ component. The live catalogue is at [/design-system](https://www.uiskillbook.com
 
 ## Typography
 
-- **IBM Plex Sans** (500/600) for headings (`h1`–`h3`, `.display`).
-- **Inter** for body text and every kit control (`--sp-rw-font-family-default`).
+- Fonts load from `@/raptrx-ui/theme/fonts` (fontsource packages) in the root layout, and the
+  raptrx tokens `--raptrx-font-body`, `--raptrx-font-heading` and `--raptrx-font-mono` set them.
+- **IBM Plex Sans** for headings (`h1`–`h3`, `.display`).
+- **Inter** for body text and every kit control.
 - **Geist Mono** only for real code: commands, file names and URLs.
+- **Accent:** the raptrx accent `#4132C8`, through the kit's accent tokens (`link`, `brand-*`).
 - Display text is 30–48px at weight 500 with tight tracking and balanced wrapping. Section titles
   are 20px at weight 600. Labels (`.label`) are 13px in sentence case.
 - Use `tabular-nums` on counts, stars and page numbers.
@@ -78,7 +81,7 @@ component. The live catalogue is at [/design-system](https://www.uiskillbook.com
 To add a kit component, run:
 
 ```bash
-npx shadcn@4.18.0 add @siteplane/<name>
+npx shadcn@4.18.0 add @raptrx/<name>   # needs RAPTRX_UI_URL and RAPTRX_UI_TOKEN
 ```
 
 ## Our own patterns
@@ -101,12 +104,12 @@ npx shadcn@4.18.0 add @siteplane/<name>
 
 - Don't hand-roll a button, input, menu, tab, dialog or drawer when the kit has one.
 - Don't put a Tailwind import above the kit stylesheet, because that breaks the layer order.
-- Don't edit `src/siteplane` by hand. Reinstall from the registry instead.
+- Don't edit `src/raptrx-ui` by hand. Fix the kit in the raptrx-ui repo and reinstall.
 - Don't use more than one chromatic accent per component.
 
 ## Component catalog
 
-Every Siteplane UI component also has a catalog entry (`content/skills/siteplane-*`,
+The public catalog describes the upstream kit raptrx-ui is built on. Every Siteplane UI component has a catalog entry (`content/skills/siteplane-*`,
 the `siteplane-ui` collection and `/siteplane-ui`). The entries are generated from our
 own guidance in `content/siteplane-ui/guidance/*.json`: edit it, then run
 `npm run generate:siteplane` and `npm run check:siteplane`.

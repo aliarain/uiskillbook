@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { SunMoonMorphToggle } from "@/siteplane/components/theme-toggles";
+import { SunMoonMorphToggle } from "@/raptrx-ui/components/theme-toggles";
 import { useMounted } from "./theme-provider";
 
 export function ThemeToggle() {

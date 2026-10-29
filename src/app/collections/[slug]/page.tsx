@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { markdownToHast } from "@/lib/markdown";
 import { Markdown } from "@/components/markdown";
-import { Button } from "@/siteplane/components/button";
+import { Button } from "@/raptrx-ui/components/button";
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +9,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/siteplane/components/pagination";
+} from "@/raptrx-ui/components/pagination";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {

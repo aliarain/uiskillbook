@@ -52,8 +52,8 @@ no SDK dependency. Tools: `list_skills`, `get_skill`, `search`, `get_stats`,
 ## Tech stack
 
 - [Next.js](https://nextjs.org) (App Router, TypeScript) deployed on [Vercel](https://vercel.com)
-- [Siteplane UI](https://ui.siteplane.io) as the design system: components installed as source under `src/siteplane` with the shadcn CLI (see [`DESIGN.md`](DESIGN.md))
-- Tailwind CSS v4, through Siteplane UI's stylesheet
+- raptrx-ui as the design system, built on [Siteplane UI](https://ui.siteplane.io): components installed as source under `src/raptrx-ui` from the `@raptrx` registry with the shadcn CLI (see [`DESIGN.md`](DESIGN.md))
+- Tailwind CSS v4, through the raptrx-ui stylesheet
 - Content as markdown, indexed at build time — no database
 
 ## Getting started

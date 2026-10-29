@@ -1,8 +1,8 @@
 "use client";
 
-import { CopyButton } from "@/siteplane/components/copy-button";
-import { Card, CardHeader, CardPanel, CardTitle } from "@/siteplane/components/card";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/siteplane/components/tabs";
+import { CopyButton } from "@/raptrx-ui/components/copy-button";
+import { Card, CardHeader, CardPanel, CardTitle } from "@/raptrx-ui/components/card";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/raptrx-ui/components/tabs";
 import { InlineCode } from "./inline-code";
 
 export type InstallTarget = { agent: string; label: string; prompt: string };

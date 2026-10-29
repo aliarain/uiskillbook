@@ -1,0 +1,15 @@
+/* The one stylesheet an app imports: the kit, then the raptrx brand layer.
+ *   @import "../raptrx-ui/theme/index.css";
+ *   @source "..";
+ * Load the fonts once from the root layout: import "@/raptrx-ui/theme/fonts"; */
+@import "../system/styles/base.css";
+@import "./raptrx.css" layer(siteplane);
+
+@theme inline {
+  --color-brand: var(--raptrx-accent);
+  --color-brand-hover: var(--raptrx-accent-hover);
+  --color-brand-light: var(--raptrx-accent-light);
+  --color-brand-text: var(--sp-rw-fg-accent);
+  --color-brand-subtle: var(--sp-rw-bg-accent-translucent);
+  --font-heading: var(--raptrx-font-heading);
+}
