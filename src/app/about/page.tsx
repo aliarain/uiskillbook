@@ -1,15 +1,17 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description: "What UI Skillbook is and why it exists.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-[680px] px-6 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight text-primary">About</h1>
+      <h1 className="display text-4xl">About</h1>
 
       <div className="skill-content prose prose-sm mt-8 max-w-none">
         <p>
@@ -34,7 +36,7 @@ export default function AboutPage() {
           Skill content is stored as plain markdown with a predictable schema — see any skill&apos;s
           &ldquo;View raw&rdquo; link. GitHub is the source of truth; the site indexes it at build time.
         </p>
-        <h2>CLI and MCP</h2>
+        <h2 id="cli">CLI and MCP</h2>
         <p>
           <code>npx uiskillbook</code> is a thin client over the same catalog this site
           serves — <code>start</code>, <code>categories</code>, <code>list</code>, and{" "}

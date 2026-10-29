@@ -1,6 +1,7 @@
 ---
 title: Build a great dashboard
 description: Everything you need to make a data-heavy screen readable instead of overwhelming.
+updated_at: "2026-09-01"
 skills:
   - dashboard-information-density
   - data-table-scannability

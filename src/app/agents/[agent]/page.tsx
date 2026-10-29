@@ -5,6 +5,8 @@ import { AGENTS, agentLabel } from "@/lib/taxonomy";
 import { getSkillsByAgent } from "@/lib/skills";
 import { SkillRow } from "@/components/skill-row";
 import { CopyCodeBlock } from "@/components/copy-code-block";
+import { MCP_URL } from "@/lib/site";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -17,7 +19,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { agent } = await params;
   if (!AGENTS.some((a) => a.slug === agent)) return {};
-  return { title: `UI Skillbook for ${agentLabel(agent)}` };
+  return pageMetadata({
+    title: `UI Skillbook for ${agentLabel(agent)}`,
+    description: `UI skills, MCP and CLI setup for ${agentLabel(agent)}.`,
+    path: `/agents/${agent}`,
+  });
 }
 
 export default async function AgentDetailPage({
@@ -33,8 +39,8 @@ export default async function AgentDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="font-mono text-xs uppercase tracking-widest text-muted">Agent</span>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+      <span className="label">Agent</span>
+      <h1 className="display mt-3 text-3xl sm:text-4xl">
         UI Skillbook for {label}
       </h1>
       <p className="mt-3 max-w-lg text-secondary">
@@ -42,9 +48,9 @@ export default async function AgentDetailPage({
         and use &ldquo;Copy for agent&rdquo; to paste it directly into your session.
       </p>
 
-      <div className="card mt-6 space-y-5 p-6">
+      <div className="card mt-6 space-y-5 p-5">
         <div>
-          <p className="font-mono text-xs uppercase tracking-wider text-muted">CLI</p>
+          <p className="label">CLI</p>
           <p className="mt-1.5 text-sm text-secondary">
             Browse and fetch skills from a terminal or an agent&apos;s shell tool.
           </p>
@@ -53,7 +59,7 @@ export default async function AgentDetailPage({
           </div>
         </div>
         <div>
-          <p className="font-mono text-xs uppercase tracking-wider text-muted">MCP</p>
+          <p className="label">MCP</p>
           <p className="mt-1.5 text-sm text-secondary">
             Connect {label} to the catalog over Model Context Protocol —{" "}
             <code className="text-primary">list_skills</code> and{" "}
@@ -61,7 +67,7 @@ export default async function AgentDetailPage({
             point it at the endpoint below.
           </p>
           <div className="mt-2">
-            <CopyCodeBlock code="https://uiskillbook.com/mcp" />
+            <CopyCodeBlock code={MCP_URL} />
           </div>
         </div>
         <p className="text-xs text-muted">
@@ -79,8 +85,8 @@ export default async function AgentDetailPage({
       </div>
 
       <div className="mt-10">
-        <Link href="/agents" className="text-sm text-secondary hover:text-primary">
-          ← All agents
+        <Link href="/agents" className="link rounded-input text-sm">
+          Back to all agents
         </Link>
       </div>
     </div>

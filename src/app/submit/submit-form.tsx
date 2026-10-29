@@ -34,7 +34,7 @@ export function SubmitForm() {
           value={repo}
           onChange={(e) => setRepo(e.target.value)}
           placeholder="https://github.com/user/repo"
-          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
@@ -45,7 +45,7 @@ export function SubmitForm() {
           value={path}
           onChange={(e) => setPath(e.target.value)}
           placeholder="skills/optical-alignment/SKILL.md"
-          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
@@ -56,7 +56,7 @@ export function SubmitForm() {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Your name or handle"
-          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
@@ -67,12 +67,12 @@ export function SubmitForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="What does this skill teach an agent to do?"
-          className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-primary outline-none focus-visible:border-accent"
+          className="w-full rounded-input border border-border bg-background px-3 py-2 text-base text-primary transition-colors placeholder:text-muted hover:border-border-strong sm:text-sm"
         />
       </Field>
 
       <button type="submit" className="btn btn-primary">
-        Open a GitHub issue →
+        Open a GitHub issue
       </button>
       <p className="text-xs text-muted">
         Opens a pre-filled issue in{" "}
@@ -96,7 +96,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="font-mono text-xs uppercase tracking-wider text-muted">{label}</span>
+      <span className="label">{label}</span>
       {hint && <span className="ml-2 text-xs text-muted">{hint}</span>}
       <div className="mt-1.5">{children}</div>
     </label>

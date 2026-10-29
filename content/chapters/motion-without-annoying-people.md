@@ -2,6 +2,8 @@
 number: 4
 title: Motion without annoying people
 description: The line between motion that clarifies and motion that irritates is thinner than it looks.
+tip: "Keep UI transitions under `200ms` and respect `prefers-reduced-motion`."
+updated_at: "2026-09-01"
 minutes: 6
 skills:
   - motion-easing-basics

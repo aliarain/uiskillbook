@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { getAllSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
-
-const BASE_URL = "https://uiskillbook.com";
+import { SITE_URL } from "@/lib/site";
 
 export function GET() {
   const skills = getAllSkills();
@@ -19,19 +18,19 @@ export function GET() {
     "## Skills",
     "",
     ...skills.map(
-      (s) => `- [${s.title}](${BASE_URL}/skills/${s.slug}): ${s.description}`
+      (s) => `- [${s.title}](${SITE_URL}/skills/${s.slug}): ${s.description}`
     ),
     "",
     "## Chapters",
     "",
     ...chapters.map(
-      (c) => `- [${c.title}](${BASE_URL}/chapters/${c.slug}): ${c.description}`
+      (c) => `- [${c.title}](${SITE_URL}/chapters/${c.slug}): ${c.description}`
     ),
     "",
     "## Collections",
     "",
     ...collections.map(
-      (c) => `- [${c.title}](${BASE_URL}/collections/${c.slug}): ${c.description}`
+      (c) => `- [${c.title}](${SITE_URL}/collections/${c.slug}): ${c.description}`
     ),
     "",
   ];

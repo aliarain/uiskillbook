@@ -27,7 +27,7 @@ type RegistryManifest = {
 
 const argv = process.argv.slice(2);
 
-const SITE_URL = process.env.UISKILLBOOK_SITE_URL ?? "https://uiskillbook.com";
+const SITE_URL = process.env.UISKILLBOOK_SITE_URL ?? "https://www.uiskillbook.com";
 const REGISTRY_URL = new URL("/skills/registry.json", SITE_URL);
 
 const HELP = [

@@ -1,0 +1,52 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+const DESIGN_MD_DIR = path.join(process.cwd(), "content", "design-md");
+
+export type DesignMdFrontmatter = {
+  name: string;
+  description: string;
+  website: string;
+  /** Brand color for the logo tile. */
+  color: string;
+  category: string;
+  updated_at: string;
+  /** Simple Icons slug for the brand mark. Without one the tile shows the brand initial. */
+  icon?: string;
+};
+
+export type DesignMd = DesignMdFrontmatter & {
+  slug: string;
+  body: string;
+};
+
+let cache: DesignMd[] | null = null;
+
+export function getAllDesignMds(): DesignMd[] {
+  if (cache) return cache;
+
+  const slugs = fs.existsSync(DESIGN_MD_DIR)
+    ? fs.readdirSync(DESIGN_MD_DIR).filter((entry) =>
+        fs.existsSync(path.join(DESIGN_MD_DIR, entry, "DESIGN.md"))
+      )
+    : [];
+
+  const entries = slugs.map((slug) => {
+    const raw = fs.readFileSync(path.join(DESIGN_MD_DIR, slug, "DESIGN.md"), "utf8");
+    const { data, content } = matter(raw);
+    return { slug, body: content, ...(data as DesignMdFrontmatter) };
+  });
+
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+  cache = entries;
+  return entries;
+}
+
+export function getDesignMdBySlug(slug: string): DesignMd | undefined {
+  return getAllDesignMds().find((d) => d.slug === slug);
+}
+
+export function getDesignMdRaw(slug: string): string {
+  return fs.readFileSync(path.join(DESIGN_MD_DIR, slug, "DESIGN.md"), "utf8");
+}

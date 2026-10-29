@@ -1,14 +1,18 @@
 import { getAllSkills } from "./skills";
 import { getAllChapters } from "./chapters";
 import { getAllCollections } from "./collections";
+import { getAllDesignMds } from "./design-md";
 import { categoryLabel } from "./taxonomy";
 
 export type SearchItem = {
-  type: "skill" | "chapter" | "collection";
+  type: "skill" | "chapter" | "collection" | "design-md";
   slug: string;
   href: string;
   title: string;
+  /** Primary topic or kind, shown as one muted tag. */
   subtitle: string;
+  /** Author or source, so same-named items stay distinguishable. */
+  meta?: string;
   group: string;
 };
 
@@ -18,7 +22,8 @@ export function buildSearchIndex(): SearchItem[] {
     slug: s.slug,
     href: `/skills/${s.slug}`,
     title: s.title,
-    subtitle: s.categories.map(categoryLabel).join(" · "),
+    subtitle: categoryLabel(s.categories[0]),
+    meta: s.author.name,
     group: "Skills",
   }));
 
@@ -27,7 +32,7 @@ export function buildSearchIndex(): SearchItem[] {
     slug: c.slug,
     href: `/chapters/${c.slug}`,
     title: c.title,
-    subtitle: `Chapter ${String(c.number).padStart(2, "0")}`,
+    subtitle: `${c.minutes} min read`,
     group: "Chapters",
   }));
 
@@ -40,5 +45,14 @@ export function buildSearchIndex(): SearchItem[] {
     group: "Collections",
   }));
 
-  return [...skills, ...chapters, ...collections];
+  const designMds: SearchItem[] = getAllDesignMds().map((d) => ({
+    type: "design-md",
+    slug: d.slug,
+    href: `/design-md/${d.slug}`,
+    title: d.name,
+    subtitle: d.category,
+    group: "Design.md",
+  }));
+
+  return [...skills, ...chapters, ...collections, ...designMds];
 }

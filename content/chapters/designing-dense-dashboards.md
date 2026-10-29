@@ -2,6 +2,8 @@
 number: 3
 title: Designing dense dashboards
 description: Fit more real information on screen without it turning into a wall of numbers.
+tip: "Tighten density with `text-sm` and right-aligned numeric columns."
+updated_at: "2026-09-01"
 minutes: 12
 skills:
   - dashboard-information-density

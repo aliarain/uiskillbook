@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getAllChapters, getChapterBySlug, getChapterSkills } from "@/lib/chapters";
 import { markdownToHtml } from "@/lib/markdown";
 import { SkillRow } from "@/components/skill-row";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllChapters().map((c) => ({ slug: c.slug }));
@@ -17,7 +18,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const chapter = getChapterBySlug(slug);
   if (!chapter) return {};
-  return { title: chapter.title, description: chapter.description };
+  return pageMetadata({
+    title: chapter.title,
+    description: chapter.description,
+    path: `/chapters/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function ChapterDetailPage({
@@ -34,14 +40,14 @@ export default async function ChapterDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="font-mono text-xs uppercase tracking-widest text-muted">
+      <span className="label">
         Chapter {String(chapter.number).padStart(2, "0")}
       </span>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+      <h1 className="display mt-3 text-3xl sm:text-4xl">
         {chapter.title}
       </h1>
-      <p className="mt-2 font-mono text-xs text-muted">
-        {chapter.minutes} min · {skills.length} skills
+      <p className="mt-2 text-[13px] text-muted">
+        {chapter.minutes} min read, {skills.length} skills
       </p>
 
       <article
@@ -50,7 +56,7 @@ export default async function ChapterDetailPage({
       />
 
       <div className="mt-14">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
+        <h2 className="label">
           Skills in this chapter
         </h2>
         <div className="mt-3 space-y-0.5">
@@ -61,8 +67,8 @@ export default async function ChapterDetailPage({
       </div>
 
       <div className="mt-10">
-        <Link href="/chapters" className="text-sm text-secondary hover:text-primary">
-          ← All chapters
+        <Link href="/chapters" className="link rounded-input text-sm">
+          Back to all chapters
         </Link>
       </div>
     </div>

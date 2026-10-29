@@ -9,6 +9,9 @@ export type ChapterFrontmatter = {
   number: number;
   title: string;
   description: string;
+  /** One-line takeaway for cards. Backticks render as inline code. */
+  tip: string;
+  updated_at: string;
   minutes: number;
   skills: string[];
 };

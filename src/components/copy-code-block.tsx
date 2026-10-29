@@ -13,12 +13,13 @@ export function CopyCodeBlock({ code }: { code: string }) {
 
   return (
     <div className="group relative">
-      <pre className="overflow-x-auto rounded-xl border border-border bg-surface px-4 py-3 font-mono text-xs text-primary">
+      <pre className="overflow-x-auto rounded-card border border-border bg-surface py-3 pl-4 pr-20 font-mono text-[13px] text-primary">
         <code>{code}</code>
       </pre>
       <button
         onClick={copy}
-        className="absolute right-2 top-2 rounded-md border border-border bg-background px-2 py-1 font-mono text-[10px] text-muted opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+        aria-label="Copy to clipboard"
+        className="btn btn-secondary absolute right-1.5 top-1.5 h-8 px-2.5 text-xs shadow-none"
       >
         {copied ? "Copied" : "Copy"}
       </button>

@@ -1,45 +1,60 @@
 import type { MetadataRoute } from "next";
-import { getAllSkills } from "@/lib/skills";
+import { getAllSkills, getSkillsByAgent } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
+import { getAllDesignMds } from "@/lib/design-md";
 import { AGENTS } from "@/lib/taxonomy";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://uiskillbook.com";
+function latest(dates: string[]): Date {
+  return new Date(dates.reduce((max, d) => (d > max ? d : max), "1970-01-01"));
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "",
-    "/skills",
-    "/chapters",
-    "/collections",
-    "/agents",
-    "/authors",
-    "/submit",
-    "/about",
-  ].map((route) => ({
-    url: `${BASE_URL}${route}`,
-    lastModified: new Date(),
-  }));
+  const skills = getAllSkills();
+  const chapters = getAllChapters();
+  const collections = getAllCollections();
+  const designMds = getAllDesignMds();
+  const contentDate = latest([...skills, ...chapters, ...collections, ...designMds].map((i) => i.updated_at));
+  const dated = (items: { updated_at: string }[]) =>
+    items.length ? latest(items.map((i) => i.updated_at)) : contentDate;
 
-  const skillRoutes = getAllSkills().map((s) => ({
-    url: `${BASE_URL}/skills/${s.slug}`,
+  const staticRoutes = [
+    { path: "", lastModified: contentDate },
+    { path: "/skills", lastModified: dated(skills) },
+    { path: "/chapters", lastModified: dated(chapters) },
+    { path: "/collections", lastModified: dated(collections) },
+    { path: "/design-md", lastModified: dated(designMds) },
+    { path: "/agents", lastModified: dated(skills) },
+    { path: "/authors", lastModified: dated(skills) },
+    { path: "/submit", lastModified: contentDate },
+    { path: "/about", lastModified: contentDate },
+  ].map(({ path, lastModified }) => ({ url: `${SITE_URL}${path}`, lastModified }));
+
+  const skillRoutes = skills.map((s) => ({
+    url: `${SITE_URL}/skills/${s.slug}`,
     lastModified: new Date(s.updated_at),
   }));
 
-  const chapterRoutes = getAllChapters().map((c) => ({
-    url: `${BASE_URL}/chapters/${c.slug}`,
-    lastModified: new Date(),
+  const chapterRoutes = chapters.map((c) => ({
+    url: `${SITE_URL}/chapters/${c.slug}`,
+    lastModified: new Date(c.updated_at),
   }));
 
-  const collectionRoutes = getAllCollections().map((c) => ({
-    url: `${BASE_URL}/collections/${c.slug}`,
-    lastModified: new Date(),
+  const collectionRoutes = collections.map((c) => ({
+    url: `${SITE_URL}/collections/${c.slug}`,
+    lastModified: new Date(c.updated_at),
+  }));
+
+  const designMdRoutes = designMds.map((d) => ({
+    url: `${SITE_URL}/design-md/${d.slug}`,
+    lastModified: new Date(d.updated_at),
   }));
 
   const agentRoutes = AGENTS.filter((a) => a.slug !== "universal").map((a) => ({
-    url: `${BASE_URL}/agents/${a.slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/agents/${a.slug}`,
+    lastModified: dated(getSkillsByAgent(a.slug)),
   }));
 
-  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...agentRoutes];
+  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...designMdRoutes, ...agentRoutes];
 }
