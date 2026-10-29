@@ -4,7 +4,6 @@ import matter from "gray-matter";
 import type { AgentSlug, CategorySlug, TaskSlug } from "./taxonomy";
 import externalSkillsData from "../../content/external-skills.json";
 import repoStarsData from "../../content/repo-stars.json";
-import { SITE_URL } from "./site";
 
 const SKILLS_DIR = path.join(process.cwd(), "content", "skills");
 
@@ -24,6 +23,11 @@ export type SkillFrontmatter = {
   curated?: boolean;
   /** True for skills indexed from an external repository — no local body, links out to source instead. */
   external?: boolean;
+  /**
+   * Safety review of a submitted skill: scripts/scan-skill.mjs plus a manual
+   * read, against the pinned `commit` that source URLs point at.
+   */
+  review?: { commit: string; date: string; result: "pass"; issue?: string };
   /** Set on the generated Siteplane UI component entries (scripts/generate-siteplane-skills.mjs). */
   siteplane?: SiteplaneComponent;
 };
@@ -184,7 +188,7 @@ export function installTargets(skill: Skill) {
       {
         agent: "any",
         label: "your agent",
-        prompt: `Fetch ${SITE_URL}/skills/${skill.slug}/raw and follow the ${skill.title} skill for this task.`,
+        prompt: `Run \`npx uiskillbook get ${skill.slug}\` and follow the ${skill.title} skill it prints for this task.`,
       },
     ];
   }

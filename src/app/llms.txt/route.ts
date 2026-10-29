@@ -15,7 +15,7 @@ export function GET() {
     "> The field guide for building better interfaces with AI. Curated UI skills, rules,",
     "> and patterns for humans and coding agents.",
     "",
-    `JSON API: ${SITE_URL}/api (docs: ${SITE_URL}/api-docs). MCP server: ${SITE_URL}/mcp`,
+    `Full text: ${SITE_URL}/llms-full.txt. JSON API: ${SITE_URL}/api (docs: ${SITE_URL}/api-docs, OpenAPI: ${SITE_URL}/openapi.json). MCP server: ${SITE_URL}/mcp. Any skill page as Markdown: ${SITE_URL}/skills/{slug}.md`,
     "",
     "## Skills",
     "",

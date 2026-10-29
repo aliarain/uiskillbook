@@ -12,7 +12,7 @@ import { categoryLabel, agentLabel } from "@/lib/taxonomy";
 import { markdownToHast } from "@/lib/markdown";
 import { Markdown } from "@/components/markdown";
 import { Badge } from "@/raptrx-ui/components/badge";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
 import { JsonLd } from "@/components/json-ld";
@@ -161,6 +161,20 @@ export default async function SkillDetailPage({
             External
           </span>
         )}
+        {skill.review && (
+          <a
+            href={skill.review.issue ?? `${skill.source?.repository ?? ""}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full"
+            title={`Scanned and read by hand on ${skill.review.date} at commit ${skill.review.commit.slice(0, 7)}. Install links point at that commit.`}
+          >
+            <Badge variant="success">
+              <ShieldCheck aria-hidden className="size-3.5" />
+              Security reviewed
+            </Badge>
+          </a>
+        )}
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-1.5">
@@ -206,8 +220,8 @@ export default async function SkillDetailPage({
             Related skills
           </h2>
           <div className="mt-3 space-y-0.5">
-            {related.map((s, i) => (
-              <SkillRow key={s.slug} skill={s} index={i + 1} />
+            {related.map((s) => (
+              <SkillRow key={s.slug} skill={s} />
             ))}
           </div>
         </div>

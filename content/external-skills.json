@@ -7646,5 +7646,40 @@
     "version": "1.0.0",
     "updated_at": "2026-09-01",
     "external": true
+  },
+  {
+    "slug": "product-design-harness",
+    "title": "Product Design Harness",
+    "description": "Decide whether a product direction, feature or workflow should continue, be verified or be reframed before anyone builds it, with a structured verdict and next action.",
+    "author": {
+      "name": "cis2042",
+      "url": "https://github.com/cis2042"
+    },
+    "source": {
+      "repository": "https://github.com/cis2042/ux3-product-design-harness/blob/35ccbd575103b85f73608ecf359d2832c132c682/skills/product-design-harness/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/cis2042/ux3-product-design-harness/35ccbd575103b85f73608ecf359d2832c132c682/skills/product-design-harness/SKILL.md"
+    },
+    "categories": [
+      "taste",
+      "interaction"
+    ],
+    "agents": [
+      "universal"
+    ],
+    "tags": [
+      "product",
+      "ux-review",
+      "decision-making"
+    ],
+    "version": "1.0.0",
+    "updated_at": "2026-10-30",
+    "license": "MIT",
+    "external": true,
+    "review": {
+      "commit": "35ccbd575103b85f73608ecf359d2832c132c682",
+      "date": "2026-10-30",
+      "result": "pass",
+      "issue": "https://github.com/aliarain/uiskillbook/issues/1"
+    }
   }
 ]

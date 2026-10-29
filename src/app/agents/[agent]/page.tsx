@@ -82,7 +82,7 @@ export default async function AgentDetailPage({
         {skills.length === 0 ? (
           <p className="py-10 text-sm text-ink-3">No skills tagged for {label} yet.</p>
         ) : (
-          skills.map((skill, i) => <SkillRow key={skill.slug} skill={skill} index={i + 1} />)
+          skills.map((skill) => <SkillRow key={skill.slug} skill={skill} />)
         )}
       </div>
 

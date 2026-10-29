@@ -22,7 +22,9 @@ export default function SubmitPage() {
     <div className="mx-auto max-w-[640px] px-6 py-12">
       <h1 className="display text-4xl">Submit a skill</h1>
       <p className="mt-2 text-ink-2">
-        Point us at a skill in your repository. We&apos;ll review it before it&apos;s published.
+        Point us at a skill in your repository. Before anything is published we scan every file for hidden
+        instructions, secret access, network calls and risky scripts, read it by hand, and pin the listing to
+        the commit we reviewed.
       </p>
 
       <div className="card mt-8 p-5">
