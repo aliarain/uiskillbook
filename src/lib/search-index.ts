@@ -9,7 +9,10 @@ export type SearchItem = {
   slug: string;
   href: string;
   title: string;
+  /** Primary topic or kind, shown as one muted tag. */
   subtitle: string;
+  /** Author or source, so same-named items stay distinguishable. */
+  meta?: string;
   group: string;
 };
 
@@ -19,7 +22,8 @@ export function buildSearchIndex(): SearchItem[] {
     slug: s.slug,
     href: `/skills/${s.slug}`,
     title: s.title,
-    subtitle: s.categories.map(categoryLabel).join(" · "),
+    subtitle: categoryLabel(s.categories[0]),
+    meta: s.author.name,
     group: "Skills",
   }));
 
@@ -28,7 +32,7 @@ export function buildSearchIndex(): SearchItem[] {
     slug: c.slug,
     href: `/chapters/${c.slug}`,
     title: c.title,
-    subtitle: `Chapter ${String(c.number).padStart(2, "0")}`,
+    subtitle: `${c.minutes} min read`,
     group: "Chapters",
   }));
 
