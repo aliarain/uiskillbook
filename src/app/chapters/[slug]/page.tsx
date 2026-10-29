@@ -62,8 +62,8 @@ export default async function ChapterDetailPage({
           Skills in this chapter
         </h2>
         <div className="mt-3 space-y-0.5">
-          {skills.map((skill, i) => (
-            <SkillRow key={skill.slug} skill={skill} index={i + 1} />
+          {skills.map((skill) => (
+            <SkillRow key={skill.slug} skill={skill} />
           ))}
         </div>
       </div>

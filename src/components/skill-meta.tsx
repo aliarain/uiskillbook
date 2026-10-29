@@ -7,25 +7,28 @@ import { LogoMark } from "./logo";
 
 const compact = new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 });
 
-export function AuthorBadge({ skill }: { skill: Skill }) {
-  const avatar = authorAvatar(skill);
+/** The author's avatar: our mark for UI Skillbook skills, the GitHub avatar, else the initial. */
+export function AuthorAvatar({ skill, className = "size-5" }: { skill: Skill; className?: string }) {
   if (skill.author.name === SITE_NAME) {
-    // Our own skills carry the UI Skillbook mark as their avatar.
     return (
-      <span className="flex min-w-0 items-center gap-2 text-sm text-ink-2">
-        <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-ink-strong text-canvas">
-          <LogoMark className="size-3" />
-        </span>
-        <span className="truncate">{skill.author.name}</span>
+      <span aria-hidden className={`flex shrink-0 items-center justify-center rounded-full bg-ink-strong text-canvas ${className}`}>
+        <LogoMark className="size-1/2" />
       </span>
     );
   }
+  const avatar = authorAvatar(skill);
+  return (
+    <Avatar aria-hidden className={`shrink-0 text-[11px] ${className}`}>
+      {avatar && <AvatarImage src={avatar} alt="" loading="lazy" />}
+      <AvatarFallback>{skill.author.name.charAt(0)}</AvatarFallback>
+    </Avatar>
+  );
+}
+
+export function AuthorBadge({ skill }: { skill: Skill }) {
   return (
     <span className="flex min-w-0 items-center gap-2 text-sm text-ink-2">
-      <Avatar className="size-5 shrink-0 text-[11px]">
-        {avatar && <AvatarImage src={avatar} alt="" loading="lazy" />}
-        <AvatarFallback>{skill.author.name.charAt(0)}</AvatarFallback>
-      </Avatar>
+      <AuthorAvatar skill={skill} />
       <span className="truncate">{skill.author.name}</span>
     </span>
   );

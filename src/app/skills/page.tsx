@@ -10,7 +10,6 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuBadge,
   SidebarMenuButton,
@@ -170,7 +169,7 @@ export default async function SkillsPage({
             </SidebarContent>
           </Sidebar>
 
-          <SidebarInset className="min-w-0 md:pl-6">
+          <div className="min-w-0 flex-1 pt-2 md:pl-6">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-3">
               <div className="flex items-center gap-2">
                 <SidebarTrigger aria-label="Show filters" className="md:hidden" />
@@ -223,8 +222,8 @@ export default async function SkillsPage({
                   </EmptyContent>
                 </Empty>
               ) : (
-                visible.map((skill, i) => (
-                  <SkillRow key={skill.slug} skill={skill} index={offset + i + 1} />
+                visible.map((skill) => (
+                  <SkillRow key={skill.slug} skill={skill} />
                 ))
               )}
             </div>
@@ -259,7 +258,7 @@ export default async function SkillsPage({
                 </Pagination>
               </div>
             )}
-          </SidebarInset>
+          </div>
         </SidebarProvider>
       </div>
     </div>

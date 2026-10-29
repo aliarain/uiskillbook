@@ -72,8 +72,8 @@ export default async function CollectionDetailPage({
 
       <h2 className="sr-only">Skills in this collection</h2>
       <div className="mt-10 space-y-0.5">
-        {skills.slice(offset, offset + PAGE_SIZE).map((skill, i) => (
-          <SkillRow key={skill.slug} skill={skill} index={offset + i + 1} />
+        {skills.slice(offset, offset + PAGE_SIZE).map((skill) => (
+          <SkillRow key={skill.slug} skill={skill} />
         ))}
       </div>
 
