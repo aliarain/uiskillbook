@@ -10,7 +10,7 @@ export function CommandPalette({
   open,
   onOpenChange,
 }: {
-  items: SearchItem[];
+  items: SearchItem[] | null;
   open: boolean;
   onOpenChange: (v: boolean) => void;
 }) {
@@ -63,11 +63,17 @@ export function CommandPalette({
           </kbd>
         </div>
         <Command.List className="max-h-[60vh] overflow-y-auto p-2">
-          <Command.Empty className="px-3 py-6 text-center text-sm text-muted">
-            No results found.
-          </Command.Empty>
+          {items === null ? (
+            <Command.Loading>
+              <p className="px-3 py-6 text-center text-sm text-muted">Loading…</p>
+            </Command.Loading>
+          ) : (
+            <Command.Empty className="px-3 py-6 text-center text-sm text-muted">
+              No results found.
+            </Command.Empty>
+          )}
           {groups.map((group) => {
-            const groupItems = items.filter((i) => i.group === group);
+            const groupItems = (items ?? []).filter((i) => i.group === group);
             if (groupItems.length === 0) return null;
             return (
               <Command.Group

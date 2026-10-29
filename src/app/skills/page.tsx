@@ -13,6 +13,9 @@ export const metadata: Metadata = pageMetadata({
 
 type SortKey = "recommended" | "newest" | "az";
 
+// Every row is serialized twice (HTML + RSC payload), so the full catalog in one page ran to ~800 KB.
+const PAGE_SIZE = 60;
+
 const SORTS: { key: SortKey; label: string }[] = [
   { key: "recommended", label: "Recommended" },
   { key: "newest", label: "Newest" },
@@ -66,6 +69,11 @@ export default async function SkillsPage({
   } else {
     skills = [...skills].sort((a, b) => Number(b.curated) - Number(a.curated));
   }
+
+  const pageCount = Math.max(1, Math.ceil(skills.length / PAGE_SIZE));
+  const page = Math.min(pageCount, Math.max(1, Number(params.page) || 1));
+  const offset = (page - 1) * PAGE_SIZE;
+  const visible = skills.slice(offset, offset + PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-[1140px] px-6 py-12">
@@ -153,9 +161,38 @@ export default async function SkillsPage({
         {skills.length === 0 ? (
           <p className="py-10 text-sm text-muted">No skills match these filters yet.</p>
         ) : (
-          skills.map((skill, i) => <SkillRow key={skill.slug} skill={skill} index={i + 1} />)
+          visible.map((skill, i) => (
+            <SkillRow key={skill.slug} skill={skill} index={offset + i + 1} />
+          ))
         )}
       </div>
+
+      {pageCount > 1 && (
+        <nav
+          aria-label="Pagination"
+          className="mt-8 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-muted"
+        >
+          <span className="tabular-nums">
+            {offset + 1}–{offset + visible.length} of {skills.length}
+          </span>
+          <div className="flex flex-wrap gap-1">
+            {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
+              <Link
+                key={n}
+                href={buildHref(current, { page: n === 1 ? undefined : String(n) })}
+                aria-current={n === page ? "page" : undefined}
+                className={`flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 tabular-nums transition-colors ${
+                  n === page
+                    ? "border-accent bg-accent-subtle text-accent"
+                    : "border-border hover:text-primary"
+                }`}
+              >
+                {n}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

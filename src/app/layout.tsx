@@ -6,7 +6,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { ThemeProvider } from "@/components/theme-provider";
-import { buildSearchIndex } from "@/lib/search-index";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
@@ -38,7 +37,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  const searchIndex = buildSearchIndex();
   const umamiScriptUrl = process.env.UMAMI_SCRIPT_URL;
   const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
 
@@ -60,7 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <CommandPaletteProvider items={searchIndex}>
+          <CommandPaletteProvider>
             <SiteHeader />
             <main className="flex-1">{children}</main>
             <SiteFooter />
