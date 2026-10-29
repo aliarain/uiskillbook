@@ -3,7 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/raptrx-ui/components/button";
 import { getAllSkills, getAuthors, installTargets } from "@/lib/skills";
 import { getAllDesignMds } from "@/lib/design-md";
-import { InstallPrompt } from "../install-prompt";
+import { SkillSlider, type SkillSlide } from "./skill-slider";
+import { categoryLabel } from "@/lib/taxonomy";
 
 function Counts() {
   const skills = getAllSkills();
@@ -14,9 +15,36 @@ function Counts() {
   );
 }
 
-/** C: headline and actions beside a real skill's install card, so the first screen shows the product. */
+/** One real skill per topic for the hero slider, shown in this order. */
+const FEATURED: { slug: string; topic?: string }[] = [
+  { slug: "vercel-labs-web-design-guidelines", topic: "Web design" },
+  { slug: "accessibility" },
+  { slug: "better-typography" },
+  { slug: "emilkowalski-animate" },
+  { slug: "better-colors", topic: "Color" },
+  { slug: "shadcn" },
+];
+
+function featuredSlides(): SkillSlide[] {
+  const all = getAllSkills();
+  return FEATURED.flatMap(({ slug, topic }) => {
+    const skill = all.find((s) => s.slug === slug);
+    if (!skill) return [];
+    return [
+      {
+        slug: skill.slug,
+        title: skill.title,
+        author: skill.author.name,
+        topic: topic ?? categoryLabel(skill.categories[0]),
+        targets: installTargets(skill),
+      },
+    ];
+  });
+}
+
+/** Headline and actions beside rotating install cards for real skills, so the first screen shows the product. */
 export function HeroPreview() {
-  const skill = getAllSkills().find((s) => s.slug === "vercel-labs-web-design-guidelines") ?? getAllSkills()[0];
+  const slides = featuredSlides();
   return (
     <section className="grid items-center gap-10 pt-14 pb-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       <div>
@@ -36,15 +64,7 @@ export function HeroPreview() {
           <Counts />
         </div>
       </div>
-      <div className="min-w-0">
-        <p className="mb-2 text-sm text-ink-3">
-          <Link href={`/skills/${skill.slug}`} className="link rounded-input">
-            {skill.title}
-          </Link>{" "}
-          by {skill.author.name}
-        </p>
-        <InstallPrompt targets={installTargets(skill)} />
-      </div>
+      <SkillSlider slides={slides} />
     </section>
   );
 }
