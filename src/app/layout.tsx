@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { buildSearchIndex } from "@/lib/search-index";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
   description:
     "Curated UI skills, rules, patterns, and instructions for humans and coding agents.",
-  metadataBase: new URL("https://uiskillbook.com"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

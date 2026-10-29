@@ -6,7 +6,7 @@ Curated UI skills, rules, patterns, and agent instructions for humans and coding
 agents — built for developers browsing manually, AI agents consuming structured
 skills, and designers looking for implementation guidance.
 
-[uiskillbook.com](https://uiskillbook.com)
+[uiskillbook.com](https://www.uiskillbook.com)
 
 ## What it is
 
@@ -40,7 +40,7 @@ A thin client over `uiskillbook.com/skills/registry.json` and each skill's
 ## MCP
 
 ```
-https://uiskillbook.com/mcp
+https://www.uiskillbook.com/mcp
 ```
 
 Hand-rolled JSON-RPC 2.0 over HTTP (`initialize`, `tools/list`, `tools/call`) —
@@ -120,12 +120,12 @@ Two ways in:
 1. **Open a pull request.** Add a folder under `content/skills/<slug>/SKILL.md`
    following the schema above, or add an entry to `content/external-skills.json` if
    you're pointing at a skill hosted elsewhere.
-2. **Use [`/submit`](https://uiskillbook.com/submit).** Fills out a form and opens a
+2. **Use [`/submit`](https://www.uiskillbook.com/submit).** Fills out a form and opens a
    pre-filled GitHub issue against this repo using the
    [skill submission template](.github/ISSUE_TEMPLATE/skill-submission.yml).
 
 Every submission is checked against the curation criteria on the
-[About page](https://uiskillbook.com/about) before it's added: concrete purpose,
+[About page](https://www.uiskillbook.com/about) before it's added: concrete purpose,
 usable instruction (not generic AI filler), no duplicate of an existing skill,
 attribution preserved, source linked, license stated.
 

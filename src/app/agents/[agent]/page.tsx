@@ -5,6 +5,7 @@ import { AGENTS, agentLabel } from "@/lib/taxonomy";
 import { getSkillsByAgent } from "@/lib/skills";
 import { SkillRow } from "@/components/skill-row";
 import { CopyCodeBlock } from "@/components/copy-code-block";
+import { MCP_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -61,7 +62,7 @@ export default async function AgentDetailPage({
             point it at the endpoint below.
           </p>
           <div className="mt-2">
-            <CopyCodeBlock code="https://uiskillbook.com/mcp" />
+            <CopyCodeBlock code={MCP_URL} />
           </div>
         </div>
         <p className="text-xs text-muted">
