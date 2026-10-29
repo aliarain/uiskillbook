@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getAllSkills, getAuthors } from "@/lib/skills";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/siteplane/components/card";
+import { getAllSkills, getAuthors, getSiteplaneSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllDesignMds } from "@/lib/design-md";
 import { BrandTile } from "@/components/brand-tile";
@@ -17,9 +18,14 @@ export default function Home() {
   const authors = getAuthors();
   const chapters = getAllChapters();
   const designMds = getAllDesignMds();
+  const siteplane = getSiteplaneSkills();
+  const siteplaneFeatured = ["dialog", "combobox", "table", "command", "toast", "sidebar"]
+    .map((c) => siteplane.find((s) => s.siteplane.component === c))
+    .filter((s) => s !== undefined);
 
   const recommended = skills.filter((s) => s.curated).slice(0, 6);
-  const latest = [...skills]
+  const latest = skills
+    .filter((s) => !s.siteplane)
     .sort((a, b) => (a.updated_at < b.updated_at ? 1 : -1))
     .slice(0, 6);
 
@@ -46,8 +52,8 @@ export default function Home() {
       />
       <header className="mt-10 sm:mt-14">
         <h1 className="display text-3xl">UI skills for coding agents</h1>
-        <p className="mt-2 text-secondary tabular-nums">
-          {skills.length} skills from {authors.length} authors, {designMds.length} Design.md files and{" "}
+        <p className="mt-2 text-muted-foreground tabular-nums">
+          {skills.length} skills from {authors.length} authors (including {siteplane.length} Siteplane UI components), {designMds.length} Design.md files and{" "}
           {chapters.length} short guides.
         </p>
       </header>
@@ -62,6 +68,21 @@ export default function Home() {
         />
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {recommended.map((skill) => (
+            <SkillCard key={skill.slug} skill={skill} />
+          ))}
+        </div>
+      </section>
+
+      {/* Siteplane UI */}
+      <section className="mt-16">
+        <SectionHeading
+          title="Siteplane UI"
+          href="/siteplane-ui"
+          description={`Our design system. All ${siteplane.length} components, with when to pick each one over its neighbours.`}
+          allLabel="All components"
+        />
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {siteplaneFeatured.map((skill) => (
             <SkillCard key={skill.slug} skill={skill} />
           ))}
         </div>
@@ -94,10 +115,10 @@ export default function Home() {
             <li key={entry.slug}>
               <Link
                 href={`/design-md/${entry.slug}`}
-                className="group flex flex-col items-center gap-2 rounded-card text-center"
+                className="group flex flex-col items-center gap-2 rounded-surface text-center"
               >
                 <BrandTile entry={entry} />
-                <span className="w-full truncate text-xs text-muted transition-colors group-hover:text-primary">
+                <span className="w-full truncate text-xs text-muted-foreground transition-colors group-hover:text-foreground">
                   {entry.name}
                 </span>
               </Link>
@@ -124,12 +145,14 @@ export default function Home() {
         />
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {chapters.map((chapter) => (
-            <Link key={chapter.slug} href={`/chapters/${chapter.slug}`} className="card block p-4">
-              <h3 className="text-base font-semibold text-primary text-balance">{chapter.title}</h3>
-              <p className="mt-1 text-sm leading-[1.43] text-secondary">
-                <InlineCode text={chapter.tip} />
-              </p>
-            </Link>
+            <Card key={chapter.slug} render={<Link href={`/chapters/${chapter.slug}`} />}>
+              <CardHeader>
+                <CardTitle className="text-balance">{chapter.title}</CardTitle>
+                <CardDescription>
+                  <InlineCode text={chapter.tip} />
+                </CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
@@ -148,8 +171,8 @@ export default function Home() {
               href={`/skills?category=${cat.slug}`}
               className="row flex items-center justify-between px-3 py-2.5 text-sm"
             >
-              <span className="text-primary">{categoryLabel(cat.slug)}</span>
-              <span className="text-muted tabular-nums">{cat.count}</span>
+              <span className="text-foreground">{categoryLabel(cat.slug)}</span>
+              <span className="text-muted-foreground tabular-nums">{cat.count}</span>
             </Link>
           ))}
         </div>

@@ -1,0 +1,650 @@
+{
+  "button": {
+    "summary": "The kit's core action control: text, icon or both, with emphasis variants, sizes, loading state and link composition.",
+    "useFor": "Use Button for any click-to-act control, from a primary form submit to a quiet row action or an avatar menu trigger. Its variants set emphasis, and its profiles cover special placements such as icon actions inside a field or links in running text.",
+    "neighbours": [
+      { "name": "toggle", "guidance": "Pick Toggle instead when the control holds an on/off pressed state rather than firing a one-time action." },
+      { "name": "copy-button", "guidance": "Pick Copy Button instead when the action writes a value to the clipboard, since it already handles the confirmation, failure and announcement." },
+      { "name": "toolbar", "guidance": "Pick Toolbar instead when a row of related actions should share one tab stop with arrow-key movement between them." },
+      { "name": "group", "guidance": "Pick Group to visually join several buttons, or a button and an input, into one segmented frame." }
+    ],
+    "rules": [
+      "Reserve `variant=\"accent\"` for the single main action on a surface and use `default`, `outline` or `ghost` for the rest.",
+      "Navigate with `render={<a href=... />}` or a router link that forwards props and ref; `variant=\"link\"` alone only changes the look.",
+      "Set `type=\"submit\"` explicitly inside a form, because a plain Button defaults to `type=\"button\"`.",
+      "Give every icon-only control a name: use `IconButton` with `label`, or `aria-label` on a square Button.",
+      "Use `loading` (or `LoadingButton` with an async `action`) to block repeat clicks during a request, and choose `aria-disabled` over `disabled` when the control must stay discoverable by Tab.",
+      "For icon buttons that sit in an InputGroup (show/hide, clear, open picker), apply `profile=\"field-action\"` and `shape=\"square\"` rather than hand-styling a ghost button."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "design-system"],
+    "tags": ["actions", "buttons", "loading", "icon-button"],
+    "install": ["button"]
+  },
+  "copy-button": {
+    "summary": "A button that puts a value on the clipboard and confirms success or failure visually and to screen readers.",
+    "useFor": "Use Copy Button next to things people paste elsewhere: invite links, API IDs, addresses, short tokens. It works as a bare icon after a value, a labelled text button, or an icon action inside an input group.",
+    "neighbours": [
+      { "name": "button", "guidance": "Pick Button instead when the action does something other than copying; Copy Button already owns the copied and failed states." },
+      { "name": "input-group", "guidance": "Pair with Input Group when the value lives in a read-only field and the copy icon should sit at its end." },
+      { "name": "code", "guidance": "Pick Code with `copyable` instead for a block of code, which places this button inside the block for you." }
+    ],
+    "rules": [
+      "Name the icon-only form after what it copies via `labels.copy` or `aria-label`, for example \"Copy invite link\".",
+      "Always render the value visibly next to the button so people can select it by hand if the clipboard write fails.",
+      "Pass a function to `value` when the text must be fetched on press, and keep that request short because browsers only allow a copy shortly after the gesture.",
+      "Use `onCopyError` to tell people what to do next when copying is unavailable, such as on plain http.",
+      "Inside a field set `profile=\"field-action\"`; inside a menu keep a `MenuItem` and call `useCopyToClipboard` from its handler."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["clipboard", "copy", "feedback"],
+    "install": ["copy-button"]
+  },
+  "toggle": {
+    "summary": "A single button that stays pressed or unpressed, for on/off tool states like bold or bookmark.",
+    "useFor": "Use Toggle for a standalone pressed-state control in an editor, toolbar or card, where the button itself shows whether something is active. It suits formatting tools, favourites and view options that act immediately.",
+    "neighbours": [
+      { "name": "switch", "guidance": "Pick Switch instead for a setting that is turned on or off and saved, especially one that must submit with a form." },
+      { "name": "checkbox", "guidance": "Pick Checkbox instead when the choice is a form value or an agreement rather than a tool state." },
+      { "name": "toggle-group", "guidance": "Pick Toggle Group when several related toggles belong together, either one-of-many or any-of-many." }
+    ],
+    "rules": [
+      "Do not swap the label or icon when it toggles; assistive tech already reports whether it is pressed.",
+      "An icon-only toggle takes `padding=\"icon\"` to stay square, plus an `aria-label` that never changes.",
+      "Own the state with `pressed` and `onPressedChange` when the app already knows it, such as the current text formatting.",
+      "Do not rely on Toggle to submit a form value; serialize the state yourself or use Checkbox or Switch.",
+      "Use `lift` only for a reaction like a like or favourite, not for ordinary tool toggles."
+    ],
+    "categories": ["interaction"],
+    "tasks": ["other", "form"],
+    "tags": ["toggle", "pressed-state", "editor"],
+    "install": ["toggle"]
+  },
+  "toggle-group": {
+    "summary": "A set of related pressed-state buttons sharing one selection, single or multiple, with arrow-key movement.",
+    "useFor": "Use Toggle Group for compact option sets that act right away, such as text alignment, list versus grid view, or a group of formatting marks. It handles single or multiple pressed items and keyboard navigation across the set.",
+    "neighbours": [
+      { "name": "radio-group", "guidance": "Pick Radio Group instead when exactly one answer is a required form value; Toggle Group lets a single selection be cleared." },
+      { "name": "tabs", "guidance": "Pick Tabs instead when each option swaps a content panel rather than changing a view setting." },
+      { "name": "toolbar", "guidance": "Pick Toolbar when the row mixes plain buttons, selects and toggles; a Toggle Group can live inside it." },
+      { "name": "toggle", "guidance": "Pick a lone Toggle when there is only one on/off option." }
+    ],
+    "rules": [
+      "Treat `value` as an array in both single and `multiple` mode.",
+      "To force one option always selected, ignore empty arrays in `onValueChange`.",
+      "Every toggle group needs a name: point `aria-labelledby` at a visible `FieldLabel`, or fall back to `aria-label`.",
+      "Set `size` and `variant` on the group so every `ToggleGroupItem` matches; split sets with `ToggleGroupSeparator`.",
+      "Set `orientation=\"vertical\"` for stacked items so arrow keys follow the layout."
+    ],
+    "categories": ["interaction", "navigation"],
+    "tasks": ["other", "dashboard"],
+    "tags": ["segmented-control", "view-switcher", "selection"],
+    "install": ["toggle-group"]
+  },
+  "toolbar": {
+    "summary": "A labelled row of related controls that takes one tab stop and moves between items with arrow keys.",
+    "useFor": "Use Toolbar for editor formatting bars, canvas tools and table action rows where many small controls sit together. It gives the set roving focus so keyboard users do not tab through every button.",
+    "neighbours": [
+      { "name": "group", "guidance": "Pick Group instead when you only want controls joined visually and each should keep its own tab stop." },
+      { "name": "toggle-group", "guidance": "Pick Toggle Group for a set that shares a pressed selection; nest it inside a Toolbar when the bar also has other actions." },
+      { "name": "menu", "guidance": "Move rarely used actions into a Menu triggered from the toolbar instead of crowding the row." }
+    ],
+    "rules": [
+      "Give the toolbar, and any meaningful `ToolbarGroup`, an accessible label.",
+      "Build items from `ToolbarButton`, `ToolbarLink`, `ToolbarInput` and `ToolbarGroup` so they join the arrow-key focus order.",
+      "Set `size` once on `Toolbar`; a group or item can override it for its own controls.",
+      "Divide clusters with `ToolbarSeparator` rather than spacing alone.",
+      "Use `focusableWhenDisabled` on a `ToolbarButton` that should stay reachable while unavailable."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["other", "dashboard"],
+    "tags": ["toolbar", "roving-focus", "editor"],
+    "install": ["toolbar"]
+  },
+  "input": {
+    "summary": "A single-line text control with surface variants and sizes; it also ships Field for labels, help and errors.",
+    "useFor": "Use Input for short free text such as names, emails, URLs, passwords and search terms, and for native types like file. Wrap it in a Field so the label, description and validation message are wired to the control.",
+    "neighbours": [
+      { "name": "textarea", "guidance": "Pick Textarea instead when the answer can run to more than one line." },
+      { "name": "number-field", "guidance": "Pick Number Field instead for numeric values that need stepping, bounds or locale formatting." },
+      { "name": "input-group", "guidance": "Pick Input Group when the input needs an attached prefix, icon or action button." },
+      { "name": "autocomplete", "guidance": "Pick Autocomplete when free text should be helped along by suggestions." }
+    ],
+    "rules": [
+      "Always give a visible label through Field and FieldLabel; a placeholder is never the name.",
+      "Set `invalid` on the surrounding Field and explain it with FieldError instead of styling the input red.",
+      "Use `readOnly` for values people can see and submit but not change, and `disabled` only when the value should not submit.",
+      "Read the text through `onValueChange`. Resetting the form leaves a controlled Input untouched, so empty your own state inside `onReset`.",
+      "Use `insetStart`/`insetEnd` when composing adjoining elements, and put password reveal in an InputGroup rather than inside the Input."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["text-input", "forms", "field"],
+    "install": ["input"]
+  },
+  "textarea": {
+    "summary": "A multiline text control that grows with its content between a minimum and maximum number of lines.",
+    "useFor": "Use Textarea for descriptions, comments, bios and messages where the answer may wrap or contain paragraphs. It sizes itself to the text, so you set limits in lines rather than a fixed height.",
+    "neighbours": [
+      { "name": "input", "guidance": "Pick Input instead when the answer fits on one line." },
+      { "name": "input-group", "guidance": "Pick Input Group with InputGroupTextarea when the box needs a header, footer or corner action like a send button." },
+      { "name": "prompt-input", "guidance": "Pick Prompt Input instead for a chat or AI composer with attachments and submit behavior built in." }
+    ],
+    "rules": [
+      "Set height with `minLines` and `maxLines`; native `rows` does not control it.",
+      "Listen with native `onChange`; Textarea has no `onValueChange`.",
+      "Enforce limits with `maxLength` and show the remaining count from a controlled `value`.",
+      "Label it through Field and FieldLabel, and put errors on the Field with FieldError.",
+      "Use `readOnly` for submitted but locked text and `disabled` only when it should not submit."
+    ],
+    "categories": ["forms"],
+    "tasks": ["form"],
+    "tags": ["textarea", "multiline", "forms"],
+    "install": ["textarea"]
+  },
+  "number-field": {
+    "summary": "A numeric input with step buttons, bounds, locale formatting and optional drag-to-scrub.",
+    "useFor": "Use Number Field when the value is a number people adjust: quantities, seats, timeouts, budgets. It keeps the value numeric while showing it formatted, and clamps it to the range you set.",
+    "neighbours": [
+      { "name": "slider", "guidance": "Pick Slider instead when an approximate position on a range matters more than an exact typed number." },
+      { "name": "input", "guidance": "Pick Input instead for digit strings that are not quantities, like phone numbers or postcodes." },
+      { "name": "otp-field", "guidance": "Pick OTP Field instead for a fixed-length verification code." }
+    ],
+    "rules": [
+      "Compose `NumberFieldGroup` with `NumberFieldDecrement`, `NumberFieldInput` and `NumberFieldIncrement`, and add `NumberFieldScrubArea` with a `label` for scrubbing.",
+      "Use `null` for an empty value, and constrain edits with `min`, `max` and `step`.",
+      "Pass `format` and `locale` for currency or percent; the stored value stays a plain number.",
+      "Put the `name` on the surrounding Field so Form submits the number, and add `className=\"w-full\"` when it should fill a column.",
+      "Keep the label above the control; Number Field does not support a floating label."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["number-input", "stepper", "forms"],
+    "install": ["number-field"]
+  },
+  "otp-field": {
+    "summary": "A one-time-code entry with one slot per character, separate or joined, with paste and auto-advance handled.",
+    "useFor": "Use OTP Field for verification, two-factor and recovery codes of a known length. It manages typing, pasting and deletion across slots and can submit the form once the code is complete.",
+    "neighbours": [
+      { "name": "input", "guidance": "Pick Input instead when the code length varies or the value is a password." },
+      { "name": "number-field", "guidance": "Pick Number Field instead for a quantity rather than a code made of digits." }
+    ],
+    "rules": [
+      "Set `length` and render exactly that many `OTPFieldInput` slots; `OTPFieldSeparator` does not count.",
+      "Label the field once; the first slot takes the Field label, so only name the following slots.",
+      "Use `validationType=\"alphanumeric\"` for recovery codes and `layout=\"joined\"` for a single-input look.",
+      "Treat `onValueComplete` or `autoSubmit` as a trigger only, and verify the code with rate limits on the server.",
+      "Keep the label on top; OTP Field does not take a floating label."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form", "mobile-interface"],
+    "tags": ["otp", "verification", "auth"],
+    "install": ["otp-field"]
+  },
+  "label": {
+    "summary": "A plain visible label for a native control, plus a card variant for checkbox, radio and switch options.",
+    "useFor": "Use Label to name a control outside a Field, or to wrap a checkbox, radio or switch with its sentence so the text is clickable. Its card variant turns each option into a bordered, selectable tile.",
+    "neighbours": [
+      { "name": "field", "guidance": "Pick Field with FieldLabel instead when you also need help text, a required marker or validation wired to the control." },
+      { "name": "fieldset", "guidance": "Pick Fieldset instead to name a whole group of controls with a legend." }
+    ],
+    "rules": [
+      "Connect it with `htmlFor` to the control's id, or wrap the control inside it.",
+      "Use `variant=\"card\"` for choice cards and let Label own the border, hover, checked and disabled styles.",
+      "Keep secondary buttons outside a card Label so clicking them does not toggle the option.",
+      "Do not use Label as a replacement for FieldLabel; it adds no required marker, help or validation.",
+      "Avoid swapping the element via `render` unless you restore native label behavior yourself."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["label", "choice-card", "forms"],
+    "install": ["label"]
+  },
+  "field": {
+    "summary": "The wrapper that ties a control to its label, help text and validation messages, with top or floating labels.",
+    "useFor": "Use Field around every form control that has a label, description or error. It owns validation timing, the required marker and the accessible links between the parts, and supports floating labels for compact forms.",
+    "neighbours": [
+      { "name": "label", "guidance": "Pick plain Label only for a control that needs a name and nothing else." },
+      { "name": "fieldset", "guidance": "Pick Fieldset to group several Fields under one legend, or render a Field as a Fieldset for checkbox and radio groups." },
+      { "name": "form", "guidance": "Pick Form as the outer boundary that submits Fields, sets form-wide validation mode and maps server errors." }
+    ],
+    "rules": [
+      "Keep `FieldLabel`, the control, `FieldDescription` and `FieldError` inside one `Field` so they are linked automatically.",
+      "Put `required` on the control and add `requiredIndicator` to the Field instead of typing an asterisk into the label.",
+      "Client-side checks go through `validate` and `validationMode`. When your app decides the error itself, mark Field as `invalid` and give FieldError `match`.",
+      "Use `labelPlacement=\"floating\"` only with Input, Textarea, Select and single-select Combobox or Autocomplete, and never with a leading icon.",
+      "Change spacing with the `--field-gap` variable, not a `gap-*` utility, so FieldError stays aligned.",
+      "Install it with `input`; Field has no registry item of its own."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["field", "validation", "floating-label", "forms"],
+    "install": ["input"]
+  },
+  "fieldset": {
+    "summary": "Groups related form fields under a shared legend and optional description, and can disable them together.",
+    "useFor": "Use Fieldset for clusters like a shipping address, billing details or a set of radio options that need one shared name. It also lets you disable every control in the group at once.",
+    "neighbours": [
+      { "name": "field", "guidance": "Pick Field for a single control; render a Field as the Fieldset when a radio or checkbox group needs a legend and one name." },
+      { "name": "card", "guidance": "Pick Card when you want a visual container; use Fieldset inside it when the controls also need a shared accessible name." },
+      { "name": "form", "guidance": "Pick Form for submission and validation; Fieldset only groups and does not submit." }
+    ],
+    "rules": [
+      "Write a `FieldsetLegend` that says what the controls have in common.",
+      "Shared help text for the group goes in `FieldsetDescription`; help for a single input goes in FieldDescription.",
+      "Set `disabled` on Fieldset to switch off every control inside; do not use it to show read-only values.",
+      "With radio or checkbox groups, let the Field render as the Fieldset. The legend then labels the whole set, and every option inherits the Field's name."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["fieldset", "legend", "grouping"],
+    "install": ["fieldset"]
+  },
+  "form": {
+    "summary": "The submit boundary for Fields: form-wide validation timing, server error mapping and reset handling.",
+    "useFor": "Use Form around any set of Fields that submit together, from a sign-in to a settings page. It decides when validation runs, shows errors returned by your server next to the right field, and moves focus to the first problem.",
+    "neighbours": [
+      { "name": "field", "guidance": "Pick Field for each control inside the Form; Field-level settings override the Form's." },
+      { "name": "fieldset", "guidance": "Pick Fieldset to group related Fields within the Form under a legend." }
+    ],
+    "rules": [
+      "Pass server messages through `errors`, keyed by each Field's `name`.",
+      "Use `onFormSubmit` to receive values without a page navigation, or call `preventDefault` yourself in `onSubmit`.",
+      "Give the submit Button `type=\"submit\"` and show `loading` on it while your request runs.",
+      "Restore controlled values in `onReset`, because a native reset does not touch React state.",
+      "Re-validate on the server; async `Field.validate` does not block submission."
+    ],
+    "categories": ["forms"],
+    "tasks": ["form"],
+    "tags": ["form", "validation", "submission"],
+    "install": ["form"]
+  },
+  "checkbox": {
+    "summary": "A box for one independent yes/no choice, with indeterminate state and form submission built in.",
+    "useFor": "Use Checkbox for agreements, opt-ins and single options that are checked or not and submitted with a form. It also serves as each option in a Checkbox Group.",
+    "neighbours": [
+      { "name": "switch", "guidance": "Pick Switch instead for a setting that takes effect immediately, like enabling notifications." },
+      { "name": "checkbox-group", "guidance": "Pick Checkbox Group when several related options share one name and selection." },
+      { "name": "radio-group", "guidance": "Pick Radio Group when exactly one option of a set must be chosen." },
+      { "name": "toggle", "guidance": "Pick Toggle for a pressed tool state in a toolbar rather than a form value." }
+    ],
+    "rules": [
+      "Wrap the box and its text in `FieldLabel` or `Label` so clicking the text toggles it.",
+      "Use `checked` with `onCheckedChange` only when the app owns the value; otherwise `defaultChecked`.",
+      "Set `uncheckedValue` when the server needs a value for the unchecked state; otherwise nothing is sent.",
+      "Remember `aria-invalid` only styles the box; real errors come from Field and FieldError.",
+      "Use `Label variant=\"card\"` for card-style options instead of rebuilding checked styles."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["checkbox", "boolean", "forms"],
+    "install": ["checkbox"]
+  },
+  "checkbox-group": {
+    "summary": "Owns a set of related checkboxes as one array value, with an optional parent box that selects all.",
+    "useFor": "Use Checkbox Group when people may pick any number of options from a related list, such as notification channels, permissions or visible columns. It shares size and selection, and can show a mixed parent state.",
+    "neighbours": [
+      { "name": "radio-group", "guidance": "Pick Radio Group instead when only one option may be chosen." },
+      { "name": "combobox", "guidance": "Pick Combobox with `multiple` instead when the list is long enough to need search." },
+      { "name": "toggle-group", "guidance": "Pick Toggle Group with `multiple` for compact tool options that act immediately rather than submit." }
+    ],
+    "rules": [
+      "Give every Checkbox a unique `value`, and own selection with `value` and `onValueChange` when needed.",
+      "A select-all control is a Checkbox marked `parent`, with each child's value collected in `allValues`.",
+      "Render the Field as a Fieldset with a legend so the group is named and the Field `name` applies to each box.",
+      "Lay out horizontally with `className=\"flex-row gap-4\"`; the default 8 px vertical gap is replaced by your utility."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["checkbox", "multi-select", "forms"],
+    "install": ["checkbox-group"]
+  },
+  "radio-group": {
+    "summary": "A set of visible options where exactly one is chosen, with arrow-key movement and form submission.",
+    "useFor": "Use Radio Group for short, mutually exclusive choices that people should compare at a glance: plans, frequencies, delivery speeds. Options can carry descriptions or be shown as selectable cards.",
+    "neighbours": [
+      { "name": "select", "guidance": "Pick Select instead when there are many options or space is tight and comparison is not important." },
+      { "name": "checkbox-group", "guidance": "Pick Checkbox Group instead when several options can be on at once." },
+      { "name": "toggle-group", "guidance": "Pick Toggle Group for a compact view or tool switch that acts immediately." },
+      { "name": "list-box", "guidance": "Pick List Box for a single choice from a longer visible list of rich rows." }
+    ],
+    "rules": [
+      "Give each `Radio` a unique `value` and own the choice with `value` and `onValueChange` when needed.",
+      "Render the Field as a Fieldset with a legend so the group has a name and submits under the Field `name`.",
+      "For options with descriptions, put each Radio in a `FieldItem` beside a `FieldLabel` and `FieldDescription`.",
+      "Use `Label variant=\"card\"` for plan-style cards so the whole card selects the option.",
+      "Set `size` once on the group; a Radio's own size overrides it."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["radio", "single-choice", "forms"],
+    "install": ["radio-group"]
+  },
+  "switch": {
+    "summary": "An on/off control for a setting, with an optional label and description row and form submission.",
+    "useFor": "Use Switch for preferences and feature flags that are clearly on or off, typically in settings pages. It reads as a setting rather than an answer, and fits rows with a label and description beside it.",
+    "neighbours": [
+      { "name": "checkbox", "guidance": "Pick Checkbox instead for consent, agreements or options that only matter on submit." },
+      { "name": "toggle", "guidance": "Pick Toggle instead for a pressed tool button in an editor or toolbar." },
+      { "name": "settings-list", "guidance": "Pick Settings List when building a full page of setting rows that each hold a Switch or other control." }
+    ],
+    "rules": [
+      "Place `FieldLabel` and `FieldDescription` before the Switch inside a Field so both describe it.",
+      "Use `checked` and `onCheckedChange` when the app saves the setting immediately; otherwise `defaultChecked`.",
+      "Set `uncheckedValue` if the form must send a value while it is off.",
+      "Do not use Switch for a mixed or partial state; it has no indeterminate mode.",
+      "Use `Label variant=\"card\"` for card rows rather than restyling the switch."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "mobile-interface"],
+    "tags": ["switch", "settings", "boolean"],
+    "install": ["switch"]
+  },
+  "slider": {
+    "summary": "Pick a number or a range by dragging one or more thumbs along a track, with optional scale labels.",
+    "useFor": "Use Slider for values where relative position matters more than precision: volume, price ranges, storage limits, timeouts. Passing an array gives one thumb per value for ranges.",
+    "neighbours": [
+      { "name": "number-field", "guidance": "Pick Number Field instead when people need to type an exact value." },
+      { "name": "meter", "guidance": "Pick Meter instead to show a value people cannot change." },
+      { "name": "progress", "guidance": "Pick Progress instead to show how far a task has got." }
+    ],
+    "rules": [
+      "Always name the slider with a Field label or `aria-label`; scale `labels` are not a name.",
+      "Pass an array to `value` or `defaultValue` for a range, and set `min` and `max` explicitly.",
+      "Use `onValueCommitted` for expensive work and `onValueChange` for live display.",
+      "Show the current number with `SliderValue` when the exact value matters.",
+      "To include the slider in form data, set `name` on its Field. Range sliders post a separate entry for each thumb."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["slider", "range", "forms"],
+    "install": ["slider"]
+  },
+  "select": {
+    "summary": "A trigger that opens a fixed list of options for one or several choices, without typing to filter.",
+    "useFor": "Use Select for picking from a known, moderate list such as a region, role or team, where search would be overkill. It supports groups, icons, multiple selection and a ghost trigger for values inside rows.",
+    "neighbours": [
+      { "name": "combobox", "guidance": "Pick Combobox instead when the list is long enough that people need to type to find an option." },
+      { "name": "autocomplete", "guidance": "Pick Autocomplete instead when the answer can be any text and the options are only suggestions." },
+      { "name": "radio-group", "guidance": "Pick Radio Group instead for a few options that people should see side by side." },
+      { "name": "menu", "guidance": "Pick Menu instead when the list contains actions, not a value." }
+    ],
+    "rules": [
+      "Pass `items` to Select so a stored ID shows its label in the trigger before the popup opens.",
+      "Set `size` and `variant` on `SelectTrigger`, not on the root.",
+      "Use `SelectGroup`, `SelectGroupLabel` and `SelectSeparator` for sections, and `SelectLabel` or FieldLabel to name the control.",
+      "Use `itemToStringValue` for object items so the form submits the right string.",
+      "Set `name` and `required` and place it in a Field so Form blocks an empty submit and FieldError explains it.",
+      "Never use the placeholder as the label."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["select", "dropdown", "forms"],
+    "install": ["select"]
+  },
+  "combobox": {
+    "summary": "A searchable picker that filters known options as you type, for single or multi-select with chips.",
+    "useFor": "Reach for Combobox when the answer has to be picked from a fixed list too long to browse, like assignees, countries, time zones or labels. Typing narrows the list, options can be grouped, and multiple picks show up as chips that can be removed.",
+    "neighbours": [
+      { "name": "select", "guidance": "Pick Select instead for a short list where typing adds nothing." },
+      { "name": "autocomplete", "guidance": "Pick Autocomplete instead when the typed text itself is the value and suggestions are optional." },
+      { "name": "command", "guidance": "Pick Command instead for a searchable list of actions or navigation, not a form value." },
+      { "name": "checkbox-group", "guidance": "Pick Checkbox Group for a handful of multi-select options that can all be visible." }
+    ],
+    "rules": [
+      "Set `size` and `variant` on `ComboboxInput`, and turn on `showClear` when clearing is common.",
+      "For multi-select set `multiple` and render `ComboboxChip`s inside `ComboboxChips` through `ComboboxValue`; do not add a second remove button.",
+      "Provide `itemToStringLabel` for display and filtering and `itemToStringValue` for submission when items are objects.",
+      "Always render a `ComboboxEmpty` so a no-match query explains itself, and own async loading through `ComboboxStatus`.",
+      "For a select-looking trigger with search, use `ComboboxTrigger render={<SelectButton />}` with an embedded `ComboboxInput` in the popup.",
+      "Use `indicatorPosition=\"end\"` on items that lead with an avatar or logo."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["combobox", "search", "multi-select", "chips"],
+    "install": ["combobox"]
+  },
+  "autocomplete": {
+    "summary": "A text input that suggests completions while still accepting whatever the person types.",
+    "useFor": "Use Autocomplete when people type their own answer but suggestions help, as with job titles, tags, search queries or city names. Whatever they type is what gets submitted, even if no suggestion matches.",
+    "neighbours": [
+      { "name": "combobox", "guidance": "Pick Combobox instead if only values from the list are allowed." },
+      { "name": "input", "guidance": "Pick plain Input when there are no useful suggestions to offer." },
+      { "name": "select", "guidance": "Pick Select for a short fixed list where free text is not allowed." }
+    ],
+    "rules": [
+      "Treat `value` as a plain string that can hold arbitrary text, not a selected item.",
+      "Use `itemToStringValue` for object items so selecting one fills the input with the right text.",
+      "Cap long lists with `limit` and report the remainder through `AutocompleteStatus` using `useAutocompleteFilter`.",
+      "Render `AutocompleteEmpty` for no matches and own async fetching and errors in app code.",
+      "Set `size` and `variant` on `AutocompleteInput`, and place it in a Field with a `name` to submit."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["autocomplete", "suggestions", "search"],
+    "install": ["autocomplete"]
+  },
+  "list-box": {
+    "summary": "An always-visible list where one row is selected, with rich multiline rows and typeahead.",
+    "useFor": "Use List Box for a single choice from a short to medium list that should stay on screen, such as choosing a workspace or template with descriptions. It suits side panels and pickers inside dialogs.",
+    "neighbours": [
+      { "name": "select", "guidance": "Pick Select instead when the options should hide in a popup until needed." },
+      { "name": "radio-group", "guidance": "Pick Radio Group instead for a plain form question that must submit natively." },
+      { "name": "combobox", "guidance": "Pick Combobox when the list needs text search." },
+      { "name": "menu", "guidance": "Pick Menu when the rows trigger actions instead of holding a selection." }
+    ],
+    "rules": [
+      "Give every `ListBoxItem` a stable string `value` and own selection with `value` and `onValueChange`.",
+      "Name the list with a visible `FieldLabel` referenced by `aria-labelledby`, or an `aria-label`.",
+      "Set `textValue` on rich items so typeahead matches the title only.",
+      "Serialize the selection yourself; List Box does not submit a native form value and has no multiple mode.",
+      "Use `selectionAppearance=\"row\"` when the check mark adds noise to rich rows."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "other"],
+    "tags": ["listbox", "single-choice", "picker"],
+    "install": ["list-box"]
+  },
+  "input-group": {
+    "summary": "A shared input surface with attached text, icons, buttons or a header and footer around an input or textarea.",
+    "useFor": "Use Input Group when a field needs something attached: a currency or protocol prefix, a search icon, a show-password action, an apply button, or a toolbar under a comment box. The group draws one frame around everything.",
+    "neighbours": [
+      { "name": "group", "guidance": "Pick Group instead to join separate controls, like an input and a submit button, as segments with their own frames." },
+      { "name": "input", "guidance": "Pick plain Input when nothing needs to attach to the field." },
+      { "name": "prompt-input", "guidance": "Pick Prompt Input instead for a full chat composer." }
+    ],
+    "rules": [
+      "Use `InputGroupInput` or `InputGroupTextarea` inside the group; the group owns the surface and the inner control stays unstyled.",
+      "Place extras in `InputGroupAddon` with `align` set to inline-start, inline-end, block-start or block-end.",
+      "Use Button with `profile=\"field-action\"` and `shape=\"square\"` for icon actions, and keep a password toggle's label constant with `aria-pressed`.",
+      "Remember addon text is not part of the value or the label; name the field with Field and FieldLabel.",
+      "Compose Button directly; there is no InputGroupButton part."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["input-group", "addons", "password"],
+    "install": ["input-group"]
+  },
+  "group": {
+    "summary": "Visually joins related buttons or an input and its button into one segmented frame, without shared state.",
+    "useFor": "Use Group for split buttons, segmented action sets, zoom controls, or a search input joined to its submit button. Each control keeps its own behavior and tab stop.",
+    "neighbours": [
+      { "name": "toolbar", "guidance": "Pick Toolbar instead when the controls should share one tab stop with arrow-key navigation." },
+      { "name": "toggle-group", "guidance": "Pick Toggle Group instead when the segments share a pressed selection." },
+      { "name": "input-group", "guidance": "Pick Input Group instead when the addon should sit inside one input surface." }
+    ],
+    "rules": [
+      "Each Group needs an accessible name from `aria-label` or `aria-labelledby`.",
+      "Use `GroupText` for a fixed prefix or unit and give the input its own accessible name.",
+      "Put an input-plus-button Group inside a Form and make the button `type=\"submit\"` so Enter submits.",
+      "Give icon-only segments `shape=\"square\"` instead of a fixed icon size so heights match.",
+      "Use `GroupSeparator` between non-button controls, or `separator=\"inset\"` for button rows."
+    ],
+    "categories": ["layout", "interaction"],
+    "tasks": ["other", "form"],
+    "tags": ["button-group", "segmented", "split-button"],
+    "install": ["group"]
+  },
+  "calendar": {
+    "summary": "An inline month grid for picking a single date, several dates or a range, with unavailable-day rules.",
+    "useFor": "Use Calendar when the date grid should stay on the page, for example a booking flow, a scheduling sidebar or a range picker with shortcuts. It shares one options object with every date picker in the kit.",
+    "neighbours": [
+      { "name": "date-picker", "guidance": "Pick Date Picker instead when the calendar should only open from a compact button." },
+      { "name": "date-field", "guidance": "Pick Date Field instead when people mostly type the date, such as a birth date." },
+      { "name": "date-range-picker", "guidance": "Pick Date Range Picker for a compact typed range field with a popover calendar." }
+    ],
+    "rules": [
+      "Choose `selectionMode` (single, multiple or range) first; it sets the shape of `value`.",
+      "Block days with `disabled` matchers and limit navigation with `startMonth` and `endMonth`.",
+      "Define shared `CalendarOptions` once and reuse them across Calendar and pickers' `calendarProps`.",
+      "Control `month` alongside `value` when your own buttons, like Today, change the date.",
+      "Persist days deliberately, for example as `YYYY-MM-DD`, because values are local-midnight Date objects.",
+      "Give it an `aria-label`; do not pass React Aria `CalendarDate` or `minValue` props."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["calendar", "date", "booking"],
+    "install": ["calendar"]
+  },
+  "date-field": {
+    "summary": "A typed date input built from day, month and year segments, with an optional calendar popover.",
+    "useFor": "Use Date Field when people know the date and want to type it quickly, such as invoice dates or birth dates, while still offering a calendar. It submits a stable ISO day string regardless of display locale.",
+    "neighbours": [
+      { "name": "date-picker", "guidance": "Pick Date Picker instead when choosing from a calendar is the main path and typing is unnecessary." },
+      { "name": "date-time-picker", "guidance": "Pick Date Time Picker when a time of day is needed too." },
+      { "name": "calendar", "guidance": "Pick Calendar when the month grid should stay visible on the page." }
+    ],
+    "rules": [
+      "Store `null` for an empty controlled value; `onValueChange` reports `undefined` when cleared.",
+      "Pass `calendarProps` with `disabled`, `startMonth` and `endMonth`; typed dates that break them become invalid.",
+      "Set `name` to submit `YYYY-MM-DD`, and use `required` with FieldError for the missing message.",
+      "Use `iconMode=\"decorative-start\"` for birth dates where a calendar does not help.",
+      "Name it with FieldLabel or `aria-label`, keep a top label, and add `className=\"w-full\"` to fill a column."
+    ],
+    "categories": ["forms", "accessibility"],
+    "tasks": ["form"],
+    "tags": ["date", "date-input", "forms"],
+    "install": ["date-field"]
+  },
+  "date-picker": {
+    "summary": "A button that opens a calendar to choose one date, showing the chosen date as formatted text.",
+    "useFor": "Use Date Picker for due dates, appointment dates and filters where picking from a calendar is more natural than typing. The trigger stays compact and the value is a native Date.",
+    "neighbours": [
+      { "name": "date-field", "guidance": "Pick Date Field instead when people type the date or when the value must be shown read-only." },
+      { "name": "date-range-picker", "guidance": "Pick Date Range Picker when you need a start and an end date." },
+      { "name": "date-time-picker", "guidance": "Pick Date Time Picker when a time is part of the value." },
+      { "name": "calendar", "guidance": "Pick Calendar when the grid should be always visible." }
+    ],
+    "rules": [
+      "Store `null` for no date in a controlled picker, never `undefined`.",
+      "Block days through `calendarProps.disabled` and validate the date again on the server.",
+      "Use `formatValue` to change only the trigger text; it also replaces `placeholder`.",
+      "Set `name` to submit `YYYY-MM-DD` and `required` to block empty submits.",
+      "Do not expect a read-only mode; switch to Date Field for a locked date."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["date", "date-picker", "popover"],
+    "install": ["date-picker"]
+  },
+  "date-range-picker": {
+    "summary": "A typed start-and-end date field with a calendar popover, submitting two ISO day strings.",
+    "useFor": "Use Date Range Picker for trips, out-of-office spans, report periods and bookings. People can type both ends or select them in a calendar, and the control only reports complete ranges.",
+    "neighbours": [
+      { "name": "calendar", "guidance": "Pick Calendar with `selectionMode=\"range\"` instead for an always-visible grid, two months side by side or quick shortcuts." },
+      { "name": "date-picker", "guidance": "Pick Date Picker when only one date is needed." },
+      { "name": "date-field", "guidance": "Pick two Date Fields only if the ends are truly independent questions." }
+    ],
+    "rules": [
+      "Form data carries the two ends under `startName` and `endName`; the picker takes no single `name` and posts no combined range value.",
+      "Store `null` for an empty controlled range; the value is `{ from, to }` and `undefined` means cleared.",
+      "Pass booking rules through `calendarProps` and re-check the range on the server.",
+      "Set `startLabel` and `endLabel` when the default Start Date and End Date names are too generic.",
+      "Use `iconMode=\"none\"` when a separate Calendar on the page already drives the range."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["date-range", "booking", "forms"],
+    "install": ["date-range-picker"]
+  },
+  "date-time-picker": {
+    "summary": "One control for a local date and time, with typed segments, a calendar and a time selector.",
+    "useFor": "Use Date Time Picker for scheduled publishes, meeting starts and reminders where both day and time matter. It submits a local date-time string without a time zone, so conversion stays in your app.",
+    "neighbours": [
+      { "name": "date-field", "guidance": "Pick Date Field instead when only the day matters." },
+      { "name": "time-field", "guidance": "Pick Time Field instead for a time with no date, like a daily reminder." },
+      { "name": "date-picker", "guidance": "Pick Date Picker for a calendar-only date choice without typing." }
+    ],
+    "rules": [
+      "Treat the value as `{ date, time: { hour, minute } }` and store `null` when empty.",
+      "Set `name` to submit `YYYY-MM-DDTHH:mm` and convert time zones yourself.",
+      "Use `minuteStep` for selector options, but validate the step and business hours in app code and on the server.",
+      "Set `hourCycle={12}` for AM/PM display; the value stays 24-hour.",
+      "Block days with `calendarProps.disabled`; time rules are not checked for you."
+    ],
+    "categories": ["forms", "interaction"],
+    "tasks": ["form"],
+    "tags": ["date-time", "scheduling", "forms"],
+    "install": ["date-time-picker"]
+  },
+  "time-field": {
+    "summary": "An hour and minute input with typed segments and an optional selector, submitting 24-hour HH:mm.",
+    "useFor": "Use Time Field for times without a date: daily summaries, opening hours, reminder times, shift starts. It supports 12- or 24-hour display and a minute step in its selector.",
+    "neighbours": [
+      { "name": "date-time-picker", "guidance": "Pick Date Time Picker instead when the time belongs to a specific day." },
+      { "name": "select", "guidance": "Pick Select instead when only a few fixed time slots are allowed." },
+      { "name": "date-field", "guidance": "Pick Date Field when the value is a day rather than a time." }
+    ],
+    "rules": [
+      "Treat the value as `{ hour, minute }` in 24-hour time, even with `hourCycle={12}`.",
+      "Store `null` for an empty controlled value; `undefined` from `onValueChange` means cleared.",
+      "Set `name` to submit `HH:mm`, and `required` with FieldError for the missing message.",
+      "Use `minuteStep` for the selector and validate the step on the server since typed minutes are not rounded.",
+      "Use `iconMode=\"decorative-start\"` for compact start/end pairs, and do not pass a `locale` prop."
+    ],
+    "categories": ["forms"],
+    "tasks": ["form"],
+    "tags": ["time", "time-input", "forms"],
+    "install": ["time-field"]
+  },
+  "color-picker": {
+    "summary": "A trigger that opens a hex color editor with a saturation area, hue slider and RGB fields.",
+    "useFor": "Use Color Picker when people choose any custom color, such as a brand or theme color. It can also appear as the last swatch of a palette so a fixed set ends with a custom choice.",
+    "neighbours": [
+      { "name": "color-swatch-picker", "guidance": "Pick Color Swatch Picker instead when the choice is limited to a fixed palette." },
+      { "name": "input", "guidance": "Pick Input instead only if people paste hex values and never need visual picking." }
+    ],
+    "rules": [
+      "Expect lowercase hex strings from `onValueChange`; there is no alpha channel.",
+      "Keep an accessible name when hiding the value with `showValue={false}`.",
+      "Use `variant=\"swatch\"` with `selected` to end a Color Swatch Picker row with a custom color.",
+      "Do not rely on `required` to block submission, because the picker always holds a color.",
+      "Use `readOnly` to show a fixed color and `disabled` to remove it from the form."
+    ],
+    "categories": ["forms", "design-systems"],
+    "tasks": ["form", "design-system"],
+    "tags": ["color", "picker", "theming"],
+    "install": ["color-picker"]
+  },
+  "color-swatch-picker": {
+    "summary": "A row of color or image swatches for choosing one option from a palette your app defines.",
+    "useFor": "Use Color Swatch Picker for label colors, avatar backgrounds, theme presets or image choices from a fixed set. The value is the option key, so your data stays independent of the CSS color.",
+    "neighbours": [
+      { "name": "color-picker", "guidance": "Pick Color Picker instead when any color is allowed, or add it as the last swatch for a custom choice." },
+      { "name": "radio-group", "guidance": "Pick Radio Group instead when the options are better described by words than by color." },
+      { "name": "select", "guidance": "Pick Select when the palette is too large to show as swatches." }
+    ],
+    "rules": [
+      "Give every option a `label` and unique `value`; the label is what screen readers announce.",
+      "Store the option key from `onValueChange`, not the CSS color.",
+      "Use `indicator=\"ring\"` for image swatches so the check does not cover the picture.",
+      "Place it in a Field with a `name` and `required` so FieldError can explain a missing choice.",
+      "Change swatch shape through the provider `radius`, not custom classes."
+    ],
+    "categories": ["forms", "visual"],
+    "tasks": ["form", "design-system"],
+    "tags": ["color", "swatches", "palette"],
+    "install": ["color-swatch-picker"]
+  }
+}

@@ -4,6 +4,7 @@ import {
   authorAvatar,
   getAllSkills,
   getAuthors,
+  getSiteplaneSkills,
   getSkillBySlug,
   getSkillRawMarkdown,
   installTargets,
@@ -83,6 +84,7 @@ export function skillSummary(skill: Skill) {
     stars: skillStars(skill) ?? null,
     external: Boolean(skill.external),
     curated: Boolean(skill.curated),
+    siteplane: skill.siteplane ?? null,
     updated_at: skill.updated_at,
     url: `${SITE_URL}/skills/${skill.slug}`,
     raw_url: skill.external
@@ -182,6 +184,37 @@ export function catalogStats() {
     roles: ROLES.map((r) => ({ slug: r.slug, name: r.label, categories: r.categories })),
     stars_fetched_at: REPO_STARS_FETCHED_AT,
     updated_at: skills.reduce((max, s) => (s.updated_at > max ? s.updated_at : max), ""),
+  };
+}
+
+/** Every Siteplane UI component entry grouped as Siteplane groups them, with its install command. */
+export function siteplaneCatalog(group?: string) {
+  const needle = group?.trim().toLowerCase();
+  const groups: { group: string; components: ReturnType<typeof siteplaneComponent>[] }[] = [];
+  for (const skill of getSiteplaneSkills()) {
+    if (needle && skill.siteplane.group.toLowerCase() !== needle) continue;
+    let entry = groups.find((g) => g.group === skill.siteplane.group);
+    if (!entry) groups.push((entry = { group: skill.siteplane.group, components: [] }));
+    entry.components.push(siteplaneComponent(skill));
+  }
+  return {
+    design_system: "Siteplane UI",
+    docs: "https://ui.siteplane.io/docs/",
+    total: groups.reduce((n, g) => n + g.components.length, 0),
+    groups,
+  };
+}
+
+function siteplaneComponent(skill: ReturnType<typeof getSiteplaneSkills>[number]) {
+  return {
+    component: skill.siteplane.component,
+    name: skill.siteplane.title,
+    slug: skill.slug,
+    description: skill.description,
+    install: `npx shadcn@4.18.0 add ${skill.siteplane.install.map((i) => `@siteplane/${i}`).join(" ")}`,
+    docs: skill.siteplane.docs,
+    url: `${SITE_URL}/skills/${skill.slug}`,
+    raw_url: `${SITE_URL}/skills/${skill.slug}/raw`,
   };
 }
 

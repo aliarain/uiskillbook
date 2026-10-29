@@ -13,13 +13,13 @@ function foregroundFor(hex: string) {
 
 /** Rounded-square brand mark: neutral until its link is hovered or focused. */
 export function BrandTile({ entry, size = "md" }: { entry: DesignMd; size?: "md" | "lg" }) {
-  const box = size === "lg" ? "size-16 rounded-feature text-2xl" : "size-12 rounded-card text-lg";
+  const box = size === "lg" ? "size-16 rounded-surface text-2xl" : "size-12 rounded-surface text-lg";
   return (
     <span
       style={
         { "--brand": entry.color, "--brand-foreground": foregroundFor(entry.color) } as React.CSSProperties
       }
-      className={`flex shrink-0 items-center justify-center border border-border bg-surface font-medium text-muted transition-colors duration-150 group-hover:border-(--brand) group-hover:bg-(--brand) group-hover:text-(--brand-foreground) group-focus-visible:border-(--brand) group-focus-visible:bg-(--brand) group-focus-visible:text-(--brand-foreground) ${box}`}
+      className={`flex shrink-0 items-center justify-center hairline bg-muted font-medium text-muted-foreground transition-colors duration-150 group-hover:border-(--brand) group-hover:bg-(--brand) group-hover:text-(--brand-foreground) group-focus-visible:border-(--brand) group-focus-visible:bg-(--brand) group-focus-visible:text-(--brand-foreground) ${box}`}
       aria-hidden
     >
       {entry.icon && getSimpleIcon(entry.icon) ? (

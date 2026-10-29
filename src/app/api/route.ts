@@ -14,6 +14,7 @@ export function GET() {
       skill: `${SITE_URL}/api/skills/{slug}`,
       search: `${SITE_URL}/api/search?q=`,
       stats: `${SITE_URL}/api/stats`,
+      siteplane: `${SITE_URL}/api/siteplane?group=`,
       design_md: `${SITE_URL}/api/design-md`,
       design_md_entry: `${SITE_URL}/api/design-md/{slug}`,
     },

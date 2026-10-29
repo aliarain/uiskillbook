@@ -9,7 +9,12 @@ import {
   installTargets,
 } from "@/lib/skills";
 import { categoryLabel, agentLabel } from "@/lib/taxonomy";
-import { markdownToHtml } from "@/lib/markdown";
+import { markdownToHast } from "@/lib/markdown";
+import { Markdown } from "@/components/markdown";
+import { Badge } from "@/siteplane/components/badge";
+import { Button } from "@/siteplane/components/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/siteplane/components/card";
+import { ArrowUpRight } from "lucide-react";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
 import { JsonLd } from "@/components/json-ld";
@@ -18,6 +23,7 @@ import { AuthorBadge, StarCount } from "@/components/skill-meta";
 import { AddToAgent } from "@/components/add-to-agent";
 import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { groupAnchor } from "@/lib/siteplane";
 
 export function generateStaticParams() {
   return getAllSkills().map((s) => ({ slug: s.slug }));
@@ -82,18 +88,27 @@ export default async function SkillDetailPage({
         }}
       />
       <Breadcrumbs
-        items={[
-          { label: "Skills", href: "/skills" },
-          { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
-        ]}
+        items={
+          skill.siteplane
+            ? [
+                { label: "Siteplane UI", href: "/siteplane-ui" },
+                { label: skill.siteplane.group, href: `/siteplane-ui#${groupAnchor(skill.siteplane.group)}` },
+                { label: skill.siteplane.title },
+              ]
+            : [
+                { label: "Skills", href: "/skills" },
+                { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
+                { label: skill.title },
+              ]
+        }
       />
 
-      <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.title}</h1>
-      <p className="mt-3 text-lg text-secondary text-pretty">{skill.description}</p>
+      <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.siteplane?.title ?? skill.title}</h1>
+      <p className="mt-3 text-lg text-muted-foreground text-pretty">{skill.description}</p>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
         {skill.author.url ? (
-          <a href={skill.author.url} target="_blank" rel="noreferrer" className="rounded-input">
+          <a href={skill.author.url} target="_blank" rel="noreferrer" className="rounded-control">
             <AuthorBadge skill={skill} />
           </a>
         ) : (
@@ -101,28 +116,26 @@ export default async function SkillDetailPage({
         )}
         <StarCount skill={skill} />
         {skill.source?.repository && (
-          <a
-            href={skill.source.repository}
-            target="_blank"
-            rel="noreferrer"
-            className="link rounded-input text-sm"
-          >
+          <Button variant="link" size="sm" render={<a href={skill.source.repository} target="_blank" rel="noreferrer" />}>
             Source on GitHub
-          </a>
+          </Button>
         )}
-        {skill.external && (
-          <span className="rounded-full bg-tag-violet-bg px-2.5 py-0.5 text-[13px] font-medium text-tag-violet">
-            External
-          </span>
+        {skill.siteplane && (
+          <Button variant="outline" size="sm" render={<a href={skill.siteplane.docs} target="_blank" rel="noreferrer" />}>
+            Siteplane docs
+            <ArrowUpRight aria-hidden />
+          </Button>
         )}
+        {skill.siteplane && <Badge variant="accent">Siteplane UI {skill.version}</Badge>}
+        {skill.external && <Badge variant="info">External</Badge>}
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-1.5">
         <span className="label mr-1">Works with</span>
         {skill.agents.map((a) => (
-          <span key={a} className="rounded-full border border-border px-2.5 py-0.5 text-[13px] text-secondary">
+          <Badge key={a} variant="outline">
             {agentLabel(a)}
-          </span>
+          </Badge>
         ))}
       </div>
 
@@ -131,7 +144,7 @@ export default async function SkillDetailPage({
       </div>
 
       {skill.external ? (
-        <ExternalSkillBody slug={skill.slug} sourceUrl={skill.source?.repository} rawUrl={skill.source?.rawUrl} />
+        <ExternalSkillBody sourceUrl={skill.source?.repository} rawUrl={skill.source?.rawUrl} />
       ) : (
         <LocalSkillBody slug={skill.slug} body={skill.body ?? ""} />
       )}
@@ -154,16 +167,17 @@ export default async function SkillDetailPage({
       )}
 
       <div className="mt-10">
-        <Link href="/skills" className="link rounded-input text-sm">
-          Back to all skills
-        </Link>
+        <Button variant="ghost" size="sm" render={<Link href={skill.siteplane ? "/siteplane-ui" : "/skills"} />}>
+          {skill.siteplane ? "Back to Siteplane UI" : "Back to all skills"}
+        </Button>
       </div>
     </div>
   );
 }
 
 async function LocalSkillBody({ slug, body }: { slug: string; body: string }) {
-  const html = await markdownToHtml(body);
+  // The page already shows the title, so the body's own leading H1 is dropped.
+  const tree = await markdownToHast(body.replace(/^\s*(<!--[\s\S]*?-->\s*)?# .*\n/, ""));
   const raw = getSkillRawMarkdown(slug);
 
   const agentPrompt = `Use the following UI skill while working on this task:
@@ -178,27 +192,20 @@ Follow these instructions unless they conflict with the existing product's estab
     <>
       <div className="mt-6">
         <CopyButtons raw={raw} agentPrompt={agentPrompt} />
-        <div className="mt-3 flex gap-4 text-sm">
-          <a href={`/skills/${slug}/raw`} className="link rounded-input">
-            View raw SKILL.md
-          </a>
-        </div>
+        <Button variant="link" size="sm" className="mt-2 px-0" render={<a href={`/skills/${slug}/raw`} />}>
+          View raw SKILL.md
+        </Button>
       </div>
 
-      <article
-        className="skill-content prose prose-sm mt-12 max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <Markdown tree={tree} className="mt-10" />
     </>
   );
 }
 
 function ExternalSkillBody({
-  slug,
   sourceUrl,
   rawUrl,
 }: {
-  slug: string;
   sourceUrl?: string;
   rawUrl?: string;
 }) {
@@ -208,21 +215,22 @@ ${rawUrl ?? sourceUrl}
 Treat it as a set of rules for this task unless it conflicts with the existing product's established design system.`;
 
   return (
-    <div className="card mt-6 p-5">
-      <h2 className="text-base font-semibold text-primary">Hosted in an external repository</h2>
-      <p className="mt-2 text-sm text-secondary">
-        This skill&apos;s full instructions live in its source repository, not on UI
-        Skillbook. Open it on GitHub to read it, or copy a prompt that points your agent
-        straight at it.
-      </p>
-      <div className="mt-5 flex flex-wrap gap-2">
+    <Card className="mt-6">
+      <CardHeader>
+        <CardTitle>Hosted in an external repository</CardTitle>
+        <CardDescription>
+          This skill&apos;s full instructions live in its source repository, not on UI Skillbook. Open it on
+          GitHub to read it, or copy a prompt that points your agent straight at it.
+        </CardDescription>
+      </CardHeader>
+      <CardFooter className="flex-wrap gap-2">
         {sourceUrl && (
-          <a href={sourceUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+          <Button variant="outline" render={<a href={sourceUrl} target="_blank" rel="noreferrer" />}>
             View on GitHub
-          </a>
+          </Button>
         )}
-        <ExternalCopyButton slug={slug} agentPrompt={agentPrompt} />
-      </div>
-    </div>
+        <ExternalCopyButton agentPrompt={agentPrompt} />
+      </CardFooter>
+    </Card>
   );
 }

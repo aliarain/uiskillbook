@@ -4,6 +4,26 @@ import { getAllSkills } from "@/lib/skills";
 import { CATEGORIES, AGENTS, ROLES } from "@/lib/taxonomy";
 import { SkillRow } from "@/components/skill-row";
 import { pageMetadata } from "@/lib/site";
+import { Check, ChevronDown, SearchX } from "lucide-react";
+import { Button } from "@/siteplane/components/button";
+import { Menu, MenuLinkItem, MenuPopup, MenuTrigger } from "@/siteplane/components/menu";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/siteplane/components/pagination";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/siteplane/components/empty-state";
 
 export const metadata: Metadata = pageMetadata({
   title: "Skills",
@@ -81,85 +101,92 @@ export default async function SkillsPage({
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-12">
       <h1 className="display text-4xl">Skills</h1>
-      <p className="mt-3 text-secondary">Practical instructions for better interface work.</p>
+      <p className="mt-3 text-muted-foreground">Practical instructions for better interface work.</p>
 
       <div className="mt-8 space-y-3">
         <FilterRow label="By role">
           {ROLES.map((r) => (
-            <Link
-              key={r.slug}
-              href={buildHref(current, { role: role === r.slug ? undefined : r.slug })}
-              aria-current={role === r.slug ? "page" : undefined}
-              className="pill"
-            >
+            <FilterChip key={r.slug} href={buildHref(current, { role: role === r.slug ? undefined : r.slug })} active={role === r.slug}>
               {r.label}
-            </Link>
+            </FilterChip>
           ))}
         </FilterRow>
         <FilterRow label="By topic">
           {CATEGORIES.map((c) => (
-            <Link
+            <FilterChip
               key={c.slug}
               href={buildHref(current, { category: category === c.slug ? undefined : c.slug })}
-              aria-current={category === c.slug ? "page" : undefined}
-              className="pill"
+              active={category === c.slug}
             >
               {c.label}
-            </Link>
+            </FilterChip>
           ))}
         </FilterRow>
         <FilterRow label="By agent">
           {AGENTS.map((a) => (
-            <Link
-              key={a.slug}
-              href={buildHref(current, { agent: agent === a.slug ? undefined : a.slug })}
-              aria-current={agent === a.slug ? "page" : undefined}
-              className="pill"
-            >
+            <FilterChip key={a.slug} href={buildHref(current, { agent: agent === a.slug ? undefined : a.slug })} active={agent === a.slug}>
               {a.label}
-            </Link>
+            </FilterChip>
           ))}
         </FilterRow>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
-        <p className="text-sm text-muted tabular-nums">{skills.length} skills</p>
-        <div className="flex items-center gap-1 text-sm">
-          <span className="mr-1 text-muted">Sort</span>
-          {SORTS.map((s) => (
-            <Link
-              key={s.key}
-              href={buildHref(current, { sort: s.key === "recommended" ? undefined : s.key })}
-              aria-current={sort === s.key ? "page" : undefined}
-              className="pill border-transparent"
-            >
-              {s.label}
-            </Link>
-          ))}
-        </div>
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 hairline-b pb-2">
+        <p className="text-sm text-muted-foreground tabular-nums">{skills.length} skills</p>
+        <Menu>
+          <MenuTrigger render={<Button variant="ghost" size="sm" />}>
+            Sort: {SORTS.find((x) => x.key === sort)?.label ?? "Recommended"}
+            <ChevronDown aria-hidden />
+          </MenuTrigger>
+          <MenuPopup align="end">
+            {SORTS.map((x) => (
+              <MenuLinkItem
+                key={x.key}
+                aria-current={sort === x.key ? "true" : undefined}
+                render={<Link href={buildHref(current, { sort: x.key === "recommended" ? undefined : x.key, page: undefined })} />}
+              >
+                <Check aria-hidden className={sort === x.key ? undefined : "invisible"} />
+                {x.label}
+              </MenuLinkItem>
+            ))}
+          </MenuPopup>
+        </Menu>
       </div>
 
       {q && (
-        <p className="mt-6 text-sm text-secondary">
-          Results for <span className="text-accent">&ldquo;{q}&rdquo;</span>{" "}
-          <Link href={buildHref(current, { q: undefined })} className="ml-2 underline">
-            clear
-          </Link>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Results for <span className="font-medium text-foreground">&ldquo;{q}&rdquo;</span>{" "}
+          <Button variant="link" size="sm" render={<Link href={buildHref(current, { q: undefined })} />}>
+            Clear
+          </Button>
         </p>
       )}
 
       {task && (
-        <p className="mt-6 text-sm text-secondary">
-          Showing skills for: <span className="text-accent">{task.replace(/-/g, " ")}</span>{" "}
-          <Link href={buildHref(current, { task: undefined })} className="ml-2 underline">
-            clear
-          </Link>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Showing skills for: <span className="font-medium text-foreground">{task.replace(/-/g, " ")}</span>{" "}
+          <Button variant="link" size="sm" render={<Link href={buildHref(current, { task: undefined })} />}>
+            Clear
+          </Button>
         </p>
       )}
 
       <div className="mt-2 space-y-0.5">
         {skills.length === 0 ? (
-          <p className="py-10 text-sm text-muted">No skills match these filters yet.</p>
+          <Empty className="py-16">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <SearchX aria-hidden />
+              </EmptyMedia>
+              <EmptyTitle>No skills match these filters</EmptyTitle>
+              <EmptyDescription>Clear a filter or try a broader topic.</EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button variant="outline" render={<Link href="/skills" />}>
+                Show all skills
+              </Button>
+            </EmptyContent>
+          </Empty>
         ) : (
           visible.map((skill, i) => (
             <SkillRow key={skill.slug} skill={skill} index={offset + i + 1} />
@@ -168,28 +195,65 @@ export default async function SkillsPage({
       </div>
 
       {pageCount > 1 && (
-        <nav
-          aria-label="Pagination"
-          className="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted"
-        >
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <span className="tabular-nums">
             {offset + 1}–{offset + visible.length} of {skills.length}
           </span>
-          <div className="flex flex-wrap gap-1">
-            {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
-              <Link
-                key={n}
-                href={buildHref(current, { page: n === 1 ? undefined : String(n) })}
-                aria-current={n === page ? "page" : undefined}
-                className="btn btn-secondary min-w-9 px-2 tabular-nums shadow-none aria-[current=page]:border-transparent aria-[current=page]:bg-accent-subtle aria-[current=page]:text-accent-on-subtle"
-              >
-                {n}
-              </Link>
-            ))}
-          </div>
-        </nav>
+          <Pagination className="mx-0 w-auto">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  disabled={page === 1}
+                  render={<Link href={buildHref(current, { page: page > 2 ? String(page - 1) : undefined })} />}
+                />
+              </PaginationItem>
+              {pageItems(page, pageCount).map((item) => (
+                <PaginationItem key={item}>
+                  {typeof item === "number" ? (
+                    <PaginationLink
+                      active={item === page}
+                      render={<Link href={buildHref(current, { page: item === 1 ? undefined : String(item) })} />}
+                    >
+                      {item}
+                    </PaginationLink>
+                  ) : (
+                    <PaginationEllipsis />
+                  )}
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  disabled={page === pageCount}
+                  render={<Link href={buildHref(current, { page: String(Math.min(pageCount, page + 1)) })} />}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       )}
     </div>
+  );
+}
+
+/** Up to seven slots, with ellipses, so the control keeps its width while paging. */
+function pageItems(page: number, total: number): (number | "start-ellipsis" | "end-ellipsis")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (page <= 4) return [1, 2, 3, 4, 5, "end-ellipsis", total];
+  if (page >= total - 3) return [1, "start-ellipsis", total - 4, total - 3, total - 2, total - 1, total];
+  return [1, "start-ellipsis", page - 1, page, page + 1, "end-ellipsis", total];
+}
+
+function FilterChip({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) {
+  return (
+    <Button
+      variant={active ? "inverse" : "outline"}
+      shape="pill"
+      size="sm"
+      aria-current={active ? "page" : undefined}
+      render={<Link href={href} />}
+    >
+      {children}
+    </Button>
   );
 }
 

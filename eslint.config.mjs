@@ -14,6 +14,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Local reference clone — not part of this project, never linted or built.
     "opensrc/**",
+    // Siteplane UI source installed by the shadcn CLI; updated from its registry, not edited here.
+    "src/siteplane/**",
+    ".claude/skills/**",
   ]),
 ]);
 

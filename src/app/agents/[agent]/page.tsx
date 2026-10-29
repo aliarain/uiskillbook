@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Card } from "@/siteplane/components/card";
+import { Code } from "@/siteplane/components/code";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { AGENTS, agentLabel } from "@/lib/taxonomy";
@@ -44,49 +46,49 @@ export default async function AgentDetailPage({
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         UI Skillbook for {label}
       </h1>
-      <p className="mt-3 max-w-lg text-secondary">
+      <p className="mt-3 max-w-lg text-muted-foreground">
         Give {label} access to UI Skillbook&apos;s design knowledge. Open any skill below
         and use &ldquo;Copy for agent&rdquo; to paste it directly into your session.
       </p>
 
-      <div className="card mt-6 space-y-5 p-5">
+      <Card className="mt-6 space-y-5 p-5">
         <div>
           <p className="label">CLI</p>
-          <p className="mt-1.5 text-sm text-secondary">
+          <p className="mt-1.5 text-sm text-muted-foreground">
             Browse and fetch skills from a terminal or an agent&apos;s shell tool.
           </p>
           <div className="mt-2">
-            <CopyCodeBlock code={`npx uiskillbook start\nnpx uiskillbook list --category motion\nnpx uiskillbook get pressed-button-feedback`} />
+            <CopyCodeBlock code={`npx uiskillbook start\nnpx uiskillbook list --category motion\nnpx uiskillbook get pressed-button-feedback\nnpx uiskillbook siteplane`} />
           </div>
         </div>
         <div>
           <p className="label">MCP</p>
-          <p className="mt-1.5 text-sm text-secondary">
+          <p className="mt-1.5 text-sm text-muted-foreground">
             Connect {label} to the catalog over Model Context Protocol —{" "}
-            <code className="text-primary">list_skills</code> and{" "}
-            <code className="text-primary">get_skill</code> tools. Setup varies by agent;
+            <Code>list_skills</Code>, <Code>get_skill</Code> and{" "}
+            <Code>list_siteplane_components</Code> tools. Setup varies by agent;
             point it at the endpoint below.
           </p>
           <div className="mt-2">
             <CopyCodeBlock code={MCP_URL} />
           </div>
         </div>
-        <p className="text-xs text-muted">
+        <p className="text-xs text-muted-foreground">
           Or skip both — every skill page has a &ldquo;Copy for agent&rdquo; button you can
           paste directly into a session.
         </p>
-      </div>
+      </Card>
 
       <div className="mt-10 space-y-0.5">
         {skills.length === 0 ? (
-          <p className="py-10 text-sm text-muted">No skills tagged for {label} yet.</p>
+          <p className="py-10 text-sm text-muted-foreground">No skills tagged for {label} yet.</p>
         ) : (
           skills.map((skill, i) => <SkillRow key={skill.slug} skill={skill} index={i + 1} />)
         )}
       </div>
 
       <div className="mt-10">
-        <Link href="/agents" className="link rounded-input text-sm">
+        <Link href="/agents" className="link rounded-control text-sm">
           Back to all agents
         </Link>
       </div>

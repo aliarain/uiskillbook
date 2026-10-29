@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogoMark } from "./logo-mark";
 import { getAllSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
@@ -17,6 +18,7 @@ function siteColumns(): FooterColumn[] {
       title: "Discover",
       links: [
         { href: "/skills", label: "All skills" },
+        { href: "/siteplane-ui", label: "Siteplane UI" },
         { href: "/chapters", label: "Playbook" },
         { href: "/collections", label: "Collections" },
         { href: "/design-md", label: "Design.md" },
@@ -94,7 +96,7 @@ function directoryColumns(): FooterColumn[] {
   ];
 }
 
-const LINK_CLASS = "link rounded-input text-sm";
+const LINK_CLASS = "link rounded-control text-sm";
 
 function FooterAnchor({ link, className = LINK_CLASS }: { link: FooterLink; className?: string }) {
   return link.external ? (
@@ -124,7 +126,7 @@ function Column({ column }: { column: FooterColumn }) {
           <li>
             <FooterAnchor
               link={column.all}
-              className="rounded-input text-sm text-accent underline-offset-2 hover:underline"
+              className="rounded-control text-sm text-info-foreground underline-offset-2 hover:underline"
             />
           </li>
         )}
@@ -135,15 +137,23 @@ function Column({ column }: { column: FooterColumn }) {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-border bg-surface">
+    <footer className="mt-16 hairline-t bg-muted">
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-strong">
+            <Link
+              href="/"
+              className="flex w-fit items-center gap-2 rounded-control text-[15px] font-semibold tracking-[-0.01em] text-foreground"
+            >
+              <LogoMark />
               UI Skillbook
             </Link>
-            <p className="mt-3 max-w-xs text-sm text-secondary">
-              The field guide for building better interfaces with AI.
+            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+              The field guide for building better interfaces with AI. Built on{" "}
+              <a href="https://ui.siteplane.io" target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                Siteplane UI
+              </a>
+              .
             </p>
           </div>
           {siteColumns().map((column) => (
@@ -151,13 +161,13 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-border pt-10 md:grid-cols-5">
+        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 hairline-t pt-10 md:grid-cols-5">
           {directoryColumns().map((column) => (
             <Column key={column.title} column={column} />
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 hairline-t pt-6 text-[13px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} UI Skillbook</span>
           <span>
             Built by{" "}
@@ -165,16 +175,16 @@ export function SiteFooter() {
               href="https://aliarain.com"
               target="_blank"
               rel="noreferrer"
-              className="link rounded-input"
+              className="link rounded-control"
             >
               Ali Arain
             </a>
-            <span className="mx-2 text-faint" aria-hidden>/</span>
+            <span className="mx-2 text-muted-foreground/60" aria-hidden>/</span>
             <a
               href={X_URL}
               target="_blank"
               rel="noreferrer"
-              className="link rounded-input"
+              className="link rounded-control"
             >
               @realaliarain
             </a>

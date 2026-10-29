@@ -1,19 +1,36 @@
 "use client";
 
-import { Command } from "cmdk";
-import { Search } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, CornerDownLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment } from "react";
 import type { SearchItem } from "@/lib/search-index";
+import {
+  Command,
+  CommandCollection,
+  CommandDialog,
+  CommandDialogPopup,
+  CommandEmpty,
+  CommandFooter,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandPanel,
+  CommandSeparator,
+} from "@/siteplane/components/command";
+import { Kbd, KbdGroup } from "@/siteplane/components/kbd";
+import { Skeleton } from "@/siteplane/components/skeleton";
 
-const GROUPS = ["Skills", "Chapters", "Collections", "Design.md"] as const;
-const GROUP_LABELS: Record<(typeof GROUPS)[number], string> = {
-  Skills: "Skills",
-  Chapters: "Learn",
-  Collections: "Collections",
-  "Design.md": "Design.md",
-};
-const EXIT_MS = 150;
+const GROUPS: { key: string; label: string }[] = [
+  { key: "Skills", label: "Skills" },
+  { key: "Siteplane UI", label: "Siteplane UI" },
+  { key: "Chapters", label: "Learn" },
+  { key: "Collections", label: "Collections" },
+  { key: "Design.md", label: "Design.md" },
+];
+
+type Group = { key: string; label: string; items: SearchItem[] };
 
 export function CommandPalette({
   items,
@@ -25,40 +42,9 @@ export function CommandPalette({
   onOpenChange: (v: boolean) => void;
 }) {
   const router = useRouter();
-  // Stays true for EXIT_MS after closing so the exit transition can play.
-  const [rendered, setRendered] = useState(open);
-  const [shown, setShown] = useState(false);
-
-  if (open && !rendered) setRendered(true);
-
-  useEffect(() => {
-    if (open) {
-      const frame = requestAnimationFrame(() => setShown(true));
-      return () => cancelAnimationFrame(frame);
-    }
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- start the exit transition
-    setShown(false);
-    const timer = setTimeout(() => setRendered(false), EXIT_MS);
-    return () => clearTimeout(timer);
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onOpenChange(false);
-    }
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = original;
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, onOpenChange]);
-
-  if (!rendered) return null;
+  const groups: Group[] = GROUPS.map((g) => ({ ...g, items: (items ?? []).filter((i) => i.group === g.key) })).filter(
+    (g) => g.items.length > 0
+  );
 
   function select(href: string) {
     onOpenChange(false);
@@ -66,86 +52,72 @@ export function CommandPalette({
   }
 
   return (
-    <div
-      data-shown={shown}
-      className="palette-backdrop fixed inset-0 z-50 flex items-start justify-center bg-black/30 px-4 pt-[10vh] dark:bg-black/60"
-      onClick={() => onOpenChange(false)}
-    >
-      <Command
-        label="Search UI Skillbook"
-        data-shown={shown}
-        className="palette-panel flex max-h-[min(560px,80vh)] w-full max-w-xl flex-col overflow-hidden rounded-feature border border-border bg-background shadow-hero"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex h-12 shrink-0 items-center gap-2.5 border-b border-border px-4">
-          <Search size={16} strokeWidth={1.75} aria-hidden className="shrink-0 text-muted" />
-          <Command.Input
-            autoFocus
-            placeholder="Search skills and guides…"
-            className="h-full min-w-0 flex-1 bg-transparent text-base text-primary outline-none placeholder:text-muted focus-visible:outline-none sm:text-[15px]"
-          />
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            aria-label="Close search"
-            className="shrink-0 rounded-input border border-border px-1.5 text-xs leading-5 text-muted transition-colors hover:text-primary"
-          >
-            esc
-          </button>
-        </div>
-
-        <Command.List className="scroll-thin min-h-0 flex-1 overflow-y-auto p-1.5">
-          {items === null ? (
-            <Command.Loading>
-              <p className="px-3 py-8 text-center text-sm text-muted">Loading…</p>
-            </Command.Loading>
-          ) : (
-            <Command.Empty className="px-3 py-10 text-center">
-              <p className="text-sm font-medium text-primary">No results</p>
-              <p className="mt-1 text-sm text-muted">Try a topic like “motion” or “forms”.</p>
-            </Command.Empty>
-          )}
-          {GROUPS.map((group) => {
-            const groupItems = (items ?? []).filter((i) => i.group === group);
-            if (groupItems.length === 0) return null;
-            return (
-              <Command.Group
-                key={group}
-                heading={GROUP_LABELS[group]}
-                className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:pt-2.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted"
-              >
-                {groupItems.map((item) => (
-                  <Command.Item
-                    key={`${item.type}-${item.slug}`}
-                    value={`${item.type}-${item.slug}`}
-                    keywords={[item.title, item.subtitle, item.meta ?? "", item.slug]}
-                    onSelect={() => select(item.href)}
-                    className="flex cursor-pointer items-center gap-3 rounded-button px-2.5 py-2 text-sm data-[selected=true]:bg-hover"
-                  >
-                    <span className="min-w-0 flex-1 truncate">
-                      <span className="text-primary">{item.title}</span>
-                      {item.meta && <span className="ml-2 text-muted">{item.meta}</span>}
-                    </span>
-                    <span className="shrink-0 text-xs text-muted">{item.subtitle}</span>
-                  </Command.Item>
+    <CommandDialog open={open} onOpenChange={onOpenChange}>
+      <CommandDialogPopup aria-label="Search UI Skillbook">
+        <Command
+          items={groups}
+          itemToStringValue={(item: SearchItem) => [item.title, item.subtitle, item.meta, item.slug].join(" ")}
+        >
+          <CommandInput placeholder="Search skills, components and guides…" />
+          <CommandPanel>
+            {items === null ? (
+              <div className="space-y-2 p-2" aria-label="Loading">
+                {Array.from({ length: 6 }, (_, i) => (
+                  <Skeleton key={i} className="h-8 w-full" />
                 ))}
-              </Command.Group>
-            );
-          })}
-        </Command.List>
-
-        <div className="hidden shrink-0 items-center gap-4 border-t border-border px-4 py-2 text-xs text-muted sm:flex">
-          <span>
-            <kbd className="font-sans">↑↓</kbd> to navigate
-          </span>
-          <span>
-            <kbd className="font-sans">↵</kbd> to open
-          </span>
-          <span>
-            <kbd className="font-sans">esc</kbd> to close
-          </span>
-        </div>
-      </Command>
-    </div>
+              </div>
+            ) : (
+              <CommandEmpty>No results. Try a topic like “motion” or “forms”.</CommandEmpty>
+            )}
+            <CommandList>
+              {(group: Group, index: number) => (
+                <Fragment key={group.key}>
+                  <CommandGroup items={group.items}>
+                    <CommandGroupLabel>{group.label}</CommandGroupLabel>
+                    <CommandCollection>
+                      {(item: SearchItem) => (
+                        <CommandItem key={`${item.type}-${item.slug}`} value={item} onClick={() => select(item.href)}>
+                          <span className="min-w-0 flex-1 truncate">
+                            {item.title}
+                            {item.meta && <span className="ml-2 text-muted-foreground">{item.meta}</span>}
+                          </span>
+                          <span className="shrink-0 text-xs text-muted-foreground">{item.subtitle}</span>
+                        </CommandItem>
+                      )}
+                    </CommandCollection>
+                  </CommandGroup>
+                  {index < groups.length - 1 && <CommandSeparator />}
+                </Fragment>
+              )}
+            </CommandList>
+          </CommandPanel>
+          <CommandFooter>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <KbdGroup>
+                  <Kbd>
+                    <ArrowUpIcon />
+                  </Kbd>
+                  <Kbd>
+                    <ArrowDownIcon />
+                  </Kbd>
+                </KbdGroup>
+                <span>Navigate</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Kbd>
+                  <CornerDownLeftIcon />
+                </Kbd>
+                <span>Open</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Kbd>Esc</Kbd>
+              <span>Close</span>
+            </div>
+          </CommandFooter>
+        </Command>
+      </CommandDialogPopup>
+    </CommandDialog>
   );
 }

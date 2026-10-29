@@ -1,93 +1,65 @@
 ---
 name: UI Skillbook
-description: Quiet, editorial, light-first interface. Hairline borders instead of shadows, monochrome type for structure, one blue accent used sparingly.
-updated_at: "2026-10-29"
+description: Quiet, editorial interface built on Siteplane UI. Kit components and tokens for everything; a handful of page-level rules on top.
+updated_at: "2026-10-30"
 ---
 
 # UI Skillbook — DESIGN.md
 
-This file is the design system for uiskillbook.com. The tokens live in
-`src/app/globals.css` (`:root`, `.dark` and `@theme inline`). Components use the
-semantic Tailwind names below, never raw hex values.
+UI Skillbook's design system is [Siteplane UI](https://ui.siteplane.io). Its
+components are installed as source under `src/siteplane` with the shadcn CLI
+(registry in `components.json`), and its stylesheet is the first import of
+`src/app/globals.css`. Read the `siteplane-ui` skill in `.claude/skills/`
+before changing UI.
 
 ## Principles
 
+- **Kit first.** Every control, surface and overlay is a Siteplane UI part: Button, Card, Badge, Tabs, Menu, Sheet, Command, CodeBlock, CopyButton, Breadcrumb, Pagination, Sidebar, Accordion, Collapsible, Empty, Skeleton, Toast. Search the catalog before writing markup of our own.
 - **Quiet and editorial.** Type and spacing build the structure. Decoration is rare.
-- **Hairlines, not shadows.** Containers get a 1px `border` token. Default cards have no shadow.
-- **One accent.** Blue marks links, active states and focus. It is never a large fill.
-- **One primary action per surface.** It is a filled black (white in dark mode) button.
-- **Compact density.** Built on a 4px grid with dense lists and short rows.
+- **Hairlines, not shadows.** Kit parts draw their own edges. A custom edge uses the `hairline`, `hairline-t` or `hairline-b` utilities, which sit on the kit's `--sp-rw-border-*` tokens.
+- **One primary action per surface.** It is a `variant="inverse"` Button. Everything else is `outline`, `ghost` or `link`.
+- **Change looks through props and tokens,** never raw colors or arbitrary values in kit files.
 
 ## Color
 
-Semantic tokens. Each one has exactly one job. Dark mode keeps the same roles.
+The kit's semantic tokens, through Tailwind: `bg-background`, `bg-card`, `bg-muted`,
+`bg-state-hover`, `text-foreground`, `text-muted-foreground`, `text-info-foreground`
+and the status colors `info`, `success`, `warning` and `error`. Badges take `variant`
+(`accent`, `outline`, `info` …). There is no app-level color theme.
 
-| Token (Tailwind) | Light | Dark | Role |
-| --- | --- | --- | --- |
-| `background` | `#ffffff` | `#0a0a0a` | Page canvas, default card fill |
-| `surface` | `#fafafa` | `#111111` | Muted cards, footer, code |
-| `hover` | `#f5f5f5` | `#1a1a1a` | Hover and selected rows |
-| `border` | `#e5e5e5` | `#262626` | Default hairline on cards, inputs, dividers |
-| `border-strong` | `#d4d4d4` | `#3a3a3a` | Hovered borders, scrollbars |
-| `strong` | `#0a0a0a` | `#fafafa` | Display headings, wordmark |
-| `primary` | `#171717` | `#ededed` | Body text and headings |
-| `secondary` | `#525252` | `#a3a3a3` | Muted body, descriptions |
-| `muted` | `#737373` | `#8a8a8a` | Labels, placeholders, metadata (≥ 4.5:1 on canvas) |
-| `faint` | `#a3a3a3` | `#5c5c5c` | Decorative only: separators, row numbers |
-| `accent` | `#2563eb` | `#60a5fa` | Links, active state, focus ring |
-| `accent-subtle` | `#dbeaff` | `#13233f` | Active nav and filter tint |
-| `accent-on-subtle` | `#1d4ed8` | `#93c5fd` | Text on the tint (accent alone is 4.2:1 there) |
-| `cta` / `cta-foreground` | `#0a0a0a` / `#ffffff` | `#fafafa` / `#0a0a0a` | The one primary button |
+## Dark mode
 
-Tag accents are for pills and badges only, and only one per component:
-green `tag-green` on `tag-green-bg`, orange `tag-orange` on `tag-orange-bg` and
-violet `tag-violet` on `tag-violet-bg`.
+`next-themes` writes the resolved theme to `<html>` as a class and as `data-theme`,
+and passes the same value to `SiteplaneUIProvider` so portals follow
+(`src/components/theme-provider.tsx`). The toggle is the kit's `SunMoonMorphToggle`.
 
 ## Typography
 
-- **IBM Plex Sans** (500/600) for headings (`h1`–`h3`, `.display`). **Inter** for body and UI text. **Geist Mono** only for real code, such as commands, file names and URLs.
-- **Display** (`.display`): IBM Plex Sans, 30–48px, weight 500, `-0.02em` tracking, line height about 1.08, balanced wrapping. Never below 30px.
-- **Section title**: 20px, weight 600.
-- **Body**: 16px at 1.5. **Dense UI**: 14px at 1.43. **Labels** (`.label`): 13px, weight 500, sentence case, untracked. No tracked capitals.
-- **Scale**: 11, 13, 14, 16, 18, 20, 24, 30, 36, 48.
+- **Inter** (`@fontsource-variable/inter`), the kit's typeface, for everything. Monospace is the kit's system stack, only for real code.
+- **Display** (`.display`): 30–48px, weight 600, `-0.025em` tracking, balanced wrapping.
+- **Section title**: 20px, weight 600. **Labels** (`.label`): 13px, weight 500, sentence case.
+- Rendered markdown goes through `Markdown` (`src/components/markdown.tsx`), which is the kit's `Typeset` with its component map: fences become copyable CodeBlocks, tables NativeTables.
 - Use `tabular-nums` on counts, stars and pagination.
 
-## Spacing and shape
+## Layout
 
-- 4px base unit. Gaps between elements are 8px, card padding is 16–20px and sections are 64px apart.
-- Page max width is 1200px with 24px gutters.
-- **Radii, and only these:** pill `9999px` (tags, chips, nav items), `rounded-button` 8px, `rounded-input` 6px, `rounded-card` 12px and `rounded-feature` 16px (large and feature cards, the hero, the palette).
+- Page max width is 1200px with 24px gutters; reading pages are 680–820px.
+- Sections are 64px apart. Card grids use a 12px gap.
 
-## Elevation
+## Page-level rules
 
-Used rarely:
+`globals.css` adds only what the kit has no part for: `.display`, `.label`, `.link`
+(muted inline link), `.row` (dense list row with a hover fill), `.dot-grid` and the
+hairline utilities.
 
-- `shadow-button`: `0 1px 2px rgba(0,0,0,.05)` on buttons.
-- `shadow-ring`: a 4px `rgba(0,0,0,.1)` ring for elevated feature cards.
-- `shadow-hero`: the command palette and other floating panels.
+## Logo
 
-## Components
-
-- **Nav item** (`.pill` without border): ghost pill with 16px horizontal padding. The active item uses the `accent-subtle` tint and accent text, set through `aria-current="page"`.
-- **Buttons** (`.btn`): 36px tall with an 8px radius, 14px text at weight 500. `.btn-primary` is the filled CTA. `.btn-secondary` is white with a 1px border.
-- **Chips** (`.pill`): filters and tags. The selected state comes from `aria-current` or `aria-pressed`, not a separate class.
-- **Inputs**: white background, 1px border, 6px radius, 8×12px padding, and 16px text on mobile.
-- **Cards** (`.card`): 1px border, 12px radius, no shadow. On hover only the border darkens.
-- **Rows** (`.row`): dense list items that fill with `hover` on hover.
-- **Logo tiles**: monochrome Simple Icons marks (CC0) rendered from the `simple-icons` package, neutral until hovered or focused, then filled with the brand color (Tailwind `group-hover:` utilities, so the layer order can't override them). Brands without a mark show their initial.
-- **Hero**: optional faint dotted grid (`.dot-grid`).
-
-## Interaction
-
-- Transitions run 140ms on `color`, `background-color` and `border-color` only. Never `transition: all`, and never animate layout.
-- Hover styles sit inside `@media (hover: hover)` (Tailwind's `hover:` already does this), so they never stick on touch.
-- Every interactive element shows the `:focus-visible` ring: a 2px accent outline with a 2px offset.
-- Overlays fade and scale in over 150ms. Under `prefers-reduced-motion` they only fade.
+`src/components/logo-mark.tsx` is a placeholder square. The SVG mark is still to be
+designed; every place that shows the logo renders this one component.
 
 ## Don'ts
 
+- No `@import "tailwindcss"` or theme of our own in `globals.css`; the kit's stylesheet owns both.
+- No hand-built buttons, copy actions, tabs or menus.
 - No heavy drop shadows, and no shadows on default cards.
-- No blue backgrounds, and no accent as a large fill.
-- No radius outside the set above.
-- No display type below 30px. No tracked uppercase labels. No middle-dot meta strings.
-- Never more than one chromatic accent per component.
+- No display type below 30px. No tracked uppercase labels.

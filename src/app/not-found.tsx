@@ -1,19 +1,37 @@
 import Link from "next/link";
+import { FileQuestion } from "lucide-react";
+import { Button } from "@/siteplane/components/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/siteplane/components/empty-state";
 
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-24">
-      <p className="label">404</p>
-      <h1 className="display mt-2 text-4xl">Page not found</h1>
-      <p className="mt-3 text-secondary">The page moved or never existed.</p>
-      <div className="mt-8 flex gap-3">
-        <Link href="/skills" className="btn btn-primary">
-          Browse skills
-        </Link>
-        <Link href="/" className="btn btn-secondary">
-          Home
-        </Link>
-      </div>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <FileQuestion aria-hidden />
+          </EmptyMedia>
+          <EmptyTitle>Page not found</EmptyTitle>
+          <EmptyDescription>The page moved or never existed.</EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button variant="inverse" render={<Link href="/skills" />}>
+              Browse skills
+            </Button>
+            <Button variant="outline" render={<Link href="/" />}>
+              Home
+            </Button>
+          </div>
+        </EmptyContent>
+      </Empty>
     </div>
   );
 }
