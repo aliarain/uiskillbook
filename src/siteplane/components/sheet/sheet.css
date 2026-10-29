@@ -1,0 +1,127 @@
+@layer theme, base, components, siteplane, utilities;
+
+@layer siteplane {
+  .sp-sheet-backdrop-motion {
+    transition-property: opacity;
+    transition-duration: var(--motion-duration-panel);
+    transition-timing-function: var(--motion-ease-panel);
+    will-change: opacity;
+  }
+
+  .sp-sheet-backdrop-motion[data-starting-style],
+  .sp-sheet-backdrop-motion[data-ending-style] {
+    opacity: 0;
+  }
+
+  .sp-sheet-panel-motion {
+    transition-property: transform;
+    transition-duration: var(--motion-duration-panel);
+    transition-timing-function: var(--motion-ease-panel);
+    will-change: transform;
+  }
+
+  .sp-sheet-panel-motion[data-side="right"][data-starting-style],
+  .sp-sheet-panel-motion[data-side="right"][data-ending-style] {
+    transform: translateX(calc(100% + 1rem));
+  }
+
+  .sp-sheet-panel-motion[data-side="left"][data-starting-style],
+  .sp-sheet-panel-motion[data-side="left"][data-ending-style] {
+    transform: translateX(calc(-100% - 1rem));
+  }
+
+  /* The viewport places a side sheet at the inline start or end
+   * (justify-start, justify-end), so in a right-to-left page a left sheet
+   * sits on the right, as the Sidebar's mobile sheet does. It slides in from
+   * the edge it sits at. The dir attribute is named beside :dir(rtl), which a
+   * build for older browsers turns into a list of right-to-left languages. */
+  .sp-sheet-panel-motion[data-side="right"][data-starting-style]:is(
+      :dir(rtl),
+      [dir="rtl"],
+      [dir="rtl"] *
+    ),
+  .sp-sheet-panel-motion[data-side="right"][data-ending-style]:is(
+      :dir(rtl),
+      [dir="rtl"],
+      [dir="rtl"] *
+    ) {
+    transform: translateX(calc(-100% - 1rem));
+  }
+
+  .sp-sheet-panel-motion[data-side="left"][data-starting-style]:is(
+      :dir(rtl),
+      [dir="rtl"],
+      [dir="rtl"] *
+    ),
+  .sp-sheet-panel-motion[data-side="left"][data-ending-style]:is(
+      :dir(rtl),
+      [dir="rtl"],
+      [dir="rtl"] *
+    ) {
+    transform: translateX(calc(100% + 1rem));
+  }
+
+  .sp-sheet-panel-motion[data-side="bottom"][data-starting-style],
+  .sp-sheet-panel-motion[data-side="bottom"][data-ending-style] {
+    transform: translateY(calc(100% + 1rem));
+  }
+
+  .sp-sheet-panel-motion[data-side="top"][data-starting-style],
+  .sp-sheet-panel-motion[data-side="top"][data-ending-style] {
+    transform: translateY(calc(-100% - 1rem));
+  }
+
+  /* Fullscreen navigation is a Sheet surface, including its nested subpages. */
+  :root .sp-sheet-viewport[data-variant="fullscreen"] {
+    display: flex;
+    padding: 0;
+  }
+  :root .sp-sheet-panel-motion[data-variant="fullscreen"] {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    background: var(--sp-rw-bg-base);
+    box-shadow: none;
+    transition-duration: var(--motion-duration-slow);
+    transition-timing-function: var(--motion-ease-standard);
+  }
+  :root .sp-sheet-panel-motion[data-variant="fullscreen"][data-side="top"] {
+    transition-property: opacity, transform;
+  }
+  :root
+    .sp-sheet-panel-motion[data-variant="fullscreen"][data-side="top"]:is(
+      [data-starting-style],
+      [data-ending-style]
+    ) {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--sp-rw-space-4)));
+  }
+  html[data-motion-reduce="true"] .sp-sheet-panel-motion[data-starting-style],
+  html[data-motion-reduce="true"] .sp-sheet-panel-motion[data-ending-style],
+  :where([data-sp-motion="reduced"])
+    .sp-sheet-panel-motion[data-starting-style],
+  :where([data-sp-motion="reduced"]) .sp-sheet-panel-motion[data-ending-style] {
+    transform: none !important;
+  }
+
+  html[data-motion-reduce="true"] .sp-sheet-backdrop-motion,
+  html[data-motion-reduce="true"] .sp-sheet-panel-motion,
+  :where([data-sp-motion="reduced"]) .sp-sheet-backdrop-motion,
+  :where([data-sp-motion="reduced"]) .sp-sheet-panel-motion {
+    transition-duration: 1ms !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sp-sheet-panel-motion[data-starting-style],
+    .sp-sheet-panel-motion[data-ending-style] {
+      transform: none !important;
+    }
+
+    .sp-sheet-backdrop-motion,
+    .sp-sheet-panel-motion {
+      transition-duration: 1ms !important;
+    }
+  }
+}

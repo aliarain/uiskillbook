@@ -1,0 +1,84 @@
+@layer theme, base, components, siteplane, utilities;
+
+@layer siteplane {
+  /* Calm navigation motion. The popup fades in while it settles a few pixels
+   * into place and leaves with a plain fade. Switching between groups cross-fades
+   * the outgoing and incoming content, which travel a short distance in the
+   * direction of the switch, while the popup resizes with the same timing. No
+   * scale, no blur. */
+  .sp-navigation-menu-popup {
+    position: relative;
+    width: var(--popup-width);
+    height: var(--popup-height);
+    max-width: var(--available-width);
+    overflow: hidden;
+    transition-property: opacity, translate, width, height;
+    transition-duration: var(--motion-duration-navigation);
+    transition-timing-function: var(--motion-ease-navigation);
+  }
+  .sp-navigation-menu-popup[data-starting-style] {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--motion-overlay-y));
+  }
+  .sp-navigation-menu-popup[data-starting-style][data-side="top"] {
+    translate: 0 var(--motion-overlay-y);
+  }
+  .sp-navigation-menu-popup[data-ending-style] {
+    opacity: 0;
+  }
+  /* The content element carries the transitions Base UI waits for before it
+   * unmounts the outgoing content. */
+  .sp-navigation-content {
+    max-height: var(--available-height);
+    overflow-y: auto;
+    transition-property: opacity, translate;
+    transition-duration: var(--motion-duration-navigation);
+    transition-timing-function: var(--motion-ease-navigation);
+  }
+  .sp-navigation-content[data-activation-direction]:is(
+      [data-starting-style],
+      [data-ending-style]
+    ) {
+    opacity: 0;
+  }
+  .sp-navigation-content[data-starting-style][data-activation-direction="right"],
+  .sp-navigation-content[data-ending-style][data-activation-direction="left"] {
+    translate: var(--motion-navigation-distance) 0;
+  }
+  .sp-navigation-content[data-starting-style][data-activation-direction="left"],
+  .sp-navigation-content[data-ending-style][data-activation-direction="right"] {
+    translate: calc(-1 * var(--motion-navigation-distance)) 0;
+  }
+  /* Closing the menu: the popup owns the fade. A near-1 opacity step registers a
+   * transition, which keeps the content mounted until the popup has left. */
+  .sp-navigation-content[data-ending-style]:not([data-activation-direction]) {
+    opacity: 0.999;
+  }
+  .sp-navigation-menu-icon {
+    display: flex;
+    transition: transform var(--motion-duration-expand)
+      var(--motion-ease-navigation);
+  }
+  .sp-navigation-menu-icon[data-popup-open] {
+    transform: translateY(1px);
+  }
+  :where(html[data-motion-reduce="true"], [data-sp-motion="reduced"])
+    .sp-navigation-menu-popup,
+  :where(html[data-motion-reduce="true"], [data-sp-motion="reduced"])
+    .sp-navigation-content,
+  :where(html[data-motion-reduce="true"], [data-sp-motion="reduced"])
+    .sp-navigation-menu-icon {
+    transition-duration: 1ms;
+    translate: none !important;
+    transform: none !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sp-navigation-menu-popup,
+    .sp-navigation-content,
+    .sp-navigation-menu-icon {
+      transition-duration: 1ms;
+      translate: none !important;
+      transform: none !important;
+    }
+  }
+}
