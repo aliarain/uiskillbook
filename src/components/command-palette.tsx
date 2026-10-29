@@ -18,9 +18,9 @@ import {
   CommandList,
   CommandPanel,
   CommandSeparator,
-} from "@/siteplane/components/command";
-import { Kbd, KbdGroup } from "@/siteplane/components/kbd";
-import { Skeleton } from "@/siteplane/components/skeleton";
+} from "@/raptrx-ui/components/command";
+import { Kbd, KbdGroup } from "@/raptrx-ui/components/kbd";
+import { Skeleton } from "@/raptrx-ui/components/skeleton";
 
 const GROUPS: { key: string; label: string }[] = [
   { key: "Skills", label: "Skills" },

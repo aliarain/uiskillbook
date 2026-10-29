@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/siteplane/components/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/raptrx-ui/components/tabs";
 
 export type SkillTab = { value: string; label: string; content: React.ReactNode };
 

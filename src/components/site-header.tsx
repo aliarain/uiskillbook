@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { Button } from "@/siteplane/components/button";
+import { Button } from "@/raptrx-ui/components/button";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
 import { getRepoStars, GITHUB_URL } from "@/lib/brand";

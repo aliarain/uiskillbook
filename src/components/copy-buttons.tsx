@@ -1,6 +1,6 @@
 "use client";
 
-import { CopyButton } from "@/siteplane/components/copy-button";
+import { CopyButton } from "@/raptrx-ui/components/copy-button";
 
 export function CopyButtons({
   raw,

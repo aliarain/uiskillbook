@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/siteplane/components/pagination";
+} from "@/raptrx-ui/components/pagination";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {

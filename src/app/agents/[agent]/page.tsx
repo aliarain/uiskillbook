@@ -8,7 +8,7 @@ import { CopyCodeBlock } from "@/components/copy-code-block";
 import { MCP_URL } from "@/lib/site";
 import { pageMetadata } from "@/lib/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { Code } from "@/siteplane/components/code";
+import { Code } from "@/raptrx-ui/components/code";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));

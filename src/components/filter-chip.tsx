@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/siteplane/components/button";
+import { Button } from "@/raptrx-ui/components/button";
 
 /** A filter that is a link (state lives in the URL), styled as a kit pill button. */
 export function FilterChip({

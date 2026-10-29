@@ -17,9 +17,9 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "@/siteplane/components/sidebar";
-import { Button } from "@/siteplane/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/siteplane/components/empty-state";
+} from "@/raptrx-ui/components/sidebar";
+import { Button } from "@/raptrx-ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/raptrx-ui/components/empty-state";
 import {
   Pagination,
   PaginationContent,
@@ -27,7 +27,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/siteplane/components/pagination";
+} from "@/raptrx-ui/components/pagination";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({

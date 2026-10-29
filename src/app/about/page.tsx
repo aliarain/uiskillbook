@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
-import { Code } from "@/siteplane/components/code";
-import { Typeset, TypesetHeading, TypesetLink, TypesetParagraph } from "@/siteplane/components/typeset";
+import { Code } from "@/raptrx-ui/components/code";
+import { Typeset, TypesetHeading, TypesetLink, TypesetParagraph } from "@/raptrx-ui/components/typeset";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",

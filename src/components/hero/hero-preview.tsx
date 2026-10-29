@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/siteplane/components/button";
+import { Button } from "@/raptrx-ui/components/button";
 import { getAllSkills, getAuthors, installTargets } from "@/lib/skills";
 import { getAllDesignMds } from "@/lib/design-md";
 import { InstallPrompt } from "../install-prompt";

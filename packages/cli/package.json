@@ -1,0 +1,39 @@
+{
+  "name": "uiskillbook",
+  "version": "0.1.0",
+  "description": "UI Skillbook from the terminal: list and fetch UI skills for coding agents.",
+  "type": "module",
+  "bin": {
+    "uiskillbook": "dist/uiskillbook.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "prepublishOnly": "node build.mjs"
+  },
+  "keywords": [
+    "ui",
+    "skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "agents",
+    "design"
+  ],
+  "homepage": "https://www.uiskillbook.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliarain/uiskillbook.git",
+    "directory": "packages/cli"
+  },
+  "bugs": "https://github.com/aliarain/uiskillbook/issues",
+  "author": "Ali Arain",
+  "license": "MIT"
+}

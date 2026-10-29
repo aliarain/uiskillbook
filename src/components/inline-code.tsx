@@ -1,4 +1,4 @@
-import { Code } from "@/siteplane/components/code";
+import { Code } from "@/raptrx-ui/components/code";
 
 /** Renders a plain string, turning `backtick` spans into the kit's inline Code. */
 export function InlineCode({ text }: { text: string }) {

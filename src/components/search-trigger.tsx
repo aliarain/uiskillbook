@@ -1,8 +1,8 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { Button } from "@/siteplane/components/button";
-import { Kbd, KbdGroup } from "@/siteplane/components/kbd";
+import { Button } from "@/raptrx-ui/components/button";
+import { Kbd, KbdGroup } from "@/raptrx-ui/components/kbd";
 import { useCommandPalette } from "./command-palette-provider";
 
 function Shortcut({ className = "" }: { className?: string }) {
