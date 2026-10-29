@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/authors", lastModified: dated(skills) },
     { path: "/submit", lastModified: contentDate },
     { path: "/about", lastModified: contentDate },
+    { path: "/api-docs", lastModified: contentDate },
   ].map(({ path, lastModified }) => ({ url: `${SITE_URL}${path}`, lastModified }));
 
   const skillRoutes = skills.map((s) => ({

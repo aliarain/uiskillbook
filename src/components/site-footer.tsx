@@ -28,6 +28,7 @@ function siteColumns(): FooterColumn[] {
       title: "Developers",
       links: [
         { href: "/about#cli", label: "CLI" },
+        { href: "/api-docs", label: "API" },
         { href: "/mcp", label: "MCP server", external: true },
         { href: "/skills/registry.json", label: "Registry", external: true },
         { href: "/llms.txt", label: "llms.txt", external: true },

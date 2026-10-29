@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
-import { getAllSkills, getSkillRawMarkdown } from "@/lib/skills";
-import { getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
+import {
+  catalogStats,
+  designMdDetail,
+  designMdSummary,
+  parseSkillQuery,
+  querySkills,
+  searchCatalog,
+  skillDetail,
+  SORTS,
+} from "@/lib/catalog-api";
+import { getAllDesignMds } from "@/lib/design-md";
 
 const SERVER_NAME = "UI Skillbook";
 const SERVER_VERSION = "0.1.0";
@@ -37,13 +46,17 @@ const tools = [
   {
     name: "list_skills",
     description:
-      "List skills from the UI Skillbook catalog (same catalog as `uiskillbook list`). Optionally filter by a text query, category, or agent.",
+      "List skills from the UI Skillbook catalog (same data as GET /api/skills). Filter by text, category, agent or role; sort and paginate.",
     inputSchema: {
       type: "object",
       properties: {
-        query: { type: "string", description: "Optional filter over slug, name, or description." },
-        category: { type: "string", description: "Optional category slug to filter by." },
-        agent: { type: "string", description: "Optional agent slug to filter by." },
+        query: { type: "string", description: "Optional filter over slug, name, description, author and tags." },
+        category: { type: "string", description: "Optional category slug, e.g. motion." },
+        agent: { type: "string", description: "Optional agent slug, e.g. claude-code." },
+        role: { type: "string", description: "Optional role preset, e.g. designers." },
+        sort: { type: "string", enum: [...SORTS], description: "Sort order. Default recommended." },
+        page: { type: "number", description: "Page number, default 1." },
+        limit: { type: "number", description: "Results per page, default 30, max 100." },
       },
       additionalProperties: false,
     },
@@ -51,15 +64,34 @@ const tools = [
   {
     name: "get_skill",
     description:
-      "Fetch full skill content by slug (same content as `uiskillbook get`). Local skills return full instructions; external skills return metadata plus a source URL to fetch directly.",
+      "Fetch one skill by slug (same as GET /api/skills/{slug}). Local skills include full instructions in `content`; external skills include `raw_url` to fetch.",
     inputSchema: {
       type: "object",
       properties: {
-        slug: { type: "string", description: "The skill's slug, e.g. baseline-ui." },
+        slug: { type: "string", description: "The skill's slug, e.g. spacing-rhythm." },
       },
       required: ["slug"],
       additionalProperties: false,
     },
+  },
+  {
+    name: "search",
+    description:
+      "Search skills, guides, collections and Design.md files at once (same as GET /api/search).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        q: { type: "string", description: "Search text." },
+        limit: { type: "number", description: "Max results, default 20." },
+      },
+      required: ["q"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "get_stats",
+    description: "Catalog totals plus per-category and per-agent counts (same as GET /api/stats).",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
   {
     name: "get_design_md",
@@ -88,6 +120,7 @@ export function GET(request: Request) {
       protocol: "mcp",
       endpoint: `${baseUrl}/mcp`,
       registry: `${baseUrl}/skills/registry.json`,
+      api: `${baseUrl}/api`,
       tools: tools.map((t) => t.name),
     },
     { headers: corsHeaders }
@@ -95,7 +128,6 @@ export function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const baseUrl = new URL(request.url).origin;
   const raw = await request.text();
   if (new TextEncoder().encode(raw).byteLength > MAX_REQUEST_BYTES) {
     return jsonRpcError(null, -32600, "Request body is too large", 413);
@@ -136,105 +168,39 @@ export async function POST(request: Request) {
           ? (body.params.arguments as Record<string, unknown>)
           : {};
 
-      if (name === "list_skills") {
-        const query = typeof args.query === "string" ? args.query.trim().toLowerCase() : "";
-        const category = typeof args.category === "string" ? args.category.trim().toLowerCase() : "";
-        const agent = typeof args.agent === "string" ? args.agent.trim().toLowerCase() : "";
-
-        const skills = getAllSkills()
-          .filter((s) => {
-            if (query) {
-              const haystack = `${s.slug} ${s.title} ${s.description}`.toLowerCase();
-              if (!haystack.includes(query)) return false;
-            }
-            if (category && !s.categories.includes(category as never)) return false;
-            if (agent && !s.agents.includes(agent as never)) return false;
-            return true;
-          })
-          .map((s) => ({
-            slug: s.slug,
-            name: s.title,
-            description: s.description,
-            categories: s.categories,
-            external: Boolean(s.external),
-            url: `${baseUrl}/skills/${s.slug}`,
-          }));
-
-        return jsonRpcResult(body.id, {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(
-                { source: `${baseUrl}/skills/registry.json`, count: skills.length, skills },
-                null,
-                2
-              ),
-            },
-          ],
+      const text = (data: unknown) =>
+        jsonRpcResult(body.id, {
+          content: [{ type: "text", text: typeof data === "string" ? data : JSON.stringify(data, null, 2) }],
         });
-      }
+      const toolError = (message: string) =>
+        jsonRpcResult(body.id, { isError: true, content: [{ type: "text", text: message }] });
+
+      if (name === "list_skills") return text(querySkills(parseSkillQuery(args)));
 
       if (name === "get_skill") {
-        const slug = typeof args.slug === "string" ? args.slug : "";
-        const skill = getAllSkills().find((s) => s.slug === slug);
-
-        if (!skill) {
-          return jsonRpcResult(body.id, {
-            isError: true,
-            content: [{ type: "text", text: `Unknown skill "${slug}". Use list_skills first.` }],
-          });
-        }
-
-        if (skill.external) {
-          const text = [
-            `# ${skill.title}`,
-            "",
-            skill.description,
-            "",
-            "This skill is hosted in an external repository, not on UI Skillbook.",
-            skill.source?.rawUrl && `Raw content: ${skill.source.rawUrl}`,
-            skill.source?.repository && `Source: ${skill.source.repository}`,
-          ]
-            .filter(Boolean)
-            .join("\n");
-          return jsonRpcResult(body.id, { content: [{ type: "text", text }] });
-        }
-
-        try {
-          const content = getSkillRawMarkdown(skill.slug);
-          return jsonRpcResult(body.id, { content: [{ type: "text", text: content }] });
-        } catch {
-          return jsonRpcResult(body.id, {
-            isError: true,
-            content: [{ type: "text", text: `Failed to load skill content for ${skill.slug}` }],
-          });
-        }
+        const slug = typeof args.slug === "string" ? args.slug.trim() : "";
+        const skill = skillDetail(slug);
+        if (!skill) return toolError(`Unknown skill "${slug}". Use list_skills or search first.`);
+        // Instructions first so agents can follow them directly; metadata after.
+        const { content, ...meta } = skill;
+        return text(content ? `${content}\n\n---\n${JSON.stringify(meta, null, 2)}` : meta);
       }
+
+      if (name === "search") {
+        const q = typeof args.q === "string" ? args.q : "";
+        if (!q.trim()) return toolError("Missing required argument: q");
+        const results = searchCatalog(q, typeof args.limit === "number" ? args.limit : 20);
+        return text({ q, total: results.length, results });
+      }
+
+      if (name === "get_stats") return text(catalogStats());
 
       if (name === "get_design_md") {
         const slug = typeof args.slug === "string" ? args.slug.trim() : "";
-        if (!slug || !getDesignMdBySlug(slug)) {
-          const brands = getAllDesignMds().map((d) => ({
-            slug: d.slug,
-            name: d.name,
-            description: d.description,
-            url: `${baseUrl}/design-md/${d.slug}`,
-          }));
-          return jsonRpcResult(body.id, {
-            isError: Boolean(slug),
-            content: [
-              {
-                type: "text",
-                text: JSON.stringify(
-                  { ...(slug && { error: `Unknown brand "${slug}"` }), brands },
-                  null,
-                  2
-                ),
-              },
-            ],
-          });
-        }
-        return jsonRpcResult(body.id, { content: [{ type: "text", text: getDesignMdRaw(slug) }] });
+        const entry = slug ? designMdDetail(slug) : null;
+        if (entry) return text(entry.content);
+        const brands = getAllDesignMds().map(designMdSummary);
+        return slug ? toolError(JSON.stringify({ error: `Unknown brand "${slug}"`, brands }, null, 2)) : text({ brands });
       }
 
       return jsonRpcError(body.id, -32601, `Unknown tool: ${name}`);
