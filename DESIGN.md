@@ -74,7 +74,7 @@ Used rarely:
 - **Inputs**: white background, 1px border, 6px radius, 8×12px padding, and 16px text on mobile.
 - **Cards** (`.card`): 1px border, 12px radius, no shadow. On hover only the border darkens.
 - **Rows** (`.row`): dense list items that fill with `hover` on hover.
-- **Logo tiles**: monochrome Simple Icons marks (CC0) rendered from the `simple-icons` package, neutral until hovered or focused, then filled with the brand color (Tailwind `group-hover:` utilities, so the layer order can't override them). Brands without a mark show their initial.
+- **Logo tiles**: full-color CC0 icons from Logoforge (`scripts/fetch-design-md-logos.mjs`, sources in `content/design-md-logos.json`), grayscale and dimmed until hovered or focused, then full color. Dark variants are used in dark mode where they exist. Brands without a logo fall back to a Simple Icons mark or their initial.
 - **Hero**: optional faint dotted grid (`.dot-grid`).
 
 ## Interaction

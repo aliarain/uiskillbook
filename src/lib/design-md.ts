@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import logoData from "../../content/design-md-logos.json";
 
 const DESIGN_MD_DIR = path.join(process.cwd(), "content", "design-md");
 
@@ -19,7 +20,11 @@ export type DesignMdFrontmatter = {
 export type DesignMd = DesignMdFrontmatter & {
   slug: string;
   body: string;
+  /** Full-color Logoforge icon (CC0), from scripts/fetch-design-md-logos.mjs. */
+  logo?: { light: string; dark?: string };
 };
+
+type LogoRecord = Record<string, { icon?: { file: string }; "icon-dark"?: { file: string } }>;
 
 let cache: DesignMd[] | null = null;
 
@@ -35,7 +40,13 @@ export function getAllDesignMds(): DesignMd[] {
   const entries = slugs.map((slug) => {
     const raw = fs.readFileSync(path.join(DESIGN_MD_DIR, slug, "DESIGN.md"), "utf8");
     const { data, content } = matter(raw);
-    return { slug, body: content, ...(data as DesignMdFrontmatter) };
+    const logo = (logoData as LogoRecord)[slug];
+    return {
+      slug,
+      body: content,
+      ...(data as DesignMdFrontmatter),
+      logo: logo?.icon ? { light: logo.icon.file, dark: logo["icon-dark"]?.file } : undefined,
+    };
   });
 
   entries.sort((a, b) => a.name.localeCompare(b.name));

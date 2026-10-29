@@ -11,9 +11,33 @@ function foregroundFor(hex: string) {
   return luminance > 0.18 ? "#0a0a0a" : "#ffffff";
 }
 
-/** Rounded-square brand mark: neutral until its link is hovered or focused. */
+const NEUTRAL = "grayscale opacity-60 transition-[filter,opacity] duration-150 group-hover:grayscale-0 group-hover:opacity-100 group-focus-visible:grayscale-0 group-focus-visible:opacity-100";
+
+/**
+ * Rounded-square brand mark. Full-color logos stay grayscale until their link
+ * is hovered or focused; brands without one fall back to a Simple Icons mark
+ * or their initial, filled with the brand color on hover.
+ */
 export function BrandTile({ entry, size = "md" }: { entry: DesignMd; size?: "md" | "lg" }) {
   const box = size === "lg" ? "size-16 rounded-feature text-2xl" : "size-12 rounded-card text-lg";
+  const img = size === "lg" ? "size-8" : "size-6";
+
+  if (entry.logo) {
+    return (
+      <span
+        aria-hidden
+        className={`flex shrink-0 items-center justify-center border border-border bg-surface transition-colors duration-150 group-hover:border-border-strong ${box}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={entry.logo.light} alt="" className={`${img} ${NEUTRAL} ${entry.logo.dark ? "dark:hidden" : ""}`} />
+        {entry.logo.dark && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={entry.logo.dark} alt="" className={`${img} ${NEUTRAL} hidden dark:block`} />
+        )}
+      </span>
+    );
+  }
+
   return (
     <span
       style={
