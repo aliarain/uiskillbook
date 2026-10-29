@@ -287,40 +287,6 @@
     background-size: 16px 16px;
   }
 
-  .skill-content {
-    --tw-prose-body: var(--text-secondary);
-    --tw-prose-headings: var(--text-primary);
-    --tw-prose-links: var(--accent);
-    --tw-prose-bold: var(--text-primary);
-    --tw-prose-bullets: var(--border);
-    --tw-prose-hr: var(--border);
-    --tw-prose-quotes: var(--text-secondary);
-    --tw-prose-quote-borders: var(--border);
-    --tw-prose-code: var(--text-primary);
-    --tw-prose-pre-code: var(--text-primary);
-    --tw-prose-pre-bg: var(--surface);
-    --tw-prose-th-borders: var(--border);
-    --tw-prose-td-borders: var(--border);
-  }
-
-  .skill-content pre {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-  }
-
-  .skill-content code:not(pre code)::before,
-  .skill-content code:not(pre code)::after {
-    content: "";
-  }
-
-  .skill-content code:not(pre code) {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-input);
-    padding: 0.1em 0.35em;
-    font-size: 0.875em;
-  }
-
   /* Design.md logo tiles: desaturated until their link is hovered or focused. */
   .brand-tile {
     transition: background-color 140ms var(--ease-out), color 140ms var(--ease-out),
@@ -402,4 +368,40 @@
     transition: opacity 1ms;
     transform: none;
   }
+}
+
+/* Markdown body colors. Unlayered on purpose: the typography plugin sets its
+   --tw-prose-* defaults in the utilities layer, which would beat a components rule. */
+.skill-content {
+  --tw-prose-body: var(--text-secondary);
+  --tw-prose-headings: var(--text-primary);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--text-primary);
+  --tw-prose-bullets: var(--border);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--text-secondary);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-code: var(--text-primary);
+  --tw-prose-pre-code: var(--text-primary);
+  --tw-prose-pre-bg: var(--surface);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
+.skill-content pre {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.skill-content code:not(pre code)::before,
+.skill-content code:not(pre code)::after {
+  content: "";
+}
+
+.skill-content code:not(pre code) {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
 }
