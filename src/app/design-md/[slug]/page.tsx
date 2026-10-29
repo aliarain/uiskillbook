@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
+import { categorySlug, getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
 import { markdownToHtml } from "@/lib/markdown";
 import { BrandTile } from "@/components/brand-tile";
 import { CopyButtons } from "@/components/copy-buttons";
 import { pageMetadata } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export function generateStaticParams() {
   return getAllDesignMds().map((d) => ({ slug: d.slug }));
@@ -43,9 +44,12 @@ export default async function DesignMdDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <p className="label">
-        Design.md / {entry.category}
-      </p>
+      <Breadcrumbs
+        items={[
+          { label: "Design.md", href: "/design-md" },
+          { label: entry.category, href: `/design-md?category=${categorySlug(entry.category)}` },
+        ]}
+      />
       <div className="group mt-4 flex items-center gap-4">
         <BrandTile entry={entry} size="lg" />
         <div>

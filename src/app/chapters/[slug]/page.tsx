@@ -5,6 +5,7 @@ import { getAllChapters, getChapterBySlug, getChapterSkills } from "@/lib/chapte
 import { markdownToHtml } from "@/lib/markdown";
 import { SkillRow } from "@/components/skill-row";
 import { pageMetadata } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export function generateStaticParams() {
   return getAllChapters().map((c) => ({ slug: c.slug }));
@@ -40,9 +41,12 @@ export default async function ChapterDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="label">
-        Chapter {String(chapter.number).padStart(2, "0")}
-      </span>
+      <Breadcrumbs
+        items={[
+          { label: "Learn", href: "/chapters" },
+          { label: `Guide ${String(chapter.number).padStart(2, "0")}` },
+        ]}
+      />
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         {chapter.title}
       </h1>

@@ -17,6 +17,7 @@ import { InstallPrompt } from "@/components/install-prompt";
 import { AuthorBadge, StarCount } from "@/components/skill-meta";
 import { AddToAgent } from "@/components/add-to-agent";
 import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export function generateStaticParams() {
   return getAllSkills().map((s) => ({ slug: s.slug }));
@@ -80,15 +81,12 @@ export default async function SkillDetailPage({
           ],
         }}
       />
-      <nav aria-label="Breadcrumb" className="text-sm text-muted">
-        <Link href="/skills" className="link rounded-input">
-          Skills
-        </Link>
-        <span className="mx-2 text-faint" aria-hidden>/</span>
-        <Link href={`/skills?category=${skill.categories[0]}`} className="rounded-input text-accent">
-          {categoryLabel(skill.categories[0])}
-        </Link>
-      </nav>
+      <Breadcrumbs
+        items={[
+          { label: "Skills", href: "/skills" },
+          { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
+        ]}
+      />
 
       <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.title}</h1>
       <p className="mt-3 text-lg text-secondary text-pretty">{skill.description}</p>

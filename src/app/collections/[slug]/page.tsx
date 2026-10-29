@@ -8,6 +8,7 @@ import {
 } from "@/lib/collections";
 import { SkillRow } from "@/components/skill-row";
 import { pageMetadata } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export function generateStaticParams() {
   return getAllCollections().map((c) => ({ slug: c.slug }));
@@ -41,9 +42,7 @@ export default async function CollectionDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="label">
-        Collection
-      </span>
+      <Breadcrumbs items={[{ label: "Collections", href: "/collections" }, { label: collection.title }]} />
       <h1 className="display mt-3 text-3xl sm:text-4xl">
         {collection.title}
       </h1>

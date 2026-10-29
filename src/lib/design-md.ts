@@ -50,3 +50,15 @@ export function getDesignMdBySlug(slug: string): DesignMd | undefined {
 export function getDesignMdRaw(slug: string): string {
   return fs.readFileSync(path.join(DESIGN_MD_DIR, slug, "DESIGN.md"), "utf8");
 }
+
+export function categorySlug(category: string): string {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+export function getDesignMdCategories(): { slug: string; label: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const entry of getAllDesignMds()) counts.set(entry.category, (counts.get(entry.category) ?? 0) + 1);
+  return [...counts]
+    .map(([label, count]) => ({ slug: categorySlug(label), label, count }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
