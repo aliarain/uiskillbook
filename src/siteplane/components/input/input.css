@@ -1,0 +1,205 @@
+@layer theme, base, components, siteplane, utilities;
+
+@layer siteplane {
+  .sp-input-control:not([data-unstyled]) {
+    --sp-input-segment-background: color-mix(
+      in srgb,
+      var(--color-blue-500) 16%,
+      transparent
+    );
+    --sp-input-segment-padding-block: calc(var(--spacing) * 0.5);
+    --sp-input-segment-padding-inline: var(--spacing);
+    --sp-input-surface-subtle: rgb(0 0 0 / 4%);
+    --sp-semantic-color-background: var(--color-white);
+    --sp-semantic-color-border: rgb(0 0 0 / 8%);
+    --sp-semantic-color-destructive: var(--color-red-500);
+    --sp-semantic-color-foreground: var(--color-neutral-800);
+    --sp-semantic-color-input: rgb(0 0 0 / 10%);
+    --sp-semantic-color-muted-foreground: color-mix(
+      in srgb,
+      var(--color-neutral-500) 90%,
+      var(--color-black)
+    );
+    --sp-semantic-color-ring: var(--color-neutral-400);
+  }
+
+  .sp-base-input[data-profile="input-group"] {
+    display: contents;
+  }
+
+  .sp-base-input[data-profile="input-group"]::before {
+    display: none;
+  }
+
+  /* Embedded Combobox inputs keep the public Input layout contract while the
+   * surrounding popup owns the visible surface and focus treatment. */
+  .sp-base-input[data-profile="combobox"][data-profile-mode="embedded"] {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+    height: var(--sp-rw-control-md);
+  }
+
+  .sp-base-input[data-profile="combobox"][data-profile-mode="embedded"][data-size="sm"] {
+    height: var(--sp-rw-control-sm);
+  }
+
+  .sp-base-input[data-profile="combobox"][data-profile-mode="embedded"][data-size="lg"] {
+    height: var(--sp-rw-control-lg);
+  }
+
+  .sp-base-input[data-profile="combobox"][data-profile-mode="embedded"][data-size="xl"] {
+    height: var(--sp-rw-control-xl);
+  }
+
+  .sp-base-input[data-profile="input-group"] .sp-input {
+    flex: 1 1 0%;
+    height: var(--sp-composite-control-height, 100%);
+    border-radius: 0;
+    padding-block-start: var(--sp-composite-control-padding-block-start, 0);
+    padding-block-end: var(--sp-composite-control-padding-block-end, 0);
+    padding-inline-start: var(
+      --sp-composite-control-padding-inline-start,
+      var(--sp-input-padding-inline, calc(var(--spacing) * 3))
+    );
+    padding-inline-end: var(
+      --sp-composite-control-padding-inline-end,
+      var(--sp-input-padding-inline, calc(var(--spacing) * 3))
+    );
+  }
+
+  .dark .sp-input-control:not([data-unstyled]),
+  [data-theme="dark"] .sp-input-control:not([data-unstyled]) {
+    --sp-input-surface-subtle: rgb(255 255 255 / 4%);
+    --sp-semantic-color-background: color-mix(
+      in srgb,
+      var(--color-neutral-950) 95%,
+      var(--color-white)
+    );
+    --sp-semantic-color-border: rgb(255 255 255 / 6%);
+    --sp-semantic-color-destructive: color-mix(
+      in srgb,
+      var(--color-red-500) 90%,
+      var(--color-white)
+    );
+    --sp-semantic-color-foreground: var(--color-neutral-100);
+    --sp-semantic-color-input: rgb(255 255 255 / 8%);
+    --sp-semantic-color-muted-foreground: color-mix(
+      in srgb,
+      var(--color-neutral-500) 90%,
+      var(--color-white)
+    );
+    --sp-semantic-color-ring: var(--color-neutral-500);
+  }
+
+  .sp-input-control:not([data-unstyled])[data-variant="soft"] {
+    background-color: var(--sp-input-surface-subtle);
+  }
+
+  .sp-input-control:not([data-unstyled])[data-variant="soft"]:focus-within {
+    background-color: var(--sp-semantic-color-background);
+  }
+
+  .sp-input-control:not([data-unstyled]):has(:disabled) {
+    background-color: var(--sp-input-surface-subtle);
+  }
+
+  .sp-input-control:not([data-unstyled]):has(:autofill) {
+    background-color: color-mix(
+      in oklab,
+      var(--sp-semantic-color-foreground) 4%,
+      transparent
+    );
+  }
+
+  :is(.dark, [data-theme="dark"])
+    .sp-input-control:not([data-unstyled]):has(:autofill) {
+    background-color: color-mix(
+      in oklab,
+      var(--sp-semantic-color-foreground) 8%,
+      transparent
+    );
+  }
+
+  /* A browser paints an autofilled input with its own colour, `!important` in
+   * its stylesheet so page CSS cannot replace it (Chrome blue, Safari yellow),
+   * and Safari also turns the text black. The colour covers only the native
+   * input: beside an InputGroup addon it was a square block. The field marks
+   * autofill with its tint (above, or the group's), so the input clips the
+   * browser's colour to its text, where the text covers it, and keeps the kit
+   * text colour. A segment keeps its own focus fill. */
+  .sp-input-control:not([data-unstyled]) > .sp-input:autofill,
+  .sp-base-input[data-profile="input-group"]:not(.sp-input-segment)
+    > .sp-input:autofill {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: var(--sp-rw-fg-primary);
+    caret-color: var(--sp-rw-fg-primary);
+  }
+
+  .sp-input-hide-picker::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
+  .sp-date-input {
+    --input-segment-background: var(--sp-input-segment-background);
+    --input-segment-padding-block: var(--sp-input-segment-padding-block);
+    --input-segment-padding-inline: var(--sp-input-segment-padding-inline);
+  }
+
+  .sp-date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+
+  .sp-date-input::-webkit-datetime-edit-day-field,
+  .sp-date-input::-webkit-datetime-edit-month-field,
+  .sp-date-input::-webkit-datetime-edit-year-field {
+    border-radius: var(--radius-md);
+    padding-block: var(--input-segment-padding-block);
+    padding-inline: var(--input-segment-padding-inline);
+  }
+
+  .sp-date-input::-webkit-datetime-edit-day-field:focus,
+  .sp-date-input::-webkit-datetime-edit-month-field:focus,
+  .sp-date-input::-webkit-datetime-edit-year-field:focus {
+    background-color: var(--input-segment-background);
+  }
+
+  /* One rule per selector: Chrome rejects a ::selection after another
+   * pseudo-element, and one selector it rejects drops a whole list, so the
+   * input's own selection rule stands alone. */
+  .sp-date-input::selection {
+    background-color: transparent;
+  }
+
+  .sp-date-input::-webkit-datetime-edit-day-field::selection {
+    background-color: transparent;
+  }
+
+  .sp-date-input::-webkit-datetime-edit-month-field::selection {
+    background-color: transparent;
+  }
+
+  .sp-date-input::-webkit-datetime-edit-year-field::selection {
+    background-color: transparent;
+  }
+
+  /* Embedded search headers: Input owns sizing, typography and native states. */
+  :root .sp-base-input[data-profile="command"] {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    height: var(--sp-rw-line-24);
+  }
+  :root .sp-base-input[data-profile="command"] .sp-input {
+    flex: 1;
+    height: var(--sp-rw-line-24);
+    padding: 0;
+    font-size: var(--sp-rw-font-16);
+    line-height: var(--sp-rw-line-24);
+  }
+  :root .sp-base-input[data-profile="command"]:has([aria-invalid="true"]) {
+    outline: 1px solid var(--destructive);
+  }
+}

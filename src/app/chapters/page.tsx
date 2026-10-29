@@ -15,7 +15,7 @@ export default function ChaptersPage() {
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">Chapters</h1>
-      <p className="mt-2 text-secondary">
+      <p className="mt-2 text-ink-2">
         A chapter combines multiple skills into a practical lesson.
       </p>
 
@@ -27,12 +27,12 @@ export default function ChaptersPage() {
             className="card block p-5"
           >
             <div>
-              <span className="text-[13px] text-muted">
+              <span className="text-[13px] text-ink-3">
                 Chapter {String(chapter.number).padStart(2, "0")}
               </span>
-              <h2 className="mt-1 text-lg font-semibold text-primary">{chapter.title}</h2>
-              <p className="mt-1.5 text-sm text-secondary">{chapter.description}</p>
-              <p className="mt-2 text-[13px] text-muted">
+              <h2 className="mt-1 text-lg font-semibold text-ink">{chapter.title}</h2>
+              <p className="mt-1.5 text-sm text-ink-2">{chapter.description}</p>
+              <p className="mt-2 text-[13px] text-ink-3">
                 {chapter.minutes} min read, {chapter.skills.length} skills
               </p>
             </div>

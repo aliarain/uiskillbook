@@ -1,99 +1,46 @@
-@import "tailwindcss";
+@import "../siteplane/system/styles/base.css";
 @plugin "@tailwindcss/typography";
+@source "..";
 
-/* UI Skillbook design system. See DESIGN.md at the repo root.
-   Quiet, editorial, hairline borders over shadows, one blue accent. */
-
-@custom-variant dark (&:where(.dark, .dark *));
+/* UI Skillbook on the Siteplane UI design system. See DESIGN.md.
+   The kit's stylesheet comes first and owns the palette, radii and controls.
+   The aliases below give our own markup non-clashing names (ink, canvas,
+   panel, line, link) that point at the kit's role tokens, so pages and kit
+   components always share one theme. Dark mode follows .dark/[data-theme]. */
 
 :root {
-  /* Surfaces */
-  --background: #ffffff;
-  --surface: #fafafa;
-  --hover: #f5f5f5;
+  --sp-rw-font-family-default: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Borders */
-  --border: #e5e5e5;
-  --border-strong: #d4d4d4;
+  /* Tag accents, one per component. The kit has no tag ramp. */
+  --tag-green: var(--sp-rw-fg-positive);
+  --tag-green-bg: var(--sp-rw-bg-positive-translucent);
+  --tag-orange: var(--sp-rw-fg-attention);
+  --tag-orange-bg: var(--sp-rw-bg-attention-translucent);
+  --tag-violet: oklch(48% 0.2 293);
+  --tag-violet-bg: oklch(55% 0.2 293 / 14%);
 
-  /* Text */
-  --text-strong: #0a0a0a;
-  --text-primary: #171717;
-  --text-secondary: #525252;
-  --text-muted: #737373;
-  --text-faint: #a3a3a3;
-
-  /* Accent: links, active and focus states only, never a large fill */
-  --accent: #2563eb;
-  --accent-subtle: #dbeaff;
-  --accent-on-subtle: #1d4ed8;
-
-  /* Primary CTA, used once per surface */
-  --cta: #0a0a0a;
-  --cta-foreground: #ffffff;
-
-  /* Tag accents, one per component */
-  --tag-green: #15803d;
-  --tag-green-bg: #dcfce7;
-  --tag-orange: #c2410c;
-  --tag-orange-bg: #ffedd5;
-  --tag-violet: #6d28d9;
-  --tag-violet-bg: #ede9fe;
-
-  --dot-grid: rgba(10, 10, 10, 0.07);
-
-  color-scheme: light;
+  --dot-grid: oklch(10% 0 0 / 7%);
 }
 
-.dark {
-  --background: #0a0a0a;
-  --surface: #111111;
-  --hover: #1a1a1a;
-
-  --border: #262626;
-  --border-strong: #3a3a3a;
-
-  --text-strong: #fafafa;
-  --text-primary: #ededed;
-  --text-secondary: #a3a3a3;
-  --text-muted: #8a8a8a;
-  --text-faint: #5c5c5c;
-
-  --accent: #60a5fa;
-  --accent-subtle: #13233f;
-  --accent-on-subtle: #93c5fd;
-
-  --cta: #fafafa;
-  --cta-foreground: #0a0a0a;
-
-  --tag-green: #4ade80;
-  --tag-green-bg: #0f2a1a;
-  --tag-orange: #fb923c;
-  --tag-orange-bg: #2e1a0c;
-  --tag-violet: #a78bfa;
-  --tag-violet-bg: #221a3a;
-
-  --dot-grid: rgba(250, 250, 250, 0.06);
-
-  color-scheme: dark;
+:is(.dark, [data-theme="dark"]) {
+  --tag-violet: oklch(78% 0.12 293);
+  --tag-violet-bg: oklch(55% 0.2 293 / 22%);
+  --dot-grid: oklch(100% 0 0 / 6%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-hover: var(--hover);
-  --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-strong: var(--text-strong);
-  --color-primary: var(--text-primary);
-  --color-secondary: var(--text-secondary);
-  --color-muted: var(--text-muted);
-  --color-faint: var(--text-faint);
-  --color-accent: var(--accent);
-  --color-accent-subtle: var(--accent-subtle);
-  --color-accent-on-subtle: var(--accent-on-subtle);
-  --color-cta: var(--cta);
-  --color-cta-foreground: var(--cta-foreground);
+  --color-canvas: var(--sp-rw-bg-base);
+  --color-panel: var(--sp-rw-bg-primary);
+  --color-hover: var(--sp-semantic-color-control-hover);
+  --color-line: var(--sp-semantic-color-border);
+  --color-line-strong: var(--sp-semantic-color-border-strong);
+  --color-ink-strong: var(--sp-rw-fg-primary);
+  --color-ink: var(--sp-rw-fg-primary);
+  --color-ink-2: var(--sp-rw-fg-secondary);
+  --color-ink-3: var(--sp-rw-fg-tertiary);
+  --color-ink-4: var(--sp-rw-fg-quaternary);
+  --color-link: var(--sp-rw-fg-accent);
+  --color-link-subtle: var(--sp-rw-bg-accent-translucent);
   --color-tag-green: var(--tag-green);
   --color-tag-green-bg: var(--tag-green-bg);
   --color-tag-orange: var(--tag-orange);
@@ -105,18 +52,14 @@
   --font-heading: var(--font-plex);
   --font-mono: var(--font-geist-mono);
 
-  /* The only radii in the system */
-  --radius-input: 6px;
-  --radius-button: 8px;
-  --radius-card: 12px;
-  --radius-feature: 16px;
+  /* Our radius names follow the kit's role radii. */
+  --radius-input: var(--sp-rw-radius-control);
+  --radius-button: var(--sp-rw-radius-control);
+  --radius-card: var(--sp-rw-radius-surface);
+  --radius-feature: var(--sp-rw-radius-dialog);
 
-  --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-ring: 0 0 0 4px rgba(0, 0, 0, 0.1);
-  --shadow-hero: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-
+  --shadow-hero: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
-  --default-transition-duration: 140ms;
 }
 
 @layer base {
@@ -133,8 +76,8 @@
 
   body {
     overflow-x: clip;
-    background: var(--background);
-    color: var(--text-primary);
+    background: var(--sp-rw-bg-base);
+    color: var(--sp-rw-fg-primary);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -155,12 +98,12 @@
   }
 
   ::selection {
-    background: var(--accent-subtle);
-    color: var(--text-strong);
+    background: var(--sp-rw-bg-accent-translucent);
+    color: var(--sp-rw-fg-primary);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--sp-rw-fg-accent);
     outline-offset: 2px;
   }
 }
@@ -171,7 +114,7 @@
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.08;
-    color: var(--text-strong);
+    color: var(--sp-rw-fg-primary);
     text-wrap: balance;
   }
 
@@ -180,104 +123,38 @@
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.4;
-    color: var(--text-muted);
+    color: var(--sp-rw-fg-tertiary);
   }
 
-  /* Default card: hairline border, no shadow. Hover only darkens the border,
-     so nothing moves or reflows. */
+  /* Link cards use the kit's raised card surface and border so they match <Card>. */
   .card {
-    background: var(--background);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
+    background: var(--sp-rw-bg-secondary);
+    border: 1px solid var(--sp-semantic-color-border);
+    border-radius: var(--sp-rw-radius-surface);
     transition: border-color 140ms var(--ease-out), background-color 140ms var(--ease-out);
   }
 
   /* Dense list row: the hover fill does the separating. */
   .row {
-    border-radius: var(--radius-button);
+    border-radius: var(--sp-rw-radius-control);
     transition: background-color 140ms var(--ease-out);
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    height: 2.25rem;
-    padding: 0 0.875rem;
-    border: 1px solid transparent;
-    border-radius: var(--radius-button);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.43;
-    white-space: nowrap;
-    box-shadow: var(--shadow-button);
-    transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out),
-      color 140ms var(--ease-out);
-  }
-
-  .btn-primary {
-    background: var(--cta);
-    color: var(--cta-foreground);
-  }
-
-  .btn-secondary {
-    background: var(--background);
-    color: var(--text-primary);
-    border-color: var(--border);
-  }
-
-  /* Ghost pill used for nav items, chips and filters. */
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    border: 1px solid var(--border);
-    border-radius: 9999px;
-    padding: 0.3125rem 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.43;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out),
-      color 140ms var(--ease-out);
-  }
-
-  .pill[aria-current="page"],
-  .pill[aria-pressed="true"],
-  .pill[aria-selected="true"] {
-    background: var(--accent-subtle);
-    border-color: transparent;
-    color: var(--accent-on-subtle);
   }
 
   /* Hover styles only where a pointer can hover, so they never stick on touch. */
   @media (hover: hover) {
     .card:hover {
-      border-color: var(--border-strong);
+      border-color: var(--sp-semantic-color-border-strong);
     }
     .row:hover {
-      background: var(--hover);
-    }
-    .btn-primary:hover {
-      background: color-mix(in srgb, var(--cta) 86%, var(--background));
-    }
-    .btn-secondary:hover {
-      background: var(--hover);
-      border-color: var(--border-strong);
-    }
-    .pill:not([aria-current="page"], [aria-pressed="true"], [aria-selected="true"]):hover {
-      background: var(--hover);
-      color: var(--text-primary);
+      background: var(--sp-semantic-color-control-hover);
     }
     .link:hover {
-      color: var(--text-primary);
+      color: var(--sp-rw-fg-primary);
     }
   }
 
   .link {
-    color: var(--text-secondary);
+    color: var(--sp-rw-fg-secondary);
     transition: color 140ms var(--ease-out);
   }
 
@@ -290,7 +167,7 @@
   /* Thin scrollbar for scrolling panels such as the command palette. */
   .scroll-thin {
     scrollbar-width: thin;
-    scrollbar-color: var(--border-strong) transparent;
+    scrollbar-color: var(--sp-semantic-color-border-strong) transparent;
   }
 
   .scroll-thin::-webkit-scrollbar {
@@ -298,79 +175,34 @@
   }
 
   .scroll-thin::-webkit-scrollbar-thumb {
-    background: var(--border-strong);
+    background: var(--sp-semantic-color-border-strong);
     border: 2px solid transparent;
     border-radius: 9999px;
     background-clip: content-box;
-  }
-
-  /* Square icon button in the header: 36px hit area, quiet until hovered. */
-  .icon-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.25rem;
-    min-width: 2.25rem;
-    border-radius: var(--radius-button);
-    color: var(--text-secondary);
-    transition: background-color 140ms var(--ease-out), color 140ms var(--ease-out);
-  }
-
-  @media (hover: hover) {
-    .icon-button:hover {
-      background: var(--hover);
-      color: var(--text-primary);
-    }
-  }
-}
-
-/* Command palette enter/exit: 150ms fade and slight scale. */
-.palette-backdrop {
-  opacity: 0;
-  transition: opacity 150ms var(--ease-out);
-}
-
-.palette-panel {
-  opacity: 0;
-  transform: scale(0.98);
-  transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
-}
-
-.palette-backdrop[data-shown="true"],
-.palette-panel[data-shown="true"] {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .palette-backdrop,
-  .palette-panel {
-    transition: opacity 1ms;
-    transform: none;
   }
 }
 
 /* Markdown body colors. Unlayered on purpose: the typography plugin sets its
    --tw-prose-* defaults in the utilities layer, which would beat a components rule. */
 .skill-content {
-  --tw-prose-body: var(--text-secondary);
-  --tw-prose-headings: var(--text-primary);
-  --tw-prose-links: var(--accent);
-  --tw-prose-bold: var(--text-primary);
-  --tw-prose-bullets: var(--border);
-  --tw-prose-hr: var(--border);
-  --tw-prose-quotes: var(--text-secondary);
-  --tw-prose-quote-borders: var(--border);
-  --tw-prose-code: var(--text-primary);
-  --tw-prose-pre-code: var(--text-primary);
-  --tw-prose-pre-bg: var(--surface);
-  --tw-prose-th-borders: var(--border);
-  --tw-prose-td-borders: var(--border);
+  --tw-prose-body: var(--sp-rw-fg-secondary);
+  --tw-prose-headings: var(--sp-rw-fg-primary);
+  --tw-prose-links: var(--sp-rw-fg-accent);
+  --tw-prose-bold: var(--sp-rw-fg-primary);
+  --tw-prose-bullets: var(--sp-semantic-color-border);
+  --tw-prose-hr: var(--sp-semantic-color-border);
+  --tw-prose-quotes: var(--sp-rw-fg-secondary);
+  --tw-prose-quote-borders: var(--sp-semantic-color-border);
+  --tw-prose-code: var(--sp-rw-fg-primary);
+  --tw-prose-pre-code: var(--sp-rw-fg-primary);
+  --tw-prose-pre-bg: var(--sp-rw-bg-primary);
+  --tw-prose-th-borders: var(--sp-semantic-color-border);
+  --tw-prose-td-borders: var(--sp-semantic-color-border);
 }
 
 .skill-content pre {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  border: 1px solid var(--sp-semantic-color-border);
+  border-radius: var(--sp-rw-radius-surface);
 }
 
 .skill-content code:not(pre code)::before,
@@ -379,9 +211,9 @@
 }
 
 .skill-content code:not(pre code) {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-input);
+  background: var(--sp-rw-bg-primary);
+  border: 1px solid var(--sp-semantic-color-border);
+  border-radius: var(--sp-rw-radius-control);
   padding: 0.1em 0.35em;
   font-size: 0.875em;
 }

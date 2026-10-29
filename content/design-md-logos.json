@@ -1,0 +1,144 @@
+{
+  "airbnb": {
+    "icon": {
+      "file": "/design-md/logos/airbnb.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/airbnb"
+    }
+  },
+  "apple": {
+    "icon": {
+      "file": "/design-md/logos/apple.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/apple"
+    },
+    "icon-dark": {
+      "file": "/design-md/logos/apple-dark.svg",
+      "origin": "gilbarbara/logos (dark: auto)",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/apple"
+    }
+  },
+  "discord": {
+    "icon": {
+      "file": "/design-md/logos/discord.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/discord"
+    }
+  },
+  "duolingo": {
+    "icon": {
+      "file": "/design-md/logos/duolingo.svg",
+      "origin": "simple-icons",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/duolingo"
+    }
+  },
+  "figma": {
+    "icon": {
+      "file": "/design-md/logos/figma.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/figma"
+    }
+  },
+  "github": {
+    "icon": {
+      "file": "/design-md/logos/github.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/github"
+    },
+    "icon-dark": {
+      "file": "/design-md/logos/github-dark.svg",
+      "origin": "gilbarbara/logos (dark: auto)",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/github"
+    }
+  },
+  "linear": {
+    "icon": {
+      "file": "/design-md/logos/linear.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/linear"
+    },
+    "icon-dark": {
+      "file": "/design-md/logos/linear-dark.svg",
+      "origin": "gilbarbara/logos (dark: auto)",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/linear"
+    }
+  },
+  "notion": {
+    "icon": {
+      "file": "/design-md/logos/notion.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/notion"
+    },
+    "icon-dark": {
+      "file": "/design-md/logos/notion-dark.svg",
+      "origin": "gilbarbara/logos (dark: auto)",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/notion"
+    }
+  },
+  "raycast": {
+    "icon": {
+      "file": "/design-md/logos/raycast.svg",
+      "origin": "simple-icons",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/raycast"
+    }
+  },
+  "shopify": {
+    "icon": {
+      "file": "/design-md/logos/shopify.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/shopify"
+    }
+  },
+  "slack": {
+    "icon": {
+      "file": "/design-md/logos/slack.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/slack"
+    }
+  },
+  "spotify": {
+    "icon": {
+      "file": "/design-md/logos/spotify.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/spotify"
+    }
+  },
+  "stripe": {
+    "icon": {
+      "file": "/design-md/logos/stripe.svg",
+      "origin": "simple-icons",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/stripe"
+    }
+  },
+  "vercel": {
+    "icon": {
+      "file": "/design-md/logos/vercel.svg",
+      "origin": "gilbarbara/logos",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/vercel"
+    },
+    "icon-dark": {
+      "file": "/design-md/logos/vercel-dark.svg",
+      "origin": "gilbarbara/logos (dark: auto)",
+      "license": "CC0-1.0",
+      "page": "https://logoforge.terravidhal.me/logos/vercel"
+    }
+  }
+}

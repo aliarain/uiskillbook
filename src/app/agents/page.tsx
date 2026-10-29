@@ -16,15 +16,15 @@ export default function AgentsPage() {
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">Agents</h1>
-      <p className="mt-2 text-secondary">
+      <p className="mt-2 text-ink-2">
         Give your coding agent better taste. Skills work with any agent that can read markdown.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {agents.map((agent) => (
           <Link key={agent.slug} href={`/agents/${agent.slug}`} className="card p-5">
-            <h2 className="text-base font-medium text-primary">{agent.label}</h2>
-            <p className="mt-2 text-[13px] text-muted">
+            <h2 className="text-base font-medium text-ink">{agent.label}</h2>
+            <p className="mt-2 text-[13px] text-ink-3">
               {getSkillsByAgent(agent.slug).length} compatible skills
             </p>
           </Link>

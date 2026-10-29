@@ -29,6 +29,7 @@ function siteColumns(): FooterColumn[] {
       links: [
         { href: "/about#cli", label: "CLI" },
         { href: "/api-docs", label: "API" },
+        { href: "/design-system", label: "Design system" },
         { href: "/mcp", label: "MCP server", external: true },
         { href: "/skills/registry.json", label: "Registry", external: true },
         { href: "/llms.txt", label: "llms.txt", external: true },
@@ -124,7 +125,7 @@ function Column({ column }: { column: FooterColumn }) {
           <li>
             <FooterAnchor
               link={column.all}
-              className="rounded-input text-sm text-accent underline-offset-2 hover:underline"
+              className="rounded-input text-sm text-link underline-offset-2 hover:underline"
             />
           </li>
         )}
@@ -135,14 +136,14 @@ function Column({ column }: { column: FooterColumn }) {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-border bg-surface">
+    <footer className="mt-16 border-t border-line bg-panel">
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-strong">
+            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong">
               UI Skillbook
             </Link>
-            <p className="mt-3 max-w-xs text-sm text-secondary">
+            <p className="mt-3 max-w-xs text-sm text-ink-2">
               The field guide for building better interfaces with AI.
             </p>
           </div>
@@ -151,13 +152,13 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-border pt-10 md:grid-cols-5">
+        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-line pt-10 md:grid-cols-5">
           {directoryColumns().map((column) => (
             <Column key={column.title} column={column} />
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-[13px] text-ink-3 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} UI Skillbook</span>
           <span>
             Built by{" "}
@@ -169,7 +170,7 @@ export function SiteFooter() {
             >
               Ali Arain
             </a>
-            <span className="mx-2 text-faint" aria-hidden>/</span>
+            <span className="mx-2 text-ink-4" aria-hidden>/</span>
             <a
               href={X_URL}
               target="_blank"

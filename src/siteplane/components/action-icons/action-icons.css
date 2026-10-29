@@ -1,0 +1,136 @@
+@layer theme, base, components, siteplane, utilities;
+
+@layer siteplane {
+  /* The copy feedback of CopyRedrawIcon (rulebook T7) on the motion tokens;
+   * useCopyIconPhase times its phases from the same tokens. The check draws
+   * in over two micro steps, holds, fades over the fast step, then the copy
+   * icon draws itself again over the slow step, the kit's time for a draw.
+   * Its glyphs sit in a Button, whose shared icon opacity (design-rework.css)
+   * is a zero-specificity rule of this layer, so the phases below refine it
+   * without raising their importance; at rest the copy glyph keeps the
+   * Button's opacity. */
+  .sp-copy-check {
+    opacity: 0;
+    transition: opacity var(--motion-duration-fast) var(--motion-ease-linear);
+  }
+
+  /* The check is the success green, the colour of a copy that went through.
+   * On a Button whose fill takes a colour of its own (accent, destructive and
+   * inverse, and the glass film) the green would sink into it, so the check
+   * takes the Button's text colour there, as the copy glyph does. */
+  :where(.sp-copy-check) {
+    color: var(--sp-semantic-color-success-foreground);
+  }
+
+  [data-chassis]:is(
+      [data-variant="accent"],
+      [data-variant="destructive"],
+      [data-variant="inverse"],
+      [data-variant="glass"]
+    )
+    .sp-copy-check {
+    color: inherit;
+  }
+
+  .sp-copy-check path {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 0;
+  }
+
+  .sp-copy[data-phase="check"] .sp-copy-check {
+    opacity: 1;
+    transition: none;
+  }
+
+  .sp-copy[data-phase="check"] .sp-copy-check path {
+    animation: sp-check-draw calc(var(--motion-duration-micro) * 2)
+      var(--motion-ease-linear) both;
+  }
+
+  @keyframes sp-check-draw {
+    from {
+      stroke-dashoffset: -1.1;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .sp-copy-draw [data-draw] {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 0;
+  }
+
+  .sp-copy[data-phase="check"] .sp-copy-draw,
+  .sp-copy[data-phase="check-out"] .sp-copy-draw {
+    opacity: 0;
+  }
+
+  .sp-copy[data-phase="check"] .sp-copy-draw [data-draw],
+  .sp-copy[data-phase="check-out"] .sp-copy-draw [data-draw] {
+    stroke-dashoffset: 1.1;
+  }
+
+  .sp-copy[data-phase="redraw"] .sp-copy-check {
+    opacity: 0;
+    transition: none;
+  }
+
+  .sp-copy[data-phase="redraw"] .sp-copy-draw [data-draw] {
+    animation: sp-stroke-draw var(--motion-duration-slow)
+      var(--motion-ease-linear) both;
+  }
+
+  .sp-copy[data-phase="redraw"] .sp-copy-draw [data-draw="2"] {
+    animation-delay: calc(var(--motion-duration-slow) * 0.8);
+  }
+
+  @keyframes sp-stroke-draw {
+    from {
+      stroke-dashoffset: 1.1;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Reduced motion (M5): the check shows and the copy icon draws at once,
+   * and the check stays whole until the icon returns. The document mode, the
+   * provider preset and the system setting each switch it; every selector
+   * names the phase, so it ranks above the phase rules it stops. */
+  html[data-motion-reduce="true"]
+    .sp-copy[data-phase]
+    :is(.sp-copy-check, .sp-copy-check path, .sp-copy-draw [data-draw]),
+  [data-sp-motion="reduced"]
+    .sp-copy[data-phase]
+    :is(.sp-copy-check, .sp-copy-check path, .sp-copy-draw [data-draw]) {
+    transition-duration: 1ms;
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+
+  html[data-motion-reduce="true"]
+    .sp-copy[data-phase="check-out"]
+    .sp-copy-check,
+  [data-sp-motion="reduced"] .sp-copy[data-phase="check-out"] .sp-copy-check {
+    opacity: 1;
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root
+      .sp-copy[data-phase]
+      :is(.sp-copy-check, .sp-copy-check path, .sp-copy-draw [data-draw]) {
+      transition-duration: 1ms;
+      animation-duration: 1ms;
+      animation-delay: 0ms;
+    }
+
+    :root .sp-copy[data-phase="check-out"] .sp-copy-check {
+      opacity: 1;
+      transition: none;
+    }
+  }
+}

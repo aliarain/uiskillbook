@@ -1,0 +1,421 @@
+.sp-floating-panel {
+  --sp-floating-panel-x: 0px;
+  --sp-floating-panel-y: calc(var(--motion-floating-panel-offset) * -1);
+  transform-origin: var(--transform-origin, top center);
+  transition-property: opacity, transform;
+  transition-duration: var(--motion-duration-moderate);
+  transition-timing-function: var(--motion-ease-standard);
+  will-change: opacity, transform;
+}
+
+.sp-floating-panel[data-side="top"] {
+  --sp-floating-panel-y: var(--motion-floating-panel-offset);
+}
+
+.sp-floating-panel[data-side="left"],
+.sp-floating-panel[data-side="inline-start"] {
+  --sp-floating-panel-x: var(--motion-floating-panel-offset);
+  --sp-floating-panel-y: 0px;
+}
+
+.sp-floating-panel[data-side="right"],
+.sp-floating-panel[data-side="inline-end"] {
+  --sp-floating-panel-x: calc(var(--motion-floating-panel-offset) * -1);
+  --sp-floating-panel-y: 0px;
+}
+
+/* A right-to-left page: the dir attribute is named beside :dir(rtl), which a
+ * build for older browsers turns into a list of right-to-left languages, as
+ * Tailwind's rtl variant does. */
+.sp-floating-panel[data-side="inline-start"]:is(
+    :dir(rtl),
+    [dir="rtl"],
+    [dir="rtl"] *
+  ) {
+  --sp-floating-panel-x: calc(var(--motion-floating-panel-offset) * -1);
+}
+
+.sp-floating-panel[data-side="inline-end"]:is(
+    :dir(rtl),
+    [dir="rtl"],
+    [dir="rtl"] *
+  ) {
+  --sp-floating-panel-x: var(--motion-floating-panel-offset);
+}
+
+.sp-floating-panel[data-side="none"] {
+  --sp-floating-panel-y: 0px;
+}
+
+.sp-floating-panel[data-starting-style],
+.sp-floating-panel[data-ending-style] {
+  opacity: 0;
+  transform: translate(var(--sp-floating-panel-x), var(--sp-floating-panel-y))
+    scale(var(--motion-floating-panel-scale));
+}
+
+/* Fade through for a pane that Base UI mounts and unmounts and fades with CSS
+ * transitions, such as a Tabs panel (rulebook M8; swapFadeClassName of the
+ * Motion component). The pane that takes over fades in during the last micro
+ * duration of the base duration; the pane that leaves fades out at once. Zero
+ * specificity, so the reduced-motion rules below and a consumer's utility both
+ * win. */
+:where(.sp-swap-fade) {
+  transition-property: opacity;
+  transition-duration: var(--motion-duration-micro);
+  transition-timing-function: var(--motion-ease-standard);
+  transition-delay: max(
+    0ms,
+    calc(var(--motion-duration-base) - var(--motion-duration-micro))
+  );
+}
+
+:where(.sp-swap-fade:is([data-starting-style], [data-ending-style])) {
+  opacity: 0;
+}
+
+:where(.sp-swap-fade[data-ending-style]) {
+  transition-timing-function: var(--motion-ease-soft-in-out);
+  transition-delay: 0ms;
+}
+
+/* A Tabs panel switches at once (rulebook M8; panelSwitchClassName of the
+ * Motion component), as tabs do in the WAI-ARIA pattern and most interfaces:
+ * the panel that leaves is hidden the moment the new one shows, and the
+ * indicator and the height of the panels' container carry the motion. A
+ * dissolve showed both panels' text at once wherever a panel has no surface of
+ * its own (Lukas, 13 October 2026). Zero specificity, so a consumer's utility
+ * wins. */
+:where(.sp-panel-switch[data-ending-style]) {
+  opacity: 0;
+}
+
+/* The height follow (followHeight in motion-follow.ts; rulebook M7, M8): a
+ * container whose content changes moves to the height of the new content.
+ * JavaScript measures the height the container shows and the height of its
+ * new content and writes them as its height; this transition animates between
+ * them, as Base UI's Collapsible and Accordion panels animate the height they
+ * measure. It starts with the frame that renders it and retargets from the
+ * height shown when content that builds later changes the height again. A
+ * container carries the class only while it follows. Its rows keep their own
+ * height meanwhile: a container held taller than its content would stretch
+ * the lines of a wrapping row or a grid's rows. Zero specificity, so a
+ * consumer's utility wins (P6); with reduced motion nothing follows (M5). A
+ * swap moves its height over the whole swap, everything else over the expand
+ * duration. */
+:where(.sp-height-follow) {
+  align-content: start;
+  transition-property: height;
+  transition-duration: var(--motion-duration-expand);
+  transition-timing-function: var(--motion-ease-standard);
+}
+
+:where(.sp-height-follow.sp-motion-swap) {
+  transition-duration: var(--motion-duration-base);
+}
+
+@keyframes sp-calendar-slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sp-calendar-slide-out-to-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes sp-calendar-slide-in-from-left {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sp-calendar-slide-out-to-right {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.sp-icon-pop {
+  animation: sp-icon-pop var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+/* A carousel caption fades in as its page slides in, instead of jumping. */
+@keyframes sp-carousel-caption-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.sp-carousel-caption {
+  animation: sp-carousel-caption-in var(--motion-duration-slow)
+    var(--motion-ease-soft-in-out);
+}
+
+html[data-motion-reduce="true"] .sp-carousel-caption,
+[data-sp-motion="reduced"] .sp-carousel-caption {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-carousel-caption {
+    animation: none;
+  }
+}
+
+/* A Toggle with `lift` lifts its icon once as it turns on: up and back with a
+ * slight tilt, a small reaction such as a like (Lukas, 12 October 2026).
+ * toggle.tsx sets data-lift="on" for one play and clears it when it ends. A
+ * soft curve on the way up and the way down, from the icon's base, on its own
+ * layer so the small move does not snap to whole pixels (Lukas, 12 October
+ * 2026: smoother and subtler). */
+.sp-base-toggle[data-lift="on"] > svg:first-child {
+  animation: sp-toggle-lift var(--motion-duration-slow)
+    var(--motion-ease-soft-in-out);
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+@keyframes sp-toggle-lift {
+  45% {
+    transform: translateY(-1.5px) rotate(-6deg);
+  }
+}
+
+html[data-motion-reduce="true"]
+  .sp-base-toggle[data-lift="on"]
+  > svg:first-child,
+[data-sp-motion="reduced"] .sp-base-toggle[data-lift="on"] > svg:first-child {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-base-toggle[data-lift="on"] > svg:first-child {
+    animation: none;
+  }
+}
+
+@keyframes sp-icon-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* A check that draws itself in and out (rulebook M1, M5). Every check of the
+ * kit draws through these rules, so a check moves the same everywhere: the
+ * Checkbox, the checkbox and radio items of Menu, DropdownMenu, ContextMenu and
+ * DrawerMenu, the selected-item checks of Select, Combobox, ListBox and
+ * ColorSwatchPicker, the selection mark of a ResourceList row and the selection
+ * box of a Table. The path draws in when the indicator that holds the glyph is
+ * checked and draws back out when it is not. The indicator is the parent of the
+ * glyph: the element that carries data-checked or data-indeterminate (the Base
+ * UI Checkbox, Radio and menu items, the indicator of a Table box) or
+ * data-selected (the Base UI Select and Combobox item indicators, a swatch, the
+ * selection slot of a ResourceList row, the indicator of a Table box) and,
+ * while it enters or leaves, data-starting-style and data-ending-style. A glyph
+ * that sits deeper inside the element that owns the state, as the check of a
+ * ListBox row does, names that element with `sp-check-item`. A glyph
+ * with a geometry of its own, as the mark of a ResourceList row and the Table
+ * box have, takes pathLength 24 so that the dash of 24 covers its path exactly
+ * and the draw runs along its whole length. */
+.sp-check-path-motion,
+.sp-checkbox-indeterminate {
+  opacity: 0;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition-duration: var(--motion-duration-slow);
+  transition-property: opacity, stroke-dashoffset;
+  transition-timing-function: var(--motion-ease-standard);
+}
+
+:is([data-checked], [data-selected]) > svg > .sp-check-path-motion,
+.sp-check-item:is([data-checked], [data-selected]) .sp-check-path-motion,
+[data-indeterminate] > svg > .sp-checkbox-indeterminate {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+[data-starting-style] > svg > .sp-check-path-motion,
+[data-starting-style] > svg > .sp-checkbox-indeterminate,
+[data-ending-style] > svg > .sp-check-path-motion,
+[data-ending-style] > svg > .sp-checkbox-indeterminate {
+  opacity: 0;
+  stroke-dashoffset: 24;
+}
+
+/* The glyph of a row also pops with its check, as the indicator of the
+ * Checkbox does: it grows from --motion-check-pop-scale as the check draws in
+ * and shrinks back as it draws out. The Checkbox and Radio pop their whole
+ * indicator instead (checkbox.css, radio-group.css), with the same token. */
+.sp-check-glyph-motion {
+  transform: scale(var(--motion-check-pop-scale));
+  transform-origin: center;
+  transition-duration: var(--motion-duration-slow);
+  transition-property: transform;
+  transition-timing-function: var(--motion-ease-standard);
+}
+
+:is([data-checked], [data-selected]) > .sp-check-glyph-motion,
+.sp-check-item:is([data-checked], [data-selected]) .sp-check-glyph-motion {
+  transform: none;
+}
+
+[data-starting-style] > .sp-check-glyph-motion,
+[data-ending-style] > .sp-check-glyph-motion {
+  transform: scale(var(--motion-check-pop-scale));
+}
+
+html[data-motion-reduce="true"] .sp-check-path-motion,
+html[data-motion-reduce="true"] .sp-checkbox-indeterminate,
+[data-sp-motion="reduced"] .sp-check-path-motion,
+[data-sp-motion="reduced"] .sp-checkbox-indeterminate {
+  animation: none;
+  stroke-dashoffset: 0;
+  transition-duration: 1ms;
+}
+
+html[data-motion-reduce="true"] .sp-check-glyph-motion,
+[data-sp-motion="reduced"] .sp-check-glyph-motion {
+  transform: none;
+  transition-duration: 1ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-check-path-motion,
+  .sp-checkbox-indeterminate {
+    animation: none;
+    stroke-dashoffset: 0;
+    transition-duration: 1ms;
+  }
+
+  .sp-check-glyph-motion {
+    transform: none;
+    transition-duration: 1ms;
+  }
+}
+
+html[data-motion-reduce="true"] .sp-floating-panel,
+:where([data-sp-motion="reduced"]) .sp-floating-panel {
+  transition-duration: 1ms;
+}
+
+html[data-motion-reduce="true"] .sp-swap-fade,
+:where([data-sp-motion="reduced"]) .sp-swap-fade {
+  transition-duration: 1ms;
+  transition-delay: 0ms;
+}
+
+html[data-motion-reduce="true"] .sp-icon-pop,
+:where([data-sp-motion="reduced"]) .sp-icon-pop {
+  animation-duration: 1ms;
+}
+
+html[data-motion-reduce="true"] .sp-floating-panel[data-starting-style],
+html[data-motion-reduce="true"] .sp-floating-panel[data-ending-style],
+:where([data-sp-motion="reduced"]) .sp-floating-panel[data-starting-style],
+:where([data-sp-motion="reduced"]) .sp-floating-panel[data-ending-style] {
+  transform: none;
+}
+
+html[data-motion-reduce="true"] .sp-skeleton-motion,
+:where([data-sp-motion="reduced"]) .sp-skeleton-motion {
+  animation: none;
+}
+
+/* MotionShimmer: live text shows at 45 % of its colour while a band of the
+ * full colour sweeps across it. The text keeps its colour and only its fill
+ * turns transparent, so currentColor in the gradient is the text colour of
+ * any tone. The image is 2.5 times the text's width; moving its position from
+ * 100 % to 0 % carries the band from before the start to past the end. */
+.sp-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklab, currentColor 45%, transparent) 40%,
+    currentColor 50%,
+    color-mix(in oklab, currentColor 45%, transparent) 60%
+  );
+  background-position: 100% 0;
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sp-shimmer calc(var(--motion-duration-loop) * 2)
+    var(--motion-ease-linear) infinite;
+}
+
+.sp-shimmer:is(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+  animation-direction: reverse;
+}
+
+@keyframes sp-shimmer {
+  to {
+    background-position: 0% 0;
+  }
+}
+
+/* The shimmer is a loop, so it stops in its own rule (M5): the text stands
+ * still at its full colour. */
+html[data-motion-reduce="true"] .sp-shimmer,
+:where([data-sp-motion="reduced"]) .sp-shimmer {
+  animation: none;
+  background-image: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-shimmer {
+    animation: none;
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .sp-floating-panel {
+    transition-duration: 1ms;
+  }
+
+  .sp-swap-fade {
+    transition-duration: 1ms;
+    transition-delay: 0ms;
+  }
+
+  .sp-floating-panel[data-starting-style],
+  .sp-floating-panel[data-ending-style] {
+    transform: none;
+  }
+
+  .sp-icon-pop {
+    animation-duration: 1ms;
+  }
+
+  .sp-skeleton-motion {
+    animation: none;
+  }
+}

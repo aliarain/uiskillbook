@@ -46,7 +46,7 @@ export default function Home() {
       />
       <header className="mt-10 sm:mt-14">
         <h1 className="display text-3xl">UI skills for coding agents</h1>
-        <p className="mt-2 text-secondary tabular-nums">
+        <p className="mt-2 text-ink-2 tabular-nums">
           {skills.length} skills from {authors.length} authors, {designMds.length} Design.md files and{" "}
           {chapters.length} short guides.
         </p>
@@ -97,7 +97,7 @@ export default function Home() {
                 className="group flex flex-col items-center gap-2 rounded-card text-center"
               >
                 <BrandTile entry={entry} />
-                <span className="w-full truncate text-xs text-muted transition-colors group-hover:text-primary">
+                <span className="w-full truncate text-xs text-ink-3 transition-colors group-hover:text-ink">
                   {entry.name}
                 </span>
               </Link>
@@ -125,8 +125,8 @@ export default function Home() {
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {chapters.map((chapter) => (
             <Link key={chapter.slug} href={`/chapters/${chapter.slug}`} className="card block p-4">
-              <h3 className="text-base font-semibold text-primary text-balance">{chapter.title}</h3>
-              <p className="mt-1 text-sm leading-[1.43] text-secondary">
+              <h3 className="text-base font-semibold text-ink text-balance">{chapter.title}</h3>
+              <p className="mt-1 text-sm leading-[1.43] text-ink-2">
                 <InlineCode text={chapter.tip} />
               </p>
             </Link>
@@ -148,8 +148,8 @@ export default function Home() {
               href={`/skills?category=${cat.slug}`}
               className="row flex items-center justify-between px-3 py-2.5 text-sm"
             >
-              <span className="text-primary">{categoryLabel(cat.slug)}</span>
-              <span className="text-muted tabular-nums">{cat.count}</span>
+              <span className="text-ink">{categoryLabel(cat.slug)}</span>
+              <span className="text-ink-3 tabular-nums">{cat.count}</span>
             </Link>
           ))}
         </div>

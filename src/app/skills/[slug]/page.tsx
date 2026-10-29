@@ -13,6 +13,9 @@ import { markdownToHtml } from "@/lib/markdown";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
 import { JsonLd } from "@/components/json-ld";
+import { Button } from "@/siteplane/components/button";
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@/siteplane/components/accordion";
+import { RawSkillDrawer } from "@/components/raw-skill-drawer";
 import { InstallPrompt } from "@/components/install-prompt";
 import { AuthorBadge, StarCount } from "@/components/skill-meta";
 import { AddToAgent } from "@/components/add-to-agent";
@@ -51,6 +54,24 @@ export default async function SkillDetailPage({
 
   const related = getRelatedSkills(skill);
   const url = `${SITE_URL}/skills/${skill.slug}`;
+  const install = installTargets(skill);
+  const faq = [
+    { q: `What does ${skill.title} do?`, a: skill.description },
+    {
+      q: `How do I install ${skill.title}?`,
+      a: install[0].prompt.replace(/`/g, ""),
+    },
+    {
+      q: "Which coding agents does it work with?",
+      a: `${skill.agents.map(agentLabel).join(", ")}. Any agent that reads SKILL.md files or Markdown instructions can use it.`,
+    },
+    {
+      q: "Who maintains it?",
+      a: skill.external
+        ? `${skill.author.name}, in ${skill.source?.repository ?? "its source repository"}. UI Skillbook indexes it.`
+        : "UI Skillbook. The source is in the uiskillbook repository on GitHub.",
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
@@ -71,6 +92,14 @@ export default async function SkillDetailPage({
               ...(skill.source?.repository && { isBasedOn: skill.source.repository }),
             },
             {
+              "@type": "FAQPage",
+              mainEntity: faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+            {
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
@@ -89,7 +118,7 @@ export default async function SkillDetailPage({
       />
 
       <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.title}</h1>
-      <p className="mt-3 text-lg text-secondary text-pretty">{skill.description}</p>
+      <p className="mt-3 text-lg text-ink-2 text-pretty">{skill.description}</p>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
         {skill.author.url ? (
@@ -120,14 +149,14 @@ export default async function SkillDetailPage({
       <div className="mt-4 flex flex-wrap items-center gap-1.5">
         <span className="label mr-1">Works with</span>
         {skill.agents.map((a) => (
-          <span key={a} className="rounded-full border border-border px-2.5 py-0.5 text-[13px] text-secondary">
+          <span key={a} className="rounded-full border border-line px-2.5 py-0.5 text-[13px] text-ink-2">
             {agentLabel(a)}
           </span>
         ))}
       </div>
 
       <div className="mt-8">
-        <InstallPrompt targets={installTargets(skill)} />
+        <InstallPrompt targets={install} />
       </div>
 
       {skill.external ? (
@@ -139,6 +168,20 @@ export default async function SkillDetailPage({
       <div className="mt-12">
         <AddToAgent slug={skill.slug} />
       </div>
+
+      <section className="mt-12">
+        <h2 className="text-xl font-semibold text-ink">Questions</h2>
+        <Accordion className="mt-3">
+          {faq.map((f) => (
+            <AccordionItem key={f.q} value={f.q}>
+              <AccordionTrigger>{f.q}</AccordionTrigger>
+              <AccordionPanel>
+                <p className="text-sm leading-relaxed text-ink-2">{f.a}</p>
+              </AccordionPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </section>
 
       {related.length > 0 && (
         <div className="mt-16">
@@ -179,9 +222,7 @@ Follow these instructions unless they conflict with the existing product's estab
       <div className="mt-6">
         <CopyButtons raw={raw} agentPrompt={agentPrompt} />
         <div className="mt-3 flex gap-4 text-sm">
-          <a href={`/skills/${slug}/raw`} className="link rounded-input">
-            View raw SKILL.md
-          </a>
+          <RawSkillDrawer slug={slug} raw={raw} />
         </div>
       </div>
 
@@ -209,17 +250,17 @@ Treat it as a set of rules for this task unless it conflicts with the existing p
 
   return (
     <div className="card mt-6 p-5">
-      <h2 className="text-base font-semibold text-primary">Hosted in an external repository</h2>
-      <p className="mt-2 text-sm text-secondary">
+      <h2 className="text-base font-semibold text-ink">Hosted in an external repository</h2>
+      <p className="mt-2 text-sm text-ink-2">
         This skill&apos;s full instructions live in its source repository, not on UI
         Skillbook. Open it on GitHub to read it, or copy a prompt that points your agent
         straight at it.
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
         {sourceUrl && (
-          <a href={sourceUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+          <Button variant="outline" render={<a href={sourceUrl} target="_blank" rel="noreferrer" />}>
             View on GitHub
-          </a>
+          </Button>
         )}
         <ExternalCopyButton slug={slug} agentPrompt={agentPrompt} />
       </div>

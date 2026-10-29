@@ -21,7 +21,7 @@ export default function SubmitPage() {
   return (
     <div className="mx-auto max-w-[640px] px-6 py-12">
       <h1 className="display text-4xl">Submit a skill</h1>
-      <p className="mt-2 text-secondary">
+      <p className="mt-2 text-ink-2">
         Point us at a skill in your repository. We&apos;ll review it before it&apos;s published.
       </p>
 
@@ -31,8 +31,8 @@ export default function SubmitPage() {
         </p>
         <ul className="mt-3 space-y-1.5">
           {CRITERIA.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-sm text-secondary">
-              <span className="mt-0.5 text-accent">✓</span>
+            <li key={item} className="flex items-start gap-2 text-sm text-ink-2">
+              <span className="mt-0.5 text-link">✓</span>
               {item}
             </li>
           ))}

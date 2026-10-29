@@ -25,36 +25,36 @@ export default function ApiDocsPage() {
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">API</h1>
-      <p className="mt-3 text-secondary text-pretty">
+      <p className="mt-3 text-ink-2 text-pretty">
         The same catalog as this site, as JSON. No key, open CORS, cached for an hour at the edge.
         Agents can use the MCP server instead, which exposes the same data as tools.
       </p>
 
-      <h2 className="mt-12 text-xl font-semibold text-primary">Endpoints</h2>
-      <div className="mt-4 divide-y divide-border rounded-card border border-border">
+      <h2 className="mt-12 text-xl font-semibold text-ink">Endpoints</h2>
+      <div className="mt-4 divide-y divide-line rounded-card border border-line">
         {ENDPOINTS.map((e) => (
           <div key={e.path} className="p-4">
-            <p className="font-mono text-sm text-primary">
-              <span className="mr-2 text-muted">GET</span>
+            <p className="font-mono text-sm text-ink">
+              <span className="mr-2 text-ink-3">GET</span>
               {e.path}
             </p>
-            <p className="mt-1.5 text-sm text-secondary">
-              <span className="text-muted">Params:</span> {e.params}
+            <p className="mt-1.5 text-sm text-ink-2">
+              <span className="text-ink-3">Params:</span> {e.params}
             </p>
-            <p className="mt-0.5 text-sm text-secondary">
-              <span className="text-muted">Returns:</span> {e.returns}
+            <p className="mt-0.5 text-sm text-ink-2">
+              <span className="text-ink-3">Returns:</span> {e.returns}
             </p>
           </div>
         ))}
       </div>
 
-      <h2 className="mt-12 text-xl font-semibold text-primary">Example</h2>
+      <h2 className="mt-12 text-xl font-semibold text-ink">Example</h2>
       <div className="mt-4">
         <CopyCodeBlock code={`curl "${SITE_URL}/api/skills?category=motion&sort=stars&limit=5"`} />
       </div>
 
-      <h2 className="mt-12 text-xl font-semibold text-primary">MCP server</h2>
-      <p className="mt-2 text-sm text-secondary">
+      <h2 className="mt-12 text-xl font-semibold text-ink">MCP server</h2>
+      <p className="mt-2 text-sm text-ink-2">
         Tools: <code>list_skills</code>, <code>get_skill</code>, <code>search</code>,{" "}
         <code>get_stats</code>, <code>get_design_md</code>.
       </p>
