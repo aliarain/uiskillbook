@@ -43,20 +43,20 @@ export default async function DesignMdDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <p className="font-mono text-xs uppercase tracking-widest text-muted">
+      <p className="label">
         Design.md / {entry.category}
       </p>
       <div className="group mt-4 flex items-center gap-4">
         <BrandTile entry={entry} size="lg" />
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+          <h1 className="display text-3xl sm:text-4xl">
             {entry.name}
           </h1>
           <a
             href={entry.website}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-accent hover:underline"
+            className="rounded-input text-sm text-accent underline-offset-2 hover:underline"
           >
             {entry.website.replace(/^https?:\/\/(www\.)?/, "")}
           </a>
@@ -66,7 +66,7 @@ export default async function DesignMdDetailPage({
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <CopyButtons raw={raw} agentPrompt={agentPrompt} rawLabel="Copy DESIGN.md" />
-        <a href={`/design-md/${slug}/raw`} className="text-sm text-secondary hover:text-primary">
+        <a href={`/design-md/${slug}/raw`} className="link rounded-input text-sm">
           Raw DESIGN.md
         </a>
       </div>
@@ -77,8 +77,8 @@ export default async function DesignMdDetailPage({
       />
 
       <div className="mt-10">
-        <Link href="/design-md" className="text-sm text-secondary hover:text-primary">
-          ← All Design.md files
+        <Link href="/design-md" className="link rounded-input text-sm">
+          Back to all Design.md files
         </Link>
       </div>
     </div>

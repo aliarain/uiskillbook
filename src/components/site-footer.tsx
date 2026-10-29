@@ -93,7 +93,7 @@ function directoryColumns(): FooterColumn[] {
   ];
 }
 
-const LINK_CLASS = "text-sm text-secondary transition-colors hover:text-primary";
+const LINK_CLASS = "link rounded-input text-sm";
 
 function FooterAnchor({ link, className = LINK_CLASS }: { link: FooterLink; className?: string }) {
   return link.external ? (
@@ -110,7 +110,7 @@ function FooterAnchor({ link, className = LINK_CLASS }: { link: FooterLink; clas
 function Column({ column }: { column: FooterColumn }) {
   return (
     <div className="min-w-0">
-      <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted">
+      <h3 className="label">
         {column.title}
       </h3>
       <ul className="mt-3 space-y-2">
@@ -123,7 +123,7 @@ function Column({ column }: { column: FooterColumn }) {
           <li>
             <FooterAnchor
               link={column.all}
-              className="text-sm text-accent transition-opacity hover:opacity-80"
+              className="rounded-input text-sm text-accent underline-offset-2 hover:underline"
             />
           </li>
         )}
@@ -134,17 +134,17 @@ function Column({ column }: { column: FooterColumn }) {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-10 border-t border-border/60 bg-surface/60">
-      <div className="mx-auto max-w-[1140px] px-6 py-14">
+    <footer className="mt-16 border-t border-border bg-surface">
+      <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="font-mono text-sm font-semibold tracking-wide text-primary">
-              UI SKILLBOOK
+            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-strong">
+              UI Skillbook
             </Link>
             <p className="mt-3 max-w-xs text-sm text-secondary">
               The field guide for building better interfaces with AI.
             </p>
-            <code className="mt-5 inline-block rounded-lg border border-border bg-background px-3 py-1.5 font-mono text-xs text-secondary">
+            <code className="mt-5 inline-block rounded-input border border-border bg-background px-2.5 py-1 font-mono text-xs text-secondary">
               npx uiskillbook start
             </code>
           </div>
@@ -153,13 +153,13 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-border/60 pt-10 md:grid-cols-5">
+        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-border pt-10 md:grid-cols-5">
           {directoryColumns().map((column) => (
             <Column key={column.title} column={column} />
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-border/60 pt-6 font-mono text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} UI Skillbook</span>
           <span>
             Built by{" "}
@@ -167,16 +167,16 @@ export function SiteFooter() {
               href="https://aliarain.com"
               target="_blank"
               rel="noreferrer"
-              className="text-secondary transition-colors hover:text-accent"
+              className="link rounded-input"
             >
               Ali Arain
-            </a>{" "}
-            ·{" "}
+            </a>
+            <span className="mx-2 text-faint" aria-hidden>/</span>
             <a
               href={X_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-secondary transition-colors hover:text-accent"
+              className="link rounded-input"
             >
               @realaliarain
             </a>

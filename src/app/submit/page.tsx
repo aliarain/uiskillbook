@@ -20,13 +20,13 @@ const CRITERIA = [
 export default function SubmitPage() {
   return (
     <div className="mx-auto max-w-[640px] px-6 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight text-primary">Submit a skill</h1>
+      <h1 className="display text-4xl">Submit a skill</h1>
       <p className="mt-2 text-secondary">
         Point us at a skill in your repository. We&apos;ll review it before it&apos;s published.
       </p>
 
-      <div className="card mt-8 p-6">
-        <p className="font-mono text-xs uppercase tracking-wider text-muted">
+      <div className="card mt-8 p-5">
+        <p className="label">
           What gets curated
         </p>
         <ul className="mt-3 space-y-1.5">

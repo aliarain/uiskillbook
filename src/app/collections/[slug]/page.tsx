@@ -41,14 +41,14 @@ export default async function CollectionDetailPage({
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
-      <span className="font-mono text-xs uppercase tracking-widest text-muted">
+      <span className="label">
         Collection
       </span>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+      <h1 className="display mt-3 text-3xl sm:text-4xl">
         {collection.title}
       </h1>
       <p className="mt-3 text-secondary">{collection.description}</p>
-      <p className="mt-2 font-mono text-xs text-muted">{skills.length} skills</p>
+      <p className="mt-2 text-[13px] text-muted">{skills.length} skills</p>
 
       <div className="mt-10 space-y-0.5">
         {skills.map((skill, i) => (
@@ -57,8 +57,8 @@ export default async function CollectionDetailPage({
       </div>
 
       <div className="mt-10">
-        <Link href="/collections" className="text-sm text-secondary hover:text-primary">
-          ← All collections
+        <Link href="/collections" className="link rounded-input text-sm">
+          Back to all collections
         </Link>
       </div>
     </div>

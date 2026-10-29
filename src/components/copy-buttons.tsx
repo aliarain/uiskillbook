@@ -66,13 +66,14 @@ export function CopyCommand({
 
   return (
     <div className="min-w-0">
-      <p className="font-mono text-[11px] uppercase tracking-wider text-muted">{label}</p>
-      <div className="mt-2 flex items-center gap-2 rounded-xl border border-border bg-background py-1.5 pl-4 pr-1.5">
-        <code className="min-w-0 flex-1 truncate font-mono text-sm text-primary">{command}</code>
+      <p className="label">{label}</p>
+      <div className="mt-1.5 flex h-11 items-center gap-2 rounded-button border border-border bg-background pl-3.5 pr-1">
+        <code className="min-w-0 flex-1 truncate font-mono text-[13px] text-primary">{command}</code>
         <button
           onClick={() => copy(event, command)}
           data-umami-event={event}
-          className="h-9 shrink-0 rounded-lg border border-border px-3 font-mono text-xs text-secondary transition-colors hover:text-primary"
+          aria-label={`Copy ${label}`}
+          className="btn btn-secondary h-9 shrink-0 px-3 shadow-none"
         >
           {copied === event ? "Copied" : "Copy"}
         </button>

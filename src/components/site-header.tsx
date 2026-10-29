@@ -1,50 +1,36 @@
 import Link from "next/link";
 import { SearchTrigger } from "./search-trigger";
 import { ThemeToggle } from "./theme-toggle";
-
-const NAV = [
-  { href: "/skills", label: "Skills" },
-  { href: "/chapters", label: "Chapters" },
-  { href: "/collections", label: "Collections" },
-  { href: "/agents", label: "Agents" },
-  { href: "/submit", label: "Submit" },
-];
+import { NavLinks } from "./nav-links";
 
 const GITHUB_URL = "https://github.com/aliarain/uiskillbook";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[1140px] items-center justify-between px-6">
-        <Link href="/" className="font-mono text-sm font-semibold tracking-wide text-primary">
-          UI SKILLBOOK
+    <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
+        <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-strong">
+          UI Skillbook
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-secondary transition-colors hover:text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <NavLinks />
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-1">
           <a
             href={GITHUB_URL}
             target="_blank"
             rel="noreferrer"
             aria-label="View source on GitHub"
-            className="text-secondary transition-colors hover:text-primary"
+            className="icon-button"
           >
             <GitHubIcon />
           </a>
           <ThemeToggle />
           <SearchTrigger />
         </div>
+      </div>
+      <div className="mx-auto max-w-[1200px] px-6">
+        <NavLinks mobile />
       </div>
     </header>
   );

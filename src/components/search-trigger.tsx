@@ -7,11 +7,12 @@ export function SearchTrigger({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={() => setOpen(true)}
-      className={`flex items-center gap-2 text-secondary hover:text-primary transition-colors ${className}`}
+      className={`icon-button w-auto gap-2 px-2.5 ${className}`}
       aria-label="Search the Skillbook"
+      aria-keyshortcuts="Meta+K"
     >
       <SearchIcon />
-      <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded border border-border px-1.5 py-0.5 font-mono text-[11px] text-muted">
+      <kbd className="hidden rounded-input border border-border px-1.5 text-xs leading-5 text-muted sm:inline">
         ⌘K
       </kbd>
     </button>
@@ -23,15 +24,14 @@ export function SearchBar({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={() => setOpen(true)}
-      className={`card flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-muted ${className}`}
+      aria-keyshortcuts="Meta+K"
+      className={`btn btn-secondary h-11 justify-between px-3.5 font-normal text-muted ${className}`}
     >
       <span className="flex items-center gap-2">
         <SearchIcon />
         Search skills, topics, authors…
       </span>
-      <kbd className="rounded border border-border px-1.5 py-0.5 font-mono text-[11px] text-muted">
-        ⌘K
-      </kbd>
+      <kbd className="rounded-input border border-border px-1.5 text-xs leading-5 text-muted">⌘K</kbd>
     </button>
   );
 }

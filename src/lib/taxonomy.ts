@@ -78,3 +78,15 @@ export const TASKS: { slug: TaskSlug; label: string }[] = [
   { slug: "empty-state", label: "Empty state" },
   { slug: "other", label: "Other" },
 ];
+
+/**
+ * Role presets for browsing. Each role is a shortcut over existing
+ * categories, not a separate tag on skills.
+ */
+export const ROLES: { slug: string; label: string; categories: CategorySlug[] }[] = [
+  { slug: "designers", label: "Designers", categories: ["visual", "typography", "taste", "design-systems"] },
+  { slug: "engineers", label: "Engineers", categories: ["performance", "accessibility", "responsive", "layout"] },
+  { slug: "founders", label: "Founders", categories: ["taste", "visual", "interaction"] },
+  { slug: "product", label: "Product", categories: ["interaction", "forms", "navigation"] },
+  { slug: "motion", label: "Motion designers", categories: ["motion"] },
+];

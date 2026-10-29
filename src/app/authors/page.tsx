@@ -13,7 +13,7 @@ export default function AuthorsPage() {
 
   return (
     <div className="mx-auto max-w-[680px] px-6 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight text-primary">Authors</h1>
+      <h1 className="display text-4xl">Authors</h1>
       <p className="mt-2 text-secondary">Everyone whose skills are curated in the Skillbook.</p>
 
       <div className="mt-8 space-y-0.5">
@@ -29,7 +29,7 @@ export default function AuthorsPage() {
             ) : (
               <span className="text-sm text-primary">{author.name}</span>
             )}
-            <span className="font-mono text-xs text-muted tabular-nums">
+            <span className="text-[13px] text-muted tabular-nums">
               {author.count} {author.count === 1 ? "skill" : "skills"}
             </span>
           </div>

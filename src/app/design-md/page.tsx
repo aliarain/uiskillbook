@@ -14,8 +14,8 @@ export default function DesignMdIndexPage() {
   const entries = getAllDesignMds();
 
   return (
-    <div className="mx-auto max-w-[1140px] px-6 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight text-primary">Design.md</h1>
+    <div className="mx-auto max-w-[1200px] px-6 py-12">
+      <h1 className="display text-4xl">Design.md</h1>
       <p className="mt-2 max-w-2xl text-secondary">
         Drop-in DESIGN.md files that describe a brand&apos;s colors, type, spacing and components,
         so your coding agent can work in that style. Independent write-ups, not official brand
