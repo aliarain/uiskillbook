@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "./logo";
 import { getAllSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
@@ -140,9 +141,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong">
-              UI Skillbook
-            </Link>
+            <Logo className="w-fit" />
             <p className="mt-3 max-w-xs text-sm text-ink-2">
               The field guide for building better interfaces with AI.
             </p>

@@ -50,7 +50,7 @@
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-plex);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains-mono);
 
   /* Our radius names follow the kit's role radii. */
   --radius-input: var(--sp-rw-radius-control);

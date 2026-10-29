@@ -44,7 +44,7 @@ component. The live catalogue is at [/design-system](https://www.uiskillbook.com
 
 - **IBM Plex Sans** (500/600) for headings (`h1`–`h3`, `.display`).
 - **Inter** for body text and every kit control (`--sp-rw-font-family-default`).
-- **Geist Mono** only for real code: commands, file names and URLs.
+- **JetBrains Mono** only for real code: commands, file names and URLs.
 - Display text is 30–48px at weight 500 with tight tracking and balanced wrapping. Section titles
   are 20px at weight 600. Labels (`.label`) are 13px in sentence case.
 - Use `tabular-nums` on counts, stars and page numbers.

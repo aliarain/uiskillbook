@@ -19,10 +19,11 @@ export function SearchTrigger({ className = "" }: { className?: string }) {
   return (
     <Button
       onClick={() => setOpen(true)}
-      variant="ghost"
+      variant="outline"
+      size="sm"
       aria-label="Search the Skillbook"
       aria-keyshortcuts="Meta+K"
-      className={className}
+      className={`text-ink-3 ${className}`}
     >
       <Search aria-hidden />
       <Shortcut className="hidden sm:inline-flex" />
