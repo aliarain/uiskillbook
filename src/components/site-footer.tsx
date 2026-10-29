@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogoMark } from "./logo-mark";
 import { getAllSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
@@ -17,6 +18,7 @@ function siteColumns(): FooterColumn[] {
       title: "Discover",
       links: [
         { href: "/skills", label: "All skills" },
+        { href: "/siteplane-ui", label: "Siteplane UI" },
         { href: "/chapters", label: "Playbook" },
         { href: "/collections", label: "Collections" },
         { href: "/design-md", label: "Design.md" },
@@ -140,7 +142,11 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong">
+            <Link
+              href="/"
+              className="flex w-fit items-center gap-2 rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong"
+            >
+              <LogoMark />
               UI Skillbook
             </Link>
             <p className="mt-3 max-w-xs text-sm text-ink-2">

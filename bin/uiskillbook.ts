@@ -8,6 +8,8 @@ type RegistryEntry = {
   description: string;
   categories: string[];
   agents: string[];
+  tags?: string[];
+  siteplane?: { component: string; title: string; group: string; order: number; docs: string; install: string[] };
   author: string;
   external: boolean;
   url: string;
@@ -44,11 +46,13 @@ const HELP = [
   "  list [--category <slug>] [--agent <slug>]",
   "                               List skills",
   "  get <slug>                  Print full skill content",
+  "  siteplane [--group <name>]  List Siteplane UI components with install commands",
   "",
   "Examples:",
   "  uiskillbook start",
   "  uiskillbook list --category motion",
   "  uiskillbook get pressed-button-feedback",
+  "  uiskillbook siteplane --group \"Overlays & disclosure\"",
 ].join("\n");
 
 const normalize = (value: string) => value.trim().toLowerCase();
@@ -118,6 +122,31 @@ const printList = async (category?: string, agent?: string) => {
   }
 
   print(filtered.map(formatSkill).join("\n"));
+};
+
+const printSiteplane = async (group?: string) => {
+  const { registry } = await fetchManifest();
+  const components = registry
+    .filter((s) => s.siteplane && (!group || normalize(s.siteplane.group) === normalize(group)))
+    .sort((a, b) => a.siteplane!.order - b.siteplane!.order);
+
+  if (components.length === 0) {
+    fail(group ? `No Siteplane UI components in group: ${group}` : "No Siteplane UI components found", 3);
+    return;
+  }
+
+  const lines: string[] = [];
+  let currentGroup = "";
+  for (const s of components) {
+    const sp = s.siteplane!;
+    if (sp.group !== currentGroup) {
+      lines.push(`${lines.length ? "\n" : ""}${sp.group}`);
+      currentGroup = sp.group;
+    }
+    lines.push(`  ${s.slug} — ${s.description.replace(/\s+/g, " ").trim()}`);
+    lines.push(`    npx shadcn@4.18.0 add ${sp.install.map((i) => `@siteplane/${i}`).join(" ")}`);
+  }
+  print(lines.join("\n"));
 };
 
 const printGet = async (input: string) => {
@@ -196,6 +225,16 @@ const main = async () => {
       return;
     }
     await printGet(target);
+    return;
+  }
+
+  if (command === "siteplane") {
+    const args = argv.slice(1);
+    if (args.length && (args[0] !== "--group" || args.length !== 2)) {
+      fail(args[0] === "--group" ? "Missing value for --group" : `Unknown flag: ${args[0]}`, 1);
+      return;
+    }
+    await printSiteplane(args[1]);
     return;
   }
 

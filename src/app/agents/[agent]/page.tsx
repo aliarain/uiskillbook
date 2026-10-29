@@ -8,6 +8,7 @@ import { CopyCodeBlock } from "@/components/copy-code-block";
 import { MCP_URL } from "@/lib/site";
 import { pageMetadata } from "@/lib/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Code } from "@/siteplane/components/code";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -56,15 +57,14 @@ export default async function AgentDetailPage({
             Browse and fetch skills from a terminal or an agent&apos;s shell tool.
           </p>
           <div className="mt-2">
-            <CopyCodeBlock code={`npx uiskillbook start\nnpx uiskillbook list --category motion\nnpx uiskillbook get pressed-button-feedback`} />
+            <CopyCodeBlock code={`npx uiskillbook start\nnpx uiskillbook list --category motion\nnpx uiskillbook get pressed-button-feedback\nnpx uiskillbook siteplane`} />
           </div>
         </div>
         <div>
           <p className="label">MCP</p>
           <p className="mt-1.5 text-sm text-ink-2">
             Connect {label} to the catalog over Model Context Protocol —{" "}
-            <code className="text-ink">list_skills</code> and{" "}
-            <code className="text-ink">get_skill</code> tools. Setup varies by agent;
+            <Code>list_skills</Code>, <Code>get_skill</Code> and <Code>list_siteplane_components</Code> tools. Setup varies by agent;
             point it at the endpoint below.
           </p>
           <div className="mt-2">

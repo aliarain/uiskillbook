@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { categorySlug, getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
-import { markdownToHtml } from "@/lib/markdown";
+import { markdownToHast } from "@/lib/markdown";
+import { Markdown } from "@/components/markdown";
 import { BrandTile } from "@/components/brand-tile";
 import { CopyButtons } from "@/components/copy-buttons";
 import { pageMetadata } from "@/lib/site";
@@ -38,7 +39,7 @@ export default async function DesignMdDetailPage({
   if (!entry) notFound();
 
   // The page header already shows the brand name, so drop the file's own H1.
-  const html = await markdownToHtml(entry.body.replace(/^\s*# .*\n/, ""));
+  const tree = await markdownToHast(entry.body.replace(/^\s*# .*\n/, ""));
   const raw = getDesignMdRaw(slug);
   const agentPrompt = `Save the following as DESIGN.md in the project root and follow it for all UI work:\n\n${raw}`;
 
@@ -75,10 +76,7 @@ export default async function DesignMdDetailPage({
         </a>
       </div>
 
-      <article
-        className="skill-content prose prose-sm mt-10 max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <Markdown tree={tree} className="mt-10" />
 
       <div className="mt-10">
         <Link href="/design-md" className="link rounded-input text-sm">

@@ -55,21 +55,25 @@ component. The live catalogue is at [/design-system](https://www.uiskillbook.com
 | --- | --- | --- |
 | Main navigation | NavigationMenu | Header, with dropdowns for skills, guides, collections and agents |
 | Mobile navigation | Sheet + Collapsible | Header menu button on phones |
-| Theme switch | Menu (radio items) | Header |
+| Theme switch | SunMoonMorphToggle (Theme Toggles) | Header |
 | Icon hints | Tooltip | Header icon buttons |
 | Actions and links | Button (`render={<Link/>}`) | Everywhere; filters are `shape="pill"` buttons |
-| Copy | CopyButton | Install blocks, code blocks, Design.md pages |
+| Copy | CopyButton, CodeBlock (`copyable`) | Install blocks, commands, Design.md pages |
+| Markdown | Typeset with `typesetComponents` (`src/components/markdown.tsx`) | Skill, guide and Design.md bodies |
+| Inline code | Code | Guide tips, API and agent pages |
 | Breadcrumbs | Breadcrumb | Every detail page |
 | Filters | Sidebar (contained) | `/skills`; on phones it becomes a sheet |
 | Paging | Pagination | `/skills` |
 | Per-agent install | Tabs inside Card | Skill pages |
 | Questions | Accordion | Skill pages, with FAQPage JSON-LD |
 | Raw SKILL.md | DetailDrawer | Local skill pages |
-| Search | Dialog + Kbd + Skeleton | ⌘K palette (cmdk inside the Dialog) |
-| Forms | Field, Input, Textarea | `/submit` |
+| Search | Command (CommandDialog) + Kbd + Skeleton | ⌘K palette |
+| Forms | Form, Field, Input, Textarea, Toast | `/submit` |
 | Empty results | Empty | `/skills` with no matches |
 | Authors | Avatar | Skill cards and pages |
 | Catalogue | DashboardShell and every other installed part | `/design-system` |
+| Component catalog | Sidebar (static), Collapsible, Card, CodeBlock, Accordion | `/siteplane-ui` |
+| Long lists | Pagination | `/skills`, collection pages |
 
 To add a kit component, run:
 
@@ -99,3 +103,15 @@ npx shadcn@4.18.0 add @siteplane/<name>
 - Don't put a Tailwind import above the kit stylesheet, because that breaks the layer order.
 - Don't edit `src/siteplane` by hand. Reinstall from the registry instead.
 - Don't use more than one chromatic accent per component.
+
+## Component catalog
+
+Every Siteplane UI component also has a catalog entry (`content/skills/siteplane-*`,
+the `siteplane-ui` collection and `/siteplane-ui`). The entries are generated from our
+own guidance in `content/siteplane-ui/guidance/*.json`: edit it, then run
+`npm run generate:siteplane` and `npm run check:siteplane`.
+
+## Logo
+
+`src/components/logo-mark.tsx` is a placeholder square. The SVG mark is still to be
+designed; the header and footer both render this one component.

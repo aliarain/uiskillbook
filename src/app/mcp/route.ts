@@ -6,6 +6,7 @@ import {
   parseSkillQuery,
   querySkills,
   searchCatalog,
+  siteplaneCatalog,
   skillDetail,
   SORTS,
 } from "@/lib/catalog-api";
@@ -92,6 +93,18 @@ const tools = [
     name: "get_stats",
     description: "Catalog totals plus per-category and per-agent counts (same as GET /api/stats).",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
+  },
+  {
+    name: "list_siteplane_components",
+    description:
+      "Every Siteplane UI component, UI Skillbook's design system, grouped as Siteplane groups them, with a one-line purpose, the shadcn install command and its docs link. Call get_skill with a slug for when to pick it over its neighbours and its usage rules.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        group: { type: "string", description: "Optional group name, e.g. \"Overlays & disclosure\"." },
+      },
+      additionalProperties: false,
+    },
   },
   {
     name: "get_design_md",
@@ -194,6 +207,10 @@ export async function POST(request: Request) {
       }
 
       if (name === "get_stats") return text(catalogStats());
+
+      if (name === "list_siteplane_components") {
+        return text(siteplaneCatalog(typeof args.group === "string" ? args.group : undefined));
+      }
 
       if (name === "get_design_md") {
         const slug = typeof args.slug === "string" ? args.slug.trim() : "";

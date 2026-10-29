@@ -1,11 +1,11 @@
+import type { Root } from "hast";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
-import remarkHtml from "remark-html";
+import remarkRehype from "remark-rehype";
 
-export async function markdownToHtml(markdown: string): Promise<string> {
-  const result = await remark()
-    .use(remarkGfm)
-    .use(remarkHtml, { sanitize: false })
-    .process(markdown);
-  return result.toString();
+/** Parses markdown into a hast tree without source positions, small enough to hand to a client component. */
+export async function markdownToHast(markdown: string): Promise<Root> {
+  const processor = remark().use(remarkGfm).use(remarkRehype);
+  const tree = await processor.run(processor.parse(markdown));
+  return JSON.parse(JSON.stringify(tree, (key, value) => (key === "position" ? undefined : value)));
 }
