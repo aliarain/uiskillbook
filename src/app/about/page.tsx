@@ -33,7 +33,7 @@ export default function AboutPage() {
         <TypesetHeading level={2}>Design system</TypesetHeading>
         <TypesetParagraph>
           The site is built on <TypesetLink href="https://ui.siteplane.io">Siteplane UI</TypesetLink>, and the
-          catalog carries <TypesetLink href="/siteplane-ui">an entry for every Siteplane UI
+          catalog carries <TypesetLink href="/collections/siteplane-ui">an entry for every Siteplane UI
           component</TypesetLink>: what it is for, when to pick it over its neighbours, and how to install it.
         </TypesetParagraph>
         <TypesetHeading level={2}>Open source content</TypesetHeading>

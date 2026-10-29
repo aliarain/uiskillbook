@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { LOGO_PATH } from "@/lib/brand";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -40,7 +41,12 @@ export function renderOgImage({
           )}
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26 }}>
-          <span style={{ fontWeight: 600, letterSpacing: 3 }}>UI SKILLBOOK</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 14, fontWeight: 600 }}>
+            <svg viewBox="0 0 20 20" width="34" height="34">
+              <path fillRule="evenodd" fill="#181817" d={LOGO_PATH} />
+            </svg>
+            UI Skillbook
+          </span>
           <span style={{ color: "#315ce7" }}>www.uiskillbook.com</span>
         </div>
       </div>

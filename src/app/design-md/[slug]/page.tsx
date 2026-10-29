@@ -71,7 +71,7 @@ export default async function DesignMdDetailPage({
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <CopyButtons raw={raw} agentPrompt={agentPrompt} rawLabel="Copy DESIGN.md" />
-        <a href={`/design-md/${slug}/raw`} className="link rounded-input text-sm">
+        <a href={`/design-md/${slug}/raw`} className="link inline-block rounded-input py-1 text-sm">
           Raw DESIGN.md
         </a>
       </div>

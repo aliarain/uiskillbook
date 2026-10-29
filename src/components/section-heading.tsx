@@ -33,7 +33,7 @@ export function SectionHeading({
         {description && <p className="mt-1 text-sm text-ink-2">{description}</p>}
       </div>
       {href && allLabel && (
-        <Link href={href} className="link hidden shrink-0 items-center gap-1 text-sm sm:inline-flex">
+        <Link href={href} className="link hidden shrink-0 items-center gap-1 rounded-button py-1 text-sm sm:inline-flex">
           {allLabel}
           <Chevron />
         </Link>

@@ -46,7 +46,7 @@ license is in `LICENSE.siteplane-ui`. Every control on the site is a raptrx-ui c
   raptrx tokens `--raptrx-font-body`, `--raptrx-font-heading` and `--raptrx-font-mono` set them.
 - **IBM Plex Sans** for headings (`h1`–`h3`, `.display`).
 - **Inter** for body text and every kit control.
-- **Geist Mono** only for real code: commands, file names and URLs.
+- **JetBrains Mono** only for real code: commands, file names and URLs. It loads with `next/font` and overrides `--raptrx-font-mono`.
 - **Accent:** the raptrx accent `#4132C8`, through the kit's accent tokens (`link`, `brand-*`).
 - Display text is 30–48px at weight 500 with tight tracking and balanced wrapping. Section titles
   are 20px at weight 600. Labels (`.label`) are 13px in sentence case.

@@ -8,8 +8,8 @@ import { useCommandPalette } from "./command-palette-provider";
 function Shortcut({ className = "" }: { className?: string }) {
   return (
     <KbdGroup className={className}>
-      <Kbd>⌘</Kbd>
-      <Kbd>K</Kbd>
+      <Kbd className="text-xs">⌘</Kbd>
+      <Kbd className="text-xs">K</Kbd>
     </KbdGroup>
   );
 }
@@ -19,10 +19,11 @@ export function SearchTrigger({ className = "" }: { className?: string }) {
   return (
     <Button
       onClick={() => setOpen(true)}
-      variant="ghost"
+      variant="outline"
+      size="sm"
       aria-label="Search the Skillbook"
       aria-keyshortcuts="Meta+K"
-      className={className}
+      className={`text-ink-3 ${className}`}
     >
       <Search aria-hidden />
       <Shortcut className="hidden sm:inline-flex" />

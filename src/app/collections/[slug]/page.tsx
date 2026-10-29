@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { markdownToHast } from "@/lib/markdown";
 import { Markdown } from "@/components/markdown";
-import { Button } from "@/raptrx-ui/components/button";
 import {
   Pagination,
   PaginationContent,
@@ -70,12 +69,8 @@ export default async function CollectionDetailPage({
       <p className="mt-2 text-[13px] text-ink-3">{skills.length} skills</p>
 
       {collection.body.trim() && <Markdown tree={tree} className="mt-6" />}
-      {slug === "siteplane-ui" && (
-        <Button variant="outline" className="mt-6" render={<Link href="/siteplane-ui" />}>
-          Browse by group
-        </Button>
-      )}
 
+      <h2 className="sr-only">Skills in this collection</h2>
       <div className="mt-10 space-y-0.5">
         {skills.slice(offset, offset + PAGE_SIZE).map((skill, i) => (
           <SkillRow key={skill.slug} skill={skill} index={offset + i + 1} />

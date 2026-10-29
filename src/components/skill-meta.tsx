@@ -2,11 +2,24 @@ import { Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/raptrx-ui/components/avatar";
 import type { Skill } from "@/lib/skills";
 import { authorAvatar, skillStars } from "@/lib/skills";
+import { SITE_NAME } from "@/lib/site";
+import { LogoMark } from "./logo";
 
 const compact = new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 });
 
 export function AuthorBadge({ skill }: { skill: Skill }) {
   const avatar = authorAvatar(skill);
+  if (skill.author.name === SITE_NAME) {
+    // Our own skills carry the UI Skillbook mark as their avatar.
+    return (
+      <span className="flex min-w-0 items-center gap-2 text-sm text-ink-2">
+        <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-ink-strong text-canvas">
+          <LogoMark className="size-3" />
+        </span>
+        <span className="truncate">{skill.author.name}</span>
+      </span>
+    );
+  }
   return (
     <span className="flex min-w-0 items-center gap-2 text-sm text-ink-2">
       <Avatar className="size-5 shrink-0 text-[11px]">

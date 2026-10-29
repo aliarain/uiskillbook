@@ -1,5 +1,6 @@
 import "@/raptrx-ui/theme/fonts";
 import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
@@ -7,6 +8,12 @@ import { SiteFooter } from "@/components/site-footer";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+
+// The raptrx theme ships Inter and IBM Plex Sans; code uses JetBrains Mono.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className="h-full antialiased"
+      className={`${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         {umamiScriptUrl && umamiWebsiteId && (

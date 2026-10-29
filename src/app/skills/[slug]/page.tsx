@@ -10,7 +10,6 @@ import {
 } from "@/lib/skills";
 import { categoryLabel, agentLabel } from "@/lib/taxonomy";
 import { markdownToHast } from "@/lib/markdown";
-import { groupAnchor } from "@/lib/siteplane";
 import { Markdown } from "@/components/markdown";
 import { Badge } from "@/raptrx-ui/components/badge";
 import { ArrowUpRight } from "lucide-react";
@@ -118,8 +117,8 @@ export default async function SkillDetailPage({
         items={
           skill.siteplane
             ? [
-                { label: "Siteplane UI", href: "/siteplane-ui" },
-                { label: skill.siteplane.group, href: `/siteplane-ui#${groupAnchor(skill.siteplane.group)}` },
+                { label: "Skills", href: "/skills" },
+                { label: "Siteplane UI", href: "/collections/siteplane-ui" },
               ]
             : [
                 { label: "Skills", href: "/skills" },
@@ -133,7 +132,7 @@ export default async function SkillDetailPage({
 
       <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
         {skill.author.url ? (
-          <a href={skill.author.url} target="_blank" rel="noreferrer" className="rounded-input">
+          <a href={skill.author.url} target="_blank" rel="noreferrer" className="rounded-input py-1">
             <AuthorBadge skill={skill} />
           </a>
         ) : (
@@ -145,7 +144,7 @@ export default async function SkillDetailPage({
             href={skill.source.repository}
             target="_blank"
             rel="noreferrer"
-            className="link rounded-input text-sm"
+            className="link rounded-input py-1 text-sm"
           >
             Source on GitHub
           </a>
@@ -215,7 +214,7 @@ export default async function SkillDetailPage({
       )}
 
       <div className="mt-10">
-        <Link href={skill.siteplane ? "/siteplane-ui" : "/skills"} className="link rounded-input text-sm">
+        <Link href="/skills" className="link rounded-input text-sm">
           {skill.siteplane ? "Back to Siteplane UI" : "Back to all skills"}
         </Link>
       </div>

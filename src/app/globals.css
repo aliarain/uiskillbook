@@ -8,6 +8,8 @@
    components always share one theme. Dark mode follows .dark/[data-theme]. */
 
 :root {
+  /* Code is set in JetBrains Mono, over the theme default. */
+  --raptrx-font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
   /* Tag accents, one per component. The kit has no tag ramp. */
   --tag-green: var(--sp-rw-fg-positive);
   --tag-green-bg: var(--sp-rw-bg-positive-translucent);
@@ -47,7 +49,7 @@
 
   --font-sans: var(--raptrx-font-body);
   --font-heading: var(--raptrx-font-heading);
-  --font-mono: var(--raptrx-font-mono);
+  --font-mono: var(--font-jetbrains-mono);
 
   /* Our radius names follow the kit's role radii. */
   --radius-input: var(--sp-rw-radius-control);

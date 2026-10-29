@@ -208,6 +208,7 @@ export default async function SkillsPage({
               </p>
             )}
 
+            <h2 className="sr-only">Results</h2>
             <div className="mt-2 space-y-0.5">
               {skills.length === 0 ? (
                 <Empty className="py-12">
