@@ -9,7 +9,11 @@ import {
   installTargets,
 } from "@/lib/skills";
 import { categoryLabel, agentLabel } from "@/lib/taxonomy";
-import { markdownToHtml } from "@/lib/markdown";
+import { markdownToHast } from "@/lib/markdown";
+import { groupAnchor } from "@/lib/siteplane";
+import { Markdown } from "@/components/markdown";
+import { Badge } from "@/siteplane/components/badge";
+import { ArrowUpRight } from "lucide-react";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
 import { JsonLd } from "@/components/json-ld";
@@ -111,13 +115,20 @@ export default async function SkillDetailPage({
         }}
       />
       <Breadcrumbs
-        items={[
-          { label: "Skills", href: "/skills" },
-          { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
-        ]}
+        items={
+          skill.siteplane
+            ? [
+                { label: "Siteplane UI", href: "/siteplane-ui" },
+                { label: skill.siteplane.group, href: `/siteplane-ui#${groupAnchor(skill.siteplane.group)}` },
+              ]
+            : [
+                { label: "Skills", href: "/skills" },
+                { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
+              ]
+        }
       />
 
-      <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.title}</h1>
+      <h1 className="display mt-4 text-3xl sm:text-4xl">{skill.siteplane?.title ?? skill.title}</h1>
       <p className="mt-3 text-lg text-ink-2 text-pretty">{skill.description}</p>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
@@ -139,6 +150,13 @@ export default async function SkillDetailPage({
             Source on GitHub
           </a>
         )}
+        {skill.siteplane && (
+          <Button variant="outline" size="sm" render={<a href={skill.siteplane.docs} target="_blank" rel="noreferrer" />}>
+            Siteplane docs
+            <ArrowUpRight aria-hidden />
+          </Button>
+        )}
+        {skill.siteplane && <Badge variant="accent">Siteplane UI {skill.version}</Badge>}
         {skill.external && (
           <span className="rounded-full bg-tag-violet-bg px-2.5 py-0.5 text-[13px] font-medium text-tag-violet">
             External
@@ -197,8 +215,8 @@ export default async function SkillDetailPage({
       )}
 
       <div className="mt-10">
-        <Link href="/skills" className="link rounded-input text-sm">
-          Back to all skills
+        <Link href={skill.siteplane ? "/siteplane-ui" : "/skills"} className="link rounded-input text-sm">
+          {skill.siteplane ? "Back to Siteplane UI" : "Back to all skills"}
         </Link>
       </div>
     </div>
@@ -206,7 +224,8 @@ export default async function SkillDetailPage({
 }
 
 async function LocalSkillBody({ slug, body }: { slug: string; body: string }) {
-  const html = await markdownToHtml(body);
+  // The page already shows the title, so the body's own leading H1 (after any comment) is dropped.
+  const tree = await markdownToHast(body.replace(/^\s*(<!--[\s\S]*?-->\s*)?# .*\n/, ""));
   const raw = getSkillRawMarkdown(slug);
 
   const agentPrompt = `Use the following UI skill while working on this task:
@@ -226,10 +245,7 @@ Follow these instructions unless they conflict with the existing product's estab
         </div>
       </div>
 
-      <article
-        className="skill-content prose prose-sm mt-12 max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <Markdown tree={tree} className="mt-12" />
     </>
   );
 }

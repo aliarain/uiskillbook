@@ -24,6 +24,18 @@ export type SkillFrontmatter = {
   curated?: boolean;
   /** True for skills indexed from an external repository — no local body, links out to source instead. */
   external?: boolean;
+  /** Set on the generated Siteplane UI component entries (scripts/generate-siteplane-skills.mjs). */
+  siteplane?: SiteplaneComponent;
+};
+
+export type SiteplaneComponent = {
+  component: string;
+  title: string;
+  group: string;
+  /** Position in Siteplane's own component listing, so groups keep the docs' order. */
+  order: number;
+  docs: string;
+  install: string[];
 };
 
 export type Skill = SkillFrontmatter & {
@@ -84,6 +96,13 @@ export function getSkillBySlug(slug: string): Skill | undefined {
 
 export function getSkillRawMarkdown(slug: string): string {
   return fs.readFileSync(path.join(SKILLS_DIR, slug, "SKILL.md"), "utf8");
+}
+
+/** The Siteplane UI component entries, in the order of the Siteplane UI collection. */
+export function getSiteplaneSkills(): (Skill & { siteplane: SiteplaneComponent })[] {
+  return getAllSkills()
+    .filter((s): s is Skill & { siteplane: SiteplaneComponent } => Boolean(s.siteplane))
+    .sort((a, b) => a.siteplane.order - b.siteplane.order);
 }
 
 export function getSkillsByCategory(category: string): Skill[] {

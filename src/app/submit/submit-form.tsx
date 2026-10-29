@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/siteplane/components/button";
+import { Form } from "@/siteplane/components/form";
 import { Field, FieldDescription, FieldLabel } from "@/siteplane/components/field";
 import { Input } from "@/siteplane/components/input";
 import { Textarea } from "@/siteplane/components/textarea";
+import { toastManager } from "@/siteplane/components/toast";
 import { useState } from "react";
 
 const REPO = "aliarain/uiskillbook";
@@ -24,11 +26,15 @@ export function SubmitForm() {
   }).toString()}`;
 
   return (
-    <form
+    <Form
       className="mt-8 space-y-5"
       onSubmit={(e) => {
         e.preventDefault();
         window.open(issueUrl, "_blank", "noreferrer");
+        toastManager.add({
+          title: "Issue opened in a new tab",
+          description: "Check the details on GitHub, then submit the issue there.",
+        });
       }}
     >
       <Field>
@@ -86,6 +92,6 @@ export function SubmitForm() {
         </a>
         . We review every submission against the curation criteria above before it&apos;s added.
       </p>
-    </form>
+    </Form>
   );
 }

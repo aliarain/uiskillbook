@@ -4,6 +4,7 @@ import { useSyncExternalStore, type ReactNode } from "react";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import { SiteplaneUIProvider } from "@/siteplane/system/provider/siteplane-ui-provider";
 import { TooltipProvider } from "@/siteplane/components/tooltip";
+import { ToastProvider } from "@/siteplane/components/toast";
 
 const subscribe = () => () => {};
 
@@ -20,7 +21,9 @@ function KitTheme({ children }: { children: ReactNode }) {
       className="contents"
       data-theme={mounted ? (resolvedTheme === "dark" ? "dark" : "light") : undefined}
     >
-      <TooltipProvider>{children}</TooltipProvider>
+      <TooltipProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </TooltipProvider>
     </SiteplaneUIProvider>
   );
 }

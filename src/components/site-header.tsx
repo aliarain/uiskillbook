@@ -2,6 +2,9 @@ import Link from "next/link";
 import { Button } from "@/siteplane/components/button";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
+import { getSiteplaneSkills } from "@/lib/skills";
+import { groupAnchor } from "@/lib/siteplane";
+import { LogoMark } from "./logo-mark";
 import { AGENTS, CATEGORIES, ROLES } from "@/lib/taxonomy";
 import { SearchTrigger } from "./search-trigger";
 import { ThemeToggle } from "./theme-toggle";
@@ -21,6 +24,15 @@ function navSections(): NavSection[] {
         ...CATEGORIES.slice(0, 7).map((c) => ({ href: `/skills?category=${c.slug}`, label: c.label })),
       ],
       all: { href: "/skills", label: "All skills" },
+    },
+    {
+      label: "Siteplane UI",
+      href: "/siteplane-ui",
+      links: [...new Set(getSiteplaneSkills().map((s) => s.siteplane.group))].map((group) => ({
+        href: `/siteplane-ui#${groupAnchor(group)}`,
+        label: group,
+      })),
+      all: { href: "/siteplane-ui", label: "All components" },
     },
     { label: "Design.md", href: "/design-md" },
     {
@@ -55,7 +67,11 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-4 px-6">
         <div className="flex items-center gap-1">
           <MobileNav sections={sections} />
-          <Link href="/" className="rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong">
+          <Link
+            href="/"
+            className="flex items-center gap-2 rounded-button text-[15px] font-semibold tracking-[-0.01em] text-ink-strong"
+          >
+            <LogoMark />
             UI Skillbook
           </Link>
         </div>

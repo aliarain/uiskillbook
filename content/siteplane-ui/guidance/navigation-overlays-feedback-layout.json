@@ -1,0 +1,663 @@
+{
+  "command": {
+    "summary": "A searchable, keyboard-driven list of actions, shown inline in a panel or as a command palette in a dialog.",
+    "useFor": "Reach for Command when people need to find and run one action out of many by typing. It works as an inline list inside a page or panel, or as a palette that opens over everything. It suits power-user shortcuts, quick switchers and \"go to\" searches.",
+    "neighbours": [
+      { "name": "menu", "guidance": "Pick Menu instead when the actions are few and fixed and scanning beats typing." },
+      { "name": "autocomplete", "guidance": "Pick Autocomplete instead when the typed text fills a form field rather than triggering an action." },
+      { "name": "dialog", "guidance": "Use the CommandDialog parts rather than wrapping Command in your own Dialog, so the palette gets the right size and label." }
+    ],
+    "rules": [
+      "Give CommandInput an aria-label that names what it searches; the default only says it searches commands.",
+      "Render CommandEmpty so a search with no match says so instead of showing a blank panel.",
+      "Treat CommandShortcut as a visual hint only and register the real key handler in your app.",
+      "Wire the global shortcut that opens the palette yourself, for example with CommandDialog and controlled open state.",
+      "Group related items with CommandGroup and CommandGroupLabel so long lists stay scannable."
+    ],
+    "categories": ["interaction", "navigation", "accessibility"],
+    "tasks": ["navigation", "dashboard"],
+    "tags": ["command-palette", "search", "keyboard", "actions"],
+    "install": ["command"]
+  },
+  "breadcrumb": {
+    "summary": "A row of links tracing the path from the site root to the current page, so people can climb back up.",
+    "useFor": "Use Breadcrumb on pages nested a few levels deep, such as a project inside a workspace, so people see their location and can jump to any level above. It supplements the main navigation and does not replace it.",
+    "neighbours": [
+      { "name": "stepper", "guidance": "Pick Stepper instead when the trail shows progress through an ordered process rather than a place in a hierarchy." },
+      { "name": "sidebar", "guidance": "Pick Sidebar for the main application navigation; a breadcrumb only shows one path through it." }
+    ],
+    "rules": [
+      "Mark the current location with BreadcrumbPage, not a link, so it carries aria-current page.",
+      "Keep BreadcrumbSeparator elements as siblings between items, never inside a BreadcrumbItem.",
+      "Pass a router link through render on BreadcrumbLink so client navigation keeps native anchor semantics.",
+      "Treat BreadcrumbEllipsis as decoration; if hidden levels must be reachable, put them behind a labelled menu trigger.",
+      "Change the Breadcrumb aria-label when a page has more than one trail."
+    ],
+    "categories": ["navigation", "accessibility"],
+    "tasks": ["navigation", "dashboard"],
+    "tags": ["breadcrumbs", "hierarchy", "wayfinding"],
+    "install": ["breadcrumb"]
+  },
+  "navigation-menu": {
+    "summary": "A row of site links where some entries open dropdown panels of further destinations.",
+    "useFor": "Use Navigation Menu for a site or product header where top-level sections reveal a panel of links on hover or press. It fits marketing sites and docs headers with grouped destinations. Every entry should lead somewhere rather than run a command.",
+    "neighbours": [
+      { "name": "dropdown-menu", "guidance": "Pick Dropdown Menu instead when the entries are actions, such as Rename or Sign out, rather than pages." },
+      { "name": "tabs", "guidance": "Pick Tabs instead when switching swaps panels within the same page rather than going to another URL." },
+      { "name": "sidebar", "guidance": "Pick Sidebar for an application with many sections that needs persistent vertical navigation." }
+    ],
+    "rules": [
+      "Give NavigationMenu an aria-label so its nav landmark is named.",
+      "Render exactly one NavigationMenuPopup inside the menu; panels share it as people move between triggers.",
+      "Set active on the NavigationMenuLink for the current page so it gets aria-current page and the active style.",
+      "Use value and onValueChange with a matching NavigationMenuItem value when your own state opens panels, and null to close.",
+      "Keep wide panel content max-w-full so a multi-column panel never overflows a small screen."
+    ],
+    "categories": ["navigation", "interaction"],
+    "tasks": ["navigation", "landing-page"],
+    "tags": ["header", "site-navigation", "mega-menu"],
+    "install": ["navigation-menu"]
+  },
+  "pagination": {
+    "summary": "Previous, Next and numbered page links for stepping through a long list or table.",
+    "useFor": "Use Pagination below a table or list that is split into pages and where the page number matters, for example in shareable URLs. The app owns the page count, slicing and fetching; the component only renders the controls.",
+    "neighbours": [
+      { "name": "button", "guidance": "Pick a Load more Button or infinite scroll instead when people browse a feed and never need to jump to a page." },
+      { "name": "tabs", "guidance": "Pick Tabs instead when there are only a handful of named sections rather than numbered pages." },
+      { "name": "table", "guidance": "Pair Pagination with Table; the table renders the current slice and the pagination moves between slices." }
+    ],
+    "rules": [
+      "Keep the current page in app state or the URL and set active on its PaginationLink so it carries aria-current page.",
+      "Disable PaginationPrevious and PaginationNext at the first and last page; the component does not compute bounds.",
+      "Pass real links through render when pages have URLs, so they can be opened in a new tab.",
+      "Use variant=\"ghost\" where space is tight; the arrows keep their accessible names without the visible text.",
+      "Set labels to translate the landmark and button names instead of patching the parts."
+    ],
+    "categories": ["navigation", "accessibility"],
+    "tasks": ["data-table", "navigation"],
+    "tags": ["pagination", "paging", "tables"],
+    "install": ["pagination"]
+  },
+  "tabs": {
+    "summary": "Keyboard-navigable tabs that switch between related panels of content on the same page.",
+    "useFor": "Use Tabs to split one view into a few peer panels, such as Overview, Activity and Settings, where people look at one at a time. Each tab swaps content in place without changing pages. Variants cover boxed, pill and underline styles.",
+    "neighbours": [
+      { "name": "toggle-group", "guidance": "Pick Toggle Group instead when the choice changes a setting or filter of one view rather than showing a different panel." },
+      { "name": "navigation-menu", "guidance": "Pick Navigation Menu or plain links instead when each choice is a separate page with its own URL." },
+      { "name": "accordion", "guidance": "Pick Accordion instead when sections stack vertically and people may open several at once." }
+    ],
+    "rules": [
+      "Give every TabsTab a value that matches its TabsPanel, and keep that value in your state when the selection is controlled.",
+      "Set keepMounted on TabsPanel when a hidden panel holds state that must survive switching, or lift that state out.",
+      "Set orientation on Tabs for a vertical list so arrow-key direction matches the layout.",
+      "Choose the look with variant on TabsList, and add divider on an underline list to draw the shared baseline.",
+      "Keep icons decorative and the label as the tab's accessible name."
+    ],
+    "categories": ["navigation", "interaction", "accessibility"],
+    "tasks": ["dashboard", "navigation"],
+    "tags": ["tabs", "panels", "segmented-views"],
+    "install": ["tabs"]
+  },
+  "sidebar": {
+    "summary": "Application navigation in a side column that collapses to an icon rail on desktop and becomes a sheet on mobile.",
+    "useFor": "Use Sidebar for the primary navigation of an app with many sections, grouped under labels, with workspace and account menus at the ends. It handles desktop collapse, an optional resize rail and the mobile sheet for you. For a full page frame with header and scrolling content, start from Dashboard Shell.",
+    "neighbours": [
+      { "name": "dashboard-shell", "guidance": "Pick Dashboard Shell instead when you want the sidebar, sticky header and scrolling main area wired together." },
+      { "name": "navigation-menu", "guidance": "Pick Navigation Menu instead for a handful of top-level pages that fit in a header row." },
+      { "name": "drawer", "guidance": "Pick Drawer for a standalone mobile menu without a desktop sidebar." }
+    ],
+    "rules": [
+      "A single SidebarProvider holds the open state, so place both the Sidebar and its neighbouring content inside it.",
+      "Read the sidebar_state cookie on the server and pass it as defaultOpen; the provider writes the cookie but never reads it.",
+      "Set active on the SidebarMenuButton for the current page and pass a router link through render.",
+      "Give each SidebarMenuButton a tooltip so the collapsed icon rail still names its destinations.",
+      "Turn off keyboardShortcut on any secondary sidebar so it does not fight the main one for Ctrl/Cmd+B.",
+      "Do not override the padding of SidebarHeader, SidebarGroup or SidebarFooter to remove the leading gutter."
+    ],
+    "categories": ["navigation", "layout", "responsive"],
+    "tasks": ["dashboard", "navigation"],
+    "tags": ["sidebar", "app-navigation", "collapsible-rail"],
+    "install": ["sidebar"]
+  },
+  "dashboard-shell": {
+    "summary": "A responsive app frame that combines the sidebar, a sticky top bar and a scrolling content area.",
+    "useFor": "Use Dashboard Shell as the outer layout of an authenticated app or admin tool. It sets up the sidebar, header and main region so only the content scrolls, in either an inset or a push layout. Routing, auth and data stay in your app.",
+    "neighbours": [
+      { "name": "sidebar", "guidance": "Compose Sidebar directly instead when you need a nonstandard layout the shell's parts do not cover." },
+      { "name": "frame", "guidance": "Use Frame inside the shell's main area to group panels; it is a surface, not a page layout." }
+    ],
+    "rules": [
+      "Use one DashboardShell per page and put the page content inside DashboardShellMain, which is the part that scrolls.",
+      "Place DashboardShellHeader as a direct child of DashboardShellInset so the sticky header works.",
+      "Set stickyHeader={false} when the whole page should scroll and the header should scroll away.",
+      "Set flush on DashboardShellMain for views that lay out their own panes edge to edge, such as list and detail.",
+      "Pass open and onOpenChange on DashboardShell to control the sidebar; it forwards them to SidebarProvider."
+    ],
+    "categories": ["layout", "navigation", "responsive"],
+    "tasks": ["dashboard"],
+    "tags": ["app-shell", "layout", "sidebar", "sticky-header"],
+    "install": ["dashboard-shell"]
+  },
+  "accordion": {
+    "summary": "A stack of related sections that expand and collapse, one at a time or several together.",
+    "useFor": "Use Accordion for a list of peer sections that people open on demand, such as FAQs or groups of settings. It keeps long pages short while every heading stays visible.",
+    "neighbours": [
+      { "name": "collapsible", "guidance": "Pick Collapsible instead for a single show-or-hide section with no siblings." },
+      { "name": "tabs", "guidance": "Pick Tabs instead when the sections are peers people switch between and only one should show." }
+    ],
+    "rules": [
+      "Turn on multiple to let more than one section stay expanded; either way, the value is an array of the expanded items.",
+      "Give each AccordionItem a stable value when you control the open items with value and onValueChange.",
+      "Keep other interactive controls out of AccordionTrigger; put them in the panel.",
+      "Expect Tab to move between triggers and Enter or Space to toggle them; arrow keys do not move focus.",
+      "Avoid it when people need to compare content across sections, since closed sections hide it."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["other", "landing-page"],
+    "tags": ["disclosure", "faq", "expandable"],
+    "install": ["accordion"]
+  },
+  "collapsible": {
+    "summary": "A single disclosure that shows or hides one block of content behind a trigger.",
+    "useFor": "Use Collapsible to tuck away one optional section, such as advanced options, order details or one branch of a file tree. It only toggles visibility; loading and navigation stay with your app.",
+    "neighbours": [
+      { "name": "accordion", "guidance": "Pick Accordion instead when there is a list of related sections that should behave as a group." },
+      { "name": "popover", "guidance": "Pick Popover instead when the extra content should float over the page rather than push content down." }
+    ],
+    "rules": [
+      "Use open and onOpenChange when your app owns the state, or defaultOpen when it does not.",
+      "Give an icon-only CollapsibleTrigger an accessible label that stays meaningful whether open or closed.",
+      "Add a chevron yourself with data-slot=\"collapsible-chevron\"; the trigger draws no indicator by default.",
+      "Set keepMounted on CollapsiblePanel when closed content must stay in the DOM, such as a form section.",
+      "Nest collapsibles for a tree and pass a smaller ghost button through render for compact rows."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "other"],
+    "tags": ["disclosure", "show-hide", "file-tree"],
+    "install": ["collapsible"]
+  },
+  "context-menu": {
+    "summary": "Secondary actions for an element that appear on right-click or a long press.",
+    "useFor": "Use Context Menu for quick actions on an item people work with directly, such as a file, a canvas object or a row. It shares Menu's look and parts. Treat it as a shortcut, because many people never think to right-click.",
+    "neighbours": [
+      { "name": "menu", "guidance": "Also offer a visible Menu button for the same actions so people who never right-click can still reach them." },
+      { "name": "dropdown-menu", "guidance": "Pick Dropdown Menu instead when the menu opens from a visible button rather than from the element itself." },
+      { "name": "command", "guidance": "Pick Command instead when people search a large set of actions by typing." }
+    ],
+    "rules": [
+      "Never make the context menu the only path to an action; mirror it in a visible control.",
+      "For items that navigate, use ContextMenuLinkItem: it outputs an actual anchor and dismisses the menu on activation.",
+      "Do not wrap ContextMenuPopup in another portal; it already includes the portal and positioner.",
+      "Group related items with ContextMenuGroup and ContextMenuGroupLabel, and move rare actions into a submenu.",
+      "Remember checkbox and radio items hold menu state and do not submit with a form."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["context-menu", "right-click", "actions"],
+    "install": ["context-menu"]
+  },
+  "menu": {
+    "summary": "A compact list of actions or choices that opens from a button, with keyboard navigation.",
+    "useFor": "Use Menu for a short set of actions tied to a trigger, such as an account menu, the actions of a table row or a More button. It also holds checkbox and radio items for view options. It is the base that Dropdown Menu and Context Menu build on.",
+    "neighbours": [
+      { "name": "select", "guidance": "Pick Select instead when people choose a value that a form submits." },
+      { "name": "navigation-menu", "guidance": "Pick Navigation Menu instead for site sections with panels of links." },
+      { "name": "dropdown-menu", "guidance": "Dropdown Menu is the same component under DropdownMenu-prefixed names; pick one naming per menu." },
+      { "name": "command", "guidance": "Pick Command instead when the list is long enough that people should search it." }
+    ],
+    "rules": [
+      "Do not wrap MenuPopup in another portal; it already includes the portal, positioner and scrolling viewport.",
+      "Set variant=\"destructive\" on a MenuItem that deletes or removes something.",
+      "Use MenuCheckboxItem for independent toggles and MenuRadioGroup for one choice; neither submits with a form.",
+      "Use MenuLinkItem for rows that navigate so they are real links.",
+      "To launch a dialog from a menu item, control the dialog's open state yourself and mount it outside the menu, otherwise it unmounts when the menu closes."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["menu", "actions", "overflow-menu"],
+    "install": ["menu"]
+  },
+  "dropdown-menu": {
+    "summary": "Menu exported under DropdownMenu-prefixed part names for a list of actions opened from a button.",
+    "useFor": "Use Dropdown Menu when you or your code prefer shadcn-style part names such as DropdownMenuContent. Its behavior, styling and API are exactly Menu's; only the names differ.",
+    "neighbours": [
+      { "name": "menu", "guidance": "Pick Menu instead if the rest of your code uses Menu part names; never mix both naming sets in one menu." },
+      { "name": "context-menu", "guidance": "Pick Context Menu instead when the same actions should open on right-click of an element." },
+      { "name": "select", "guidance": "Pick Select instead when the choice is a form value." }
+    ],
+    "rules": [
+      "Use only DropdownMenu-prefixed parts inside one menu; do not mix them with Menu parts.",
+      "Do not wrap DropdownMenuContent or DropdownMenuSubContent in another portal; they include one.",
+      "Start action items with a fitting icon; checkbox and radio items already draw an indicator, so give them none.",
+      "Give items that remove something variant=\"destructive\".",
+      "Set the same variant on DropdownMenuSubContent as on its parent, for example glass."
+    ],
+    "categories": ["interaction"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["menu", "dropdown", "actions"],
+    "install": ["dropdown-menu"]
+  },
+  "dialog": {
+    "summary": "A modal overlay for a focused task or short form, with a title and a clear way to close.",
+    "useFor": "Use Dialog when people must step away from the page to finish one task, such as renaming a project or inviting a member. It traps focus and blocks the page until closed. Long content scrolls inside while the header and footer stay put.",
+    "neighbours": [
+      { "name": "alert-dialog", "guidance": "Pick Alert Dialog instead for a yes-or-no decision, such as a delete confirmation, that must be answered before continuing." },
+      { "name": "sheet", "guidance": "Pick Sheet instead for a longer form that slides in from an edge and keeps more of the page context visible." },
+      { "name": "popover", "guidance": "Pick Popover instead for light, non-modal content anchored to its trigger." },
+      { "name": "drawer", "guidance": "Pick Drawer instead on mobile when the panel should come from an edge and close with a swipe." }
+    ],
+    "rules": [
+      "Always include DialogTitle, and DialogDescription when helpful, so the dialog is named for assistive technology.",
+      "Do not add another portal or backdrop around DialogPopup; it already includes them.",
+      "Never wrap a submit button in DialogClose; close the dialog yourself after the submission succeeds.",
+      "Use open and onOpenChange when a menu item or other code opens the dialog, and render it outside that menu.",
+      "Put long content in DialogPanel so it scrolls between the header and footer.",
+      "Pick a width with size on DialogPopup, using md or lg for two-column forms or wide tables."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["modal", "overlays", "dialog"],
+    "install": ["dialog"]
+  },
+  "alert-dialog": {
+    "summary": "A modal confirmation that asks for a deliberate decision before a consequential action.",
+    "useFor": "Use Alert Dialog right before an action that is hard to undo, such as deleting a project or discarding unsaved changes. It interrupts on purpose and offers a clear confirm and cancel. It does not run the action; your code does.",
+    "neighbours": [
+      { "name": "dialog", "guidance": "Pick Dialog instead when the overlay holds fields or several steps rather than a single decision." },
+      { "name": "toast", "guidance": "Pick Toast with an undo action instead when the action is safely reversible and an interruption is not worth it." },
+      { "name": "alert", "guidance": "Pick Alert instead when the message needs no response from the user." }
+    ],
+    "rules": [
+      "Write a title that names the action and a description that states the consequence.",
+      "Control the root with open and onOpenChange when confirming runs a request, and close it only after the request succeeds.",
+      "Show loading on the confirm button while the request runs and ignore dismissal until it settles.",
+      "Do not wrap AlertDialogPopup in another portal; it already includes the backdrop and viewport.",
+      "Expect the popup to become a full-width bottom sheet below 640 px."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["confirmation", "modal", "destructive-actions"],
+    "install": ["alert-dialog"]
+  },
+  "drawer": {
+    "summary": "A modal sheet that enters from any side of the screen and closes when swiped away.",
+    "useFor": "Use Drawer for touch-first panels such as a mobile navigation menu, an action sheet or filters, coming from any edge. It supports snap points for a bottom panel that rests half open. It also ships menu parts for action lists inside the panel.",
+    "neighbours": [
+      { "name": "sheet", "guidance": "Pick Sheet instead for an edge panel that should not respond to swipe gestures, such as a desktop form." },
+      { "name": "detail-drawer", "guidance": "Pick Detail Drawer instead to show one record's details beside a list." },
+      { "name": "dialog", "guidance": "Pick Dialog instead for a centred task that does not belong to an edge." }
+    ],
+    "rules": [
+      "Set position on the Drawer root; the popup, bar and swipe direction follow it.",
+      "Keep a visible close action, such as showCloseButton on DrawerPopup, since swipe is not the only way people close it.",
+      "Wrap DrawerMenu items in DrawerClose when choosing one should close the drawer; they do not close on their own.",
+      "Place lengthy content inside DrawerPanel; it scrolls on its own and the header and footer remain fixed.",
+      "Use snapPoints for a bottom drawer that should open at a compact height before expanding."
+    ],
+    "categories": ["interaction", "responsive"],
+    "tasks": ["mobile-interface", "navigation"],
+    "tags": ["drawer", "bottom-sheet", "swipe", "overlays"],
+    "install": ["drawer"]
+  },
+  "detail-drawer": {
+    "summary": "A right-side drawer for viewing one record's details beside its list, optionally with an edit form.",
+    "useFor": "Use Detail Drawer when people pick an item from a list or table and want its details without leaving the page. It has a header for the record name, a scrolling body and a footer for actions. Wrap it in a form to make it an edit panel.",
+    "neighbours": [
+      { "name": "drawer", "guidance": "Compose Drawer directly instead when the panel is not about a single record." },
+      { "name": "sheet", "guidance": "Pick Sheet instead for a standalone form at the edge that has no swipe behavior." },
+      { "name": "alert-dialog", "guidance": "Pick Alert Dialog instead for a short confirmation." }
+    ],
+    "rules": [
+      "Name the record in the header with a title and keep a visible close action.",
+      "Put the content in DetailDrawerBody so long records and forms scroll between the header and footer.",
+      "Wrap header, body and footer in a form when editing, so Save submits; close the drawer after the save succeeds.",
+      "Leave position on DetailDrawerPopup unset so it follows the root and the swipe direction matches.",
+      "Write DetailDrawerPopup in new code; DetailDrawerContent is the older name."
+    ],
+    "categories": ["interaction", "layout"],
+    "tasks": ["data-table", "dashboard"],
+    "tags": ["detail-view", "drawer", "records"],
+    "install": ["detail-drawer"]
+  },
+  "sheet": {
+    "summary": "A dialog-backed panel that opens from a screen edge for forms and save-or-cancel tasks.",
+    "useFor": "Use Sheet for a task that needs more room than a dialog but should keep the page in view, such as editing a profile or reading release notes. It opens from any edge with dialog behavior and no swipe. The fullscreen variant also serves as small-screen navigation.",
+    "neighbours": [
+      { "name": "drawer", "guidance": "Pick Drawer instead when swipe-to-dismiss is wanted, typically on touch devices." },
+      { "name": "dialog", "guidance": "Pick Dialog instead for a short centred task." },
+      { "name": "alert-dialog", "guidance": "Pick Alert Dialog instead when the overlay is only a decision that must be answered." }
+    ],
+    "rules": [
+      "Set side on SheetPopup to choose the edge; right is the default.",
+      "Include SheetTitle so the panel is named, and keep a close control if you turn off showCloseButton.",
+      "Put long content in SheetPanel so it scrolls while the header and footer stay fixed.",
+      "Close the sheet after a save succeeds, not when the save button is pressed.",
+      "Use variant=\"fullscreen\" for small-screen navigation that fills the viewport."
+    ],
+    "categories": ["interaction", "layout"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["side-panel", "overlays", "forms"],
+    "install": ["sheet"]
+  },
+  "popover": {
+    "summary": "A non-modal surface anchored to a trigger for contextual content people can interact with.",
+    "useFor": "Use Popover for small interactive content tied to a control, such as a quick feedback form, a notification list or a filter. The page stays usable behind it. It can also act as a click-to-open hint for info buttons.",
+    "neighbours": [
+      { "name": "tooltip", "guidance": "Pick Tooltip instead for a short, non-interactive label on hover or focus." },
+      { "name": "dialog", "guidance": "Pick Dialog instead when the task needs the whole screen's focus." },
+      { "name": "menu", "guidance": "Pick Menu instead when the content is just a list of actions." },
+      { "name": "preview-card", "guidance": "Pick Preview Card instead for a hover preview of a link's destination." }
+    ],
+    "rules": [
+      "Set showCloseButton on PopoverPopup, or add PopoverClose, when the content is long enough that people look for a way out.",
+      "Use side and align to place it; it flips when there is no room.",
+      "Use tooltipStyle for an info hint that must open on tap as well as hover, adding openOnHover on the trigger.",
+      "Do not put a task that must be finished before continuing in a popover; it is not modal."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "other"],
+    "tags": ["popover", "overlays", "contextual"],
+    "install": ["popover"]
+  },
+  "preview-card": {
+    "summary": "Hovering or focusing a link opens this card with a preview of where it goes, so people stay on the page.",
+    "useFor": "Use Preview Card on links to people, projects or documents so readers can peek before opening them. The preview is extra information only. The link must make sense without it.",
+    "neighbours": [
+      { "name": "tooltip", "guidance": "Pick Tooltip instead for a one-line label on a control." },
+      { "name": "popover", "guidance": "Pick Popover instead when the content holds actions or fields people must reach by keyboard." }
+    ],
+    "rules": [
+      "Keep the link text clear on its own; never hide required information in the card.",
+      "Do not place required buttons or actions in the card.",
+      "Tune delay and closeDelay on PreviewCardTrigger if the default timing feels slow or jumpy.",
+      "Give PreviewCardPopup a width class when the content needs more than the default width."
+    ],
+    "categories": ["interaction", "visual"],
+    "tasks": ["other"],
+    "tags": ["hover-card", "link-preview", "overlays"],
+    "install": ["preview-card"]
+  },
+  "tooltip": {
+    "summary": "Brief text shown on hover or focus that names or explains a control, for example an icon button.",
+    "useFor": "Use Tooltip to name icon buttons or add a brief, optional explanation to a control. It appears on hover and keyboard focus. Nothing essential should live only in a tooltip.",
+    "neighbours": [
+      { "name": "popover", "guidance": "Pick Popover instead when the content is interactive or must open on tap." },
+      { "name": "preview-card", "guidance": "Pick Preview Card instead for a richer preview of a link's destination." },
+      { "name": "truncate", "guidance": "Use Truncate for cut-off text; it adds the tooltip with the full text for you." }
+    ],
+    "rules": [
+      "Mount TooltipProvider once near the app root, and group nearby tooltips under one provider so later ones open without delay.",
+      "Use aria-disabled instead of disabled on a button that needs a tooltip, so it stays focusable.",
+      "Keep tooltip text short and never put links or buttons inside it.",
+      "Do not rely on a tooltip for instructions people need; touch users may never see it.",
+      "Use tone=\"error\" only for error hints, and variant=\"glass\" over photos or colored surfaces."
+    ],
+    "categories": ["accessibility", "interaction"],
+    "tasks": ["other"],
+    "tags": ["tooltip", "hints", "icon-buttons"],
+    "install": ["tooltip"]
+  },
+  "alert": {
+    "summary": "An inline message that stays in the layout, styled by tone, with actions and a dismiss button if needed.",
+    "useFor": "Use Alert to report the condition of a page, form or card when the notice must remain on screen until it is dealt with, like scheduled maintenance or a sync that failed. Place it inline, stretch it across the top of the page as a banner, or lay it across a card as a band.",
+    "neighbours": [
+      { "name": "toast", "guidance": "Pick Toast instead for a brief confirmation after an action that should disappear on its own." },
+      { "name": "alert-dialog", "guidance": "Pick Alert Dialog instead when people must make a decision before continuing." },
+      { "name": "empty-state", "guidance": "Pick Empty State instead when a collection has no content and needs a next step." }
+    ],
+    "rules": [
+      "Pick variant for the tone and also state the status in the words, so color is not the only signal.",
+      "Rely on the role the variant sets: error and warning interrupt as alerts, the others announce politely.",
+      "Make the icon the first child of Alert, ahead of the title, and it will occupy a separate column.",
+      "Use layout=\"banner\" for page-wide issues and layout=\"band\" directly under a CardHeader for one card's problem.",
+      "Put buttons in AlertAction and connect their handlers in your app; use AlertClose for a dismiss control."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["alerts", "banners", "feedback", "status"],
+    "install": ["alert"]
+  },
+  "empty-state": {
+    "summary": "A centred block, with optional media and actions, telling people why there is nothing here yet and how to proceed.",
+    "useFor": "Use Empty State once loading has finished and a list, table or view has nothing to show. It covers first-run screens, searches with no matches and recoverable gaps. Your app decides which case applies and which action fits.",
+    "neighbours": [
+      { "name": "skeleton", "guidance": "Pick Skeleton or Spinner instead while the data is still loading." },
+      { "name": "alert", "guidance": "Pick Alert instead when an error appears but the rest of the page still shows content." }
+    ],
+    "rules": [
+      "Show it only after loading has settled, never as a loading placeholder.",
+      "Set level on EmptyTitle when the title should be a real heading in the page outline.",
+      "Put the next-step buttons in EmptyContent and make the primary action the obvious one.",
+      "For no matching results, keep search and filter controls visible and offer a way to clear them.",
+      "Use EmptyMedia variant=\"icon\" for a compact icon, or the default variant for richer media such as avatars."
+    ],
+    "categories": ["visual", "taste"],
+    "tasks": ["empty-state", "dashboard"],
+    "tags": ["empty-states", "onboarding", "zero-data"],
+    "install": ["empty-state"]
+  },
+  "meter": {
+    "summary": "A bar for a value inside fixed bounds, like storage used, that can carry a status tone.",
+    "useFor": "Use Meter for a quantity that sits somewhere in a fixed range, like disk usage, quota or a strength score. It describes a level, not the progress of a task.",
+    "neighbours": [
+      { "name": "progress", "guidance": "Pick Progress instead when the bar tracks how much of an operation has completed." },
+      { "name": "spinner", "guidance": "Pick Spinner instead while something loads or the value is unknown; Meter has no way to display that." }
+    ],
+    "rules": [
+      "Add MeterLabel, or give the meter an aria-label, so it is named.",
+      "Set tone yourself when the value crosses a threshold; there are no built-in low, high or optimum levels.",
+      "Keep value, range and formatting on the root, and let MeterValue display the formatted figure.",
+      "Include MeterTrack and MeterIndicator explicitly when you pass custom children."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard"],
+    "tags": ["meter", "usage", "gauge"],
+    "install": ["meter"]
+  },
+  "progress": {
+    "summary": "A bar or circle reporting how far a task has got, or simply that it is still under way.",
+    "useFor": "Use Progress for uploads, exports and other tasks where the amount done is known or can be shown as indeterminate. It comes as a linear bar and as a separate ProgressCircle. Timing, cancellation and failure stay with your app.",
+    "neighbours": [
+      { "name": "meter", "guidance": "Pick Meter instead for a level within a range, such as storage used." },
+      { "name": "spinner", "guidance": "Pick Spinner instead for a short wait with no measurable progress." },
+      { "name": "skeleton", "guidance": "Pick Skeleton instead when content loads into a known layout." }
+    ],
+    "rules": [
+      "Name it with ProgressLabel or aria-label, and keep that name stable while the value changes.",
+      "Pass value null for an indeterminate state when you cannot measure completion.",
+      "Include ProgressTrack and ProgressIndicator explicitly when you supply custom children.",
+      "ProgressCircle stands alone: pass it a value and leave it without children.",
+      "Show a clear message when the task fails; the bar does not report errors."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard", "form"],
+    "tags": ["progress", "loading", "uploads"],
+    "install": ["progress"]
+  },
+  "skeleton": {
+    "summary": "Decorative shapes that stand in for content while it loads, keeping the layout steady.",
+    "useFor": "Use Skeleton when you know the shape of what is coming, such as a card, a list row or table rows. Mirror the real layout so nothing shifts when the data arrives.",
+    "neighbours": [
+      { "name": "spinner", "guidance": "Pick Spinner instead if you cannot predict how the result will be laid out, or if the wait happens within a control." },
+      { "name": "progress", "guidance": "Pick Progress instead when you can measure how far along the work is." },
+      { "name": "empty-state", "guidance": "Pick Empty State once loading has finished and there is nothing to show." }
+    ],
+    "rules": [
+      "Size each Skeleton with className to match the content that replaces it.",
+      "Mark the surrounding region as busy and announce loading there; skeletons are hidden from assistive technology.",
+      "Remove the placeholders as soon as the real content renders.",
+      "Avoid skeletons for very short waits where a flash of grey is worse than nothing."
+    ],
+    "categories": ["visual", "performance", "accessibility"],
+    "tasks": ["dashboard", "data-table"],
+    "tags": ["loading", "placeholder", "skeleton"],
+    "install": ["skeleton"]
+  },
+  "spinner": {
+    "summary": "A looping animation signalling that work is under way when there is no telling how long it will take.",
+    "useFor": "Use Spinner for short waits with no measurable progress, on its own, in an input addon during a search, or in a button. Several visual variants are available and it respects reduced motion.",
+    "neighbours": [
+      { "name": "progress", "guidance": "Pick Progress instead when completion can be measured." },
+      { "name": "skeleton", "guidance": "Pick Skeleton instead when content loads into a known layout." }
+    ],
+    "rules": [
+      "Set aria-label to say what is loading, or hide the spinner from assistive technology when nearby text already says it.",
+      "Use the Button loading prop for a pending button rather than placing a Spinner in it by hand.",
+      "Scale it with size utility classes; it is 16 px by default.",
+      "Remove it when the request settles and show the error state yourself; the spinner tracks nothing."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["loading", "spinner", "pending"],
+    "install": ["spinner"]
+  },
+  "toast": {
+    "summary": "Brief notifications that appear after an action and dismiss themselves, managed through one provider.",
+    "useFor": "Use Toast for short feedback that should not block work, such as Saved, Upload complete or an undo prompt. One toast can follow a task from loading to success or error.",
+    "neighbours": [
+      { "name": "alert", "guidance": "Pick Alert instead for a message that should stay in the page until the problem is resolved." },
+      { "name": "alert-dialog", "guidance": "Pick Alert Dialog instead when the person must decide something before going on." }
+    ],
+    "rules": [
+      "Mount ToastProvider once near the app root.",
+      "Set type for a status icon and also say the outcome in the title.",
+      "Use promise() for a task that settles later, or keep the id from add() and call update or close.",
+      "Do not put blocking or form errors only in a toast; show them beside the field as well.",
+      "Implement the operation behind actionProps, such as undo, in your app; the toast only renders the button."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["toast", "notifications", "feedback"],
+    "install": ["toast"]
+  },
+  "frame": {
+    "summary": "A muted surface that groups raised panels with an optional header, descriptions and footer.",
+    "useFor": "Use Frame to gather a few related panels inside one shared surface, such as a settings group or a summary with stacked sections. It is presentation only, with no state or behavior.",
+    "neighbours": [
+      { "name": "card", "guidance": "Pick Card instead for a single surface with its own header, content and actions." },
+      { "name": "separator", "guidance": "Use Separator inside a FramePanel with its padding removed to stack sections in one panel." }
+    ],
+    "rules": [
+      "Place several FramePanel parts directly inside Frame; the spacing between them is automatic.",
+      "For several sections inside a single panel, drop the panel's padding and put a Separator between each section.",
+      "Do not add borders or shadows to panels; they already draw the kit hairline.",
+      "Keep state and behavior in the content you place inside; Frame holds none."
+    ],
+    "categories": ["layout", "visual"],
+    "tasks": ["dashboard", "design-system"],
+    "tags": ["surface", "panels", "layout"],
+    "install": ["frame"]
+  },
+  "kbd": {
+    "summary": "Styled notation for a keyboard key or a key combination inside text, buttons or menus.",
+    "useFor": "Use Kbd to show the shortcut for an action, in a hint sentence, a search field addon or after a button label. It only displays keys; your app implements the shortcut.",
+    "neighbours": [
+      { "name": "code", "guidance": "Pick Code instead for commands, values or source snippets." },
+      { "name": "command", "guidance": "Use Command's own shortcut part inside a command palette." }
+    ],
+    "rules": [
+      "Wrap keys pressed together in KbdGroup.",
+      "Show labels that match the person's platform, such as Cmd on macOS and Ctrl elsewhere.",
+      "Implement every shortcut you display; Kbd adds no key handling.",
+      "Never make the shortcut the only way to find or run the action.",
+      "Remember a Kbd after a button label becomes part of the button's accessible name."
+    ],
+    "categories": ["typography", "accessibility"],
+    "tasks": ["other"],
+    "tags": ["keyboard", "shortcuts", "typography"],
+    "install": ["kbd"]
+  },
+  "motion": {
+    "summary": "Ready-made parts that animate list items entering, leaving and moving, content swaps and changing numbers.",
+    "useFor": "Use Motion when the data changes and you want the interface to show that change smoothly: rows added or removed, chips reflowing, a panel swapping steps, or a total rolling to a new figure. It needs no animation code and turns instant under reduced motion.",
+    "neighbours": [
+      { "name": "collapsible", "guidance": "Skip Motion for components that already animate themselves, such as Collapsible, Dialog or Toast." },
+      { "name": "skeleton", "guidance": "Pick Skeleton instead to fill space while data loads; Motion animates the change once it arrives." }
+    ],
+    "rules": [
+      "Give every MotionItem a stable key from the data, never the array index.",
+      "Set the space between items with gap on MotionList, not a CSS gap.",
+      "Move focus to a neighbouring item before removing one, because a leaving item is inert.",
+      "Use MotionReveal with open for one block, MotionSwap with a changing swapKey for replaced content, and MotionNumber for figures.",
+      "Virtualize lists with hundreds of rows instead of wrapping each in a Motion element."
+    ],
+    "categories": ["motion", "performance"],
+    "tasks": ["animation", "dashboard"],
+    "tags": ["animation", "lists", "transitions", "numbers"],
+    "install": ["motion"]
+  },
+  "scroll-area": {
+    "summary": "A fixed-size region that scrolls with custom overlay scrollbars, plus optional fades at the edges and control over the gutter.",
+    "useFor": "Use Scroll Area when a fixed-size region inside the page has to scroll, such as a list in a card, a horizontal tag row or a panel with a pinned footer. Prefer letting the page itself scroll when it can.",
+    "neighbours": [
+      { "name": "dialog", "guidance": "Use DialogPanel, SheetPanel or DrawerPanel inside overlays; they already wrap a scroll area." },
+      { "name": "truncate", "guidance": "Pick Truncate instead when the text should be cut rather than scrolled." }
+    ],
+    "rules": [
+      "Name the region with aria-label or aria-labelledby, since the viewport joins the tab order when it overflows.",
+      "Scrolling happens in the viewport, not the root, so use viewportRef to get or change the scroll offset.",
+      "Content that scrolls sideways needs its own width, for example w-max; also set scrollbarGutter to keep the scrollbar from overlapping it.",
+      "Turn on fill for a flex-column child that must stretch to full height, such as one that pins a footer to the bottom.",
+      "Avoid nesting a scroll region where the page could simply scroll."
+    ],
+    "categories": ["layout", "accessibility"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["scrolling", "overflow", "layout"],
+    "install": ["scroll-area"]
+  },
+  "separator": {
+    "summary": "A horizontal or vertical line that divides related sections or controls.",
+    "useFor": "Use Separator to mark a boundary between groups of content or controls, such as between a heading and a body or between toolbar items. It is a visual and semantic divider, not a spacing tool.",
+    "neighbours": [
+      { "name": "frame", "guidance": "Pick Frame when the sections need their own surfaces rather than a line between them." }
+    ],
+    "rules": [
+      "A vertical divider uses orientation=\"vertical\" and only stretches when its parent row has a defined height.",
+      "Use role=\"presentation\" when the layout already separates content, such as list rows, so each line is not announced.",
+      "Name content groups with headings; a line alone is not structure.",
+      "Use gap or margin for spacing, not an invisible separator."
+    ],
+    "categories": ["layout", "visual"],
+    "tasks": ["design-system", "other"],
+    "tags": ["divider", "layout"],
+    "install": ["separator"]
+  },
+  "code": {
+    "summary": "Inline code and code blocks with optional highlighting, titles, line numbers, marked lines, masking and copy.",
+    "useFor": "Use Code for commands or identifiers in a sentence, and CodeBlock for snippets such as API requests, config or diffs that people read and copy. Blocks can mask secrets, mark added or removed lines and stream in as text arrives.",
+    "neighbours": [
+      { "name": "kbd", "guidance": "Pick Kbd instead to show keys or shortcuts." },
+      { "name": "copy-button", "guidance": "Pick Copy Button on its own for a copyable value that does not need code styling." }
+    ],
+    "rules": [
+      "Pass the full text through value on CodeBlock; copyable copies exactly that value.",
+      "Install and import code-highlight once in client code before relying on language; without it the block shows plain text.",
+      "Remember mask only hides the value on screen; the secret still reaches the browser and Copy still copies it.",
+      "Set streaming while text is still arriving so the copy action stays disabled until it is complete.",
+      "Use lineStates with added and removed so changes carry a + or − mark, not only color."
+    ],
+    "categories": ["typography", "accessibility"],
+    "tasks": ["other", "design-system"],
+    "tags": ["code", "syntax-highlighting", "copy"],
+    "install": ["code"]
+  },
+  "truncate": {
+    "summary": "Cuts text after one line or a set number of lines with an ellipsis and shows the full text in a tooltip.",
+    "useFor": "Use Truncate for titles, file names and descriptions that can outgrow their box, such as card titles or table cells. The element keeps the whole text for assistive technology, and a tooltip reveals it on hover.",
+    "neighbours": [
+      { "name": "tooltip", "guidance": "Truncate already adds a tooltip with the full text; reach for Tooltip only for other labels." },
+      { "name": "scroll-area", "guidance": "Pick Scroll Area instead when people need the full content in place." }
+    ],
+    "rules": [
+      "Nest Truncate within the element whose text it clips, like a CardTitle or a table cell, so the outer element and its styling stay intact.",
+      "Set lines for a multi-line clamp instead of a single line.",
+      "In table cells and other containers that expand to fit their content, cap it with a width class like max-w-56.",
+      "Never clip text that has to be read completely, for example error messages, instructions or legal copy.",
+      "Skip it for menu rows, Badge, Tag and Button labels, which already end in an ellipsis."
+    ],
+    "categories": ["typography", "layout"],
+    "tasks": ["data-table", "dashboard"],
+    "tags": ["truncation", "ellipsis", "text-overflow"],
+    "install": ["truncate"]
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CopyCodeBlock } from "@/components/copy-code-block";
+import { Code } from "@/siteplane/components/code";
 import { MCP_URL, pageMetadata, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -17,6 +18,7 @@ const ENDPOINTS = [
   { path: "/api/skills/{slug}", params: "none", returns: "One skill with install prompts and, for local skills, full content" },
   { path: "/api/search", params: "q (required), limit", returns: "Skills, guides, collections and Design.md matches" },
   { path: "/api/stats", params: "none", returns: "Totals, per-category and per-agent counts" },
+  { path: "/api/siteplane", params: "group", returns: "Every Siteplane UI component by group, with install commands and docs links" },
   { path: "/api/design-md", params: "none", returns: "All Design.md entries" },
   { path: "/api/design-md/{slug}", params: "none", returns: "One entry with its DESIGN.md content" },
 ];
@@ -55,8 +57,8 @@ export default function ApiDocsPage() {
 
       <h2 className="mt-12 text-xl font-semibold text-ink">MCP server</h2>
       <p className="mt-2 text-sm text-ink-2">
-        Tools: <code>list_skills</code>, <code>get_skill</code>, <code>search</code>,{" "}
-        <code>get_stats</code>, <code>get_design_md</code>.
+        Tools: <Code>list_skills</Code>, <Code>get_skill</Code>, <Code>search</Code>, <Code>get_stats</Code>,{" "}
+        <Code>get_design_md</Code>, <Code>list_siteplane_components</Code>.
       </p>
       <div className="mt-4">
         <CopyCodeBlock code={MCP_URL} />

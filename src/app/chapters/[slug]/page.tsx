@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllChapters, getChapterBySlug, getChapterSkills } from "@/lib/chapters";
-import { markdownToHtml } from "@/lib/markdown";
+import { markdownToHast } from "@/lib/markdown";
+import { Markdown } from "@/components/markdown";
 import { SkillRow } from "@/components/skill-row";
 import { pageMetadata } from "@/lib/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -36,7 +37,7 @@ export default async function ChapterDetailPage({
   const chapter = getChapterBySlug(slug);
   if (!chapter) notFound();
 
-  const html = await markdownToHtml(chapter.body);
+  const tree = await markdownToHast(chapter.body);
   const skills = getChapterSkills(chapter);
 
   return (
@@ -54,10 +55,7 @@ export default async function ChapterDetailPage({
         {chapter.minutes} min read, {skills.length} skills
       </p>
 
-      <article
-        className="skill-content prose prose-sm mt-8 max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <Markdown tree={tree} className="mt-8" />
 
       <div className="mt-14">
         <h2 className="label">

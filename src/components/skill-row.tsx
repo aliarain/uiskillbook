@@ -19,7 +19,7 @@ export function SkillRow({ skill, index }: { skill: Skill; index: number }) {
           {skill.description}
         </p>
         <p className="mt-1.5 text-[13px] text-ink-3">
-          <span className="text-link">{categoryLabel(skill.categories[0])}</span>
+          <span className="text-link">{skill.siteplane ? "Siteplane UI" : categoryLabel(skill.categories[0])}</span>
           <span className="ml-3">{skill.author.name}</span>
         </p>
       </div>
