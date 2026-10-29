@@ -1,87 +1,164 @@
 import Link from "next/link";
-import { AGENTS } from "@/lib/taxonomy";
+import { getAllSkills } from "@/lib/skills";
+import { getAllChapters } from "@/lib/chapters";
+import { getAllCollections } from "@/lib/collections";
+import { AGENTS, CATEGORIES } from "@/lib/taxonomy";
 
 const GITHUB_URL = "https://github.com/aliarain/uiskillbook";
+const X_URL = "https://x.com/realaliarain";
+const DIRECTORY_LIMIT = 6;
 
-const COLUMNS: { title: string; links: { href: string; label: string; external?: boolean }[] }[] = [
-  {
-    title: "Browse",
-    links: [
-      { href: "/skills", label: "Skills" },
-      { href: "/chapters", label: "Chapters" },
-      { href: "/collections", label: "Collections" },
-      { href: "/authors", label: "Authors" },
-    ],
-  },
-  {
-    title: "Agents",
-    links: AGENTS.filter((a) => a.slug !== "universal").map((a) => ({
-      href: `/agents/${a.slug}`,
-      label: a.label,
-    })),
-  },
-  {
-    title: "Resources",
-    links: [
-      { href: GITHUB_URL, label: "GitHub", external: true },
-      { href: "/llms.txt", label: "llms.txt", external: true },
-      { href: "/skills/registry.json", label: "registry.json", external: true },
-      { href: "/mcp", label: "MCP", external: true },
-      { href: "/submit", label: "Submit a skill" },
-      { href: "/about", label: "About" },
-    ],
-  },
-];
+type FooterLink = { href: string; label: string; external?: boolean };
+type FooterColumn = { title: string; links: FooterLink[]; all?: FooterLink };
+
+function siteColumns(): FooterColumn[] {
+  return [
+    {
+      title: "Discover",
+      links: [
+        { href: "/skills", label: "All skills" },
+        { href: "/chapters", label: "Playbook" },
+        { href: "/collections", label: "Collections" },
+        { href: "/authors", label: "Authors" },
+        { href: "/agents", label: "Agents" },
+      ],
+    },
+    {
+      title: "Developers",
+      links: [
+        { href: "/about#cli", label: "CLI" },
+        { href: "/mcp", label: "MCP server", external: true },
+        { href: "/skills/registry.json", label: "Registry", external: true },
+        { href: "/llms.txt", label: "llms.txt", external: true },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { href: GITHUB_URL, label: "GitHub", external: true },
+        { href: X_URL, label: "X", external: true },
+        { href: "/submit", label: "Submit a skill" },
+        { href: "/about", label: "About" },
+      ],
+    },
+  ];
+}
+
+function directoryColumns(): FooterColumn[] {
+  const skills = getAllSkills();
+  const topics = CATEGORIES.map((c) => ({
+    ...c,
+    count: skills.filter((s) => s.categories.includes(c.slug)).length,
+  }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, DIRECTORY_LIMIT);
+
+  return [
+    {
+      title: "Topics",
+      links: topics.map((c) => ({ href: `/skills?category=${c.slug}`, label: c.label })),
+      all: { href: "/skills", label: "All topics" },
+    },
+    {
+      title: "Collections",
+      links: getAllCollections()
+        .slice(0, DIRECTORY_LIMIT)
+        .map((c) => ({ href: `/collections/${c.slug}`, label: c.title })),
+      all: { href: "/collections", label: "All collections" },
+    },
+    {
+      title: "Agents",
+      links: AGENTS.filter((a) => a.slug !== "universal")
+        .slice(0, DIRECTORY_LIMIT)
+        .map((a) => ({ href: `/agents/${a.slug}`, label: a.label })),
+      all: { href: "/agents", label: "All agents" },
+    },
+    {
+      title: "Popular skills",
+      links: skills
+        .filter((s) => s.curated)
+        .slice(0, DIRECTORY_LIMIT)
+        .map((s) => ({ href: `/skills/${s.slug}`, label: s.title })),
+      all: { href: "/skills", label: "All skills" },
+    },
+    {
+      title: "Playbook",
+      links: getAllChapters()
+        .slice(0, DIRECTORY_LIMIT)
+        .map((c) => ({ href: `/chapters/${c.slug}`, label: c.title })),
+      all: { href: "/chapters", label: "All guides" },
+    },
+  ];
+}
+
+const LINK_CLASS = "text-sm text-secondary transition-colors hover:text-primary";
+
+function FooterAnchor({ link, className = LINK_CLASS }: { link: FooterLink; className?: string }) {
+  return link.external ? (
+    <a href={link.href} target="_blank" rel="noreferrer" className={className}>
+      {link.label}
+    </a>
+  ) : (
+    <Link href={link.href} className={className}>
+      {link.label}
+    </Link>
+  );
+}
+
+function Column({ column }: { column: FooterColumn }) {
+  return (
+    <div className="min-w-0">
+      <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted">
+        {column.title}
+      </h3>
+      <ul className="mt-3 space-y-2">
+        {column.links.map((link) => (
+          <li key={link.href} className="truncate">
+            <FooterAnchor link={link} />
+          </li>
+        ))}
+        {column.all && (
+          <li>
+            <FooterAnchor
+              link={column.all}
+              className="text-sm text-accent transition-opacity hover:opacity-80"
+            />
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/60">
+    <footer className="mt-10 border-t border-border/60 bg-surface/60">
       <div className="mx-auto max-w-[1140px] px-6 py-14">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <div>
-            <span className="font-mono text-sm font-semibold tracking-wide text-primary">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-5">
+          <div className="col-span-2">
+            <Link href="/" className="font-mono text-sm font-semibold tracking-wide text-primary">
               UI SKILLBOOK
-            </span>
-            <p className="mt-3 text-sm text-muted">
-              Practical UI knowledge for humans and coding agents.
+            </Link>
+            <p className="mt-3 max-w-xs text-sm text-secondary">
+              The field guide for building better interfaces with AI.
             </p>
+            <code className="mt-5 inline-block rounded-lg border border-border bg-background px-3 py-1.5 font-mono text-xs text-secondary">
+              npx uiskillbook start
+            </code>
           </div>
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted">
-                {col.title}
-              </h3>
-              <ul className="mt-3 space-y-2">
-                {col.links.map((link) =>
-                  link.external ? (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm text-secondary transition-colors hover:text-primary"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ) : (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-secondary transition-colors hover:text-primary"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+          {siteColumns().map((column) => (
+            <Column key={column.title} column={column} />
+          ))}
+        </div>
+
+        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-border/60 pt-10 md:grid-cols-5">
+          {directoryColumns().map((column) => (
+            <Column key={column.title} column={column} />
           ))}
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border/60 pt-6 font-mono text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between">
-          <span>© 2026 UI Skillbook</span>
+          <span>© {new Date().getFullYear()} UI Skillbook</span>
           <span>
             Built by{" "}
             <a
@@ -94,7 +171,7 @@ export function SiteFooter() {
             </a>{" "}
             ·{" "}
             <a
-              href="https://x.com/realaliarain"
+              href={X_URL}
               target="_blank"
               rel="noreferrer"
               className="text-secondary transition-colors hover:text-accent"
