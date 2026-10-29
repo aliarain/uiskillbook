@@ -6,6 +6,8 @@ import { SkillRow } from "@/components/skill-row";
 import { TaskSelector } from "@/components/task-selector";
 import { SearchBar } from "@/components/search-trigger";
 import { InlineCode } from "@/components/inline-code";
+import { JsonLd } from "@/components/json-ld";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export default function Home() {
   const skills = getAllSkills();
@@ -24,6 +26,20 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-[1140px] px-6">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: SITE_NAME,
+          url: SITE_URL,
+          description: SITE_DESCRIPTION,
+          potentialAction: {
+            "@type": "SearchAction",
+            target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/skills?q={search_term_string}` },
+            "query-input": "required name=search_term_string",
+          },
+        }}
+      />
       {/* Hero */}
       <section className="card mt-8 px-8 py-16 sm:mt-12 sm:px-14 sm:py-20">
         <p className="font-mono text-xs uppercase tracking-widest text-muted">

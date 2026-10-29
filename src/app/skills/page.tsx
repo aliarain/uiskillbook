@@ -41,14 +41,23 @@ export default async function SkillsPage({
   const category = typeof params.category === "string" ? params.category : undefined;
   const agent = typeof params.agent === "string" ? params.agent : undefined;
   const task = typeof params.task === "string" ? params.task : undefined;
+  const q = typeof params.q === "string" ? params.q.trim() : undefined;
   const sort: SortKey = (typeof params.sort === "string" ? params.sort : "recommended") as SortKey;
 
-  const current = { category, agent, task, sort: sort === "recommended" ? undefined : sort };
+  const current = { q, category, agent, task, sort: sort === "recommended" ? undefined : sort };
 
   let skills = getAllSkills();
   if (category) skills = skills.filter((s) => s.categories.includes(category as never));
   if (agent) skills = skills.filter((s) => s.agents.includes(agent as never));
   if (task) skills = skills.filter((s) => s.tasks?.includes(task as never));
+  if (q) {
+    const needle = q.toLowerCase();
+    skills = skills.filter((s) =>
+      [s.slug, s.title, s.description, s.author.name, ...(s.tags ?? [])].some((field) =>
+        field.toLowerCase().includes(needle)
+      )
+    );
+  }
 
   if (sort === "newest") {
     skills = [...skills].sort((a, b) => (a.updated_at < b.updated_at ? 1 : -1));
@@ -121,6 +130,15 @@ export default async function SkillsPage({
           ))}
         </div>
       </div>
+
+      {q && (
+        <p className="mt-6 text-sm text-secondary">
+          Results for <span className="text-accent">&ldquo;{q}&rdquo;</span>{" "}
+          <Link href={buildHref(current, { q: undefined })} className="ml-2 underline">
+            clear
+          </Link>
+        </p>
+      )}
 
       {task && (
         <p className="mt-6 text-sm text-secondary">

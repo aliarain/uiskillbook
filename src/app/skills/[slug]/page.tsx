@@ -11,7 +11,8 @@ import { categoryLabel, agentLabel } from "@/lib/taxonomy";
 import { markdownToHtml } from "@/lib/markdown";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
-import { pageMetadata } from "@/lib/site";
+import { JsonLd } from "@/components/json-ld";
+import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllSkills().map((s) => ({ slug: s.slug }));
@@ -44,9 +45,37 @@ export default async function SkillDetailPage({
   if (!skill) notFound();
 
   const related = getRelatedSkills(skill);
+  const url = `${SITE_URL}/skills/${skill.slug}`;
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "TechArticle",
+              headline: skill.title,
+              description: skill.description,
+              url,
+              image: `${url}/opengraph-image`,
+              dateModified: skill.updated_at,
+              author: { "@type": "Person", name: skill.author.name, url: skill.author.url },
+              publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+              keywords: [...skill.categories, ...(skill.tags ?? [])].join(", "),
+              ...(skill.source?.repository && { isBasedOn: skill.source.repository }),
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                { "@type": "ListItem", position: 2, name: "Skills", item: `${SITE_URL}/skills` },
+                { "@type": "ListItem", position: 3, name: skill.title, item: url },
+              ],
+            },
+          ],
+        }}
+      />
       <p className="font-mono text-xs uppercase tracking-widest text-muted">
         Skill / {skill.categories.map(categoryLabel).join(" / ")}
         {skill.external && " / External"}
