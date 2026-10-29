@@ -145,6 +145,9 @@ export function SiteFooter() {
             <p className="mt-3 max-w-xs text-sm text-ink-2">
               The field guide for building better interfaces with AI.
             </p>
+            <code className="mt-5 inline-block rounded-input border border-line bg-canvas px-2.5 py-1 font-mono text-xs text-ink-2">
+              npx uiskillbook start
+            </code>
           </div>
           {siteColumns().map((column) => (
             <Column key={column.title} column={column} />
