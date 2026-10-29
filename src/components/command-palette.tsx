@@ -34,7 +34,7 @@ export function CommandPalette({
 
   if (!open) return null;
 
-  const groups = ["Skills", "Chapters", "Collections"] as const;
+  const groups = ["Skills", "Chapters", "Collections", "Design.md"] as const;
 
   function select(href: string) {
     onOpenChange(false);

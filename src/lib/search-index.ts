@@ -1,10 +1,11 @@
 import { getAllSkills } from "./skills";
 import { getAllChapters } from "./chapters";
 import { getAllCollections } from "./collections";
+import { getAllDesignMds } from "./design-md";
 import { categoryLabel } from "./taxonomy";
 
 export type SearchItem = {
-  type: "skill" | "chapter" | "collection";
+  type: "skill" | "chapter" | "collection" | "design-md";
   slug: string;
   href: string;
   title: string;
@@ -40,5 +41,14 @@ export function buildSearchIndex(): SearchItem[] {
     group: "Collections",
   }));
 
-  return [...skills, ...chapters, ...collections];
+  const designMds: SearchItem[] = getAllDesignMds().map((d) => ({
+    type: "design-md",
+    slug: d.slug,
+    href: `/design-md/${d.slug}`,
+    title: d.name,
+    subtitle: d.category,
+    group: "Design.md",
+  }));
+
+  return [...skills, ...chapters, ...collections, ...designMds];
 }

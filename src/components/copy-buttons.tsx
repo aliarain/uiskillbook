@@ -17,16 +17,18 @@ function useClipboard() {
 export function CopyButtons({
   raw,
   agentPrompt,
+  rawLabel = "Copy skill",
 }: {
   raw: string;
   agentPrompt: string;
+  rawLabel?: string;
 }) {
   const { copied, copy } = useClipboard();
 
   return (
     <div className="flex flex-wrap gap-2">
       <button onClick={() => copy("skill", raw)} className="btn btn-secondary">
-        {copied === "skill" ? "Copied" : "Copy skill"}
+        {copied === "skill" ? "Copied" : rawLabel}
       </button>
       <button onClick={() => copy("agent", agentPrompt)} className="btn btn-primary">
         {copied === "agent" ? "Copied" : "Copy for agent"}

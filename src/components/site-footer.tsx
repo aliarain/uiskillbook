@@ -19,6 +19,7 @@ function siteColumns(): FooterColumn[] {
         { href: "/skills", label: "All skills" },
         { href: "/chapters", label: "Playbook" },
         { href: "/collections", label: "Collections" },
+        { href: "/design-md", label: "Design.md" },
         { href: "/authors", label: "Authors" },
         { href: "/agents", label: "Agents" },
       ],

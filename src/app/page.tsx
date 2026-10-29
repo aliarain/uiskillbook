@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getAllSkills, getAuthors } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
+import { getAllDesignMds } from "@/lib/design-md";
+import { BrandTile } from "@/components/brand-tile";
 import { CATEGORIES, categoryLabel } from "@/lib/taxonomy";
 import { SkillRow } from "@/components/skill-row";
 import { TaskSelector } from "@/components/task-selector";
@@ -14,6 +16,7 @@ export default function Home() {
   const skills = getAllSkills();
   const authors = getAuthors();
   const chapters = getAllChapters();
+  const designMds = getAllDesignMds();
 
   const recommended = skills.filter((s) => s.curated).slice(0, 8);
   const latest = [...skills]
@@ -68,6 +71,36 @@ export default function Home() {
       <div className="mt-8">
         <AddToAgent />
       </div>
+
+      {/* Design.md */}
+      <section className="pt-14">
+        <Link
+          href="/design-md"
+          className="group inline-flex items-center gap-1.5 text-xl font-semibold tracking-tight text-primary"
+        >
+          Design.md
+          <span aria-hidden className="text-muted transition-transform group-hover:translate-x-0.5">
+            ›
+          </span>
+        </Link>
+        <p className="mt-1 text-sm text-secondary">
+          Brand design languages as DESIGN.md files your agent can follow.
+        </p>
+        <ul className="mt-5 flex flex-wrap gap-3">
+          {designMds.map((entry) => (
+            <li key={entry.slug}>
+              <Link
+                href={`/design-md/${entry.slug}`}
+                title={entry.name}
+                aria-label={`${entry.name} DESIGN.md`}
+                className="group block rounded-xl"
+              >
+                <BrandTile entry={entry} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* What are you building */}
       <section className="py-14">

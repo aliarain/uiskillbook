@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllSkills, getSkillsByAgent } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
+import { getAllDesignMds } from "@/lib/design-md";
 import { AGENTS } from "@/lib/taxonomy";
 import { SITE_URL } from "@/lib/site";
 
@@ -13,7 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const skills = getAllSkills();
   const chapters = getAllChapters();
   const collections = getAllCollections();
-  const contentDate = latest([...skills, ...chapters, ...collections].map((i) => i.updated_at));
+  const designMds = getAllDesignMds();
+  const contentDate = latest([...skills, ...chapters, ...collections, ...designMds].map((i) => i.updated_at));
   const dated = (items: { updated_at: string }[]) =>
     items.length ? latest(items.map((i) => i.updated_at)) : contentDate;
 
@@ -22,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/skills", lastModified: dated(skills) },
     { path: "/chapters", lastModified: dated(chapters) },
     { path: "/collections", lastModified: dated(collections) },
+    { path: "/design-md", lastModified: dated(designMds) },
     { path: "/agents", lastModified: dated(skills) },
     { path: "/authors", lastModified: dated(skills) },
     { path: "/submit", lastModified: contentDate },
@@ -43,10 +46,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(c.updated_at),
   }));
 
+  const designMdRoutes = designMds.map((d) => ({
+    url: `${SITE_URL}/design-md/${d.slug}`,
+    lastModified: new Date(d.updated_at),
+  }));
+
   const agentRoutes = AGENTS.filter((a) => a.slug !== "universal").map((a) => ({
     url: `${SITE_URL}/agents/${a.slug}`,
     lastModified: dated(getSkillsByAgent(a.slug)),
   }));
 
-  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...agentRoutes];
+  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...designMdRoutes, ...agentRoutes];
 }

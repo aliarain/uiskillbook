@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAllSkills, getSkillRawMarkdown } from "@/lib/skills";
+import { getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
 
 const SERVER_NAME = "UI Skillbook";
 const SERVER_VERSION = "0.1.0";
@@ -57,6 +58,18 @@ const tools = [
         slug: { type: "string", description: "The skill's slug, e.g. baseline-ui." },
       },
       required: ["slug"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "get_design_md",
+    description:
+      "Fetch a brand DESIGN.md (colors, type, spacing, components) by slug. Call without a slug to list available brands.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string", description: "Brand slug, e.g. linear. Omit to list brands." },
+      },
       additionalProperties: false,
     },
   },
@@ -196,6 +209,32 @@ export async function POST(request: Request) {
             content: [{ type: "text", text: `Failed to load skill content for ${skill.slug}` }],
           });
         }
+      }
+
+      if (name === "get_design_md") {
+        const slug = typeof args.slug === "string" ? args.slug.trim() : "";
+        if (!slug || !getDesignMdBySlug(slug)) {
+          const brands = getAllDesignMds().map((d) => ({
+            slug: d.slug,
+            name: d.name,
+            description: d.description,
+            url: `${baseUrl}/design-md/${d.slug}`,
+          }));
+          return jsonRpcResult(body.id, {
+            isError: Boolean(slug),
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(
+                  { ...(slug && { error: `Unknown brand "${slug}"` }), brands },
+                  null,
+                  2
+                ),
+              },
+            ],
+          });
+        }
+        return jsonRpcResult(body.id, { content: [{ type: "text", text: getDesignMdRaw(slug) }] });
       }
 
       return jsonRpcError(body.id, -32601, `Unknown tool: ${name}`);

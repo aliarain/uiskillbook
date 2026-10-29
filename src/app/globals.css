@@ -162,3 +162,16 @@ pre {
   padding: 0.1em 0.35em;
   font-size: 0.875em;
 }
+
+/* Design.md logo tiles stay neutral until their row or card is hovered. */
+.brand-tile {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+@media (hover: hover) {
+  .group:hover .brand-tile {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: white;
+  }
+}
