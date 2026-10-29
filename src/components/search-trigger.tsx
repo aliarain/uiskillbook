@@ -8,8 +8,8 @@ import { useCommandPalette } from "./command-palette-provider";
 function Shortcut({ className = "" }: { className?: string }) {
   return (
     <KbdGroup className={className}>
-      <Kbd>⌘</Kbd>
-      <Kbd>K</Kbd>
+      <Kbd className="text-xs">⌘</Kbd>
+      <Kbd className="text-xs">K</Kbd>
     </KbdGroup>
   );
 }

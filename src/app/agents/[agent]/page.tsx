@@ -77,6 +77,7 @@ export default async function AgentDetailPage({
         </p>
       </div>
 
+      <h2 className="sr-only">Skills for {label}</h2>
       <div className="mt-10 space-y-0.5">
         {skills.length === 0 ? (
           <p className="py-10 text-sm text-ink-3">No skills tagged for {label} yet.</p>

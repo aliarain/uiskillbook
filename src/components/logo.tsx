@@ -15,7 +15,7 @@ export function Logo({ className = "" }: { className?: string }) {
     <Link
       href="/"
       aria-label="UI Skillbook home"
-      className={`flex items-center gap-1.5 rounded-button text-[15px] font-medium tracking-[-0.01em] text-ink-strong ${className}`}
+      className={`flex items-center gap-1.5 rounded-button py-1 text-[15px] font-medium tracking-[-0.01em] text-ink-strong ${className}`}
     >
       <LogoMark />
       UI Skillbook

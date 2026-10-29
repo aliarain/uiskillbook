@@ -9,7 +9,7 @@ export function SkillRow({ skill, index }: { skill: Skill; index: number }) {
       href={`/skills/${skill.slug}`}
       className="row flex items-start gap-4 px-3 py-3.5 sm:items-center"
     >
-      <span className="w-6 shrink-0 pt-0.5 text-[13px] text-ink-4 tabular-nums sm:pt-0">
+      <span aria-hidden className="w-6 shrink-0 pt-0.5 text-[13px] text-ink-3 tabular-nums sm:pt-0">
         {String(index).padStart(2, "0")}
       </span>
 

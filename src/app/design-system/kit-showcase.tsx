@@ -103,7 +103,7 @@ function Demo({ id, title, children }: { id: string; title: string; children: Re
   return (
     <Card id={id} className="scroll-mt-24">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle render={<h2 />}>{title}</CardTitle>
       </CardHeader>
       <CardPanel className="flex flex-wrap items-start gap-3">{children}</CardPanel>
     </Card>

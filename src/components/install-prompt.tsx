@@ -17,6 +17,8 @@ function PromptPanel({ target }: { target: InstallTarget }) {
         <p className="text-[13px] text-ink-3">Paste this into {target.label}.</p>
         <CopyButton
           value={target.prompt}
+          variant="outline"
+          size="sm"
           data-umami-event="copy-install-prompt"
           data-umami-event-agent={target.agent}
         >
@@ -39,7 +41,7 @@ export function InstallPrompt({ targets }: { targets: InstallTarget[] }) {
           <Tabs defaultValue={targets[0].agent}>
             <TabsList aria-label="Agent">
               {targets.map((t) => (
-                <TabsTab key={t.agent} value={t.agent}>
+                <TabsTab key={t.agent} value={t.agent} className="text-ink-2 aria-selected:text-ink">
                   {t.label}
                 </TabsTab>
               ))}

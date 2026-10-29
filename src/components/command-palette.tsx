@@ -95,24 +95,24 @@ export function CommandPalette({
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <KbdGroup>
-                  <Kbd>
+                  <Kbd className="text-xs">
                     <ArrowUpIcon />
                   </Kbd>
-                  <Kbd>
+                  <Kbd className="text-xs">
                     <ArrowDownIcon />
                   </Kbd>
                 </KbdGroup>
                 <span>Navigate</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Kbd>
+                <Kbd className="text-xs">
                   <CornerDownLeftIcon />
                 </Kbd>
                 <span>Open</span>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
-              <Kbd>Esc</Kbd>
+              <Kbd className="text-xs">Esc</Kbd>
               <span>Close</span>
             </div>
           </CommandFooter>

@@ -19,7 +19,7 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
             {i > 0 && <BreadcrumbSeparator />}
             <BreadcrumbItem>
               {item.href ? (
-                <BreadcrumbLink render={<Link href={item.href} />}>{item.label}</BreadcrumbLink>
+                <BreadcrumbLink className="py-1" render={<Link href={item.href} />}>{item.label}</BreadcrumbLink>
               ) : (
                 <BreadcrumbPage>{item.label}</BreadcrumbPage>
               )}

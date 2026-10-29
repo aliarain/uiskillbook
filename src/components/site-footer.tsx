@@ -18,7 +18,6 @@ function siteColumns(): FooterColumn[] {
       title: "Discover",
       links: [
         { href: "/skills", label: "All skills" },
-        { href: "/siteplane-ui", label: "Siteplane UI" },
         { href: "/chapters", label: "Playbook" },
         { href: "/collections", label: "Collections" },
         { href: "/design-md", label: "Design.md" },

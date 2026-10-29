@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getAllSkills, getSiteplaneSkills } from "@/lib/skills";
+import { getAllSkills, skillRepo, skillStars, type Skill } from "@/lib/skills";
+import { SkillTabs } from "@/components/skill-tabs";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllDesignMds } from "@/lib/design-md";
 import { BrandTile } from "@/components/brand-tile";
@@ -17,12 +18,20 @@ export default function Home() {
   const skills = getAllSkills();
   const chapters = getAllChapters();
   const designMds = getAllDesignMds();
-  const siteplane = getSiteplaneSkills();
-  const siteplaneFeatured = ["dialog", "combobox", "table", "command", "toast", "sidebar"]
-    .map((c) => siteplane.find((s) => s.siteplane.component === c))
-    .filter((s) => s !== undefined);
 
   const recommended = skills.filter((s) => s.curated).slice(0, 6);
+  // Trending = most GitHub stars on the source repo, one skill per repo so a big repo can't fill the row.
+  const seenRepos = new Set<string>();
+  const trending = skills
+    .filter((s) => skillStars(s) !== undefined)
+    .sort((a, b) => (skillStars(b) ?? 0) - (skillStars(a) ?? 0))
+    .filter((s) => {
+      const repo = skillRepo(s) ?? s.slug;
+      if (seenRepos.has(repo)) return false;
+      seenRepos.add(repo);
+      return true;
+    })
+    .slice(0, 6);
   const latest = skills
     .filter((s) => !s.siteplane)
     .sort((a, b) => (a.updated_at < b.updated_at ? 1 : -1))
@@ -51,47 +60,17 @@ export default function Home() {
       />
       <HeroPreview />
 
-      {/* Recommended */}
-      <section className="mt-10">
-        <SectionHeading
-          title="Recommended"
-          href="/skills"
-          description="Hand-picked skills to start with."
-          allLabel="View all"
-        />
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {recommended.map((skill) => (
-            <SkillCard key={skill.slug} skill={skill} />
-          ))}
-        </div>
-      </section>
-
-      {/* Siteplane UI */}
+      {/* Skills */}
       <section className="mt-16">
-        <SectionHeading
-          title="Siteplane UI"
-          href="/siteplane-ui"
-          description={`Our design system. All ${siteplane.length} components, with when to pick each one over its neighbours.`}
-          allLabel="All components"
-        />
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {siteplaneFeatured.map((skill) => (
-            <SkillCard key={skill.slug} skill={skill} />
-          ))}
-        </div>
-      </section>
-
-      {/* Latest additions */}
-      <section className="mt-16">
-        <SectionHeading
-          title="Latest additions"
-          href="/skills?sort=newest"
-          allLabel="View all"
-        />
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {latest.map((skill) => (
-            <SkillCard key={skill.slug} skill={skill} />
-          ))}
+        <SectionHeading title="Skills" href="/skills" allLabel="Browse all skills" />
+        <div className="mt-4">
+          <SkillTabs
+            tabs={[
+              { value: "trending", label: "Trending", content: <SkillGrid skills={trending} /> },
+              { value: "latest", label: "Latest", content: <SkillGrid skills={latest} /> },
+              { value: "recommended", label: "Recommended", content: <SkillGrid skills={recommended} /> },
+            ]}
+          />
         </div>
       </section>
 
@@ -168,6 +147,16 @@ export default function Home() {
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function SkillGrid({ skills }: { skills: Skill[] }) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {skills.map((skill) => (
+        <SkillCard key={skill.slug} skill={skill} />
+      ))}
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function AuthorsPage() {
             className="row flex items-center justify-between px-3 py-3.5"
           >
             {author.url ? (
-              <a href={author.url} className="text-sm text-ink hover:text-link">
+              <a href={author.url} className="inline-block py-1 text-sm text-ink hover:text-link">
                 {author.name}
               </a>
             ) : (
