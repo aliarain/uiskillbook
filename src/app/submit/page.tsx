@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { SubmitForm } from "./submit-form";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Submit a skill",
   description: "Submit a UI skill to the Skillbook for review.",
-};
+  path: "/submit",
+});
 
 const CRITERIA = [
   "Has a concrete purpose",

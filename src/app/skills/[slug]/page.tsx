@@ -11,6 +11,7 @@ import { categoryLabel, agentLabel } from "@/lib/taxonomy";
 import { markdownToHtml } from "@/lib/markdown";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllSkills().map((s) => ({ slug: s.slug }));
@@ -24,7 +25,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const skill = getSkillBySlug(slug);
   if (!skill) return {};
-  return { title: skill.title, description: skill.description };
+  return pageMetadata({
+    title: skill.title,
+    description: skill.description,
+    path: `/skills/${slug}`,
+    type: "article",
+    image: `/skills/${slug}/opengraph-image`,
+  });
 }
 
 export default async function SkillDetailPage({

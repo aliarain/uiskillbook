@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import { getAllSkills } from "@/lib/skills";
 import { CATEGORIES, AGENTS } from "@/lib/taxonomy";
 import { SkillRow } from "@/components/skill-row";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Skills",
   description: "Practical instructions for better interface work.",
-};
+  path: "/skills",
+});
 
 type SortKey = "recommended" | "newest" | "az";
 

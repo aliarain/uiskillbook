@@ -2,11 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { AGENTS } from "@/lib/taxonomy";
 import { getSkillsByAgent } from "@/lib/skills";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Agents",
   description: "Use UI Skillbook with your coding agent of choice.",
-};
+  path: "/agents",
+});
 
 export default function AgentsPage() {
   const agents = AGENTS.filter((a) => a.slug !== "universal");

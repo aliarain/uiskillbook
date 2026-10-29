@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getAllChapters, getChapterBySlug, getChapterSkills } from "@/lib/chapters";
 import { markdownToHtml } from "@/lib/markdown";
 import { SkillRow } from "@/components/skill-row";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllChapters().map((c) => ({ slug: c.slug }));
@@ -17,7 +18,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const chapter = getChapterBySlug(slug);
   if (!chapter) return {};
-  return { title: chapter.title, description: chapter.description };
+  return pageMetadata({
+    title: chapter.title,
+    description: chapter.description,
+    path: `/chapters/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function ChapterDetailPage({

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllCollections } from "@/lib/collections";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Collections",
   description: "Skills grouped around the jobs you're actually trying to do.",
-};
+  path: "/collections",
+});
 
 export default function CollectionsPage() {
   const collections = getAllCollections();

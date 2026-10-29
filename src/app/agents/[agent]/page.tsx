@@ -6,6 +6,7 @@ import { getSkillsByAgent } from "@/lib/skills";
 import { SkillRow } from "@/components/skill-row";
 import { CopyCodeBlock } from "@/components/copy-code-block";
 import { MCP_URL } from "@/lib/site";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return AGENTS.filter((a) => a.slug !== "universal").map((a) => ({ agent: a.slug }));
@@ -18,7 +19,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { agent } = await params;
   if (!AGENTS.some((a) => a.slug === agent)) return {};
-  return { title: `UI Skillbook for ${agentLabel(agent)}` };
+  return pageMetadata({
+    title: `UI Skillbook for ${agentLabel(agent)}`,
+    description: `UI skills, MCP and CLI setup for ${agentLabel(agent)}.`,
+    path: `/agents/${agent}`,
+  });
 }
 
 export default async function AgentDetailPage({

@@ -7,6 +7,7 @@ import {
   getCollectionSkills,
 } from "@/lib/collections";
 import { SkillRow } from "@/components/skill-row";
+import { pageMetadata } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllCollections().map((c) => ({ slug: c.slug }));
@@ -20,7 +21,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const collection = getCollectionBySlug(slug);
   if (!collection) return {};
-  return { title: collection.title, description: collection.description };
+  return pageMetadata({
+    title: collection.title,
+    description: collection.description,
+    path: `/collections/${slug}`,
+  });
 }
 
 export default async function CollectionDetailPage({

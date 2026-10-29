@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { buildSearchIndex } from "@/lib/search-index";
-import { SITE_URL } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +24,17 @@ export const metadata: Metadata = {
     default: "UI Skillbook — The field guide for building better interfaces with AI",
     template: "%s — UI Skillbook",
   },
-  description:
-    "Curated UI skills, rules, patterns, and instructions for humans and coding agents.",
+  description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/",
+    title: "UI Skillbook — The field guide for building better interfaces with AI",
+    description: SITE_DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", creator: "@realaliarain" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

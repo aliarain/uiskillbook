@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllChapters } from "@/lib/chapters";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Chapters",
   description: "Multi-skill lessons for practical interface problems.",
-};
+  path: "/chapters",
+});
 
 export default function ChaptersPage() {
   const chapters = getAllChapters();

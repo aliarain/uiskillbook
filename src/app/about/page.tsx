@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description: "What UI Skillbook is and why it exists.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

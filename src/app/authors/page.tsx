@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { getAuthors } from "@/lib/skills";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Authors",
   description: "Everyone whose skills are curated in UI Skillbook.",
-};
+  path: "/authors",
+});
 
 export default function AuthorsPage() {
   const authors = getAuthors();
