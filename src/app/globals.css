@@ -287,26 +287,6 @@
     background-size: 16px 16px;
   }
 
-  /* Design.md logo tiles: desaturated until their link is hovered or focused. */
-  .brand-tile {
-    transition: background-color 140ms var(--ease-out), color 140ms var(--ease-out),
-      border-color 140ms var(--ease-out);
-  }
-
-  .group:focus-visible .brand-tile {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: var(--brand-foreground);
-  }
-
-  @media (hover: hover) {
-    .group:hover .brand-tile {
-      background: var(--brand);
-      border-color: var(--brand);
-      color: var(--brand-foreground);
-    }
-  }
-
   /* Thin scrollbar for scrolling panels such as the command palette. */
   .scroll-thin {
     scrollbar-width: thin;
