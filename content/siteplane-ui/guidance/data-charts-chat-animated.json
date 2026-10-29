@@ -1,0 +1,624 @@
+{
+  "avatar": {
+    "summary": "A round image for a user or account, showing initials or an icon instead when no picture is available.",
+    "useFor": "Avatar stands in for a single user, team or account next to their name, in headers, comments and list rows. It handles the loading and broken-image case for you by swapping in initials or an icon.",
+    "neighbours": [
+      { "name": "avatar-group", "guidance": "Pick Avatar Group when several people share one spot and you want them overlapped with a +N count." },
+      { "name": "badge", "guidance": "Pick Badge for a text label about status or category; Avatar is only for identity." }
+    ],
+    "rules": [
+      "Compose `Avatar` with an `AvatarImage` and an `AvatarFallback`, so initials or an icon show while the image loads or if it fails.",
+      "Write a meaningful `alt` for the image. When the avatar shows only initials or an icon, add `role=\"img\"` and an `aria-label` to `Avatar` itself.",
+      "Resize or reshape with classes such as `size-10` or a radius class, because there is no size or shape prop.",
+      "Use `status` for a presence dot and let it announce Online, Away, Busy or Offline; override the wording with `statusLabel` when translating.",
+      "Skip the accessible name when the person's name is already printed right beside the avatar, so it is not read twice."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["avatar", "profile", "identity", "presence"],
+    "install": ["avatar"]
+  },
+  "avatar-group": {
+    "summary": "A facepile: several avatars overlapped in a row with an optional count of the people not shown.",
+    "useFor": "Avatar Group shows that a set of people belongs to something, such as project members or reviewers, without listing each name. It handles the overlap, the separating ring and the overflow pill.",
+    "neighbours": [
+      { "name": "avatar", "guidance": "Pick a single Avatar when only one person is involved." },
+      { "name": "resource-list", "guidance": "Pick Resource List when every person needs their name and details visible on screen." }
+    ],
+    "rules": [
+      "Place `Avatar` children straight inside `AvatarGroup`, then end with an `AvatarGroupCount` for the hidden members.",
+      "Set `size` (`sm`, `md`, `lg`, `xl`) on the group rather than on each avatar so the overlap and the count scale together.",
+      "Set `count` to the number of avatars left out, and pair it with screen-reader-only text naming what is counted, for example \"more members\".",
+      "Decide in your own code how many avatars to render; the group does not measure or trim its children.",
+      "On a custom surface, check that the ring colour matches the background, since it follows the kit surface it sits on."
+    ],
+    "categories": ["visual", "layout"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["avatar", "facepile", "members", "overflow-count"],
+    "install": ["avatar-group"]
+  },
+  "badge": {
+    "summary": "A compact label for a status, category, plan or count, with semantic colour variants and fixed sizes.",
+    "useFor": "Badge tags a piece of content with a short word or number, such as Draft, Paid, New or an unread count. It also covers status-with-dot text, plan entitlements and a verified mark on an avatar.",
+    "neighbours": [
+      { "name": "tag-group", "guidance": "Pick Tag Group when the labels can be selected, removed or navigated with the keyboard." },
+      { "name": "marker", "guidance": "Pick Marker for a quiet status line inside a chat thread rather than a chip on a row." }
+    ],
+    "rules": [
+      "Choose `variant` by meaning (`success`, `warning`, `error`, `info`, `accent`, `secondary` and so on) and always keep a visible word beside the colour.",
+      "Use `profile=\"status\"` for a coloured dot followed by the state in words, and `profile=\"count\"` for a notification number that never truncates.",
+      "Give a count badge a contextual accessible name with hidden text, and hide decorative icons and dots from assistive technology.",
+      "Make a badge a link with `render`; otherwise it is a plain, non-interactive span and should not be used as a button.",
+      "Reserve `light` for the single announcement on a page, on an opaque variant."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard", "data-table", "design-system"],
+    "tags": ["badge", "status", "label", "count"],
+    "install": ["badge"]
+  },
+  "file-type-icon": {
+    "summary": "A document-sheet icon that shows a file's type and extension, picked from its name.",
+    "useFor": "File Type Icon gives file lists, upload rows and attachment cards a quick visual cue for PDFs, spreadsheets, images, code and more. It reads only the file name, so it works before any upload has finished.",
+    "neighbours": [
+      { "name": "attachment", "guidance": "Pick Attachment when the file needs a full card with its name, upload state and actions; it can hold this icon as its media." }
+    ],
+    "rules": [
+      "Pass the file name as `name`, or set `extension` when the name has no suffix, such as a document title.",
+      "Always print the file name next to the icon, because the icon is `aria-hidden` and carries no text for assistive technology.",
+      "Pick a `size` of 16, 20, 24, 32 or 40; below 32 px the extension label is too small to read, so lean on the visible name.",
+      "Prefer a real thumbnail for images and videos when you have one, and keep this icon for rows without a preview.",
+      "Size outside the presets with a `className` that sets height and width in the 34:40 proportion."
+    ],
+    "categories": ["visual"],
+    "tasks": ["form", "other"],
+    "tags": ["file", "icon", "attachment", "upload"],
+    "install": ["file-type-icon"]
+  },
+  "card": {
+    "summary": "A surface that groups related content and actions, with header, panel, footer and framed-section parts.",
+    "useFor": "Card is the default container for a block of an app screen, such as a form section, a summary, a list of invoices or a chart. It offers several surface treatments and a joined frame for titled sections that hold tables or stacked cards.",
+    "neighbours": [
+      { "name": "settings-list", "guidance": "Pick Settings List when every row is a labelled control; it already draws its own card and separators." },
+      { "name": "data-list", "guidance": "Put a Data List inside a Card when the content is label and value pairs for one record." },
+      { "name": "glass", "guidance": "Use the glass variant only when the card sits over a photo, video or colourful surface." }
+    ],
+    "rules": [
+      "Build with `CardHeader` (holding `CardMedia`, `CardTitle`, `CardDescription`, `CardAction`), then `CardPanel` and `CardFooter`.",
+      "Render the title as a heading with `render={<h2 />}` when it belongs in the page outline, because title parts are divs by default.",
+      "Do not wrap a card that contains buttons in another button or link; keep each control separate.",
+      "Pick the surface with `variant` (`raised`, `subtle`, `header`, `inset`, `elevated`, `message`, `error`, `glass`) and the padding with `density` or the `--sp-rw-card-inset` tokens.",
+      "Use `CardFrame` with `CardFrameBleed` to run a table edge to edge so its columns line up with the frame header."
+    ],
+    "categories": ["layout", "visual"],
+    "tasks": ["dashboard", "design-system", "form"],
+    "tags": ["card", "surface", "container", "panel"],
+    "install": ["card"]
+  },
+  "data-list": {
+    "summary": "Label and value rows that describe one record, laid out side by side or stacked.",
+    "useFor": "Data List shows the properties of a single thing, such as an account, an invoice or a deployment, as a description list. It suits detail panels, summary cards and side drawers.",
+    "neighbours": [
+      { "name": "table", "guidance": "Pick Table when people compare, sort or select many records instead of reading one." },
+      { "name": "settings-list", "guidance": "Pick Settings List when each row holds a control that changes a value." },
+      { "name": "native-table", "guidance": "Pick Native Table when the data has several columns per row rather than one label and one value." }
+    ],
+    "rules": [
+      "Compose `DataList` with one `DataListItem` per property, each holding a `DataListLabel` and a `DataListValue` so labels and values pair up for screen readers.",
+      "Switch to `orientation=\"vertical\"` in narrow columns or for long values.",
+      "Set `--data-list-label-width` when several lists stack and their value columns should line up.",
+      "Turn on `dividers` to separate rows with hairlines; inline parts such as Badge, Code or a link can sit in a value.",
+      "Keep it read-only and stateless; it renders on the server and has no editing behaviour."
+    ],
+    "categories": ["layout", "accessibility"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["description-list", "key-value", "details", "properties"],
+    "install": ["data-list"]
+  },
+  "tag-group": {
+    "summary": "A keyboard-navigable set of tags that can be selected or removed, with animated adds and removals.",
+    "useFor": "Tag Group shows a collection of short labels that people interact with, such as applied filters, project labels or chosen recipients. It handles arrow-key focus, removal by keyboard and focus recovery after a tag leaves.",
+    "neighbours": [
+      { "name": "badge", "guidance": "Pick Badge for a static label that nobody selects or removes." },
+      { "name": "filter-bar", "guidance": "Inside a Filter Bar, put the removable tags in its active-filters row." }
+    ],
+    "rules": [
+      "Make a tag selectable with `selected` plus `onSelectedChange`, or with `defaultSelected` for tag-owned state.",
+      "Providing `onRemove` gives each tag a remove button and keyboard deletion; drop the tag from your state in the handler and label the button with `removeLabel`.",
+      "Use stable React keys, never the index, or the wrong tag animates out.",
+      "Render `Tag` elements directly inside `TagGroup` (fragments are fine) and do not wrap each tag in your own component.",
+      "Set `size` once on the group so every tag matches."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["form", "data-table"],
+    "tags": ["tags", "chips", "labels", "filters"],
+    "install": ["tag-group"]
+  },
+  "table": {
+    "summary": "An interactive data grid with keyboard navigation, sortable columns, row selection and row actions.",
+    "useFor": "Table is for rows people work with: sorting, selecting, opening or running a command on a record. It acts as one tab stop with arrow-key movement, and leaves data loading, paging and sorting logic to your app.",
+    "neighbours": [
+      { "name": "native-table", "guidance": "Pick Native Table for read-only content or cells full of inputs that need their own tab stops." },
+      { "name": "resource-list", "guidance": "Pick Resource List for a one-column list of entities with a status marker and a little metadata." },
+      { "name": "data-list", "guidance": "Pick Data List to show the fields of a single record." }
+    ],
+    "rules": [
+      "Put `TableHead` cells directly in `TableHeader`, mark the identifying column with `isRowHeader`, and give rich rows a plain `textValue`.",
+      "Give the table a name with `aria-label`, `aria-labelledby` or a direct `TableCaption`.",
+      "For sorting, set `allowsSorting`, handle `onSortChange`, update `sortDescriptor` and reorder the data yourself.",
+      "For bulk selection use `selectionMode=\"multiple\"` with `selectionTrigger=\"checkbox\"` and `TableSelectionCheckbox`, and handle a `Selection` that can be the string \"all\".",
+      "Show empty results with `TableBody renderEmptyState`, and set `aria-busy` on the surrounding region while loading since there is no loading prop.",
+      "Let wide tables scroll inside their container instead of squeezing columns."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["data-table", "dashboard"],
+    "tags": ["table", "data-grid", "sorting", "selection"],
+    "install": ["table"]
+  },
+  "native-table": {
+    "summary": "A plain HTML table in the same look as Table, for reports and cells whose controls keep their own tab stops.",
+    "useFor": "Native Table renders real table elements for content people read, such as reports, price lists, estimates and markdown tables. Inputs and buttons inside cells behave normally and can belong to a surrounding form.",
+    "neighbours": [
+      { "name": "table", "guidance": "Pick Table when rows are sorted, selected or activated with arrow-key navigation." },
+      { "name": "data-list", "guidance": "Pick Data List for a single record's label and value pairs." },
+      { "name": "typeset", "guidance": "Typeset already maps markdown tables onto Native Table, so do not wire it by hand there." }
+    ],
+    "rules": [
+      "Name the table with `aria-label` or a `NativeTableCaption` placed first inside `NativeTable`.",
+      "The first cell that identifies a row should be a `NativeTableHead` carrying `scope=\"row\"`.",
+      "Use `tone` on `NativeTableRow` for `section`, `total` or `muted` rows, and turn off hover on section rows with `hoverable={false}`.",
+      "Set `align=\"end\"` on number columns so digits line up, and on their headings too.",
+      "Set `minWidth` when columns need more room than a phone gives, so the table scrolls inside its container.",
+      "Do sorting, filtering, paging and totals in your app; the table holds no state."
+    ],
+    "categories": ["layout", "accessibility"],
+    "tasks": ["data-table", "dashboard"],
+    "tags": ["table", "report", "html-table", "static"],
+    "install": ["native-table"]
+  },
+  "resource-list": {
+    "summary": "A list of entities with a status indicator, title, description and meta slot, optionally clickable as links.",
+    "useFor": "Resource List shows projects, tasks, deployments or similar items as compact rows with a coloured marker and trailing metadata. It works as navigation when rows are links and animates rows as they are added or removed.",
+    "neighbours": [
+      { "name": "table", "guidance": "Pick Table when people compare several columns or need sorting and multi-select." },
+      { "name": "data-list", "guidance": "Pick Data List for the fields of one record rather than many records." },
+      { "name": "timeline", "guidance": "Pick Timeline when the rows are events in time order joined by a connector." }
+    ],
+    "rules": [
+      "Set `interactive` on `ResourceListItem` and render an anchor to make rows links; mark the current one with `active`.",
+      "Give every `ResourceListIndicator` a `label` (and an `icon` if useful) so status is not carried by colour alone.",
+      "Render rows as direct children with stable keys so add, remove and reorder animations track the right row.",
+      "Use `variant` (`soft` or `divided`), `density` and `flush` to match the surrounding card or filter bar.",
+      "Reach for List Box instead when you need managed keyboard selection; `selected` here only changes appearance on static and link rows."
+    ],
+    "categories": ["layout", "navigation"],
+    "tasks": ["dashboard", "navigation", "data-table"],
+    "tags": ["list", "entities", "status", "rows"],
+    "install": ["resource-list"]
+  },
+  "filter-bar": {
+    "summary": "A layout strip above a list or table for view tabs, search, filter menus, actions and applied-filter tags.",
+    "useFor": "Filter Bar arranges the controls that narrow a collection, from a plain search field to view tabs that open into a search. It only lays things out: the query, the filter values and the filtering itself stay in your app.",
+    "neighbours": [
+      { "name": "tag-group", "guidance": "Use a Tag Group inside `FilterBarActiveFilters` to show the filters currently applied." },
+      { "name": "table", "guidance": "Place the Filter Bar above a Table or Resource List; results states belong to the collection, not the bar." }
+    ],
+    "rules": [
+      "Group parts with `FilterBarControls`, `FilterBarSearch`, `FilterBarFilters`, `FilterBarActiveFilters` and `FilterBarActions` inside `FilterBar`.",
+      "When a search sits alongside a handful of views, put `TabsTab` items inside `FilterBarTabs`. Filter your rows from `query`, and give the tab list a label describing the views it changes.",
+      "Set `open` on `FilterBarActiveFilters` to whether any filter applies, so the row collapses smoothly when the last one goes.",
+      "Keep loading, error and empty states with the results, and never reset a search field that has focus.",
+      "Announce meaningful result changes politely rather than on every keystroke."
+    ],
+    "categories": ["layout", "interaction", "responsive"],
+    "tasks": ["data-table", "dashboard"],
+    "tags": ["filters", "search", "toolbar", "collection"],
+    "install": ["filter-bar"]
+  },
+  "settings-list": {
+    "summary": "A titled card of settings rows, each pairing a label and help text with a control you supply.",
+    "useFor": "Settings List builds preference and account pages where each row is one setting with a switch, select, input or action button. It wires the labels and descriptions to the control and handles the responsive stacking.",
+    "neighbours": [
+      { "name": "data-list", "guidance": "Pick Data List when the rows only show values and nothing is editable." },
+      { "name": "card", "guidance": "Pick a plain Card when the content is not a set of individual settings." }
+    ],
+    "rules": [
+      "Give `SettingsList` a `title` (set `titleLevel` to fit the page outline) and give each `SettingsListItem` a `title`.",
+      "Render the control in the `control` render prop and spread every prop it receives so the label and description stay linked.",
+      "Buttons like Change or Manage should get `aria-describedby` and nothing more, so their visible text remains the accessible name.",
+      "Keep values, saving and validation in your app state; the list only draws the layout.",
+      "Use `layout=\"inline\"` for small controls like switches and leave wide text controls on the default `responsive` layout."
+    ],
+    "categories": ["forms", "layout", "accessibility"],
+    "tasks": ["form", "dashboard"],
+    "tags": ["settings", "preferences", "form", "rows"],
+    "install": ["settings-list"]
+  },
+  "stepper": {
+    "summary": "An ordered list of steps showing which are done, current, open or blocked, with optional clickable steps.",
+    "useFor": "Stepper shows progress through a sequence such as onboarding or setup, and can reveal the content of the step that is open. It is a display and navigation aid; your app decides when a step is complete.",
+    "neighbours": [
+      { "name": "timeline", "guidance": "Pick Timeline for past events in date order rather than steps someone moves through." },
+      { "name": "progress", "guidance": "Pick Progress when only a percentage matters and the steps have no names." }
+    ],
+    "rules": [
+      "Use `StepperItem` for read-only steps and `StepperButtonItem` for every step people can open, without mixing the two for the same step.",
+      "Set `status` (`done`, `current`, `open`, `blocked`) for progress and `active` on a button item for which step is open; they are independent.",
+      "Pass children to show content under a step; it sits outside the button, so it can hold fields and links.",
+      "Keep or translate `statusLabel`, because done and blocked are shown only as icons visually.",
+      "Collapsed step content turns inert, so shift focus forward yourself once a step closes."
+    ],
+    "categories": ["navigation", "forms"],
+    "tasks": ["form", "navigation"],
+    "tags": ["stepper", "wizard", "progress", "onboarding"],
+    "install": ["stepper"]
+  },
+  "timeline": {
+    "summary": "A vertical list of events in time order with coloured or icon markers and an optional now line.",
+    "useFor": "Timeline presents activity feeds, deploy histories, audit logs and a day's appointments. Events animate in and out as the list changes, and a now marker can sit between past and upcoming items.",
+    "neighbours": [
+      { "name": "stepper", "guidance": "Pick Stepper when the items are steps a person works through, not events that happened." },
+      { "name": "resource-list", "guidance": "Pick Resource List when order in time is not the point and each row is an entity." }
+    ],
+    "rules": [
+      "Render each `TimelineItem` directly inside `Timeline`, not inside a fragment, with `TimelineTitle` and `TimelineDescription`.",
+      "Set `tone` for status colour and keep the status in text as well.",
+      "Pass an icon as `marker`, and add `markerLabel` only when the marker says something the text does not.",
+      "Use `TimelineNow` between events to mark the present, passing `label` in the page language.",
+      "Wrap timestamps in `time` elements with a machine-readable `dateTime`, and supply events already sorted."
+    ],
+    "categories": ["layout", "visual"],
+    "tasks": ["dashboard", "other"],
+    "tags": ["timeline", "activity", "history", "events"],
+    "install": ["timeline"]
+  },
+  "bar-chart": {
+    "summary": "Columns or horizontal bars that compare values across categories, grouped or stacked, with keyboard tooltips.",
+    "useFor": "Bar Chart compares a handful to a few dozen categories, such as months, plans or regions, and handles negative values and rankings. It suits dashboard cards where people read totals side by side.",
+    "neighbours": [
+      { "name": "line-chart", "guidance": "Pick Line Chart for a trend over many dates where the shape matters more than each bar." },
+      { "name": "bar-list", "guidance": "Pick Bar List for a short ranked list of labels with values and no axis." },
+      { "name": "pie-chart", "guidance": "Pick Pie Chart only for a few shares of one total." }
+    ],
+    "rules": [
+      "Pass `data`, the `x` key, the `series` list and a required `label` that names the chart.",
+      "Use `stacked` for parts of a total and `orientation=\"horizontal\"` for rankings with long category names.",
+      "Format numbers with `formatValue` and categories with `formatX`, and set `locale` to match the page.",
+      "Use `palette=\"categorical\"` for unrelated series and `negativeColor` on a series for values below zero.",
+      "Keep category keys stable between data sets so bars glide instead of jumping, and translate the screen-reader words with `labels`.",
+      "Do not expect click or selection events; the chart is a read-only focus stop."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard"],
+    "tags": ["chart", "bar-chart", "analytics", "comparison"],
+    "install": ["bar-chart"]
+  },
+  "line-chart": {
+    "summary": "Lines on a shared axis that show how one or more measures rise and fall over time or ordered steps.",
+    "useFor": "Line Chart shows trends such as active users per month or orders per hour, with up to about five series. It supports date axes, several curve styles and a crosshair tooltip that works by keyboard.",
+    "neighbours": [
+      { "name": "area-chart", "guidance": "Pick Area Chart when the size of the measure or how parts stack into a total matters." },
+      { "name": "bar-chart", "guidance": "Pick Bar Chart when the categories have no natural order." },
+      { "name": "sparkline", "guidance": "Pick Sparkline for a tiny axis-free trend beside a number." }
+    ],
+    "rules": [
+      "Pass `data`, the `x` key, `series` and a required `label`.",
+      "Use `Date` objects at midnight UTC for a time axis; text x values are treated as categories.",
+      "Keep `curve=\"monotone\"` unless you have a reason, since it never overshoots the data; use `step` for values that jump.",
+      "Write values with `formatValue` and set `locale`; missing values break the line rather than dropping to zero.",
+      "Use `height=\"fill\"` with `minHeight` to fill a card's remaining height."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard"],
+    "tags": ["chart", "line-chart", "trend", "time-series"],
+    "install": ["line-chart"]
+  },
+  "area-chart": {
+    "summary": "Filled areas over time, overlaid or stacked, so the size of a measure and its parts read at a glance.",
+    "useFor": "Area Chart shows volume over time, such as page views, and when stacked shows how sources add up to a total. It shares the line chart's axes, curves and keyboard tooltip.",
+    "neighbours": [
+      { "name": "line-chart", "guidance": "Pick Line Chart when multiple series do not add up to a total; overlapping fills would obscure one another." },
+      { "name": "bar-chart", "guidance": "Pick Bar Chart for a few discrete periods or unordered categories." },
+      { "name": "sparkline", "guidance": "Pick Sparkline with the area variant for a small inline trend." }
+    ],
+    "rules": [
+      "Pass `data`, the `x` key, `series` and a required `label`.",
+      "Use `stacked` when series are parts of one total; the tooltip still shows each series' own value.",
+      "Choose `fill=\"gradient\"` or `fill=\"solid\"`; both keep a line along the top.",
+      "Prefer the default `monotone` curve for data that rests on zero so the fill never dips below it.",
+      "Format values with `formatValue` and translate the screen-reader text with `labels`."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard"],
+    "tags": ["chart", "area-chart", "trend", "stacked"],
+    "install": ["area-chart"]
+  },
+  "pie-chart": {
+    "summary": "A donut or pie that shows how one total splits into a few shares, with an optional figure in the hole.",
+    "useFor": "Pie Chart suits storage usage, plan mix or traffic split, where there are only a few parts of one whole. The donut can show a total in its centre and an unfilled remainder share.",
+    "neighbours": [
+      { "name": "bar-chart", "guidance": "Pick Bar Chart when there are more than five or six shares or values need precise comparison." },
+      { "name": "bar-list", "guidance": "Pick Bar List for a ranked breakdown that reads better as rows." }
+    ],
+    "rules": [
+      "Pass `data` items with a stable `id`, a `label` and a `value`, plus a required chart `label`.",
+      "Mark the unused remainder with `empty` so it takes the neutral colour.",
+      "Show a total with `centerValue` and `centerLabel` (format with `centerFormat`), or pass short custom `center` content.",
+      "Sort the data on purpose: slices are drawn in array order, starting at the top and going clockwise.",
+      "Leave room around the chart when `popOut` is on, because the active share steps up to 10 px outside its box."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["dashboard"],
+    "tags": ["chart", "donut", "pie-chart", "distribution"],
+    "install": ["pie-chart"]
+  },
+  "bar-list": {
+    "summary": "A ranked list of labels with a bar behind each, sized against the largest value.",
+    "useFor": "Bar List shows top pages, top countries or traffic sources as rows you can compare at a glance. It renders fully on the server and glides to new values when the period changes.",
+    "neighbours": [
+      { "name": "bar-chart", "guidance": "Pick Bar Chart if any value may fall below zero or readers need an axis to compare against." },
+      { "name": "table", "guidance": "Pick Table when rows need several values or must be clickable." },
+      { "name": "resource-list", "guidance": "Pick Resource List when a row should open or select something." }
+    ],
+    "rules": [
+      "Pass `data` sorted in the order you want ranked, each item with a unique `id`, a `label` and a `value`, and name the list with `label`.",
+      "Add a `heading` with `label` and `value` to name the two columns.",
+      "Format values with `formatValue` or set `locale`; use `description` for a quieter second line such as a path.",
+      "Keep a custom `color` light, because labels are written on top of the bars.",
+      "Rows are display-only: they do not respond to clicks, hover or focus, so do not wire actions to them."
+    ],
+    "categories": ["visual"],
+    "tasks": ["dashboard"],
+    "tags": ["ranking", "top-list", "bar-list", "analytics"],
+    "install": ["bar-list"]
+  },
+  "sparkline": {
+    "summary": "A tiny axis-free chart that shows the shape of a trend next to the number it belongs to.",
+    "useFor": "Sparkline sits beside a KPI, inside a table cell or in a line of text to show whether a measure is rising or falling. It has no tooltip or axes and draws in the surrounding text colour.",
+    "neighbours": [
+      { "name": "line-chart", "guidance": "Pick Line Chart when readers need exact values, dates or a shared axis." },
+      { "name": "area-chart", "guidance": "Pick Area Chart for a full-size filled trend with a tooltip." }
+    ],
+    "rules": [
+      "Pass `data` as an array of numbers, or an array of arrays for several series on one scale.",
+      "Write a `label` that says what is shown and over which period, and print the actual figure beside it.",
+      "Set the colour from the parent text colour (for example a success or destructive class) or with `color`.",
+      "Give it a width class such as `w-24` and a pixel `height` in tight spots.",
+      "Set `includeZero={false}` when small changes on a large value would otherwise look flat."
+    ],
+    "categories": ["visual"],
+    "tasks": ["dashboard", "data-table"],
+    "tags": ["sparkline", "mini-chart", "trend", "kpi"],
+    "install": ["sparkline"]
+  },
+  "message-scroller": {
+    "summary": "The scroll region of a chat thread: opens at the latest message, follows streaming replies and offers a jump back.",
+    "useFor": "Message Scroller holds the turns of a chat or AI conversation, keeps a new turn in view, follows a reply as it streams and keeps position when older messages load above. It also acts as a log so screen readers hear new rows.",
+    "neighbours": [
+      { "name": "message", "guidance": "Use Message inside each row to lay out a single turn." },
+      { "name": "marker", "guidance": "Use Marker rows between turns for dates, notes and a thinking status." },
+      { "name": "prompt-input", "guidance": "Place Prompt Input below the scroller as the composer." }
+    ],
+    "rules": [
+      "Make every row a `MessageScrollerItem` directly inside `MessageScrollerContent`, with a stable `messageId` that also serves as the React key.",
+      "Mark the first row of each turn with `scrollAnchor`; that is normally the user's own message.",
+      "Turn on `autoScroll` to follow a growing reply, and set `busy` on `MessageScrollerContent` while a reply is pending.",
+      "Add `MessageScrollerButton` for the jump-to-latest control and use `useMessageScroller()` for custom jumps.",
+      "Load long histories in pages above the first row; rows are not virtualised."
+    ],
+    "categories": ["interaction", "accessibility", "layout"],
+    "tasks": ["other", "mobile-interface"],
+    "tags": ["chat", "scroll", "thread", "ai"],
+    "install": ["message-scroller"]
+  },
+  "message": {
+    "summary": "The layout of one chat turn: content, footer actions and, between people, an avatar and header.",
+    "useFor": "Message arranges a single turn in a conversation, placing bubbles, attachments, traces and actions in the right order and on the right side. It draws no surface itself and keeps no state.",
+    "neighbours": [
+      { "name": "bubble", "guidance": "Use Bubble inside a Message for the text surface itself." },
+      { "name": "marker", "guidance": "Pick Marker for a line that is not a turn, such as a date or system note." },
+      { "name": "message-scroller", "guidance": "Wrap many Messages in a Message Scroller for the thread's scrolling and announcements." }
+    ],
+    "rules": [
+      "Compose `Message` with `MessageContent`, and add `MessageHeader`, `MessageFooter` and `MessageAvatar` as needed.",
+      "Set `align=\"end\"` for the writer's own turns and give the Bubbles inside the same `align`.",
+      "Back-to-back messages from the same sender belong in one `MessageGroup`; give the earlier ones an empty `MessageAvatar` to keep them aligned.",
+      "Each footer icon action needs an `aria-label`. A footer with nothing in it takes up no space, so it is safe to render before any actions arrive.",
+      "Show a failed reply as a destructive Bubble with a Try again button and no rating actions."
+    ],
+    "categories": ["layout", "interaction"],
+    "tasks": ["other", "mobile-interface"],
+    "tags": ["chat", "message", "conversation", "ai"],
+    "install": ["message"]
+  },
+  "bubble": {
+    "summary": "The surface for a chat message's text, with variants for sender, assistant replies and errors.",
+    "useFor": "Bubble draws the coloured or bordered shape around message text and sizes it to its content. A ghost variant drops the surface for assistant answers and rich content like lists and code.",
+    "neighbours": [
+      { "name": "message", "guidance": "Pick Message to arrange the turn around the bubble, with avatar and actions." },
+      { "name": "card", "guidance": "Pick Card for content blocks outside a conversation." }
+    ],
+    "rules": [
+      "Compose `Bubble` with a `BubbleContent` that holds the text.",
+      "Choose `variant` by sender: `muted` for the person in an AI chat, `ghost` for assistant answers, `default` or `tinted` for your own messages between people, `destructive` for failures.",
+      "Set `align` to match the surrounding Message.",
+      "Put links or buttons inside the bubble or in the Message footer, since the bubble itself is not interactive.",
+      "Never let the colour alone say what happened; write it in the text."
+    ],
+    "categories": ["visual", "layout"],
+    "tasks": ["other", "mobile-interface"],
+    "tags": ["chat", "bubble", "message", "surface"],
+    "install": ["bubble"]
+  },
+  "marker": {
+    "summary": "A low-key line between chat messages for things like status updates, system notes or date dividers.",
+    "useFor": "Marker covers the in-between lines of a conversation: a thinking indicator, a stopped-reply note, a model change or a Today separator. It sits as its own row between turns or inside a turn's content.",
+    "neighbours": [
+      { "name": "message", "guidance": "Pick Message for anything a participant actually said." },
+      { "name": "trace", "guidance": "Pick Trace for the list of steps an agent took, with expandable details." },
+      { "name": "badge", "guidance": "Pick Badge for a chip on a row rather than a full-width thread line." }
+    ],
+    "rules": [
+      "Compose `Marker` with an optional `MarkerIcon` and a `MarkerContent`.",
+      "Set `role=\"status\"` on lines that change, such as a live Thinking status, so they are announced.",
+      "Use `variant=\"separator\"` for dates and breaks, and `variant=\"border\"` for a note that heads the thread.",
+      "Put a Spinner in `MarkerIcon` for a reply in progress and hide decorative icons from assistive tech (the part does this).",
+      "Keep important wording in the text because the marker colour is deliberately muted."
+    ],
+    "categories": ["visual", "accessibility"],
+    "tasks": ["other"],
+    "tags": ["chat", "status", "separator", "system-note"],
+    "install": ["marker"]
+  },
+  "trace": {
+    "summary": "One-line rows for an AI agent's reasoning, tool calls and sources that expand into their details.",
+    "useFor": "Trace shows what an agent did before it answered: thinking time, searches, tool results, failures and the sources it used. Each row can open into output such as a code block, and summaries can nest further steps.",
+    "neighbours": [
+      { "name": "marker", "guidance": "Pick Marker for a single status line or note with no details to expand." },
+      { "name": "accordion", "guidance": "Pick Accordion for general expandable sections outside an agent transcript." }
+    ],
+    "rules": [
+      "Build each row from a `TraceLine` with `TraceIcon`, `TraceTitle` and `TraceDescription`, wrapped in a `TraceCollapsibleTrigger` or a `TraceLink` to make it act.",
+      "Set `status` to `running`, `error` or `pending`; leave it off for finished work.",
+      "Put the state in the title words (present tense while running, past tense when done) since screen readers do not hear colour or shimmer.",
+      "Ask for tool approval in an Alert after the Trace, not as a row.",
+      "Pass `keepMounted` to `TraceCollapsibleContent` when a summary nests another Trace whose open state should survive."
+    ],
+    "categories": ["interaction", "accessibility"],
+    "tasks": ["other"],
+    "tags": ["ai", "agent", "reasoning", "tool-calls"],
+    "install": ["trace"]
+  },
+  "attachment": {
+    "summary": "A card for a file or image attached to a message or draft, with upload states and actions.",
+    "useFor": "Attachment shows files in a chat composer, in a sent message or in an upload row, including progress, failures and retry. Cards can sit in a horizontally scrolling group and open a preview.",
+    "neighbours": [
+      { "name": "file-type-icon", "guidance": "Use File Type Icon on its own for a simple list row without upload state or actions." },
+      { "name": "prompt-input", "guidance": "Inside Prompt Input, put small attachment cards in `PromptInputAttachments`." }
+    ],
+    "rules": [
+      "Set `state` (`idle`, `uploading`, `processing`, `error`, `done`) from your upload code, and say the state in `AttachmentDescription` too.",
+      "Give every `AttachmentAction` and `AttachmentTrigger` an `aria-label` that includes the file name.",
+      "Use `orientation=\"vertical\"` with `AttachmentMedia variant=\"image\"` for image thumbnails and `size=\"sm\"` inside fields.",
+      "Wrap rows in `AttachmentGroup` with a `label` and stable keys, and move focus elsewhere before removing a card.",
+      "Remember the card uploads nothing; your app starts, retries and cancels uploads."
+    ],
+    "categories": ["interaction", "forms"],
+    "tasks": ["form", "other"],
+    "tags": ["attachment", "file", "upload", "chat"],
+    "install": ["attachment"]
+  },
+  "prompt-input": {
+    "summary": "Chat input that submits on Enter, expands as the draft gets longer, and swaps Send for Stop during a response.",
+    "useFor": "Prompt Input is the message field at the bottom of a chat or AI assistant, with room for attachments, an attach button and model or effort pickers. It speaks the AI SDK's status words, so it plugs into `useChat` directly.",
+    "neighbours": [
+      { "name": "textarea", "guidance": "Pick Textarea for an ordinary multi-line form field that is submitted with the rest of a form." },
+      { "name": "attachment", "guidance": "Use Attachment cards inside it for files in the draft." },
+      { "name": "message-scroller", "guidance": "Pair it with Message Scroller above for the thread." }
+    ],
+    "rules": [
+      "Handle `onSubmit`, which receives the trimmed text, then add the message to your thread yourself.",
+      "Pass `status` (`ready`, `submitted`, `streaming`, `error`) and `onStop` so Send becomes Stop while a reply runs.",
+      "Compose `PromptInputTextarea`, `PromptInputToolbar` with `PromptInputToolbarGroup`, `PromptInputAttachButton` and `PromptInputSubmit`.",
+      "Use `submitOnEnter=\"desktop\"` when phone users should get new lines from Enter.",
+      "Set `allowEmpty` only while the draft holds a file that is ready to send, and translate the built-in names through `labels`.",
+      "Placeholder text does not count as a label, so the field still needs an accessible name."
+    ],
+    "categories": ["forms", "interaction", "accessibility"],
+    "tasks": ["form", "mobile-interface", "other"],
+    "tags": ["chat", "composer", "ai", "input"],
+    "install": ["prompt-input"]
+  },
+  "typeset": {
+    "summary": "Applies the kit's typography to rendered markdown, like chat replies or docs, by mapping elements to components.",
+    "useFor": "Typeset gives markdown output from react-markdown or Streamdown consistent headings, lists, code blocks, quotes and tables. It copes with streaming answers that grow block by block.",
+    "neighbours": [
+      { "name": "native-table", "guidance": "Typeset renders markdown tables with Native Table already; use Native Table directly only for hand-built tables." },
+      { "name": "bubble", "guidance": "Put Typeset inside a ghost Bubble for an assistant answer." }
+    ],
+    "rules": [
+      "Pass `typesetComponents` to your renderer's `components` prop and place the output inside `Typeset`.",
+      "Choose `density=\"chat\"` for answers in a thread and `density=\"document\"` for longer standalone reading.",
+      "With Streamdown, give its wrapper `className=\"contents space-y-0\"` and pass `streaming` to `TypesetCodeBlock` while a fence is still open.",
+      "Add `remark-gfm` to react-markdown if answers contain tables.",
+      "Use Typeset only for written prose, not for interface labels in forms or cards."
+    ],
+    "categories": ["typography"],
+    "tasks": ["other", "design-system"],
+    "tags": ["markdown", "prose", "typography", "ai"],
+    "install": ["typeset"]
+  },
+  "animated-buttons": {
+    "summary": "Buttons that animate on hover with sweeping or pass-through fills, a moving arrow, actions that expand, and entrance effects.",
+    "useFor": "Animated Buttons add tactile motion to marketing calls to action, carousel arrows, learn-more links and a log out control. They keep normal Button behaviour and finish instantly under reduced motion.",
+    "neighbours": [
+      { "name": "button", "guidance": "Pick plain Button for everyday app actions where motion would distract." },
+      { "name": "icon-morphs", "guidance": "Pick Icon Morphs for a menu toggle whose bars turn into a close icon." }
+    ],
+    "rules": [
+      "Use `FillSweepButton` with `sweep` (`reverse` or `through`), `arrow` (`bare` or `tile`) and `arrowDirection` for the hover effects.",
+      "Give arrow-only buttons an `aria-label`, since they have no visible text.",
+      "Use `ExpandingArrowButton` for a link-style action and `ExpandingLogoutButton` for log out, where `label` doubles as the accessible name.",
+      "Treat `entrance` (`grow`, `widen`, `fade`) as a one-time mount effect; remount to replay it.",
+      "Make sure each action is clear without the motion, because disabled, loading and reduced-motion states do not animate."
+    ],
+    "categories": ["motion", "interaction"],
+    "tasks": ["landing-page", "animation"],
+    "tags": ["buttons", "hover", "animation", "cta"],
+    "install": ["animated-buttons"]
+  },
+  "icon-morphs": {
+    "summary": "A menu button whose bars morph into an X while its navigation panel is open.",
+    "useFor": "Icon Morphs provides the hamburger toggle for mobile and compact navigation. It owns its expanded state attribute and label, and pairs well with a Collapsible panel.",
+    "neighbours": [
+      { "name": "toggle", "guidance": "Pick Toggle for an on/off control that does not open navigation." },
+      { "name": "theme-toggles", "guidance": "Pick Theme Toggles for a light and dark switch." }
+    ],
+    "rules": [
+      "Use `MenuIconMorph` with `open` and `onOpenChange`, or `defaultOpen` for local state.",
+      "Point `aria-controls` at the navigation element it shows and hides.",
+      "Keep the built-in open and close labels or pass your own `aria-label`.",
+      "Feed the same `open` value to a Collapsible that holds the navigation so both move together.",
+      "Use `onClick` with `preventDefault()` only when you must cancel the toggle."
+    ],
+    "categories": ["motion", "navigation", "responsive"],
+    "tasks": ["navigation", "mobile-interface", "animation"],
+    "tags": ["hamburger", "menu-button", "morph", "navigation"],
+    "install": ["icon-morphs"]
+  },
+  "theme-toggles": {
+    "summary": "Animated sun and moon toggles that switch an app between light and dark mode.",
+    "useFor": "Theme Toggles give a header or settings row a single control for dark mode with a sun-to-moon animation. They report state only; your theme provider applies the change.",
+    "neighbours": [
+      { "name": "toggle-group", "guidance": "Pick Toggle Group when people choose among light, dark and system." },
+      { "name": "switch", "guidance": "Pick Switch for a labelled dark mode setting inside a settings form." }
+    ],
+    "rules": [
+      "Drive `SunMoonMorphToggle` or `LayeredThemeToggle` so that `pressed` is true in dark mode, and change the theme from `onPressedChange`.",
+      "Drive `pressed` from your resolved theme so the icon and the app never disagree, including portalled overlays.",
+      "Keep the accessible name constant (default Dark mode) and let `aria-pressed` report the state.",
+      "Size it with `size` or let it follow the provider."
+    ],
+    "categories": ["motion", "interaction"],
+    "tasks": ["navigation", "animation"],
+    "tags": ["theme", "dark-mode", "toggle", "animation"],
+    "install": ["theme-toggles"]
+  },
+  "glass": {
+    "summary": "Frosted, see-through takes on Card, Button, Menu, Context Menu, Popover and Tooltip, meant to sit on top of photos.",
+    "useFor": "Glass lets controls and cards float over photos, video, maps or colourful surfaces while staying legible. It is a `variant` on existing components rather than a component of its own.",
+    "neighbours": [
+      { "name": "card", "guidance": "Keep the default Card surface on plain pages, where glass shows almost nothing." },
+      { "name": "popover", "guidance": "Set the glass tone attributes on the popup itself, since popovers render outside their trigger." }
+    ],
+    "rules": [
+      "Set `variant=\"glass\"` on Button, Tooltip, Popover, Menu, Context Menu, Card or `DropdownMenuContent`.",
+      "Use it only with a picture or colour behind it; on a flat background keep the default surface.",
+      "Switch to a lighter panel with `data-glass-tone=\"light\"` or dark text with `data-glass-ink=\"dark\"`, on the component or a wrapper.",
+      "Check text contrast against your real imagery and keep long text on a solid surface."
+    ],
+    "categories": ["visual", "taste"],
+    "tasks": ["landing-page", "design-system"],
+    "tags": ["glass", "translucent", "blur", "overlay"],
+    "install": ["button", "card", "popover", "tooltip", "menu", "context-menu", "dropdown-menu"]
+  }
+}

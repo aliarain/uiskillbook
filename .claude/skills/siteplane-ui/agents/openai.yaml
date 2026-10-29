@@ -1,0 +1,7 @@
+interface:
+  display_name: "Siteplane UI"
+  short_description: "Build polished UI with Siteplane UI"
+  default_prompt: "Use $siteplane-ui to choose, install, and compose the right Siteplane UI components for this interface."
+
+policy:
+  allow_implicit_invocation: true

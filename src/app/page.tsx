@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllSkills, getAuthors } from "@/lib/skills";
+import { getAllSkills, getSiteplaneSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllDesignMds } from "@/lib/design-md";
 import { BrandTile } from "@/components/brand-tile";
@@ -10,16 +10,21 @@ import { TaskSelector } from "@/components/task-selector";
 import { InlineCode } from "@/components/inline-code";
 import { JsonLd } from "@/components/json-ld";
 import { AddToAgent } from "@/components/add-to-agent";
+import { HeroPreview } from "@/components/hero/hero-preview";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export default function Home() {
   const skills = getAllSkills();
-  const authors = getAuthors();
   const chapters = getAllChapters();
   const designMds = getAllDesignMds();
+  const siteplane = getSiteplaneSkills();
+  const siteplaneFeatured = ["dialog", "combobox", "table", "command", "toast", "sidebar"]
+    .map((c) => siteplane.find((s) => s.siteplane.component === c))
+    .filter((s) => s !== undefined);
 
   const recommended = skills.filter((s) => s.curated).slice(0, 6);
-  const latest = [...skills]
+  const latest = skills
+    .filter((s) => !s.siteplane)
     .sort((a, b) => (a.updated_at < b.updated_at ? 1 : -1))
     .slice(0, 6);
 
@@ -44,13 +49,7 @@ export default function Home() {
           },
         }}
       />
-      <header className="mt-10 sm:mt-14">
-        <h1 className="display text-3xl">UI skills for coding agents</h1>
-        <p className="mt-2 text-ink-2 tabular-nums">
-          {skills.length} skills from {authors.length} authors, {designMds.length} Design.md files and{" "}
-          {chapters.length} short guides.
-        </p>
-      </header>
+      <HeroPreview />
 
       {/* Recommended */}
       <section className="mt-10">
@@ -62,6 +61,21 @@ export default function Home() {
         />
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {recommended.map((skill) => (
+            <SkillCard key={skill.slug} skill={skill} />
+          ))}
+        </div>
+      </section>
+
+      {/* Siteplane UI */}
+      <section className="mt-16">
+        <SectionHeading
+          title="Siteplane UI"
+          href="/siteplane-ui"
+          description={`Our design system. All ${siteplane.length} components, with when to pick each one over its neighbours.`}
+          allLabel="All components"
+        />
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {siteplaneFeatured.map((skill) => (
             <SkillCard key={skill.slug} skill={skill} />
           ))}
         </div>

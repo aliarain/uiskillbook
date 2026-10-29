@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+# UI work
+
+The site is built on Siteplane UI (`src/siteplane`, registry in `components.json`). Load the siteplane-ui skill before any UI work, and read DESIGN.md. The Siteplane UI catalog entries in `content/skills/siteplane-*` are generated: edit `content/siteplane-ui/guidance/*.json` and run `npm run generate:siteplane`.

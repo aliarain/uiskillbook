@@ -3,6 +3,8 @@ import { Button } from "@/siteplane/components/button";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
 import { getRepoStars, GITHUB_URL } from "@/lib/brand";
+import { getSiteplaneSkills } from "@/lib/skills";
+import { groupAnchor } from "@/lib/siteplane";
 import { AGENTS, CATEGORIES, ROLES } from "@/lib/taxonomy";
 import { SearchTrigger } from "./search-trigger";
 import { ThemeToggle } from "./theme-toggle";
@@ -15,6 +17,7 @@ const compact = new Intl.NumberFormat("en", { notation: "compact", maximumFracti
 /** Desktop shows four plain links; the mobile sheet keeps the full directory. */
 const PRIMARY: NavSection[] = [
   { label: "Skills", href: "/skills" },
+  { label: "Components", href: "/siteplane-ui" },
   { label: "Design.md", href: "/design-md" },
   { label: "Learn", href: "/chapters" },
   { label: "Agents", href: "/agents" },
@@ -30,6 +33,24 @@ function mobileSections(): NavSection[] {
         ...CATEGORIES.slice(0, 6).map((c) => ({ href: `/skills?category=${c.slug}`, label: c.label })),
       ],
       all: { href: "/skills", label: "All skills" },
+    },
+    {
+      label: "Siteplane UI",
+      href: "/siteplane-ui",
+      links: [...new Set(getSiteplaneSkills().map((s) => s.siteplane.group))].map((group) => ({
+        href: `/siteplane-ui#${groupAnchor(group)}`,
+        label: group,
+      })),
+      all: { href: "/siteplane-ui", label: "All components" },
+    },
+    {
+      label: "Siteplane UI",
+      href: "/siteplane-ui",
+      links: [...new Set(getSiteplaneSkills().map((s) => s.siteplane.group))].map((group) => ({
+        href: `/siteplane-ui#${groupAnchor(group)}`,
+        label: group,
+      })),
+      all: { href: "/siteplane-ui", label: "All components" },
     },
     { label: "Design.md", href: "/design-md" },
     {

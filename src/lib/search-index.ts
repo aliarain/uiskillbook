@@ -22,9 +22,9 @@ export function buildSearchIndex(): SearchItem[] {
     slug: s.slug,
     href: `/skills/${s.slug}`,
     title: s.title,
-    subtitle: categoryLabel(s.categories[0]),
-    meta: s.author.name,
-    group: "Skills",
+    subtitle: s.siteplane?.group ?? categoryLabel(s.categories[0]),
+    meta: s.siteplane ? undefined : s.author.name,
+    group: s.siteplane ? "Siteplane UI" : "Skills",
   }));
 
   const chapters: SearchItem[] = getAllChapters().map((c) => ({

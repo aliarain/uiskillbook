@@ -1,3 +1,10 @@
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/brand/uiskillbook-mark-dark.svg">
+    <img src="public/brand/uiskillbook-mark.svg" alt="" width="40" height="40">
+  </picture>
+</p>
+
 # UI Skillbook
 
 **The field guide for building better interfaces with AI.**
@@ -32,6 +39,7 @@ npx uiskillbook start
 npx uiskillbook categories
 npx uiskillbook list --category motion
 npx uiskillbook get pressed-button-feedback
+npx uiskillbook siteplane --group "Overlays & disclosure"
 ```
 
 A thin client over `uiskillbook.com/skills/registry.json` and each skill's
@@ -44,15 +52,16 @@ https://www.uiskillbook.com/mcp
 ```
 
 Hand-rolled JSON-RPC 2.0 over HTTP (`initialize`, `tools/list`, `tools/call`) —
-no SDK dependency. Tools: `list_skills`, `get_skill`. Source:
+no SDK dependency. Tools: `list_skills`, `get_skill`, `search`, `get_stats`,
+`get_design_md`, `list_siteplane_components`. Source:
 [`src/app/mcp/route.ts`](src/app/mcp/route.ts).
 
 ## Tech stack
 
 - [Next.js](https://nextjs.org) (App Router, TypeScript) deployed on [Vercel](https://vercel.com)
-- Tailwind CSS v4
+- [Siteplane UI](https://ui.siteplane.io) as the design system: components installed as source under `src/siteplane` with the shadcn CLI (see [`DESIGN.md`](DESIGN.md))
+- Tailwind CSS v4, through Siteplane UI's stylesheet
 - Content as markdown, indexed at build time — no database
-- [`cmdk`](https://cmdk.paco.me) for the `⌘K` search palette
 
 ## Getting started
 
@@ -103,6 +112,19 @@ curated: true
 
 `content/chapters/*.md` and `content/collections/*.md` follow the same pattern —
 frontmatter plus a `skills: [slug, slug, ...]` list referencing skills by slug.
+
+### Siteplane UI entries
+
+`content/skills/siteplane-*` holds one entry per Siteplane UI component and
+`content/collections/siteplane-ui.md` lists them. They are generated: the text
+comes from our own guidance in `content/siteplane-ui/guidance/*.json`, joined with
+Siteplane's live `registry.json`, `llms.txt` and component index. Edit the
+guidance, then run:
+
+```bash
+npm run generate:siteplane   # rewrite the entries; fails on a component without guidance
+npm run check:siteplane      # flag guidance that repeats Siteplane's docs wording
+```
 
 ### External skills
 

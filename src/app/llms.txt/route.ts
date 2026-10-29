@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllSkills } from "@/lib/skills";
+import { getAllSkills, getSiteplaneSkills } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
 import { SITE_URL } from "@/lib/site";
@@ -19,8 +19,16 @@ export function GET() {
     "",
     "## Skills",
     "",
-    ...skills.map(
-      (s) => `- [${s.title}](${SITE_URL}/skills/${s.slug}): ${s.description}`
+    ...skills
+      .filter((s) => !s.siteplane)
+      .map((s) => `- [${s.title}](${SITE_URL}/skills/${s.slug}): ${s.description}`),
+    "",
+    "## Siteplane UI components",
+    "",
+    "> UI Skillbook's design system. One entry per component: when to pick it over its neighbours, install command, usage rules.",
+    "",
+    ...getSiteplaneSkills().map(
+      (s) => `- [${s.siteplane.title}](${SITE_URL}/skills/${s.slug}) (${s.siteplane.group}): ${s.description}`
     ),
     "",
     "## Chapters",

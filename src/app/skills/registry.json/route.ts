@@ -11,6 +11,8 @@ export function GET(request: Request) {
     description: s.description,
     categories: s.categories,
     agents: s.agents,
+    tags: s.tags ?? [],
+    ...(s.siteplane && { siteplane: s.siteplane }),
     author: s.author.name,
     external: Boolean(s.external),
     url: `${baseUrl}/skills/${s.slug}`,
