@@ -30,6 +30,7 @@ function siteColumns(): FooterColumn[] {
         { href: "/mcp", label: "MCP server", external: true },
         { href: "/skills/registry.json", label: "Registry", external: true },
         { href: "/llms.txt", label: "llms.txt", external: true },
+        { href: "/feed.xml", label: "RSS", external: true },
       ],
     },
     {

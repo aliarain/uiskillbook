@@ -7,6 +7,7 @@ import { TaskSelector } from "@/components/task-selector";
 import { SearchBar } from "@/components/search-trigger";
 import { InlineCode } from "@/components/inline-code";
 import { JsonLd } from "@/components/json-ld";
+import { AddToAgent } from "@/components/add-to-agent";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export default function Home() {
@@ -63,6 +64,10 @@ export default function Home() {
           <span>{CATEGORIES.length} categories</span>
         </div>
       </section>
+
+      <div className="mt-8">
+        <AddToAgent />
+      </div>
 
       {/* What are you building */}
       <section className="py-14">

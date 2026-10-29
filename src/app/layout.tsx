@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: "UI Skillbook" }] },
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,

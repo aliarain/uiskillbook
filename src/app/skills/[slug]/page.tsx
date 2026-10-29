@@ -12,6 +12,7 @@ import { markdownToHtml } from "@/lib/markdown";
 import { CopyButtons, ExternalCopyButton } from "@/components/copy-buttons";
 import { SkillRow } from "@/components/skill-row";
 import { JsonLd } from "@/components/json-ld";
+import { AddToAgent } from "@/components/add-to-agent";
 import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -109,6 +110,10 @@ export default async function SkillDetailPage({
       ) : (
         <LocalSkillBody slug={skill.slug} body={skill.body ?? ""} sourceUrl={skill.source?.repository} />
       )}
+
+      <div className="mt-12">
+        <AddToAgent slug={skill.slug} />
+      </div>
 
       {related.length > 0 && (
         <div className="mt-16">
