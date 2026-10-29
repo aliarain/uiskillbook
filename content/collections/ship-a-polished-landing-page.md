@@ -1,6 +1,7 @@
 ---
 title: Ship a polished landing page
 description: The skills that separate a landing page that converts from one that just exists.
+updated_at: "2026-09-01"
 skills:
   - optical-alignment
   - spacing-rhythm

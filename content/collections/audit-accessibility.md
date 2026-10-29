@@ -1,6 +1,7 @@
 ---
 title: Audit accessibility
 description: A focused pass on the accessibility issues most likely to break real usage, not just fail a scanner.
+updated_at: "2026-09-01"
 skills:
   - accessible-focus-states
   - color-contrast-for-taste

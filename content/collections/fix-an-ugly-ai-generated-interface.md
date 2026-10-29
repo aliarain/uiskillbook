@@ -1,6 +1,7 @@
 ---
 title: Fix an ugly AI-generated interface
 description: The specific, recognizable tells of unreviewed AI-written UI — and how to fix each one.
+updated_at: "2026-09-01"
 skills:
   - spacing-rhythm
   - optical-alignment

@@ -8,6 +8,7 @@ const COLLECTIONS_DIR = path.join(process.cwd(), "content", "collections");
 export type CollectionFrontmatter = {
   title: string;
   description: string;
+  updated_at: string;
   skills: string[];
 };
 
