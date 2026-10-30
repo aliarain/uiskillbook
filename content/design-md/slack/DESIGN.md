@@ -5,6 +5,8 @@ website: https://slack.com
 color: "#4A154B"
 category: Productivity
 updated_at: "2026-10-29"
+fonts:
+  - Lato
 ---
 
 # Slack — DESIGN.md

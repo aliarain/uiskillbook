@@ -6,6 +6,9 @@ color: "#5E6AD2"
 category: Productivity
 icon: linear
 updated_at: "2026-10-29"
+fonts:
+  - Inter
+  - Inter Display
 ---
 
 # Linear — DESIGN.md

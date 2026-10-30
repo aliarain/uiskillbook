@@ -6,6 +6,9 @@ color: "#A259FF"
 category: Design tools
 icon: figma
 updated_at: "2026-10-29"
+fonts:
+  - Figma Sans
+  - Inter
 ---
 
 # Figma — DESIGN.md

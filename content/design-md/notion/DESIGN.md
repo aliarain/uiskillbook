@@ -6,6 +6,8 @@ color: "#37352F"
 category: Productivity
 icon: notion
 updated_at: "2026-10-29"
+fonts:
+  - Inter
 ---
 
 # Notion — DESIGN.md

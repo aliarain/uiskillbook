@@ -6,6 +6,9 @@ color: "#000000"
 category: Developer tools
 icon: vercel
 updated_at: "2026-10-29"
+fonts:
+  - Geist
+  - Geist Mono
 ---
 
 # Vercel — DESIGN.md
