@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAllSkills, skillRepo, skillStars, type Skill } from "@/lib/skills";
 import { SkillTabs } from "@/components/skill-tabs";
 import { getAllChapters } from "@/lib/chapters";
-import { getAllDesignMds } from "@/lib/design-md";
+import { getOriginalDesignMds } from "@/lib/design-md";
 import { BrandTile } from "@/components/brand-tile";
 import { CATEGORIES, categoryLabel } from "@/lib/taxonomy";
 import { SkillCard } from "@/components/skill-card";
@@ -17,7 +17,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 export default function Home() {
   const skills = getAllSkills();
   const chapters = getAllChapters();
-  const designMds = getAllDesignMds();
+  const designMds = getOriginalDesignMds();
 
   const recommended = skills.filter((s) => s.curated).slice(0, 6);
   // Trending = most GitHub stars on the source repo, one skill per repo so a big repo can't fill the row.
@@ -153,7 +153,7 @@ export default function Home() {
 
 function SkillGrid({ skills }: { skills: Skill[] }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {skills.map((skill) => (
         <SkillCard key={skill.slug} skill={skill} />
       ))}

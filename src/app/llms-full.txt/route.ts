@@ -28,7 +28,16 @@ export function GET() {
     ...getAllChapters().flatMap((c) => [`### ${c.title}`, `Source: ${SITE_URL}/chapters/${c.slug}`, "", c.description, "", c.body.trim(), ""]),
     "## Design.md files",
     "",
-    ...getAllDesignMds().flatMap((d) => [`### ${d.name}`, `Source: ${SITE_URL}/design-md/${d.slug}`, "", getDesignMdRaw(d.slug).trim(), ""]),
+    ...getAllDesignMds()
+      .filter((d) => d.origin === "original")
+      .flatMap((d) => [`### ${d.name}`, `Source: ${SITE_URL}/design-md/${d.slug}`, "", getDesignMdRaw(d.slug).trim(), ""]),
+    "## Community Design.md files",
+    "",
+    "> Imported from MIT-licensed collections, credited on each page. Fetch the Markdown from the link.",
+    "",
+    ...getAllDesignMds()
+      .filter((d) => d.origin === "community")
+      .map((d) => `- [${d.name}](${SITE_URL}/design-md/${d.slug}.md) (${d.category}): ${d.description}`),
     "## External skills",
     "",
     "> Hosted in their authors' repositories. Fetch the raw SKILL.md from the link.",

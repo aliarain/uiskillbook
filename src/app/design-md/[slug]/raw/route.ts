@@ -1,7 +1,7 @@
-import { getAllDesignMds, getDesignMdBySlug, getDesignMdRaw } from "@/lib/design-md";
+import { getDesignMdBySlug, getDesignMdRaw, getOriginalDesignMds } from "@/lib/design-md";
 
 export function generateStaticParams() {
-  return getAllDesignMds().map((d) => ({ slug: d.slug }));
+  return getOriginalDesignMds().map((d) => ({ slug: d.slug }));
 }
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {

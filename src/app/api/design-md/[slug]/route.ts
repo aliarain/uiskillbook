@@ -1,8 +1,8 @@
 import { apiError, apiJson, designMdDetail } from "@/lib/catalog-api";
-import { getAllDesignMds } from "@/lib/design-md";
+import { getOriginalDesignMds } from "@/lib/design-md";
 
 export function generateStaticParams() {
-  return getAllDesignMds().map((d) => ({ slug: d.slug }));
+  return getOriginalDesignMds().map((d) => ({ slug: d.slug }));
 }
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {

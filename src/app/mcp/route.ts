@@ -216,8 +216,15 @@ export async function POST(request: Request) {
         const slug = typeof args.slug === "string" ? args.slug.trim() : "";
         const entry = slug ? designMdDetail(slug) : null;
         if (entry) return text(entry.content);
-        const brands = getAllDesignMds().map(designMdSummary);
-        return slug ? toolError(JSON.stringify({ error: `Unknown brand "${slug}"`, brands }, null, 2)) : text({ brands });
+        const needle = slug.toLowerCase();
+        const all = getAllDesignMds();
+        const matches = (needle ? all.filter((d) => `${d.slug} ${d.name}`.toLowerCase().includes(needle)) : all)
+          .slice(0, 50)
+          .map(designMdSummary);
+        const note = `${all.length} Design.md files. Showing up to 50${needle ? ` matching "${slug}"` : ""}; pass an exact slug for the file, or use GET /api/design-md?q= to page through all.`;
+        return slug
+          ? toolError(JSON.stringify({ error: `Unknown brand "${slug}"`, note, matches }, null, 2))
+          : text({ note, brands: matches });
       }
 
       return jsonRpcError(body.id, -32601, `Unknown tool: ${name}`);
