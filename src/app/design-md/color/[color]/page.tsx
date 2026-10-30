@@ -25,6 +25,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     title: `${family.label} brand design systems: ${entries.length} DESIGN.md files`,
     description: `${entries.length} DESIGN.md files for brands and apps whose main color is ${phrase(family)}, including ${listNames(entries)}. Colors, type and components for your coding agent.`,
     path: `/design-md/color/${family.slug}${page > 1 ? `?page=${page}` : ""}`,
+    image: `/design-md/color/${family.slug}/opengraph-image`,
   });
 }
 

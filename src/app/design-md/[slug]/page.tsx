@@ -57,6 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${entry.name} DESIGN.md: colors, fonts and UI rules`,
     description: metaDescription(entry),
     path: `/design-md/${slug}`,
+    image: `/design-md/${slug}/opengraph-image`,
     type: "article",
   });
 }

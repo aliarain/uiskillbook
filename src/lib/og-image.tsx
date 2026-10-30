@@ -8,10 +8,16 @@ export function renderOgImage({
   eyebrow,
   title,
   subtitle,
+  swatches,
+  meta,
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
+  /** Hex colors shown as a strip under the title, e.g. a DESIGN.md palette. */
+  swatches?: string[];
+  /** A short line under the swatches, e.g. the fonts. */
+  meta?: string;
 }) {
   return new ImageResponse(
     (
@@ -36,9 +42,27 @@ export function renderOgImage({
           </div>
           {subtitle && (
             <div style={{ display: "flex", fontSize: 30, color: "#686863", lineHeight: 1.35 }}>
-              {subtitle.length > 160 ? `${subtitle.slice(0, 157)}…` : subtitle}
+              {subtitle.length > (swatches ? 110 : 160) ? `${subtitle.slice(0, swatches ? 107 : 157)}…` : subtitle}
             </div>
           )}
+          {swatches && swatches.length > 0 && (
+            <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+              {swatches.map((hex) => (
+                <div
+                  key={hex}
+                  style={{
+                    display: "flex",
+                    width: 96,
+                    height: 64,
+                    borderRadius: 12,
+                    background: hex,
+                    border: "2px solid rgba(24,24,23,0.12)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+          {meta && <div style={{ display: "flex", fontSize: 26, color: "#686863" }}>{meta}</div>}
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26 }}>
           <span style={{ display: "flex", alignItems: "center", gap: 14, fontWeight: 600 }}>
@@ -53,4 +77,12 @@ export function renderOgImage({
     ),
     OG_SIZE
   );
+}
+
+/**
+ * The card's built-in font covers Latin text only, so CJK and other scripts
+ * would render as empty boxes. Returns `text` when it is safe, else `fallback`.
+ */
+export function ogText(text: string, fallback?: string) {
+  return /[^\u0000-ɏ -⁯₠-⃏]/.test(text) ? fallback : text;
 }
