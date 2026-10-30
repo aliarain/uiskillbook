@@ -23,14 +23,14 @@ tags:
   - activity
   - history
   - events
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: timeline
   title: "Timeline"
   group: "Data display"
-  order: 66
+  order: 67
   docs: https://ui.siteplane.io/docs/components/timeline/
   install: [timeline]
 ---
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/timeline`. The project needs Siteplane UI
 ## Reference
 
 - [Timeline docs](https://ui.siteplane.io/docs/components/timeline/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/timeline.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

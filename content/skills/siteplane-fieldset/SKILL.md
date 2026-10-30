@@ -21,14 +21,14 @@ tags:
   - fieldset
   - legend
   - grouping
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: fieldset
   title: "Fieldset"
   group: "Forms & selection"
-  order: 12
+  order: 13
   docs: https://ui.siteplane.io/docs/components/fieldset/
   install: [fieldset]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Fieldset
 
-Use Fieldset for clusters like a shipping address, billing details or a set of radio options that need one shared name. It also lets you disable every control in the group at once.
+Fieldset puts clusters like a shipping address, billing details or a set of radio options under one shared name. Disabling the Fieldset disables every control in it.
 
 ## Install
 
@@ -50,17 +50,17 @@ Import it from `@/siteplane/components/fieldset`. The project needs Siteplane UI
 ## When to pick it
 
 - **vs [Field](https://uiskillbook.com/skills/siteplane-field):** Pick Field for a single control; render a Field as the Fieldset when a radio or checkbox group needs a legend and one name.
-- **vs [Card](https://uiskillbook.com/skills/siteplane-card):** Pick Card when you want a visual container; use Fieldset inside it when the controls also need a shared accessible name.
-- **vs [Form](https://uiskillbook.com/skills/siteplane-form):** Pick Form for submission and validation; Fieldset only groups and does not submit.
+- **vs [Card](https://uiskillbook.com/skills/siteplane-card):** Pick Card for a visual container. Put a Fieldset inside it when the controls also need a shared accessible name.
+- **vs [Form](https://uiskillbook.com/skills/siteplane-form):** Pick Form for submission and validation. Fieldset groups controls and does not submit.
 
 ## Rules
 
 - Write a `FieldsetLegend` that says what the controls have in common.
-- Shared help text for the group goes in `FieldsetDescription`; help for a single input goes in FieldDescription.
-- Set `disabled` on Fieldset to switch off every control inside; do not use it to show read-only values.
-- With radio or checkbox groups, let the Field render as the Fieldset. The legend then labels the whole set, and every option inherits the Field's name.
+- Put shared help for the group in `FieldsetDescription` and help for one input in FieldDescription.
+- Set `disabled` on Fieldset to switch off every control inside it. Keep it away from read-only displays.
+- For radio or checkbox groups, render the Field as the Fieldset. The legend then labels the whole set, and each option inherits the Field's name.
 
 ## Reference
 
 - [Fieldset docs](https://ui.siteplane.io/docs/components/fieldset/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/fieldset.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

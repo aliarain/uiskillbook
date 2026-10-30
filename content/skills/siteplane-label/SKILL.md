@@ -21,14 +21,14 @@ tags:
   - label
   - choice-card
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: label
   title: "Label"
   group: "Forms & selection"
-  order: 10
+  order: 11
   docs: https://ui.siteplane.io/docs/components/label/
   install: [label]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Label
 
-Use Label to name a control outside a Field, or to wrap a checkbox, radio or switch with its sentence so the text is clickable. Its card variant turns each option into a bordered, selectable tile.
+Label names a control outside a Field, or wraps a checkbox, radio or switch with its sentence so the text is clickable. The card variant turns each option into a bordered, selectable tile.
 
 ## Install
 
@@ -49,18 +49,18 @@ Import it from `@/siteplane/components/label`. The project needs Siteplane UI's 
 
 ## When to pick it
 
-- **vs [Field](https://uiskillbook.com/skills/siteplane-field):** Pick Field with FieldLabel instead when you also need help text, a required marker or validation wired to the control.
-- **vs [Fieldset](https://uiskillbook.com/skills/siteplane-fieldset):** Pick Fieldset instead to name a whole group of controls with a legend.
+- **vs [Field](https://uiskillbook.com/skills/siteplane-field):** Pick Field with FieldLabel when you also need help text, a required marker or validation wired to the control.
+- **vs [Fieldset](https://uiskillbook.com/skills/siteplane-fieldset):** Pick Fieldset to name a group of controls with a legend.
 
 ## Rules
 
 - Connect it with `htmlFor` to the control's id, or wrap the control inside it.
 - Use `variant="card"` for choice cards and let Label own the border, hover, checked and disabled styles.
 - Keep secondary buttons outside a card Label so clicking them does not toggle the option.
-- Do not use Label as a replacement for FieldLabel; it adds no required marker, help or validation.
-- Avoid swapping the element via `render` unless you restore native label behavior yourself.
+- Label is no stand-in for FieldLabel. It adds no required marker, help or validation.
+- Keep the native element. If you swap it via `render`, restore native label behavior yourself.
 
 ## Reference
 
 - [Label docs](https://ui.siteplane.io/docs/components/label/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/label.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

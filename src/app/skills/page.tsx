@@ -31,7 +31,7 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Skills",
-  description: "Practical instructions for better interface work.",
+  description: "Instructions your agent can follow for layout, type, motion, forms and more.",
   path: "/skills",
 });
 
@@ -140,7 +140,7 @@ export default async function SkillsPage({
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-12">
       <h1 className="display text-4xl">Skills</h1>
-      <p className="mt-3 text-ink-2">Practical instructions for better interface work.</p>
+      <p className="mt-3 text-ink-2">Instructions your agent can follow for layout, type, motion, forms and more.</p>
 
       {/* The transform makes the kit's fixed sidebar position against this box, not the viewport. */}
       <div className="relative mt-8 [transform:translateZ(0)]">

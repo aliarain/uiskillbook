@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Chapters",
-  description: "Multi-skill lessons for practical interface problems.",
+  description: "Short lessons that pair skills to fix real interface problems.",
   path: "/chapters",
 });
 
@@ -16,7 +16,7 @@ export default function ChaptersPage() {
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">Chapters</h1>
       <p className="mt-2 text-ink-2">
-        A chapter combines multiple skills into a practical lesson.
+        Each chapter pairs a few skills into one lesson about a real interface problem.
       </p>
 
       <div className="mt-8 space-y-3">

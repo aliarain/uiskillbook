@@ -10,7 +10,8 @@
     "lint": "eslint",
     "generate:siteplane": "node scripts/generate-siteplane-skills.mjs",
     "check:siteplane": "node scripts/check-siteplane-overlap.mjs",
-    "build:cli": "node packages/cli/build.mjs"
+    "build:cli": "node packages/cli/build.mjs",
+    "import:writing": "node scripts/import-writing-skills.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

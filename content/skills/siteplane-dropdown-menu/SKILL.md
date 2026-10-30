@@ -21,14 +21,14 @@ tags:
   - menu
   - dropdown
   - actions
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: dropdown-menu
   title: "Dropdown Menu"
   group: "Overlays & disclosure"
-  order: 36
+  order: 37
   docs: https://ui.siteplane.io/docs/components/dropdown-menu/
   install: [dropdown-menu]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Dropdown Menu
 
-Use Dropdown Menu when you or your code prefer shadcn-style part names such as DropdownMenuContent. Its behavior, styling and API are exactly Menu's; only the names differ.
+Dropdown Menu serves code that prefers shadcn-style part names such as DropdownMenuContent. It matches Menu in behavior, styling and API; only the names differ.
 
 ## Install
 
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/dropdown-menu`. The project needs Sitepla
 ## Reference
 
 - [Dropdown Menu docs](https://ui.siteplane.io/docs/components/dropdown-menu/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/dropdown-menu.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

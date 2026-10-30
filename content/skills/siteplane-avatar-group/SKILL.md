@@ -23,14 +23,14 @@ tags:
   - facepile
   - members
   - overflow-count
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: avatar-group
   title: "Avatar Group"
   group: "Data display"
-  order: 54
+  order: 55
   docs: https://ui.siteplane.io/docs/components/avatar-group/
   install: [avatar-group]
 ---
@@ -60,9 +60,9 @@ Import it from `@/siteplane/components/avatar-group`. The project needs Siteplan
 - Set `size` (`sm`, `md`, `lg`, `xl`) on the group rather than on each avatar so the overlap and the count scale together.
 - Set `count` to the number of avatars left out, and pair it with screen-reader-only text naming what is counted, for example "more members".
 - Decide in your own code how many avatars to render; the group does not measure or trim its children.
-- On a custom surface, check that the ring colour matches the background, since it follows the kit surface it sits on.
+- The ring colour follows the kit surface, so on a custom surface check that it matches the background.
 
 ## Reference
 
 - [Avatar Group docs](https://ui.siteplane.io/docs/components/avatar-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/avatar-group.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

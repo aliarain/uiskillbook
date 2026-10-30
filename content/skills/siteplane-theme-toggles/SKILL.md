@@ -23,14 +23,14 @@ tags:
   - dark-mode
   - toggle
   - animation
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: theme-toggles
   title: "Theme Toggles"
   group: "Animated"
-  order: 97
+  order: 98
   docs: https://ui.siteplane.io/docs/components/theme-toggles/
   install: [theme-toggles]
 ---
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/theme-toggles`. The project needs Sitepla
 ## Reference
 
 - [Theme Toggles docs](https://ui.siteplane.io/docs/components/theme-toggles/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/theme-toggles.md))
-- Siteplane UI 1.7.0, Animated. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Animated. Read the installed source under `src/siteplane` before relying on an API.

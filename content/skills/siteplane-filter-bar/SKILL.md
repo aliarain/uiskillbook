@@ -24,14 +24,14 @@ tags:
   - search
   - toolbar
   - collection
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: filter-bar
   title: "Filter Bar"
   group: "Data display"
-  order: 63
+  order: 64
   docs: https://ui.siteplane.io/docs/components/filter-bar/
   install: [filter-bar]
 ---
@@ -59,11 +59,11 @@ Import it from `@/siteplane/components/filter-bar`. The project needs Siteplane 
 
 - Group parts with `FilterBarControls`, `FilterBarSearch`, `FilterBarFilters`, `FilterBarActiveFilters` and `FilterBarActions` inside `FilterBar`.
 - When a search sits alongside a handful of views, put `TabsTab` items inside `FilterBarTabs`. Filter your rows from `query`, and give the tab list a label describing the views it changes.
-- Set `open` on `FilterBarActiveFilters` to whether any filter applies, so the row collapses smoothly when the last one goes.
+- Set `open` on `FilterBarActiveFilters` to whether any filter applies, so the row collapses when the last one goes.
 - Keep loading, error and empty states with the results, and never reset a search field that has focus.
-- Announce meaningful result changes politely rather than on every keystroke.
+- Announce significant result changes in a polite live region, not on every keystroke.
 
 ## Reference
 
 - [Filter Bar docs](https://ui.siteplane.io/docs/components/filter-bar/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/filter-bar.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

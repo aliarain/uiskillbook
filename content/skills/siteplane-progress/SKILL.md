@@ -1,7 +1,7 @@
 ---
 name: siteplane-progress
 title: "Siteplane Progress"
-description: "A bar or circle reporting how far a task has got, or simply that it is still under way."
+description: "A bar or circle that reports how far a task has got, or that it is still under way."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - progress
   - loading
   - uploads
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: progress
   title: "Progress"
   group: "Feedback"
-  order: 84
+  order: 85
   docs: https://ui.siteplane.io/docs/components/progress/
   install: [progress]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Progress
 
-Use Progress for uploads, exports and other tasks where the amount done is known or can be shown as indeterminate. It comes as a linear bar and as a separate ProgressCircle. Timing, cancellation and failure stay with your app.
+Progress tracks uploads, exports and other tasks, with a known amount done or an indeterminate state. It comes as a linear bar and a separate ProgressCircle. Your app handles timing, cancellation and failure.
 
 ## Install
 
@@ -58,11 +58,11 @@ Import it from `@/siteplane/components/progress`. The project needs Siteplane UI
 
 - Name it with ProgressLabel or aria-label, and keep that name stable while the value changes.
 - Pass value null for an indeterminate state when you cannot measure completion.
-- Include ProgressTrack and ProgressIndicator explicitly when you supply custom children.
+- Include ProgressTrack and ProgressIndicator yourself when you supply custom children.
 - ProgressCircle stands alone: pass it a value and leave it without children.
-- Show a clear message when the task fails; the bar does not report errors.
+- Show your own message when the task fails; the bar does not report errors.
 
 ## Reference
 
 - [Progress docs](https://ui.siteplane.io/docs/components/progress/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/progress.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

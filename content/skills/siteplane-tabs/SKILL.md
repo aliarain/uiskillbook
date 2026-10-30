@@ -23,14 +23,14 @@ tags:
   - tabs
   - panels
   - segmented-views
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: tabs
   title: "Tabs"
   group: "Navigation"
-  order: 29
+  order: 30
   docs: https://ui.siteplane.io/docs/components/tabs/
   install: [tabs]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Tabs
 
-Use Tabs to split one view into a few peer panels, such as Overview, Activity and Settings, where people look at one at a time. Each tab swaps content in place without changing pages. Variants cover boxed, pill and underline styles.
+Tabs split one view into a few peer panels, such as Overview, Activity and Settings, that people view one at a time. Each tab swaps content in place on the same page. Variants cover boxed, pill and underline styles.
 
 ## Install
 
@@ -51,7 +51,7 @@ Import it from `@/siteplane/components/tabs`. The project needs Siteplane UI's o
 
 ## When to pick it
 
-- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group instead when the choice changes a setting or filter of one view rather than showing a different panel.
+- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group instead when the choice changes a setting or filter of one view.
 - **vs [Navigation Menu](https://uiskillbook.com/skills/siteplane-navigation-menu):** Pick Navigation Menu or plain links instead when each choice is a separate page with its own URL.
 - **vs [Accordion](https://uiskillbook.com/skills/siteplane-accordion):** Pick Accordion instead when sections stack vertically and people may open several at once.
 
@@ -66,4 +66,4 @@ Import it from `@/siteplane/components/tabs`. The project needs Siteplane UI's o
 ## Reference
 
 - [Tabs docs](https://ui.siteplane.io/docs/components/tabs/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/tabs.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

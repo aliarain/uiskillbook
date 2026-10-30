@@ -21,14 +21,14 @@ tags:
   - number-input
   - stepper
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: number-field
   title: "Number Field"
   group: "Forms & selection"
-  order: 8
+  order: 9
   docs: https://ui.siteplane.io/docs/components/number-field/
   install: [number-field]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Number Field
 
-Use Number Field when the value is a number people adjust: quantities, seats, timeouts, budgets. It keeps the value numeric while showing it formatted, and clamps it to the range you set.
+Number Field holds numbers people adjust: quantities, seats, timeouts, budgets. It keeps the value numeric while showing it formatted, and clamps it to your range.
 
 ## Install
 
@@ -49,9 +49,9 @@ Import it from `@/siteplane/components/number-field`. The project needs Siteplan
 
 ## When to pick it
 
-- **vs [Slider](https://uiskillbook.com/skills/siteplane-slider):** Pick Slider instead when an approximate position on a range matters more than an exact typed number.
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input instead for digit strings that are not quantities, like phone numbers or postcodes.
-- **vs [OTP Field](https://uiskillbook.com/skills/siteplane-otp-field):** Pick OTP Field instead for a fixed-length verification code.
+- **vs [Slider](https://uiskillbook.com/skills/siteplane-slider):** Pick Slider when an approximate position on a range matters more than an exact number.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input for digit strings that are not quantities, like phone numbers or postcodes.
+- **vs [OTP Field](https://uiskillbook.com/skills/siteplane-otp-field):** Pick OTP Field for a fixed-length verification code.
 
 ## Rules
 
@@ -59,9 +59,9 @@ Import it from `@/siteplane/components/number-field`. The project needs Siteplan
 - Use `null` for an empty value, and constrain edits with `min`, `max` and `step`.
 - Pass `format` and `locale` for currency or percent; the stored value stays a plain number.
 - Put the `name` on the surrounding Field so Form submits the number, and add `className="w-full"` when it should fill a column.
-- Keep the label above the control; Number Field does not support a floating label.
+- Keep the label above the control. Number Field has no floating label.
 
 ## Reference
 
 - [Number Field docs](https://ui.siteplane.io/docs/components/number-field/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/number-field.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

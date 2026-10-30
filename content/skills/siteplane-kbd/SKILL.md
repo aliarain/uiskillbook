@@ -21,14 +21,14 @@ tags:
   - keyboard
   - shortcuts
   - typography
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: kbd
   title: "Kbd"
   group: "Layout & utilities"
-  order: 89
+  order: 90
   docs: https://ui.siteplane.io/docs/components/kbd/
   install: [kbd]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Kbd
 
-Use Kbd to show the shortcut for an action, in a hint sentence, a search field addon or after a button label. It only displays keys; your app implements the shortcut.
+Kbd shows the shortcut for an action in a hint sentence, a search field addon or after a button label. It displays keys; your app implements the shortcut.
 
 ## Install
 
@@ -58,9 +58,9 @@ Import it from `@/siteplane/components/kbd`. The project needs Siteplane UI's on
 - Show labels that match the person's platform, such as Cmd on macOS and Ctrl elsewhere.
 - Implement every shortcut you display; Kbd adds no key handling.
 - Never make the shortcut the only way to find or run the action.
-- Remember a Kbd after a button label becomes part of the button's accessible name.
+- A Kbd after a button label becomes part of the button's accessible name.
 
 ## Reference
 
 - [Kbd docs](https://ui.siteplane.io/docs/components/kbd/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/kbd.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

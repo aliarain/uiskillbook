@@ -24,14 +24,14 @@ tags:
   - surface
   - container
   - panel
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: card
   title: "Card"
   group: "Data display"
-  order: 57
+  order: 58
   docs: https://ui.siteplane.io/docs/components/card/
   install: [card]
 ---
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/card`. The project needs Siteplane UI's o
 ## Reference
 
 - [Card docs](https://ui.siteplane.io/docs/components/card/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/card.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

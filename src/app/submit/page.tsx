@@ -10,7 +10,7 @@ export const metadata: Metadata = pageMetadata({
 
 const CRITERIA = [
   "Has a concrete purpose",
-  "Gives a usable instruction, not generic AI filler",
+  "Gives instructions an agent can act on",
   "Doesn't duplicate an existing skill",
   "Preserves attribution and links its source repository",
   "States its license",

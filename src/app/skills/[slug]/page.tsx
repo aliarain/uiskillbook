@@ -281,9 +281,7 @@ Treat it as a set of rules for this task unless it conflicts with the existing p
     <div className="card mt-6 p-5">
       <h2 className="text-base font-semibold text-ink">Hosted in an external repository</h2>
       <p className="mt-2 text-sm text-ink-2">
-        This skill&apos;s full instructions live in its source repository, not on UI
-        Skillbook. Open it on GitHub to read it, or copy a prompt that points your agent
-        straight at it.
+        This skill&apos;s instructions live in its source repository. Read them on GitHub, or copy a prompt that sends your agent to the file.
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
         {sourceUrl && (

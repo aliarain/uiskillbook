@@ -6108,33 +6108,6 @@
     "external": true
   },
   {
-    "slug": "stop-slop",
-    "title": "stop-slop",
-    "description": "Remove AI writing patterns from prose when drafting, editing, or reviewing text to eliminate predictable AI tells.",
-    "author": {
-      "name": "hardikpandya",
-      "url": "https://github.com/hardikpandya"
-    },
-    "source": {
-      "repository": "https://github.com/hardikpandya/stop-slop/blob/main/SKILL.md",
-      "rawUrl": "https://raw.githubusercontent.com/hardikpandya/stop-slop/main/SKILL.md"
-    },
-    "categories": [
-      "taste"
-    ],
-    "agents": [
-      "universal"
-    ],
-    "tags": [
-      "craft",
-      "taste",
-      "tooling"
-    ],
-    "version": "1.0.0",
-    "updated_at": "2026-09-01",
-    "external": true
-  },
-  {
     "slug": "no-ai-slop",
     "title": "no-ai-slop",
     "description": "Edit drafts into sharper, more human writing while preserving personal voice, or detect AI-slop patterns without rewriting.",

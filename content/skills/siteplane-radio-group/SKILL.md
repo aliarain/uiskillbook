@@ -21,14 +21,14 @@ tags:
   - radio
   - single-choice
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: radio-group
   title: "Radio Group"
   group: "Forms & selection"
-  order: 16
+  order: 17
   docs: https://ui.siteplane.io/docs/components/radio-group/
   install: [radio-group]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Radio Group
 
-Use Radio Group for short, mutually exclusive choices that people should compare at a glance: plans, frequencies, delivery speeds. Options can carry descriptions or be shown as selectable cards.
+Radio Group fits short, mutually exclusive choices people compare at a glance: plans, frequencies, delivery speeds. Options can carry descriptions or appear as selectable cards.
 
 ## Install
 
@@ -49,15 +49,15 @@ Import it from `@/siteplane/components/radio-group`. The project needs Siteplane
 
 ## When to pick it
 
-- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select instead when there are many options or space is tight and comparison is not important.
-- **vs [Checkbox Group](https://uiskillbook.com/skills/siteplane-checkbox-group):** Pick Checkbox Group instead when several options can be on at once.
-- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group for a compact view or tool switch that acts immediately.
+- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select when there are many options, or space is tight and side-by-side comparison matters less.
+- **vs [Checkbox Group](https://uiskillbook.com/skills/siteplane-checkbox-group):** Pick Checkbox Group when several options can be on at once.
+- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group for a compact view or tool switch that acts on press.
 - **vs [List Box](https://uiskillbook.com/skills/siteplane-list-box):** Pick List Box for a single choice from a longer visible list of rich rows.
 
 ## Rules
 
-- Give each `Radio` a unique `value` and own the choice with `value` and `onValueChange` when needed.
-- Render the Field as a Fieldset with a legend so the group has a name and submits under the Field `name`.
+- Give each `Radio` a unique `value`. Control the choice with `value` and `onValueChange` when needed.
+- Render the Field as a Fieldset with a legend. The group then has a name and submits under the Field `name`.
 - For options with descriptions, put each Radio in a `FieldItem` beside a `FieldLabel` and `FieldDescription`.
 - Use `Label variant="card"` for plan-style cards so the whole card selects the option.
 - Set `size` once on the group; a Radio's own size overrides it.
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/radio-group`. The project needs Siteplane
 ## Reference
 
 - [Radio Group docs](https://ui.siteplane.io/docs/components/radio-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/radio-group.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

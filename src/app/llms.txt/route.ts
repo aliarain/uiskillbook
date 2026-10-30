@@ -12,7 +12,7 @@ export function GET() {
   const lines = [
     "# UI Skillbook",
     "",
-    "> The field guide for building better interfaces with AI. Curated UI skills, rules,",
+    "> The field guide for building interfaces with AI. Curated UI skills, rules,",
     "> and patterns for humans and coding agents.",
     "",
     `Full text: ${SITE_URL}/llms-full.txt. JSON API: ${SITE_URL}/api (docs: ${SITE_URL}/api-docs, OpenAPI: ${SITE_URL}/openapi.json). MCP server: ${SITE_URL}/mcp. Any skill page as Markdown: ${SITE_URL}/skills/{slug}.md`,

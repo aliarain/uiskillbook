@@ -22,14 +22,14 @@ tags:
   - detail-view
   - drawer
   - records
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: detail-drawer
   title: "Detail Drawer"
   group: "Overlays & disclosure"
-  order: 40
+  order: 41
   docs: https://ui.siteplane.io/docs/components/detail-drawer/
   install: [detail-drawer]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Detail Drawer
 
-Use Detail Drawer when people pick an item from a list or table and want its details without leaving the page. It has a header for the record name, a scrolling body and a footer for actions. Wrap it in a form to make it an edit panel.
+Detail Drawer shows the details of an item people pick from a list or table, without leaving the page. It has a header for the record name, a scrolling body and a footer for actions. Wrap it in a form to make an edit panel.
 
 ## Install
 
@@ -50,7 +50,7 @@ Import it from `@/siteplane/components/detail-drawer`. The project needs Sitepla
 
 ## When to pick it
 
-- **vs [Drawer](https://uiskillbook.com/skills/siteplane-drawer):** Compose Drawer directly instead when the panel is not about a single record.
+- **vs [Drawer](https://uiskillbook.com/skills/siteplane-drawer):** Compose Drawer yourself when the panel is not about a single record.
 - **vs [Sheet](https://uiskillbook.com/skills/siteplane-sheet):** Pick Sheet instead for a standalone form at the edge that has no swipe behavior.
 - **vs [Alert Dialog](https://uiskillbook.com/skills/siteplane-alert-dialog):** Pick Alert Dialog instead for a short confirmation.
 
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/detail-drawer`. The project needs Sitepla
 ## Reference
 
 - [Detail Drawer docs](https://ui.siteplane.io/docs/components/detail-drawer/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/detail-drawer.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

@@ -1,7 +1,7 @@
 ---
 name: siteplane-resource-list
 title: "Siteplane Resource List"
-description: "A list of entities with a status indicator, title, description and meta slot, optionally clickable as links."
+description: "A list of entities with a status indicator, title, description and meta slot. Rows can be links."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -24,14 +24,14 @@ tags:
   - entities
   - status
   - rows
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: resource-list
   title: "Resource List"
   group: "Data display"
-  order: 62
+  order: 63
   docs: https://ui.siteplane.io/docs/components/resource-list/
   install: [resource-list]
 ---
@@ -59,7 +59,7 @@ Import it from `@/siteplane/components/resource-list`. The project needs Sitepla
 ## Rules
 
 - Set `interactive` on `ResourceListItem` and render an anchor to make rows links; mark the current one with `active`.
-- Give every `ResourceListIndicator` a `label` (and an `icon` if useful) so status is not carried by colour alone.
+- Give every `ResourceListIndicator` a `label` (and an `icon` if useful) so colour is not the only status cue.
 - Render rows as direct children with stable keys so add, remove and reorder animations track the right row.
 - Use `variant` (`soft` or `divided`), `density` and `flush` to match the surrounding card or filter bar.
 - Reach for List Box instead when you need managed keyboard selection; `selected` here only changes appearance on static and link rows.
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/resource-list`. The project needs Sitepla
 ## Reference
 
 - [Resource List docs](https://ui.siteplane.io/docs/components/resource-list/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/resource-list.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

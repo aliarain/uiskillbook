@@ -22,14 +22,14 @@ tags:
   - modal
   - overlays
   - dialog
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: dialog
   title: "Dialog"
   group: "Overlays & disclosure"
-  order: 37
+  order: 38
   docs: https://ui.siteplane.io/docs/components/dialog/
   install: [dialog]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Dialog
 
-Use Dialog when people must step away from the page to finish one task, such as renaming a project or inviting a member. It traps focus and blocks the page until closed. Long content scrolls inside while the header and footer stay put.
+Dialog pulls people off the page to finish one task, such as renaming a project or inviting a member. It traps focus and blocks the page until it closes. Long content scrolls inside while the header and footer stay put.
 
 ## Install
 
@@ -57,8 +57,8 @@ Import it from `@/siteplane/components/dialog`. The project needs Siteplane UI's
 
 ## Rules
 
-- Always include DialogTitle, and DialogDescription when helpful, so the dialog is named for assistive technology.
-- Do not add another portal or backdrop around DialogPopup; it already includes them.
+- Include DialogTitle, plus DialogDescription when it helps, so assistive technology can name the dialog.
+- DialogPopup includes a portal and backdrop; don't add another around it.
 - Never wrap a submit button in DialogClose; close the dialog yourself after the submission succeeds.
 - Use open and onOpenChange when a menu item or other code opens the dialog, and render it outside that menu.
 - Put long content in DialogPanel so it scrolls between the header and footer.
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/dialog`. The project needs Siteplane UI's
 ## Reference
 
 - [Dialog docs](https://ui.siteplane.io/docs/components/dialog/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/dialog.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

@@ -21,14 +21,14 @@ tags:
   - top-list
   - bar-list
   - analytics
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: bar-list
   title: "Bar List"
   group: "Charts"
-  order: 71
+  order: 72
   docs: https://ui.siteplane.io/docs/components/bar-list/
   install: [bar-list]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Bar List
 
-Bar List shows top pages, top countries or traffic sources as rows you can compare at a glance. It renders fully on the server and glides to new values when the period changes.
+Bar List shows top pages, top countries or traffic sources as rows that are easy to compare. It renders fully on the server and glides to new values when the period changes.
 
 ## Install
 
@@ -59,9 +59,9 @@ Import it from `@/siteplane/components/bar-list`. The project needs Siteplane UI
 - Add a `heading` with `label` and `value` to name the two columns.
 - Format values with `formatValue` or set `locale`; use `description` for a quieter second line such as a path.
 - Keep a custom `color` light, because labels are written on top of the bars.
-- Rows are display-only: they do not respond to clicks, hover or focus, so do not wire actions to them.
+- Rows ignore clicks, hover and focus, so don't wire actions to them.
 
 ## Reference
 
 - [Bar List docs](https://ui.siteplane.io/docs/components/bar-list/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/bar-list.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

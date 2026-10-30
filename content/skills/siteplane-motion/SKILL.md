@@ -23,14 +23,14 @@ tags:
   - lists
   - transitions
   - numbers
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: motion
   title: "Motion"
   group: "Layout & utilities"
-  order: 90
+  order: 91
   docs: https://ui.siteplane.io/docs/components/motion/
   install: [motion]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Motion
 
-Use Motion when the data changes and you want the interface to show that change smoothly: rows added or removed, chips reflowing, a panel swapping steps, or a total rolling to a new figure. It needs no animation code and turns instant under reduced motion.
+Motion animates data changes: rows added or removed, chips reflowing, a panel swapping steps, or a total rolling to a new figure. You write no animation code, and changes turn instant under reduced motion.
 
 ## Install
 
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/motion`. The project needs Siteplane UI's
 ## Reference
 
 - [Motion docs](https://ui.siteplane.io/docs/components/motion/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/motion.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

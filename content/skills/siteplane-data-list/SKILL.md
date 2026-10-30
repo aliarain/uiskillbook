@@ -23,14 +23,14 @@ tags:
   - key-value
   - details
   - properties
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: data-list
   title: "Data List"
   group: "Data display"
-  order: 58
+  order: 59
   docs: https://ui.siteplane.io/docs/components/data-list/
   install: [data-list]
 ---
@@ -66,4 +66,4 @@ Import it from `@/siteplane/components/data-list`. The project needs Siteplane U
 ## Reference
 
 - [Data List docs](https://ui.siteplane.io/docs/components/data-list/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/data-list.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

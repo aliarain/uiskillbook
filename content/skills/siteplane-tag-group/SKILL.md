@@ -23,14 +23,14 @@ tags:
   - chips
   - labels
   - filters
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: tag-group
   title: "Tag Group"
   group: "Data display"
-  order: 59
+  order: 60
   docs: https://ui.siteplane.io/docs/components/tag-group/
   install: [tag-group]
 ---
@@ -57,7 +57,7 @@ Import it from `@/siteplane/components/tag-group`. The project needs Siteplane U
 ## Rules
 
 - Make a tag selectable with `selected` plus `onSelectedChange`, or with `defaultSelected` for tag-owned state.
-- Providing `onRemove` gives each tag a remove button and keyboard deletion; drop the tag from your state in the handler and label the button with `removeLabel`.
+- Pass `onRemove` to give each tag a remove button and keyboard deletion; drop the tag from your state in the handler and label the button with `removeLabel`.
 - Use stable React keys, never the index, or the wrong tag animates out.
 - Render `Tag` elements directly inside `TagGroup` (fragments are fine) and do not wrap each tag in your own component.
 - Set `size` once on the group so every tag matches.
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/tag-group`. The project needs Siteplane U
 ## Reference
 
 - [Tag Group docs](https://ui.siteplane.io/docs/components/tag-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/tag-group.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

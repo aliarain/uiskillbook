@@ -21,14 +21,14 @@ tags:
   - date-time
   - scheduling
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: date-time-picker
   title: "Date Time Picker"
   group: "Date & color"
-  order: 49
+  order: 50
   docs: https://ui.siteplane.io/docs/components/date-time-picker/
   install: [date-time-picker]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Date Time Picker
 
-Use Date Time Picker for scheduled publishes, meeting starts and reminders where both day and time matter. It submits a local date-time string without a time zone, so conversion stays in your app.
+Date Time Picker fits scheduled publishes, meeting starts and reminders where both day and time matter. It submits a local date-time string with no time zone, so your app handles conversion.
 
 ## Install
 
@@ -49,19 +49,19 @@ Import it from `@/siteplane/components/date-time-picker`. The project needs Site
 
 ## When to pick it
 
-- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field instead when only the day matters.
-- **vs [Time Field](https://uiskillbook.com/skills/siteplane-time-field):** Pick Time Field instead for a time with no date, like a daily reminder.
+- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field when only the day matters.
+- **vs [Time Field](https://uiskillbook.com/skills/siteplane-time-field):** Pick Time Field for a time with no date, like a daily reminder.
 - **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker for a calendar-only date choice without typing.
 
 ## Rules
 
 - Treat the value as `{ date, time: { hour, minute } }` and store `null` when empty.
 - Set `name` to submit `YYYY-MM-DDTHH:mm` and convert time zones yourself.
-- Use `minuteStep` for selector options, but validate the step and business hours in app code and on the server.
+- Use `minuteStep` for selector options. Validate the step and business hours in app code and on the server.
 - Set `hourCycle={12}` for AM/PM display; the value stays 24-hour.
-- Block days with `calendarProps.disabled`; time rules are not checked for you.
+- Block days with `calendarProps.disabled`. The picker does not check time rules for you.
 
 ## Reference
 
 - [Date Time Picker docs](https://ui.siteplane.io/docs/components/date-time-picker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/date-time-picker.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - color
   - swatches
   - palette
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: color-swatch-picker
   title: "Color Swatch Picker"
   group: "Date & color"
-  order: 52
+  order: 53
   docs: https://ui.siteplane.io/docs/components/color-swatch-picker/
   install: [color-swatch-picker]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Color Swatch Picker
 
-Use Color Swatch Picker for label colors, avatar backgrounds, theme presets or image choices from a fixed set. The value is the option key, so your data stays independent of the CSS color.
+Color Swatch Picker chooses from a fixed set: label colors, avatar backgrounds, theme presets or images. The value is the option key, so your data does not depend on the CSS color.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/color-swatch-picker`. The project needs S
 
 ## When to pick it
 
-- **vs [Color Picker](https://uiskillbook.com/skills/siteplane-color-picker):** Pick Color Picker instead when any color is allowed, or add it as the last swatch for a custom choice.
-- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group instead when the options are better described by words than by color.
+- **vs [Color Picker](https://uiskillbook.com/skills/siteplane-color-picker):** Pick Color Picker when any color is allowed, or add it as the last swatch for a custom choice.
+- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group when words describe the options better than color.
 - **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select when the palette is too large to show as swatches.
 
 ## Rules
 
-- Give every option a `label` and unique `value`; the label is what screen readers announce.
-- Store the option key from `onValueChange`, not the CSS color.
+- Give each option a `label` and unique `value`. Screen readers announce the label.
+- Store the option key from `onValueChange` instead of the CSS color.
 - Use `indicator="ring"` for image swatches so the check does not cover the picture.
 - Place it in a Field with a `name` and `required` so FieldError can explain a missing choice.
-- Change swatch shape through the provider `radius`, not custom classes.
+- Change swatch shape through the provider `radius` instead of custom classes.
 
 ## Reference
 
 - [Color Swatch Picker docs](https://ui.siteplane.io/docs/components/color-swatch-picker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/color-swatch-picker.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

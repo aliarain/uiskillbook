@@ -17,7 +17,7 @@ export default function AgentsPage() {
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">Agents</h1>
       <p className="mt-2 text-ink-2">
-        Give your coding agent better taste. Skills work with any agent that can read markdown.
+        Skills work with any coding agent that reads markdown. Pick yours for setup steps.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

@@ -22,8 +22,8 @@ tags:
   - toolbar
   - roving-focus
   - editor
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: toolbar
@@ -38,7 +38,7 @@ siteplane:
 
 # Toolbar
 
-Use Toolbar for editor formatting bars, canvas tools and table action rows where many small controls sit together. It gives the set roving focus so keyboard users do not tab through every button.
+Toolbar holds editor formatting bars, canvas tools and table action rows full of small controls. Roving focus gives the set one tab stop, so keyboard users skip past it with a single Tab.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/toolbar`. The project needs Siteplane UI'
 
 ## When to pick it
 
-- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group instead when you only want controls joined visually and each should keep its own tab stop.
+- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group when the controls only need a joined look and each keeps its own tab stop.
 - **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group for a set that shares a pressed selection; nest it inside a Toolbar when the bar also has other actions.
-- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Move rarely used actions into a Menu triggered from the toolbar instead of crowding the row.
+- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Move infrequent actions into a Menu opened from the toolbar so the row stays short.
 
 ## Rules
 
 - Give the toolbar, and any meaningful `ToolbarGroup`, an accessible label.
 - Build items from `ToolbarButton`, `ToolbarLink`, `ToolbarInput` and `ToolbarGroup` so they join the arrow-key focus order.
 - Set `size` once on `Toolbar`; a group or item can override it for its own controls.
-- Divide clusters with `ToolbarSeparator` rather than spacing alone.
-- Use `focusableWhenDisabled` on a `ToolbarButton` that should stay reachable while unavailable.
+- Divide clusters with `ToolbarSeparator` instead of spacing alone.
+- Set `focusableWhenDisabled` on a `ToolbarButton` that must stay reachable while unavailable.
 
 ## Reference
 
 - [Toolbar docs](https://ui.siteplane.io/docs/components/toolbar/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/toolbar.md))
-- Siteplane UI 1.7.0, Actions. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Actions. Read the installed source under `src/siteplane` before relying on an API.

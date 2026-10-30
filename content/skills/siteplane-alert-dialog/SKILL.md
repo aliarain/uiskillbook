@@ -22,14 +22,14 @@ tags:
   - confirmation
   - modal
   - destructive-actions
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: alert-dialog
   title: "Alert Dialog"
   group: "Overlays & disclosure"
-  order: 38
+  order: 39
   docs: https://ui.siteplane.io/docs/components/alert-dialog/
   install: [alert-dialog]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Alert Dialog
 
-Use Alert Dialog right before an action that is hard to undo, such as deleting a project or discarding unsaved changes. It interrupts on purpose and offers a clear confirm and cancel. It does not run the action; your code does.
+Alert Dialog comes right before an action that is hard to undo, such as deleting a project or discarding unsaved changes. It interrupts on purpose and offers Confirm and Cancel. Your code runs the action.
 
 ## Install
 
@@ -50,8 +50,8 @@ Import it from `@/siteplane/components/alert-dialog`. The project needs Siteplan
 
 ## When to pick it
 
-- **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Pick Dialog instead when the overlay holds fields or several steps rather than a single decision.
-- **vs [Toast](https://uiskillbook.com/skills/siteplane-toast):** Pick Toast with an undo action instead when the action is safely reversible and an interruption is not worth it.
+- **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Pick Dialog instead when the overlay holds fields or several steps.
+- **vs [Toast](https://uiskillbook.com/skills/siteplane-toast):** Pick Toast with an undo action instead when the action is reversible and does not justify an interruption.
 - **vs [Alert](https://uiskillbook.com/skills/siteplane-alert):** Pick Alert instead when the message needs no response from the user.
 
 ## Rules
@@ -59,10 +59,10 @@ Import it from `@/siteplane/components/alert-dialog`. The project needs Siteplan
 - Write a title that names the action and a description that states the consequence.
 - Control the root with open and onOpenChange when confirming runs a request, and close it only after the request succeeds.
 - Show loading on the confirm button while the request runs and ignore dismissal until it settles.
-- Do not wrap AlertDialogPopup in another portal; it already includes the backdrop and viewport.
-- Expect the popup to become a full-width bottom sheet below 640 px.
+- AlertDialogPopup includes the backdrop and viewport; don't wrap it in another portal.
+- Below 640 px the popup becomes a full-width bottom sheet.
 
 ## Reference
 
 - [Alert Dialog docs](https://ui.siteplane.io/docs/components/alert-dialog/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/alert-dialog.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - breadcrumbs
   - hierarchy
   - wayfinding
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: breadcrumb
   title: "Breadcrumb"
   group: "Navigation"
-  order: 26
+  order: 27
   docs: https://ui.siteplane.io/docs/components/breadcrumb/
   install: [breadcrumb]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Breadcrumb
 
-Use Breadcrumb on pages nested a few levels deep, such as a project inside a workspace, so people see their location and can jump to any level above. It supplements the main navigation and does not replace it.
+Breadcrumb suits pages nested a few levels deep, such as a project inside a workspace. People see where they are and can jump to any level above. Keep the main navigation alongside it.
 
 ## Install
 
@@ -50,18 +50,18 @@ Import it from `@/siteplane/components/breadcrumb`. The project needs Siteplane 
 
 ## When to pick it
 
-- **vs [Stepper](https://uiskillbook.com/skills/siteplane-stepper):** Pick Stepper instead when the trail shows progress through an ordered process rather than a place in a hierarchy.
+- **vs [Stepper](https://uiskillbook.com/skills/siteplane-stepper):** Pick Stepper instead when the trail shows progress through an ordered process.
 - **vs [Sidebar](https://uiskillbook.com/skills/siteplane-sidebar):** Pick Sidebar for the main application navigation; a breadcrumb only shows one path through it.
 
 ## Rules
 
-- Mark the current location with BreadcrumbPage, not a link, so it carries aria-current page.
-- Keep BreadcrumbSeparator elements as siblings between items, never inside a BreadcrumbItem.
+- Mark the current location with BreadcrumbPage so it carries aria-current page. Don't make it a link.
+- Place each BreadcrumbSeparator between items as a sibling. Never nest one inside a BreadcrumbItem.
 - Pass a router link through render on BreadcrumbLink so client navigation keeps native anchor semantics.
-- Treat BreadcrumbEllipsis as decoration; if hidden levels must be reachable, put them behind a labelled menu trigger.
+- BreadcrumbEllipsis is decoration. To make hidden levels reachable, put them behind a labelled menu trigger.
 - Change the Breadcrumb aria-label when a page has more than one trail.
 
 ## Reference
 
 - [Breadcrumb docs](https://ui.siteplane.io/docs/components/breadcrumb/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/breadcrumb.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

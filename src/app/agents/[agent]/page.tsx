@@ -63,7 +63,7 @@ export default async function AgentDetailPage({
         <div>
           <p className="label">MCP</p>
           <p className="mt-1.5 text-sm text-ink-2">
-            Connect {label} to the catalog over Model Context Protocol —{" "}
+            Connect {label} to the catalog over Model Context Protocol with the{" "}
             <Code>list_skills</Code>, <Code>get_skill</Code> and <Code>list_siteplane_components</Code> tools. Setup varies by agent;
             point it at the endpoint below.
           </p>
@@ -72,8 +72,7 @@ export default async function AgentDetailPage({
           </div>
         </div>
         <p className="text-xs text-ink-3">
-          Or skip both — every skill page has a &ldquo;Copy for agent&rdquo; button you can
-          paste directly into a session.
+          Or skip both: every skill page has a &ldquo;Copy for agent&rdquo; button, and the copied prompt pastes into any session.
         </p>
       </div>
 

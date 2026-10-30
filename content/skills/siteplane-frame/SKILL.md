@@ -22,14 +22,14 @@ tags:
   - surface
   - panels
   - layout
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: frame
   title: "Frame"
   group: "Layout & utilities"
-  order: 88
+  order: 89
   docs: https://ui.siteplane.io/docs/components/frame/
   install: [frame]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Frame
 
-Use Frame to gather a few related panels inside one shared surface, such as a settings group or a summary with stacked sections. It is presentation only, with no state or behavior.
+Frame gathers a few related panels on one shared surface, such as a settings group or a summary with stacked sections. It has no state or behavior.
 
 ## Install
 
@@ -55,12 +55,12 @@ Import it from `@/siteplane/components/frame`. The project needs Siteplane UI's 
 
 ## Rules
 
-- Place several FramePanel parts directly inside Frame; the spacing between them is automatic.
-- For several sections inside a single panel, drop the panel's padding and put a Separator between each section.
+- Place FramePanel parts as direct children of Frame; Frame spaces them for you.
+- For several sections inside a single panel, drop the panel's padding and put a Separator between sections.
 - Do not add borders or shadows to panels; they already draw the kit hairline.
 - Keep state and behavior in the content you place inside; Frame holds none.
 
 ## Reference
 
 - [Frame docs](https://ui.siteplane.io/docs/components/frame/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/frame.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

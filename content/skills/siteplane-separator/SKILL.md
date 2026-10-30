@@ -21,14 +21,14 @@ tags:
   - siteplane-ui
   - divider
   - layout
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: separator
   title: "Separator"
   group: "Layout & utilities"
-  order: 92
+  order: 93
   docs: https://ui.siteplane.io/docs/components/separator/
   install: [separator]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Separator
 
-Use Separator to mark a boundary between groups of content or controls, such as between a heading and a body or between toolbar items. It is a visual and semantic divider, not a spacing tool.
+Separator marks a boundary between groups of content or controls, such as a heading and its body or two toolbar items. It divides visually and semantically; use gap or margin for spacing.
 
 ## Install
 
@@ -49,16 +49,16 @@ Import it from `@/siteplane/components/separator`. The project needs Siteplane U
 
 ## When to pick it
 
-- **vs [Frame](https://uiskillbook.com/skills/siteplane-frame):** Pick Frame when the sections need their own surfaces rather than a line between them.
+- **vs [Frame](https://uiskillbook.com/skills/siteplane-frame):** Pick Frame when the sections need their own surfaces.
 
 ## Rules
 
-- A vertical divider uses orientation="vertical" and only stretches when its parent row has a defined height.
-- Use role="presentation" when the layout already separates content, such as list rows, so each line is not announced.
-- Name content groups with headings; a line alone is not structure.
+- Set orientation="vertical" for a vertical divider; it stretches only when its parent row has a defined height.
+- Use role="presentation" when the layout already separates content, such as list rows, so screen readers skip each line.
+- Name content groups with headings; a line alone carries no structure.
 - Use gap or margin for spacing, not an invisible separator.
 
 ## Reference
 
 - [Separator docs](https://ui.siteplane.io/docs/components/separator/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/separator.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

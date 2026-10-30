@@ -25,14 +25,14 @@ tags:
   - composer
   - ai
   - input
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: prompt-input
   title: "Prompt Input"
   group: "Chat & AI"
-  order: 79
+  order: 80
   docs: https://ui.siteplane.io/docs/components/prompt-input/
   install: [prompt-input]
 ---
@@ -41,7 +41,7 @@ siteplane:
 
 # Prompt Input
 
-Prompt Input is the message field at the bottom of a chat or AI assistant, with room for attachments, an attach button and model or effort pickers. It speaks the AI SDK's status words, so it plugs into `useChat` directly.
+Prompt Input is the message field at the bottom of a chat or AI assistant, with room for attachments, an attach button and model or effort pickers. It uses the AI SDK's status words, so `useChat` state passes in unchanged.
 
 ## Install
 
@@ -64,9 +64,9 @@ Import it from `@/siteplane/components/prompt-input`. The project needs Siteplan
 - Compose `PromptInputTextarea`, `PromptInputToolbar` with `PromptInputToolbarGroup`, `PromptInputAttachButton` and `PromptInputSubmit`.
 - Use `submitOnEnter="desktop"` when phone users should get new lines from Enter.
 - Set `allowEmpty` only while the draft holds a file that is ready to send, and translate the built-in names through `labels`.
-- Placeholder text does not count as a label, so the field still needs an accessible name.
+- Give the field an accessible name; placeholder text does not count as a label.
 
 ## Reference
 
 - [Prompt Input docs](https://ui.siteplane.io/docs/components/prompt-input/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/prompt-input.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

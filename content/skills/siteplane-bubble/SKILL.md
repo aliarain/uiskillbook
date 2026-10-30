@@ -23,14 +23,14 @@ tags:
   - bubble
   - message
   - surface
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: bubble
   title: "Bubble"
   group: "Chat & AI"
-  order: 75
+  order: 76
   docs: https://ui.siteplane.io/docs/components/bubble/
   install: [bubble]
 ---
@@ -60,9 +60,9 @@ Import it from `@/siteplane/components/bubble`. The project needs Siteplane UI's
 - Choose `variant` by sender: `muted` for the person in an AI chat, `ghost` for assistant answers, `default` or `tinted` for your own messages between people, `destructive` for failures.
 - Set `align` to match the surrounding Message.
 - Put links or buttons inside the bubble or in the Message footer, since the bubble itself is not interactive.
-- Never let the colour alone say what happened; write it in the text.
+- Say what happened in the text, not through colour alone.
 
 ## Reference
 
 - [Bubble docs](https://ui.siteplane.io/docs/components/bubble/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/bubble.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

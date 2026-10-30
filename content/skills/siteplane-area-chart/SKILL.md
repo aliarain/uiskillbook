@@ -1,7 +1,7 @@
 ---
 name: siteplane-area-chart
 title: "Siteplane Area Chart"
-description: "Filled areas over time, overlaid or stacked, so the size of a measure and its parts read at a glance."
+description: "Filled areas over time, overlaid or stacked, that show how big a measure is and how its parts add up."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - area-chart
   - trend
   - stacked
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: area-chart
   title: "Area Chart"
   group: "Charts"
-  order: 69
+  order: 70
   docs: https://ui.siteplane.io/docs/components/area-chart/
   install: [area-chart]
 ---
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/area-chart`. The project needs Siteplane 
 ## Reference
 
 - [Area Chart docs](https://ui.siteplane.io/docs/components/area-chart/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/area-chart.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

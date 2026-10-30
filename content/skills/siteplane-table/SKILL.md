@@ -23,14 +23,14 @@ tags:
   - data-grid
   - sorting
   - selection
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: table
   title: "Table"
   group: "Data display"
-  order: 60
+  order: 61
   docs: https://ui.siteplane.io/docs/components/table/
   install: [table]
 ---
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/table`. The project needs Siteplane UI's 
 ## Reference
 
 - [Table docs](https://ui.siteplane.io/docs/components/table/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/table.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

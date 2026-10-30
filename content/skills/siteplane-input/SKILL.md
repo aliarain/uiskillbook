@@ -21,8 +21,8 @@ tags:
   - text-input
   - forms
   - field
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: input
@@ -37,7 +37,7 @@ siteplane:
 
 # Input
 
-Use Input for short free text such as names, emails, URLs, passwords and search terms, and for native types like file. Wrap it in a Field so the label, description and validation message are wired to the control.
+Input takes short free text such as names, emails, URLs, passwords and search terms, plus native types like file. Wrap it in a Field to wire the label, description and validation message to the control.
 
 ## Install
 
@@ -49,20 +49,20 @@ Import it from `@/siteplane/components/input`. The project needs Siteplane UI's 
 
 ## When to pick it
 
-- **vs [Textarea](https://uiskillbook.com/skills/siteplane-textarea):** Pick Textarea instead when the answer can run to more than one line.
-- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field instead for numeric values that need stepping, bounds or locale formatting.
+- **vs [Textarea](https://uiskillbook.com/skills/siteplane-textarea):** Pick Textarea when the answer can run past one line.
+- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field for numbers that need stepping, bounds or locale formatting.
 - **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pick Input Group when the input needs an attached prefix, icon or action button.
-- **vs [Autocomplete](https://uiskillbook.com/skills/siteplane-autocomplete):** Pick Autocomplete when free text should be helped along by suggestions.
+- **vs [Autocomplete](https://uiskillbook.com/skills/siteplane-autocomplete):** Pick Autocomplete when suggestions should help people type free text.
 
 ## Rules
 
-- Always give a visible label through Field and FieldLabel; a placeholder is never the name.
-- Set `invalid` on the surrounding Field and explain it with FieldError instead of styling the input red.
-- Use `readOnly` for values people can see and submit but not change, and `disabled` only when the value should not submit.
-- Read the text through `onValueChange`. Resetting the form leaves a controlled Input untouched, so empty your own state inside `onReset`.
-- Use `insetStart`/`insetEnd` when composing adjoining elements, and put password reveal in an InputGroup rather than inside the Input.
+- Give it a visible label through Field and FieldLabel. A placeholder does not name the control.
+- Set `invalid` on the surrounding Field and explain the problem with FieldError instead of coloring the input red.
+- Use `readOnly` for values people can see and submit but not change. Use `disabled` only when the value should not submit.
+- Read the text through `onValueChange`. A form reset leaves a controlled Input untouched, so clear your own state inside `onReset`.
+- Use `insetStart`/`insetEnd` for adjoining elements. Put a password reveal in an InputGroup instead of inside the Input.
 
 ## Reference
 
 - [Input docs](https://ui.siteplane.io/docs/components/input/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/input.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

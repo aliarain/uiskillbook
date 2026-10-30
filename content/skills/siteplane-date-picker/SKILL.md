@@ -22,14 +22,14 @@ tags:
   - date
   - date-picker
   - popover
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: date-picker
   title: "Date Picker"
   group: "Date & color"
-  order: 47
+  order: 48
   docs: https://ui.siteplane.io/docs/components/date-picker/
   install: [date-picker]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Date Picker
 
-Use Date Picker for due dates, appointment dates and filters where picking from a calendar is more natural than typing. The trigger stays compact and the value is a native Date.
+Date Picker fits due dates, appointment dates and filters, where people would rather pick from a calendar than type. The trigger stays compact and the value is a native Date.
 
 ## Install
 
@@ -50,20 +50,20 @@ Import it from `@/siteplane/components/date-picker`. The project needs Siteplane
 
 ## When to pick it
 
-- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field instead when people type the date or when the value must be shown read-only.
+- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field when people type the date or the value must show as read-only.
 - **vs [Date Range Picker](https://uiskillbook.com/skills/siteplane-date-range-picker):** Pick Date Range Picker when you need a start and an end date.
 - **vs [Date Time Picker](https://uiskillbook.com/skills/siteplane-date-time-picker):** Pick Date Time Picker when a time is part of the value.
-- **vs [Calendar](https://uiskillbook.com/skills/siteplane-calendar):** Pick Calendar when the grid should be always visible.
+- **vs [Calendar](https://uiskillbook.com/skills/siteplane-calendar):** Pick Calendar when the grid should stay visible.
 
 ## Rules
 
-- Store `null` for no date in a controlled picker, never `undefined`.
+- In a controlled picker, store `null` for no date. Don't use `undefined`.
 - Block days through `calendarProps.disabled` and validate the date again on the server.
-- Use `formatValue` to change only the trigger text; it also replaces `placeholder`.
+- `formatValue` changes only the trigger text, and it also replaces `placeholder`.
 - Set `name` to submit `YYYY-MM-DD` and `required` to block empty submits.
-- Do not expect a read-only mode; switch to Date Field for a locked date.
+- Date Picker has no read-only mode. Switch to Date Field for a locked date.
 
 ## Reference
 
 - [Date Picker docs](https://ui.siteplane.io/docs/components/date-picker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/date-picker.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

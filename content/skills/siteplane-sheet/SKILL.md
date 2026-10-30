@@ -22,14 +22,14 @@ tags:
   - side-panel
   - overlays
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: sheet
   title: "Sheet"
   group: "Overlays & disclosure"
-  order: 41
+  order: 42
   docs: https://ui.siteplane.io/docs/components/sheet/
   install: [sheet]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Sheet
 
-Use Sheet for a task that needs more room than a dialog but should keep the page in view, such as editing a profile or reading release notes. It opens from any edge with dialog behavior and no swipe. The fullscreen variant also serves as small-screen navigation.
+Sheet gives a task more room than a dialog while the page stays in view, such as editing a profile or reading release notes. It opens from any edge with dialog behavior and no swipe. The fullscreen variant also works as small-screen navigation.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/sheet`. The project needs Siteplane UI's 
 
 ## When to pick it
 
-- **vs [Drawer](https://uiskillbook.com/skills/siteplane-drawer):** Pick Drawer instead when swipe-to-dismiss is wanted, typically on touch devices.
+- **vs [Drawer](https://uiskillbook.com/skills/siteplane-drawer):** Pick Drawer instead when you want swipe-to-dismiss, as on touch devices.
 - **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Pick Dialog instead for a short centred task.
-- **vs [Alert Dialog](https://uiskillbook.com/skills/siteplane-alert-dialog):** Pick Alert Dialog instead when the overlay is only a decision that must be answered.
+- **vs [Alert Dialog](https://uiskillbook.com/skills/siteplane-alert-dialog):** Pick Alert Dialog instead when the overlay holds one decision the person must answer.
 
 ## Rules
 
 - Set side on SheetPopup to choose the edge; right is the default.
-- Include SheetTitle so the panel is named, and keep a close control if you turn off showCloseButton.
+- Include SheetTitle to name the panel, and add a close control if you turn off showCloseButton.
 - Put long content in SheetPanel so it scrolls while the header and footer stay fixed.
-- Close the sheet after a save succeeds, not when the save button is pressed.
+- Close the sheet once the save succeeds, and leave it open while the save runs.
 - Use variant="fullscreen" for small-screen navigation that fills the viewport.
 
 ## Reference
 
 - [Sheet docs](https://ui.siteplane.io/docs/components/sheet/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/sheet.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

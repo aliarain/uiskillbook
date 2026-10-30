@@ -22,14 +22,14 @@ tags:
   - icon
   - attachment
   - upload
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: file-type-icon
   title: "File Type Icon"
   group: "Data display"
-  order: 56
+  order: 57
   docs: https://ui.siteplane.io/docs/components/file-type-icon/
   install: [file-type-icon]
 ---
@@ -55,7 +55,7 @@ Import it from `@/siteplane/components/file-type-icon`. The project needs Sitepl
 ## Rules
 
 - Pass the file name as `name`, or set `extension` when the name has no suffix, such as a document title.
-- Always print the file name next to the icon, because the icon is `aria-hidden` and carries no text for assistive technology.
+- Print the file name next to the icon. The icon is `aria-hidden` and gives assistive technology no text.
 - Pick a `size` of 16, 20, 24, 32 or 40; below 32 px the extension label is too small to read, so lean on the visible name.
 - Prefer a real thumbnail for images and videos when you have one, and keep this icon for rows without a preview.
 - Size outside the presets with a `className` that sets height and width in the 34:40 proportion.
@@ -63,4 +63,4 @@ Import it from `@/siteplane/components/file-type-icon`. The project needs Sitepl
 ## Reference
 
 - [File Type Icon docs](https://ui.siteplane.io/docs/components/file-type-icon/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/file-type-icon.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

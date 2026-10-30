@@ -23,14 +23,14 @@ tags:
   - wizard
   - progress
   - onboarding
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: stepper
   title: "Stepper"
   group: "Data display"
-  order: 65
+  order: 66
   docs: https://ui.siteplane.io/docs/components/stepper/
   install: [stepper]
 ---
@@ -59,10 +59,10 @@ Import it from `@/siteplane/components/stepper`. The project needs Siteplane UI'
 - Use `StepperItem` for read-only steps and `StepperButtonItem` for every step people can open, without mixing the two for the same step.
 - Set `status` (`done`, `current`, `open`, `blocked`) for progress and `active` on a button item for which step is open; they are independent.
 - Pass children to show content under a step; it sits outside the button, so it can hold fields and links.
-- Keep or translate `statusLabel`, because done and blocked are shown only as icons visually.
+- Keep or translate `statusLabel`, because done and blocked appear only as icons.
 - Collapsed step content turns inert, so shift focus forward yourself once a step closes.
 
 ## Reference
 
 - [Stepper docs](https://ui.siteplane.io/docs/components/stepper/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/stepper.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

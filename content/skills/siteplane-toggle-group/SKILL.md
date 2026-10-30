@@ -1,7 +1,7 @@
 ---
 name: siteplane-toggle-group
 title: "Siteplane Toggle Group"
-description: "A set of related pressed-state buttons sharing one selection, single or multiple, with arrow-key movement."
+description: "Related pressed-state buttons that share one selection, single or multiple, with arrow-key movement."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,8 +22,8 @@ tags:
   - segmented-control
   - view-switcher
   - selection
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: toggle-group
@@ -38,7 +38,7 @@ siteplane:
 
 # Toggle Group
 
-Use Toggle Group for compact option sets that act right away, such as text alignment, list versus grid view, or a group of formatting marks. It handles single or multiple pressed items and keyboard navigation across the set.
+Toggle Group fits compact option sets that act on press, such as text alignment, list or grid view, and formatting marks. It handles single or multiple pressed items and arrow-key navigation across the set.
 
 ## Install
 
@@ -50,20 +50,20 @@ Import it from `@/siteplane/components/toggle-group`. The project needs Siteplan
 
 ## When to pick it
 
-- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group instead when exactly one answer is a required form value; Toggle Group lets a single selection be cleared.
-- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs instead when each option swaps a content panel rather than changing a view setting.
-- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar when the row mixes plain buttons, selects and toggles; a Toggle Group can live inside it.
-- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick a lone Toggle when there is only one on/off option.
+- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group when one answer is a required form value. Toggle Group lets people clear a single selection.
+- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs when each option swaps a content panel. Toggle Group changes a view setting.
+- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar when the row mixes plain buttons, selects and toggles. A Toggle Group can sit inside it.
+- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Use a lone Toggle for a single on/off option.
 
 ## Rules
 
 - Treat `value` as an array in both single and `multiple` mode.
-- To force one option always selected, ignore empty arrays in `onValueChange`.
-- Every toggle group needs a name: point `aria-labelledby` at a visible `FieldLabel`, or fall back to `aria-label`.
-- Set `size` and `variant` on the group so every `ToggleGroupItem` matches; split sets with `ToggleGroupSeparator`.
+- To keep one option selected at all times, ignore empty arrays in `onValueChange`.
+- Name each toggle group: point `aria-labelledby` at a visible `FieldLabel`, or fall back to `aria-label`.
+- Set `size` and `variant` on the group so the `ToggleGroupItem`s match. Split sets with `ToggleGroupSeparator`.
 - Set `orientation="vertical"` for stacked items so arrow keys follow the layout.
 
 ## Reference
 
 - [Toggle Group docs](https://ui.siteplane.io/docs/components/toggle-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/toggle-group.md))
-- Siteplane UI 1.7.0, Actions. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Actions. Read the installed source under `src/siteplane` before relying on an API.

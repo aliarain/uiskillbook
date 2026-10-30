@@ -1,7 +1,7 @@
 ---
 name: siteplane-drawer
 title: "Siteplane Drawer"
-description: "A modal sheet that enters from any side of the screen and closes when swiped away."
+description: "A modal sheet that enters from any side of the screen and closes with a swipe."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -23,14 +23,14 @@ tags:
   - bottom-sheet
   - swipe
   - overlays
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: drawer
   title: "Drawer"
   group: "Overlays & disclosure"
-  order: 39
+  order: 40
   docs: https://ui.siteplane.io/docs/components/drawer/
   install: [drawer]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Drawer
 
-Use Drawer for touch-first panels such as a mobile navigation menu, an action sheet or filters, coming from any edge. It supports snap points for a bottom panel that rests half open. It also ships menu parts for action lists inside the panel.
+Drawer suits touch-first panels from any edge, such as a mobile navigation menu, an action sheet or filters. Snap points let a bottom panel rest half open. It also ships menu parts for action lists inside the panel.
 
 ## Install
 
@@ -58,12 +58,12 @@ Import it from `@/siteplane/components/drawer`. The project needs Siteplane UI's
 ## Rules
 
 - Set position on the Drawer root; the popup, bar and swipe direction follow it.
-- Keep a visible close action, such as showCloseButton on DrawerPopup, since swipe is not the only way people close it.
-- Wrap DrawerMenu items in DrawerClose when choosing one should close the drawer; they do not close on their own.
-- Place lengthy content inside DrawerPanel; it scrolls on its own and the header and footer remain fixed.
+- Keep a visible close action, such as showCloseButton on DrawerPopup, for people who don't swipe.
+- DrawerMenu items do not close the drawer. Wrap them in DrawerClose when a choice should close it.
+- Put long content in DrawerPanel. It scrolls while the header and footer stay fixed.
 - Use snapPoints for a bottom drawer that should open at a compact height before expanding.
 
 ## Reference
 
 - [Drawer docs](https://ui.siteplane.io/docs/components/drawer/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/drawer.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

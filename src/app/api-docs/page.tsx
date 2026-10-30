@@ -28,8 +28,7 @@ export default function ApiDocsPage() {
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">API</h1>
       <p className="mt-3 text-ink-2 text-pretty">
-        The same catalog as this site, as JSON. No key, open CORS, cached for an hour at the edge.
-        Agents can use the MCP server instead, which exposes the same data as tools.
+        The site&apos;s catalog as JSON. It needs no key, allows any origin and caches for an hour at the edge. Agents can call the MCP server for the same data as tools.
       </p>
 
       <h2 className="mt-12 text-xl font-semibold text-ink">Endpoints</h2>

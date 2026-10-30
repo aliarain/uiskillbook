@@ -112,7 +112,7 @@ export default function Home() {
         <SectionHeading
           title="Learn"
           href="/chapters"
-          description="Short playbook guides for the details agents usually miss."
+          description="Short guides to the details agents tend to miss."
           allLabel="All guides"
         />
         <div className="mt-5 grid gap-3 sm:grid-cols-2">

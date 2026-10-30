@@ -1,7 +1,7 @@
 ---
 name: siteplane-group
 title: "Siteplane Group"
-description: "Visually joins related buttons or an input and its button into one segmented frame, without shared state."
+description: "Joins related buttons, or an input and its button, into one segmented frame. The controls share no state."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - button-group
   - segmented
   - split-button
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: group
   title: "Group"
   group: "Forms & selection"
-  order: 24
+  order: 25
   docs: https://ui.siteplane.io/docs/components/group/
   install: [group]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Group
 
-Use Group for split buttons, segmented action sets, zoom controls, or a search input joined to its submit button. Each control keeps its own behavior and tab stop.
+Group builds split buttons, segmented action sets, zoom controls, or a search input joined to its submit button. Each control keeps its own behavior and tab stop.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/group`. The project needs Siteplane UI's 
 
 ## When to pick it
 
-- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar instead when the controls should share one tab stop with arrow-key navigation.
-- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group instead when the segments share a pressed selection.
-- **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pick Input Group instead when the addon should sit inside one input surface.
+- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar when the controls should share one tab stop with arrow-key navigation.
+- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group when the segments share a pressed selection.
+- **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pick Input Group when the addon belongs inside one input surface.
 
 ## Rules
 
-- Each Group needs an accessible name from `aria-label` or `aria-labelledby`.
+- Name each Group with `aria-label` or `aria-labelledby`.
 - Use `GroupText` for a fixed prefix or unit and give the input its own accessible name.
-- Put an input-plus-button Group inside a Form and make the button `type="submit"` so Enter submits.
+- Wrap an input-plus-button Group in a Form, with `type="submit"` on the button, so pressing Enter sends it.
 - Give icon-only segments `shape="square"` instead of a fixed icon size so heights match.
 - Use `GroupSeparator` between non-button controls, or `separator="inset"` for button rows.
 
 ## Reference
 
 - [Group docs](https://ui.siteplane.io/docs/components/group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/group.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - header
   - site-navigation
   - mega-menu
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: navigation-menu
   title: "Navigation Menu"
   group: "Navigation"
-  order: 27
+  order: 28
   docs: https://ui.siteplane.io/docs/components/navigation-menu/
   install: [navigation-menu]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Navigation Menu
 
-Use Navigation Menu for a site or product header where top-level sections reveal a panel of links on hover or press. It fits marketing sites and docs headers with grouped destinations. Every entry should lead somewhere rather than run a command.
+Navigation Menu builds a site or product header whose top-level sections open a panel of links on hover or press. It fits marketing sites and docs headers with grouped destinations. Each entry should link to a destination.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/navigation-menu`. The project needs Sitep
 
 ## When to pick it
 
-- **vs [Dropdown Menu](https://uiskillbook.com/skills/siteplane-dropdown-menu):** Pick Dropdown Menu instead when the entries are actions, such as Rename or Sign out, rather than pages.
-- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs instead when switching swaps panels within the same page rather than going to another URL.
+- **vs [Dropdown Menu](https://uiskillbook.com/skills/siteplane-dropdown-menu):** Pick Dropdown Menu instead when the entries are actions, such as Rename or Sign out.
+- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs instead when switching swaps panels on the same page.
 - **vs [Sidebar](https://uiskillbook.com/skills/siteplane-sidebar):** Pick Sidebar for an application with many sections that needs persistent vertical navigation.
 
 ## Rules
 
 - Give NavigationMenu an aria-label so its nav landmark is named.
-- Render exactly one NavigationMenuPopup inside the menu; panels share it as people move between triggers.
+- Render a single NavigationMenuPopup inside the menu. All panels share it as people move between triggers.
 - Set active on the NavigationMenuLink for the current page so it gets aria-current page and the active style.
-- Use value and onValueChange with a matching NavigationMenuItem value when your own state opens panels, and null to close.
-- Keep wide panel content max-w-full so a multi-column panel never overflows a small screen.
+- To open panels from your own state, pass value and onValueChange with a matching NavigationMenuItem value, and null to close.
+- Give wide panel content max-w-full so a multi-column panel fits small screens.
 
 ## Reference
 
 - [Navigation Menu docs](https://ui.siteplane.io/docs/components/navigation-menu/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/navigation-menu.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

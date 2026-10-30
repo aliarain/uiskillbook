@@ -22,14 +22,14 @@ tags:
   - disclosure
   - show-hide
   - file-tree
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: collapsible
   title: "Collapsible"
   group: "Overlays & disclosure"
-  order: 33
+  order: 34
   docs: https://ui.siteplane.io/docs/components/collapsible/
   install: [collapsible]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Collapsible
 
-Use Collapsible to tuck away one optional section, such as advanced options, order details or one branch of a file tree. It only toggles visibility; loading and navigation stay with your app.
+Collapsible tucks away one optional section, such as advanced options, order details or one branch of a file tree. It toggles visibility. Your app handles loading and navigation.
 
 ## Install
 
@@ -50,8 +50,8 @@ Import it from `@/siteplane/components/collapsible`. The project needs Siteplane
 
 ## When to pick it
 
-- **vs [Accordion](https://uiskillbook.com/skills/siteplane-accordion):** Pick Accordion instead when there is a list of related sections that should behave as a group.
-- **vs [Popover](https://uiskillbook.com/skills/siteplane-popover):** Pick Popover instead when the extra content should float over the page rather than push content down.
+- **vs [Accordion](https://uiskillbook.com/skills/siteplane-accordion):** Pick Accordion instead for a list of related sections that behave as a group.
+- **vs [Popover](https://uiskillbook.com/skills/siteplane-popover):** Pick Popover instead when the extra content should float over the page without pushing content down.
 
 ## Rules
 
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/collapsible`. The project needs Siteplane
 ## Reference
 
 - [Collapsible docs](https://ui.siteplane.io/docs/components/collapsible/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/collapsible.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

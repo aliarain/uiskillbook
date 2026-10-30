@@ -1,7 +1,7 @@
 ---
 name: siteplane-combobox
 title: "Siteplane Combobox"
-description: "A searchable picker that filters known options as you type, for single or multi-select with chips."
+description: "A searchable picker that filters known options as you type, single or multi-select with chips."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - search
   - multi-select
   - chips
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: combobox
   title: "Combobox"
   group: "Forms & selection"
-  order: 20
+  order: 21
   docs: https://ui.siteplane.io/docs/components/combobox/
   install: [combobox]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Combobox
 
-Reach for Combobox when the answer has to be picked from a fixed list too long to browse, like assignees, countries, time zones or labels. Typing narrows the list, options can be grouped, and multiple picks show up as chips that can be removed.
+Combobox picks from a fixed list too long to browse, like assignees, countries, time zones or labels. Typing narrows the list, options can sit in groups, and multiple picks show as removable chips.
 
 ## Install
 
@@ -50,21 +50,21 @@ Import it from `@/siteplane/components/combobox`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select instead for a short list where typing adds nothing.
-- **vs [Autocomplete](https://uiskillbook.com/skills/siteplane-autocomplete):** Pick Autocomplete instead when the typed text itself is the value and suggestions are optional.
-- **vs [Command](https://uiskillbook.com/skills/siteplane-command):** Pick Command instead for a searchable list of actions or navigation, not a form value.
-- **vs [Checkbox Group](https://uiskillbook.com/skills/siteplane-checkbox-group):** Pick Checkbox Group for a handful of multi-select options that can all be visible.
+- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select for a short list where typing adds nothing.
+- **vs [Autocomplete](https://uiskillbook.com/skills/siteplane-autocomplete):** Pick Autocomplete when the typed text is the value and suggestions are optional.
+- **vs [Command](https://uiskillbook.com/skills/siteplane-command):** Pick Command for a searchable list of actions or navigation. Combobox holds a form value.
+- **vs [Checkbox Group](https://uiskillbook.com/skills/siteplane-checkbox-group):** Pick Checkbox Group when a handful of multi-select options can all stay visible.
 
 ## Rules
 
 - Set `size` and `variant` on `ComboboxInput`, and turn on `showClear` when clearing is common.
-- For multi-select set `multiple` and render `ComboboxChip`s inside `ComboboxChips` through `ComboboxValue`; do not add a second remove button.
-- Provide `itemToStringLabel` for display and filtering and `itemToStringValue` for submission when items are objects.
-- Always render a `ComboboxEmpty` so a no-match query explains itself, and own async loading through `ComboboxStatus`.
+- For multi-select, set `multiple` and render `ComboboxChip`s inside `ComboboxChips` through `ComboboxValue`. The chips already have a remove button.
+- When items are objects, provide `itemToStringLabel` for display and filtering and `itemToStringValue` for submission.
+- Render a `ComboboxEmpty` so a query with no matches explains itself, and handle async loading through `ComboboxStatus`.
 - For a select-looking trigger with search, use `ComboboxTrigger render={<SelectButton />}` with an embedded `ComboboxInput` in the popup.
 - Use `indicatorPosition="end"` on items that lead with an avatar or logo.
 
 ## Reference
 
 - [Combobox docs](https://ui.siteplane.io/docs/components/combobox/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/combobox.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

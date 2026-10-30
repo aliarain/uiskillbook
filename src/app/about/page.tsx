@@ -16,13 +16,13 @@ export default function AboutPage() {
 
       <Typeset density="document" className="mt-8">
         <TypesetParagraph>
-          UI Skillbook is a curated field guide of reusable UI skills, rules, patterns, and agent instructions for
-          building better interfaces. It&apos;s built for developers browsing manually, AI coding agents consuming
-          structured skills, and designers looking for implementation guidance.
+          UI Skillbook collects UI skills and agent instructions for
+          building interfaces. Developers browse it, coding agents read it as structured skills, and designers
+          use it to check how a pattern gets built.
         </TypesetParagraph>
         <TypesetParagraph>
-          The question it answers is: <em>&ldquo;I&apos;m building this UI. What skill should my agent know before
-          touching the code?&rdquo;</em> Not: here are five thousand random prompts.
+          It answers one question: <em>&ldquo;I&apos;m building this UI. What should my agent know before it
+          touches the code?&rdquo;</em>
         </TypesetParagraph>
         <TypesetHeading level={2}>Curation</TypesetHeading>
         <TypesetParagraph>
@@ -38,14 +38,14 @@ export default function AboutPage() {
         </TypesetParagraph>
         <TypesetHeading level={2}>Open source content</TypesetHeading>
         <TypesetParagraph>
-          Skill content is stored as plain markdown with a predictable schema — see any skill&apos;s &ldquo;View
-          raw&rdquo; link. GitHub is the source of truth; the site indexes it at build time.
+          Every skill is a plain markdown file with a fixed schema. Open any skill&apos;s &ldquo;View raw&rdquo;
+          link to see one. The files live on GitHub, and the site reads them at build time.
         </TypesetParagraph>
         <TypesetHeading level={2} id="cli">
           CLI and MCP
         </TypesetHeading>
         <TypesetParagraph>
-          <Code>npx uiskillbook</Code> is a thin client over the same catalog this site serves — <Code>start</Code>,{" "}
+          <Code>npx uiskillbook</Code> reads the same catalog this site serves: <Code>start</Code>,{" "}
           <Code>categories</Code>, <Code>list</Code>, <Code>get &lt;slug&gt;</Code> and <Code>siteplane</Code>. The
           MCP server at <TypesetLink href="/mcp">uiskillbook.com/mcp</TypesetLink> exposes the same catalog as{" "}
           <Code>list_skills</Code>, <Code>get_skill</Code> and <Code>list_siteplane_components</Code> tools for agents

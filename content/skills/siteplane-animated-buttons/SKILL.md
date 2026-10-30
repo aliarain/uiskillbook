@@ -23,14 +23,14 @@ tags:
   - hover
   - animation
   - cta
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: animated-buttons
   title: "Animated Buttons"
   group: "Animated"
-  order: 95
+  order: 96
   docs: https://ui.siteplane.io/docs/components/animated-buttons/
   install: [animated-buttons]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Animated Buttons
 
-Animated Buttons add tactile motion to marketing calls to action, carousel arrows, learn-more links and a log out control. They keep normal Button behaviour and finish instantly under reduced motion.
+Animated Buttons add tactile motion to marketing calls to action, carousel arrows, learn-more links and a log out control. They keep normal Button behaviour and jump to their end state under reduced motion.
 
 ## Install
 
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/animated-buttons`. The project needs Site
 ## Reference
 
 - [Animated Buttons docs](https://ui.siteplane.io/docs/components/animated-buttons/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/animated-buttons.md))
-- Siteplane UI 1.7.0, Animated. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Animated. Read the installed source under `src/siteplane` before relying on an API.

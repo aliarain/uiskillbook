@@ -21,14 +21,14 @@ tags:
   - autocomplete
   - suggestions
   - search
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: autocomplete
   title: "Autocomplete"
   group: "Forms & selection"
-  order: 21
+  order: 22
   docs: https://ui.siteplane.io/docs/components/autocomplete/
   install: [autocomplete]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Autocomplete
 
-Use Autocomplete when people type their own answer but suggestions help, as with job titles, tags, search queries or city names. Whatever they type is what gets submitted, even if no suggestion matches.
+Autocomplete fits answers people type themselves with help from suggestions: job titles, tags, search queries, city names. The form submits whatever they type, even when no suggestion matches.
 
 ## Install
 
@@ -49,19 +49,19 @@ Import it from `@/siteplane/components/autocomplete`. The project needs Siteplan
 
 ## When to pick it
 
-- **vs [Combobox](https://uiskillbook.com/skills/siteplane-combobox):** Pick Combobox instead if only values from the list are allowed.
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick plain Input when there are no useful suggestions to offer.
-- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select for a short fixed list where free text is not allowed.
+- **vs [Combobox](https://uiskillbook.com/skills/siteplane-combobox):** Pick Combobox when only values from the list are allowed.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick plain Input when you have no useful suggestions.
+- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select for a short fixed list that rejects free text.
 
 ## Rules
 
-- Treat `value` as a plain string that can hold arbitrary text, not a selected item.
+- Treat `value` as a plain string holding arbitrary text. It does not point to a selected item.
 - Use `itemToStringValue` for object items so selecting one fills the input with the right text.
 - Cap long lists with `limit` and report the remainder through `AutocompleteStatus` using `useAutocompleteFilter`.
-- Render `AutocompleteEmpty` for no matches and own async fetching and errors in app code.
+- Render `AutocompleteEmpty` for no matches. Your app code owns async fetching and errors.
 - Set `size` and `variant` on `AutocompleteInput`, and place it in a Field with a `name` to submit.
 
 ## Reference
 
 - [Autocomplete docs](https://ui.siteplane.io/docs/components/autocomplete/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/autocomplete.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

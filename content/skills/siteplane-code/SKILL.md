@@ -22,14 +22,14 @@ tags:
   - code
   - syntax-highlighting
   - copy
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: code
   title: "Code"
   group: "Layout & utilities"
-  order: 93
+  order: 94
   docs: https://ui.siteplane.io/docs/components/code/
   install: [code]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Code
 
-Use Code for commands or identifiers in a sentence, and CodeBlock for snippets such as API requests, config or diffs that people read and copy. Blocks can mask secrets, mark added or removed lines and stream in as text arrives.
+Code marks commands or identifiers in a sentence. CodeBlock holds snippets people read and copy, such as API requests, config or diffs. Blocks can mask secrets, mark added or removed lines and stream in as text arrives.
 
 ## Install
 
@@ -57,11 +57,11 @@ Import it from `@/siteplane/components/code`. The project needs Siteplane UI's o
 
 - Pass the full text through value on CodeBlock; copyable copies exactly that value.
 - Install and import code-highlight once in client code before relying on language; without it the block shows plain text.
-- Remember mask only hides the value on screen; the secret still reaches the browser and Copy still copies it.
+- The mask prop hides the value on screen only; the secret still reaches the browser and Copy still copies it.
 - Set streaming while text is still arriving so the copy action stays disabled until it is complete.
 - Use lineStates with added and removed so changes carry a + or − mark, not only color.
 
 ## Reference
 
 - [Code docs](https://ui.siteplane.io/docs/components/code/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/code.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
