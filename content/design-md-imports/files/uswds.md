@@ -1,0 +1,295 @@
+---
+name: U.S. Web Design System
+colors:
+  primary: '#005ea2'
+  primary-vivid: '#0050d8'
+  canvas: '#fcfcfc'
+  foreground: '#1b1b1b'
+  hairline: '#e6e6e6'
+  header: '#252f3e'
+  search-surface: '#13171f'
+  search-action: '#2672de'
+  inverse: '#ffffff'
+typography:
+  body:
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.6
+    use: Observed documentation body baseline
+  form-input:
+    fontSize: 16.96px
+    fontWeight: 400
+    lineHeight: 1.3
+    use: Observed text input baseline
+rounded:
+  none: 0px
+  control: 4px
+spacing:
+  xs: 4
+  sm: 8
+  md: 12
+  lg: 16
+  xl: 24
+components:
+  search-submit:
+    type: button
+    backgroundColor: '#2672de'
+    textColor: '#ffffff'
+    border: 0px
+    rounded: 0px 4px 4px 0px
+    padding: 0px 12px
+    size: 48px x 38px
+    typography: 16.96px / 700 / Source Sans Pro Web
+    states: Default baseline observed; no hover, focus, pressed, disabled, or error value was captured.
+    use: Observed site-search submit control on all three captured surfaces
+    height: 38px
+    pressed: 'bg #0050d8, outline #2491ff solid 4px (:hover + :active)'
+    focus: 'outline #2491ff solid 4px on :focus-visible'
+  side-navigation-item:
+    type: listItem
+    backgroundColor: transparent
+    textColor: '#000000'
+    border: 0px
+    rounded: 0px
+    size: 204px x 38px
+    typography: 15.04px / 400 / Public Sans Web
+    use: Observed side-navigation row on the official components overview and accordion documentation surfaces
+fonts:
+  roles:
+    ui: Public Sans Web
+    form: Source Sans Pro Web
+---
+
+# Design System Inspiration of U.S. Web Design System
+
+## Overview
+
+### Visual Theme & Atmosphere
+
+The U.S. Web Design System (USWDS) is the General Services Administration’s open-source system for helping federal teams build familiar, accessible, and mobile-friendly public websites and services. Its visual character is deliberately civic rather than proprietary: high-contrast ink, white and near-white reading surfaces, strong government blues, clear borders, and compact square-to-lightly-rounded controls make task completion legible across agencies. The system began in 2015 through 18F and the U.S. Digital Service with an advisory board spanning federal agencies; it is now maintained by GSA’s Digital Services Division. Its current mission is to shape the future of government digital services, with a stated focus on helping teams align, design, and keep services current.
+
+The supplied capture covers the public USWDS home page plus component overview and accordion documentation. Across those official documentation surfaces, `#1b1b1b` text and `#fcfcfc` canvas establish a sober reading field, while `#005ea2`, `#0050d8`, and a darker `#252f3e` header distinguish navigation and action. Measured 0px and 4px radii keep controls structural rather than decorative.
+
+The public documentation also frames USWDS as an active open-source community of government engineers, content specialists, and designers. This reference keeps that organization-level narrative separate from the measured documentation-surface tokens: it does not claim that a component captured here represents every federal implementation.
+
+**Key characteristics:**
+
+- Public-service clarity through dark ink, white space, and restrained blue action colors
+- Documentation surfaces use both `Public Sans Web` and `Source Sans Pro Web`, backed by loaded first-party font files
+- Spacing measurements cluster around 4px, 8px, 12px, 16px, and 24px
+- Square baselines with 4px control corners
+- Accessible, semantic component documentation rather than agency-specific branding
+
+### Primary tasks
+
+- Find a component's documentation from the site search
+- Configure type by role using the system's included typefaces
+- Check the accessibility conformance stated for a component's guidance
+- Align, design, and maintain a public government service
+
+### Brand Narrative
+
+USWDS was created in 2015 by a collaborative team at 18F and the U.S. Digital Service, with an advisory board drawn from several federal agencies. It is now a GSA Technology Transformation Services product maintained by the Digital Services Division.
+
+Its mission is to shape the future of government digital services. Its vision centers on supported digital service teams and familiar, easy-to-use digital services, linking system stewardship to people completing public tasks.
+
+The current public material describes an active open-source community of engineers, content specialists, and designers that supports agencies and sites. No individual executive quotation was located in the first-party sources consulted, so none is attributed here.
+
+### Principles
+
+1. **Favor familiar, easy-to-use digital services.**
+   *UI implication:* Prefer clear hierarchy, readable body text, and predictable actions over novelty.
+2. **Support teams in keeping services current.**
+   *UI implication:* Use documented, reusable patterns and state the evidence boundary for any local adaptation.
+3. **Design for legibility.**
+   *UI implication:* Use a comfortable body size, readable measure, and whitespace that groups related content.
+4. **Work in the open.**
+   *UI implication:* Keep implementation decisions inspectable and respect the code and asset license boundary.
+
+### Personas
+
+The following are stakeholder archetypes derived from USWDS’s stated audiences; they are not synthetic user-research findings.
+
+- **Government digital service team:** A cross-functional team aligning, designing, and maintaining a public website or service. It needs reusable guidance that does not erase agency-specific responsibility.
+- **Content specialist:** A contributor working with public information and task guidance. Readability, labels, and understandable structure are central to their work.
+- **Government engineer or designer contributor:** A participant in the open-source community improving shared components and documentation. They need clear implementation and licensing boundaries.
+
+## Colors
+
+- **Primary blue** (`#005ea2`): observed documentation action and outline color.
+- **Vivid blue** (`#0050d8`): observed accordion-button fill.
+- **Canvas** (`#fcfcfc`): observed documentation-surface canvas and outlined-button fill.
+- **Foreground** (`#1b1b1b`): the recurring dark text and border color.
+- **Hairline** (`#e6e6e6`): observed list boundary.
+- **Header** (`#252f3e`): observed home-page extended-header surface.
+- **Search surface** (`#13171f`) and **search action** (`#2672de`): observed paired search control values.
+- **Inverse** (`#ffffff`): observed text and border against blue or dark surfaces.
+
+No success, warning, error, hover, focus, selected, disabled, or alert color is promoted from this packet. Those semantic groups are absent here rather than filled with plausible USWDS defaults.
+
+## Typography
+
+### Font evidence boundary
+
+| Evidence class | Resolution |
+|---|---|
+| Official product-use | USWDS documentation presents Public Sans, Source Sans Pro, Merriweather, and Roboto Mono as included typefaces and describes role-based family tokens. This is a system capability and not a claim that every project uses every face. |
+| Live computed surface-use | `Public Sans Web` was loaded/high with 841 observed uses; `Source Sans Pro Web` was loaded/high with 143 uses; `Roboto Mono Web` was loaded/high with 6 uses in the supplied packet. |
+| Official distributed brand asset | The packet records first-party `designsystem.digital.gov/assets/fonts/` WOFF2 sources for Public Sans, Source Sans Pro, and Roboto Mono. USWDS documents Public Sans as an open-source face maintained by the Design System. |
+| Declared-only | `Merriweather Web` had first-party `@font-face` declarations but no visible use in the packet. It remains documented as an available typeface, not a current UI-family token. |
+| Unresolved | Typography on downstream agency products, and any font state outside the three captured documentation surfaces, is unresolved. |
+
+| Observed role | Family | Size | Weight | Line height |
+|---|---:|---:|---:|---:|
+| Documentation body baseline | Public Sans Web | 16px | 400 | 25.6px |
+| Text-input baseline | Source Sans Pro Web | 16.96px | 400 | 22.048px |
+
+USWDS’s typography guidance says its faces are selected for legibility and can be configured by role. Do not substitute a system fallback and label it as Public Sans or Source Sans Pro; this capture confirmed first-party loaded font faces for both measured families.
+
+## Layout
+
+### Layout & Spacing
+
+The measured spacing sequence is `4px`, `8px`, `12px`, `16px`, and `24px`; these values recur in the supplied computed-style aggregates. Documentation body text was measured at 16px with a 25.6px line height. USWDS’s official typography guidance separately recommends comfortable body text and explains that whitespace should group related elements while distinguishing unrelated ones.
+
+The capture does not establish a universal grid, page max width, responsive breakpoint, or agency-application layout token. Those groups are omitted rather than generalized from one documentation viewport.
+
+### Responsive & Accessibility
+
+USWDS describes its mission in terms of familiar, easy-to-use services and documents accessibility as a core concern; its typography page states WCAG 2.1 AA conformance for that component guidance. The documented system supports role-based type configuration and emphasizes legibility, readable line length, and clear labels.
+
+The supplied capture is a 1440×900 desktop observation. It does not provide a mobile breakpoint, keyboard focus treatment, reduced-motion behavior, validation state, or assistive-technology behavior for the two tokenized components. Those details remain absent from this reference.
+
+## Elevation & Depth
+
+### Visual Effects & Imagery
+
+The observed components use `box-shadow: none` and a largely flat treatment. Borders, contrast, and spacing carry hierarchy more often than elevation. The home header’s dark `#252f3e` field and white inverse text provide the strongest measured tonal shift.
+
+No image direction, illustration system, photography treatment, iconography token, or global elevation scale was established by the supplied evidence. Do not infer one from federal seals, page artwork, or component documentation examples.
+
+## Motion & Easing
+
+The supplied packet has zero interaction observations and no motion or easing measurements. No duration scale, easing token, animation, transition, or reduced-motion rule is promoted. For an implementation, obtain those values from the relevant official USWDS component documentation or a separately captured interaction evidence packet before treating them as design tokens.
+
+---
+**Verified:** 2026-07-13
+**Tier 1 sources:** https://designsystem.digital.gov/ · https://designsystem.digital.gov/components/overview/ · https://designsystem.digital.gov/components/accordion/ · https://designsystem.digital.gov/about/ · https://designsystem.digital.gov/components/typography/
+**Tier 2 sources:** https://getdesign.md/uswds (attempted; unavailable to the search fetcher) · https://styles.refero.design/?q=uswds (attempted; unavailable to the search fetcher)
+**Conflicts unresolved:** none
+
+## Components
+
+### Button
+
+**Search submit default**
+
+- Background: `#2672de`
+- Text: `#ffffff`
+- Border: `0px`
+- Radius: `0px 4px 4px 0px`
+- Padding: `0px 12px`
+- Size: `48px x 38px`
+- Font: `16.96px / 700 / Source Sans Pro Web`
+- States: Default baseline observed; no hover, focus, pressed, disabled, or error value was captured.
+- Use: Site-search submit control observed on all three supplied capture surfaces.
+
+### List item
+
+**Side navigation default**
+
+- Background: transparent
+- Text: `#000000`
+- Border: `0px`
+- Radius: `0px`
+- Size: `204px x 38px`
+- Font: `15.04px / 400 / Public Sans Web`
+- Use: Side-navigation row observed on the components overview and accordion documentation surfaces.
+
+The packet contains zero interaction records. Static default geometry above is retained because it is selector- and surface-backed; no interactive visual state is inferred from component names or CSS class names.
+
+### Published component roster (47 published, none measured here)
+
+USWDS publishes **47 components**, read from the card grid under "Find a USWDS component" on its
+own index at `https://designsystem.digital.gov/components/overview/` on 2026-09-19. No value,
+state or geometry below is asserted by this reference.
+
+Accordion, Alert, Banner, Breadcrumb, Button, Button group, Card, Character count, Checkbox, Collection, Combo box, Data visualizations, Date picker, Date range picker, File input, Footer, Form, Header, Icon, Icon list, Identifier, In-page navigation, Input mask, Input prefix/suffix, Language selector, Link, List, Memorable date, Modal, Pagination, Process list, Prose, Radio buttons, Range slider, Search, Select, Side navigation, Site alert, Step indicator, Summary box, Table, Tag, Text input, Time picker, Tooltip, Typography, Validation
+
+Four entries may look like foundations rather than components — Data visualizations, Prose,
+Typography and Validation — and they are kept because the host's own grid cards them as
+components. Three pages that live under `/components/` are excluded for the opposite reason: the
+grid does not card them. `component-lifecycle` and `component-status` are meta-documentation
+about the system's own process, and `packages` is a distribution page.
+
+### What this reference's two entries are, and what they are not
+
+§4 records two stylings: a site-search submit control and a side-navigation row. Both are
+identified by anonymous selector position — `surface-2::[data-omd-capture="..."]` — and this
+reference contains **no occurrence of the `usa-` class prefix anywhere**, which is how USWDS
+names every one of its published components in markup.
+
+Both were captured on USWDS's own documentation surfaces, including the components overview page
+that carries the index above — this reference has cited that page as `components-live` since
+2026-07-13 without reading the 47 names on it, which is precisely the failure this roster
+exists to correct. Being captured on a component's page is not the same as capturing
+the component: the search control belongs to the documentation site's chrome. Neither is claimed
+as a rendered instance of any of the 47, and none of the 47 carries a measured value here.
+
+### States
+
+No visual state token was captured for the categories below. These are documentation-level implementation considerations, not measured USWDS component values.
+
+| Category | Evidence-safe direction |
+|---|---|
+| Empty | Explain the missing result or content plainly; no empty-state color or illustration is claimed. |
+| Loading | Keep task context readable; no spinner, duration, or motion value is claimed. |
+| Error — field validation | Provide clear labels and instructions; no error color or border value is claimed. |
+| Error — service failure | State the service problem and an actionable next step; no toast or dialog geometry is claimed. |
+| Success | Confirm the completed public-service task plainly; no success color is claimed. |
+| Skeleton | Preserve reading structure while content is unavailable; no skeleton fill value is claimed. |
+| Disabled | Explain unavailable actions where needed; no disabled visual value is claimed. |
+
+Live state probe, 2026-10-16 (`https://designsystem.digital.gov/`), `search-submit`: pressed — bg #0050d8, outline #2491ff solid 4px; focus — outline #2491ff solid 4px.
+
+## Voice & Tone
+
+USWDS presents a practical, plain, and supportive voice for public-service teams. The following are documented-content paraphrases, not fabricated quotations.
+
+| Do | Don't |
+|---|---|
+| State the service task and next action plainly. | Use brand flourish that obscures a government task. |
+| Prefer familiar labels and readable explanations. | Make users decode a novel interaction pattern. |
+| Explain configuration boundaries directly. | Imply a default applies to every agency implementation. |
+
+- “Use a comfortable reading size for body text.” — official typography guidance.
+- “Keep websites and services up to date.” — paraphrase of the stated USWDS polestar.
+- “Align, design, and maintain” — condensed from the official mission/polestar framing.
+
+## Governance
+
+### UI Guidelines
+
+#### Do
+
+- Use the measured blue, ink, canvas, and inverse values only in the roles documented above.
+- Preserve the observed flat control treatment and 0px/4px corners when applying these specific static component references.
+- Keep Public Sans Web and Source Sans Pro Web distinct from their fallback stacks when reproducing the captured documentation surface.
+- Treat the search submit and side-navigation row as measured defaults, not as a source of unobserved interaction states.
+
+#### Don't
+
+- Do not promote hover, focus, pressed, disabled, error, success, or selected values from this zero-interaction packet.
+- Do not treat the documentation capture as evidence for a particular agency’s product UI.
+- Do not label a fallback or system font as a verified USWDS-loaded font.
+- Do not add semantic color groups that were not measured in the supplied evidence.
+
+### Implementation Notes
+
+Use the values in the frontmatter as a narrow documentation-surface reference. The token graph maps every color, typography, spacing, radius, and component field to a supplied surface/source pair from 2026-07-13. It has no unresolved conflict entries.
+
+Public Sans and Source Sans Pro were loaded from first-party font assets in the supplied evidence. Merriweather was declared but not visibly used; retain its official-documentation context without promoting it as a UI token. The official website policy describes GSA’s open-source approach and the public-domain/third-party-license boundary for code; consult the relevant upstream font and package licenses when redistributing assets.
+
+### Known Gaps
+
+- **Contrast, `side-navigation-item`.** Text `#000000` on `#00000000` measures 1.00:1, below the WCAG AA 4.5:1 minimum for normal-size text. Recorded as measured, not adjusted.
