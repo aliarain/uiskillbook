@@ -22,14 +22,14 @@ tags:
   - date-range
   - booking
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: date-range-picker
   title: "Date Range Picker"
   group: "Date & color"
-  order: 48
+  order: 49
   docs: https://ui.siteplane.io/docs/components/date-range-picker/
   install: [date-range-picker]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Date Range Picker
 
-Use Date Range Picker for trips, out-of-office spans, report periods and bookings. People can type both ends or select them in a calendar, and the control only reports complete ranges.
+Date Range Picker covers trips, out-of-office spans, report periods and bookings. People type both ends or select them in a calendar, and the control reports only complete ranges.
 
 ## Install
 
@@ -50,14 +50,14 @@ Import it from `@/siteplane/components/date-range-picker`. The project needs Sit
 
 ## When to pick it
 
-- **vs [Calendar](https://uiskillbook.com/skills/siteplane-calendar):** Pick Calendar with `selectionMode="range"` instead for an always-visible grid, two months side by side or quick shortcuts.
+- **vs [Calendar](https://uiskillbook.com/skills/siteplane-calendar):** Pick Calendar with `selectionMode="range"` for an always-visible grid, two months side by side or quick shortcuts.
 - **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker when only one date is needed.
-- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick two Date Fields only if the ends are truly independent questions.
+- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick two Date Fields only when the two ends are independent questions.
 
 ## Rules
 
-- Form data carries the two ends under `startName` and `endName`; the picker takes no single `name` and posts no combined range value.
-- Store `null` for an empty controlled range; the value is `{ from, to }` and `undefined` means cleared.
+- Form data carries the two ends under `startName` and `endName`. The picker takes no single `name` and posts no combined range value.
+- Store `null` for an empty controlled range. The value is `{ from, to }`, and `undefined` means cleared.
 - Pass booking rules through `calendarProps` and re-check the range on the server.
 - Set `startLabel` and `endLabel` when the default Start Date and End Date names are too generic.
 - Use `iconMode="none"` when a separate Calendar on the page already drives the range.
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/date-range-picker`. The project needs Sit
 ## Reference
 
 - [Date Range Picker docs](https://ui.siteplane.io/docs/components/date-range-picker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/date-range-picker.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

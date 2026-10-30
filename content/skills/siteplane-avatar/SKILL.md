@@ -23,14 +23,14 @@ tags:
   - profile
   - identity
   - presence
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: avatar
   title: "Avatar"
   group: "Data display"
-  order: 53
+  order: 54
   docs: https://ui.siteplane.io/docs/components/avatar/
   install: [avatar]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Avatar
 
-Avatar stands in for a single user, team or account next to their name, in headers, comments and list rows. It handles the loading and broken-image case for you by swapping in initials or an icon.
+Avatar stands in for a single user, team or account next to their name, in headers, comments and list rows. It swaps in initials or an icon while the image loads or when it fails.
 
 ## Install
 
@@ -58,11 +58,11 @@ Import it from `@/siteplane/components/avatar`. The project needs Siteplane UI's
 
 - Compose `Avatar` with an `AvatarImage` and an `AvatarFallback`, so initials or an icon show while the image loads or if it fails.
 - Write a meaningful `alt` for the image. When the avatar shows only initials or an icon, add `role="img"` and an `aria-label` to `Avatar` itself.
-- Resize or reshape with classes such as `size-10` or a radius class, because there is no size or shape prop.
+- There is no size or shape prop, so resize or reshape with classes such as `size-10` or a radius class.
 - Use `status` for a presence dot and let it announce Online, Away, Busy or Offline; override the wording with `statusLabel` when translating.
-- Skip the accessible name when the person's name is already printed right beside the avatar, so it is not read twice.
+- Skip the accessible name when the person's name sits beside the avatar, or screen readers read it twice.
 
 ## Reference
 
 - [Avatar docs](https://ui.siteplane.io/docs/components/avatar/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/avatar.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

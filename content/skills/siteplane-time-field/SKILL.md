@@ -20,14 +20,14 @@ tags:
   - time
   - time-input
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: time-field
   title: "Time Field"
   group: "Date & color"
-  order: 50
+  order: 51
   docs: https://ui.siteplane.io/docs/components/time-field/
   install: [time-field]
 ---
@@ -36,7 +36,7 @@ siteplane:
 
 # Time Field
 
-Use Time Field for times without a date: daily summaries, opening hours, reminder times, shift starts. It supports 12- or 24-hour display and a minute step in its selector.
+Time Field takes times without a date: daily summaries, opening hours, reminder times, shift starts. It shows 12- or 24-hour time and supports a minute step in its selector.
 
 ## Install
 
@@ -48,19 +48,19 @@ Import it from `@/siteplane/components/time-field`. The project needs Siteplane 
 
 ## When to pick it
 
-- **vs [Date Time Picker](https://uiskillbook.com/skills/siteplane-date-time-picker):** Pick Date Time Picker instead when the time belongs to a specific day.
-- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select instead when only a few fixed time slots are allowed.
+- **vs [Date Time Picker](https://uiskillbook.com/skills/siteplane-date-time-picker):** Pick Date Time Picker when the time belongs to a specific day.
+- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select when only a few fixed time slots are allowed.
 - **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field when the value is a day rather than a time.
 
 ## Rules
 
 - Treat the value as `{ hour, minute }` in 24-hour time, even with `hourCycle={12}`.
-- Store `null` for an empty controlled value; `undefined` from `onValueChange` means cleared.
+- Store `null` for an empty controlled value. `undefined` from `onValueChange` means cleared.
 - Set `name` to submit `HH:mm`, and `required` with FieldError for the missing message.
-- Use `minuteStep` for the selector and validate the step on the server since typed minutes are not rounded.
+- Use `minuteStep` for the selector. The field does not round typed minutes, so validate the step on the server.
 - Use `iconMode="decorative-start"` for compact start/end pairs, and do not pass a `locale` prop.
 
 ## Reference
 
 - [Time Field docs](https://ui.siteplane.io/docs/components/time-field/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/time-field.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

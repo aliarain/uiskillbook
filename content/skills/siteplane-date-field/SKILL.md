@@ -21,14 +21,14 @@ tags:
   - date
   - date-input
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: date-field
   title: "Date Field"
   group: "Date & color"
-  order: 46
+  order: 47
   docs: https://ui.siteplane.io/docs/components/date-field/
   install: [date-field]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Date Field
 
-Use Date Field when people know the date and want to type it quickly, such as invoice dates or birth dates, while still offering a calendar. It submits a stable ISO day string regardless of display locale.
+Date Field lets people who know the date type it fast, as with invoice dates or birth dates, and still offers a calendar. It submits a stable ISO day string whatever the display locale.
 
 ## Install
 
@@ -49,19 +49,19 @@ Import it from `@/siteplane/components/date-field`. The project needs Siteplane 
 
 ## When to pick it
 
-- **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker instead when choosing from a calendar is the main path and typing is unnecessary.
+- **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker when choosing from a calendar is the main path and typing adds nothing.
 - **vs [Date Time Picker](https://uiskillbook.com/skills/siteplane-date-time-picker):** Pick Date Time Picker when a time of day is needed too.
 - **vs [Calendar](https://uiskillbook.com/skills/siteplane-calendar):** Pick Calendar when the month grid should stay visible on the page.
 
 ## Rules
 
 - Store `null` for an empty controlled value; `onValueChange` reports `undefined` when cleared.
-- Pass `calendarProps` with `disabled`, `startMonth` and `endMonth`; typed dates that break them become invalid.
+- Pass `calendarProps` with `disabled`, `startMonth` and `endMonth`. Typed dates that break those rules turn invalid.
 - Set `name` to submit `YYYY-MM-DD`, and use `required` with FieldError for the missing message.
-- Use `iconMode="decorative-start"` for birth dates where a calendar does not help.
+- Use `iconMode="decorative-start"` for birth dates, where a calendar does not help.
 - Name it with FieldLabel or `aria-label`, keep a top label, and add `className="w-full"` to fill a column.
 
 ## Reference
 
 - [Date Field docs](https://ui.siteplane.io/docs/components/date-field/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/date-field.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

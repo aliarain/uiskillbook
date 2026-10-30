@@ -10,7 +10,8 @@ export type CategorySlug =
   | "visual"
   | "performance"
   | "design-systems"
-  | "taste";
+  | "taste"
+  | "writing";
 
 export const CATEGORIES: { slug: CategorySlug; label: string }[] = [
   { slug: "layout", label: "Layout" },
@@ -25,6 +26,7 @@ export const CATEGORIES: { slug: CategorySlug; label: string }[] = [
   { slug: "performance", label: "Performance" },
   { slug: "design-systems", label: "Design Systems" },
   { slug: "taste", label: "Taste" },
+  { slug: "writing", label: "Writing" },
 ];
 
 export function categoryLabel(slug: string): string {

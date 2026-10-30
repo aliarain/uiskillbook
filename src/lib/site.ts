@@ -2,7 +2,7 @@
 export const SITE_URL = "https://www.uiskillbook.com";
 export const SITE_NAME = "UI Skillbook";
 export const SITE_DESCRIPTION =
-  "Curated UI skills, rules, patterns, and instructions for humans and coding agents.";
+  "Curated UI skills and instructions for people and coding agents.";
 export const MCP_URL = `${SITE_URL}/mcp`;
 /** Child metadata replaces the parent openGraph object, so every page names its image explicitly. */
 const DEFAULT_OG_IMAGE = "/opengraph-image";

@@ -7,7 +7,7 @@
 
 # UI Skillbook
 
-**The field guide for building better interfaces with AI.**
+**The field guide for building interfaces with AI.**
 
 Curated UI skills, rules, patterns, and agent instructions for humans and coding
 agents — built for developers browsing manually, AI agents consuming structured

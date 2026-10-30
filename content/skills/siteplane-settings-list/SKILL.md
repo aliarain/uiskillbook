@@ -24,14 +24,14 @@ tags:
   - preferences
   - form
   - rows
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: settings-list
   title: "Settings List"
   group: "Data display"
-  order: 64
+  order: 65
   docs: https://ui.siteplane.io/docs/components/settings-list/
   install: [settings-list]
 ---
@@ -59,11 +59,11 @@ Import it from `@/siteplane/components/settings-list`. The project needs Sitepla
 
 - Give `SettingsList` a `title` (set `titleLevel` to fit the page outline) and give each `SettingsListItem` a `title`.
 - Render the control in the `control` render prop and spread every prop it receives so the label and description stay linked.
-- Buttons like Change or Manage should get `aria-describedby` and nothing more, so their visible text remains the accessible name.
+- Give buttons like Change or Manage only `aria-describedby`, so their visible text stays the accessible name.
 - Keep values, saving and validation in your app state; the list only draws the layout.
 - Use `layout="inline"` for small controls like switches and leave wide text controls on the default `responsive` layout.
 
 ## Reference
 
 - [Settings List docs](https://ui.siteplane.io/docs/components/settings-list/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/settings-list.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - switch
   - settings
   - boolean
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: switch
   title: "Switch"
   group: "Forms & selection"
-  order: 17
+  order: 18
   docs: https://ui.siteplane.io/docs/components/switch/
   install: [switch]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Switch
 
-Use Switch for preferences and feature flags that are clearly on or off, typically in settings pages. It reads as a setting rather than an answer, and fits rows with a label and description beside it.
+Switch fits on/off preferences and feature flags, the kind found on settings pages. People read it as a setting to change, and it fits a row with a label and description beside it.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/switch`. The project needs Siteplane UI's
 
 ## When to pick it
 
-- **vs [Checkbox](https://uiskillbook.com/skills/siteplane-checkbox):** Pick Checkbox instead for consent, agreements or options that only matter on submit.
-- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle instead for a pressed tool button in an editor or toolbar.
-- **vs [Settings List](https://uiskillbook.com/skills/siteplane-settings-list):** Pick Settings List when building a full page of setting rows that each hold a Switch or other control.
+- **vs [Checkbox](https://uiskillbook.com/skills/siteplane-checkbox):** Pick Checkbox for consent, agreements or options that only matter on submit.
+- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle for a pressed tool button in an editor or toolbar.
+- **vs [Settings List](https://uiskillbook.com/skills/siteplane-settings-list):** Pick Settings List for a full page of setting rows, each holding a Switch or another control.
 
 ## Rules
 
-- Place `FieldLabel` and `FieldDescription` before the Switch inside a Field so both describe it.
-- Use `checked` and `onCheckedChange` when the app saves the setting immediately; otherwise `defaultChecked`.
+- Inside a Field, place `FieldLabel` and `FieldDescription` before the Switch so both describe it.
+- Use `checked` and `onCheckedChange` when the app saves the setting on change. Otherwise use `defaultChecked`.
 - Set `uncheckedValue` if the form must send a value while it is off.
-- Do not use Switch for a mixed or partial state; it has no indeterminate mode.
-- Use `Label variant="card"` for card rows rather than restyling the switch.
+- Switch has no indeterminate mode, so keep it away from mixed or partial states.
+- For card rows, use `Label variant="card"` instead of restyling the switch.
 
 ## Reference
 
 - [Switch docs](https://ui.siteplane.io/docs/components/switch/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/switch.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

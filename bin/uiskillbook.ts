@@ -35,7 +35,7 @@ const REGISTRY_URL = new URL("/skills/registry.json", SITE_URL);
 const HELP = [
   "UI SKILLBOOK",
   "",
-  "The field guide for building better interfaces with AI.",
+  "The field guide for building interfaces with AI.",
   "",
   "Usage:",
   "  uiskillbook [command]",

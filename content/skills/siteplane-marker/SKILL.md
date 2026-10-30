@@ -22,14 +22,14 @@ tags:
   - status
   - separator
   - system-note
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: marker
   title: "Marker"
   group: "Chat & AI"
-  order: 76
+  order: 77
   docs: https://ui.siteplane.io/docs/components/marker/
   install: [marker]
 ---
@@ -59,10 +59,10 @@ Import it from `@/siteplane/components/marker`. The project needs Siteplane UI's
 - Compose `Marker` with an optional `MarkerIcon` and a `MarkerContent`.
 - Set `role="status"` on lines that change, such as a live Thinking status, so they are announced.
 - Use `variant="separator"` for dates and breaks, and `variant="border"` for a note that heads the thread.
-- Put a Spinner in `MarkerIcon` for a reply in progress and hide decorative icons from assistive tech (the part does this).
-- Keep important wording in the text because the marker colour is deliberately muted.
+- Put a Spinner in `MarkerIcon` for a reply in progress. The part hides decorative icons from assistive tech.
+- Keep important wording in the text because the marker colour is muted.
 
 ## Reference
 
 - [Marker docs](https://ui.siteplane.io/docs/components/marker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/marker.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

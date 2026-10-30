@@ -1,7 +1,7 @@
 ---
 title: Siteplane UI
-description: "Every Siteplane UI component (98), with when to pick it over its neighbours, how to install it and the rules that keep it right."
-updated_at: "2026-10-29"
+description: "Every Siteplane UI component (99), with when to pick it over its neighbours, how to install it and the rules that keep it right."
+updated_at: "2026-10-30"
 skills:
   - siteplane-button
   - siteplane-copy-button
@@ -10,6 +10,7 @@ skills:
   - siteplane-toolbar
   - siteplane-input
   - siteplane-textarea
+  - siteplane-editable
   - siteplane-number-field
   - siteplane-otp-field
   - siteplane-label

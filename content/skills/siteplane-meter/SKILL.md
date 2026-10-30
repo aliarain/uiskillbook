@@ -21,14 +21,14 @@ tags:
   - meter
   - usage
   - gauge
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: meter
   title: "Meter"
   group: "Feedback"
-  order: 83
+  order: 84
   docs: https://ui.siteplane.io/docs/components/meter/
   install: [meter]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Meter
 
-Use Meter for a quantity that sits somewhere in a fixed range, like disk usage, quota or a strength score. It describes a level, not the progress of a task.
+Meter shows a quantity within a fixed range, like disk usage, quota or a strength score. For the progress of a task, use Progress.
 
 ## Install
 
@@ -50,16 +50,16 @@ Import it from `@/siteplane/components/meter`. The project needs Siteplane UI's 
 ## When to pick it
 
 - **vs [Progress](https://uiskillbook.com/skills/siteplane-progress):** Pick Progress instead when the bar tracks how much of an operation has completed.
-- **vs [Spinner](https://uiskillbook.com/skills/siteplane-spinner):** Pick Spinner instead while something loads or the value is unknown; Meter has no way to display that.
+- **vs [Spinner](https://uiskillbook.com/skills/siteplane-spinner):** Pick Spinner instead while something loads or the value is unknown; Meter cannot show an unknown value.
 
 ## Rules
 
-- Add MeterLabel, or give the meter an aria-label, so it is named.
+- Name the meter with MeterLabel or an aria-label.
 - Set tone yourself when the value crosses a threshold; there are no built-in low, high or optimum levels.
 - Keep value, range and formatting on the root, and let MeterValue display the formatted figure.
-- Include MeterTrack and MeterIndicator explicitly when you pass custom children.
+- Include MeterTrack and MeterIndicator yourself when you pass custom children.
 
 ## Reference
 
 - [Meter docs](https://ui.siteplane.io/docs/components/meter/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/meter.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

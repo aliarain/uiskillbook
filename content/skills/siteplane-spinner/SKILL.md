@@ -1,7 +1,7 @@
 ---
 name: siteplane-spinner
 title: "Siteplane Spinner"
-description: "A looping animation signalling that work is under way when there is no telling how long it will take."
+description: "A looping animation that shows work is under way when its duration is unknown."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - loading
   - spinner
   - pending
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: spinner
   title: "Spinner"
   group: "Feedback"
-  order: 86
+  order: 87
   docs: https://ui.siteplane.io/docs/components/spinner/
   install: [spinner]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Spinner
 
-Use Spinner for short waits with no measurable progress, on its own, in an input addon during a search, or in a button. Several visual variants are available and it respects reduced motion.
+Spinner covers short waits with no measurable progress: on its own, in an input addon during a search, or in a button. It has several visual variants and respects reduced motion.
 
 ## Install
 
@@ -56,11 +56,11 @@ Import it from `@/siteplane/components/spinner`. The project needs Siteplane UI'
 ## Rules
 
 - Set aria-label to say what is loading, or hide the spinner from assistive technology when nearby text already says it.
-- Use the Button loading prop for a pending button rather than placing a Spinner in it by hand.
+- For a pending button, use the Button loading prop instead of placing a Spinner inside by hand.
 - Scale it with size utility classes; it is 16 px by default.
 - Remove it when the request settles and show the error state yourself; the spinner tracks nothing.
 
 ## Reference
 
 - [Spinner docs](https://ui.siteplane.io/docs/components/spinner/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/spinner.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

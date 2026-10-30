@@ -20,14 +20,14 @@ tags:
   - form
   - validation
   - submission
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: form
   title: "Form"
   group: "Forms & selection"
-  order: 13
+  order: 14
   docs: https://ui.siteplane.io/docs/components/form/
   install: [form]
 ---
@@ -36,7 +36,7 @@ siteplane:
 
 # Form
 
-Use Form around any set of Fields that submit together, from a sign-in to a settings page. It decides when validation runs, shows errors returned by your server next to the right field, and moves focus to the first problem.
+Wrap Form around Fields that submit together, from a sign-in to a settings page. It decides when validation runs, shows server errors next to the right field, and moves focus to the first problem.
 
 ## Install
 
@@ -48,7 +48,7 @@ Import it from `@/siteplane/components/form`. The project needs Siteplane UI's o
 
 ## When to pick it
 
-- **vs [Field](https://uiskillbook.com/skills/siteplane-field):** Pick Field for each control inside the Form; Field-level settings override the Form's.
+- **vs [Field](https://uiskillbook.com/skills/siteplane-field):** Use Field for each control inside the Form. Field-level settings override the Form's.
 - **vs [Fieldset](https://uiskillbook.com/skills/siteplane-fieldset):** Pick Fieldset to group related Fields within the Form under a legend.
 
 ## Rules
@@ -56,10 +56,10 @@ Import it from `@/siteplane/components/form`. The project needs Siteplane UI's o
 - Pass server messages through `errors`, keyed by each Field's `name`.
 - Use `onFormSubmit` to receive values without a page navigation, or call `preventDefault` yourself in `onSubmit`.
 - Give the submit Button `type="submit"` and show `loading` on it while your request runs.
-- Restore controlled values in `onReset`, because a native reset does not touch React state.
+- Restore controlled values in `onReset`. A native reset leaves React state alone.
 - Re-validate on the server; async `Field.validate` does not block submission.
 
 ## Reference
 
 - [Form docs](https://ui.siteplane.io/docs/components/form/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/form.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

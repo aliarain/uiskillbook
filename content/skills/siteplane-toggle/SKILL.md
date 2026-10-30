@@ -1,7 +1,7 @@
 ---
 name: siteplane-toggle
 title: "Siteplane Toggle"
-description: "A single button that stays pressed or unpressed, for on/off tool states like bold or bookmark."
+description: "One button that stays pressed or unpressed, for on/off tool states like bold or bookmark."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -21,8 +21,8 @@ tags:
   - toggle
   - pressed-state
   - editor
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: toggle
@@ -37,7 +37,7 @@ siteplane:
 
 # Toggle
 
-Use Toggle for a standalone pressed-state control in an editor, toolbar or card, where the button itself shows whether something is active. It suits formatting tools, favourites and view options that act immediately.
+Toggle is a standalone pressed-state control for editors, toolbars and cards, where the button shows whether something is on. It fits formatting tools, favourites and view options that take effect on press.
 
 ## Install
 
@@ -49,19 +49,19 @@ Import it from `@/siteplane/components/toggle`. The project needs Siteplane UI's
 
 ## When to pick it
 
-- **vs [Switch](https://uiskillbook.com/skills/siteplane-switch):** Pick Switch instead for a setting that is turned on or off and saved, especially one that must submit with a form.
-- **vs [Checkbox](https://uiskillbook.com/skills/siteplane-checkbox):** Pick Checkbox instead when the choice is a form value or an agreement rather than a tool state.
-- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group when several related toggles belong together, either one-of-many or any-of-many.
+- **vs [Switch](https://uiskillbook.com/skills/siteplane-switch):** Pick Switch for a saved on/off setting, above all one that submits with a form.
+- **vs [Checkbox](https://uiskillbook.com/skills/siteplane-checkbox):** Pick Checkbox when the choice is a form value or an agreement. Toggle holds a tool state.
+- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group when several related toggles belong together, as one-of-many or any-of-many.
 
 ## Rules
 
-- Do not swap the label or icon when it toggles; assistive tech already reports whether it is pressed.
-- An icon-only toggle takes `padding="icon"` to stay square, plus an `aria-label` that never changes.
-- Own the state with `pressed` and `onPressedChange` when the app already knows it, such as the current text formatting.
-- Do not rely on Toggle to submit a form value; serialize the state yourself or use Checkbox or Switch.
-- Use `lift` only for a reaction like a like or favourite, not for ordinary tool toggles.
+- Leave the label and icon fixed when the state flips. Assistive tech already reports whether it is pressed.
+- An icon-only toggle needs `padding="icon"` to stay square and a fixed `aria-label`.
+- Control the state with `pressed` and `onPressedChange` when the app already knows it, such as the current text formatting.
+- Toggle submits no form value. Serialize the state yourself, or use Checkbox or Switch.
+- Save `lift` for reactions like a like or favourite. Ordinary tool toggles go without it.
 
 ## Reference
 
 - [Toggle docs](https://ui.siteplane.io/docs/components/toggle/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/toggle.md))
-- Siteplane UI 1.7.0, Actions. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Actions. Read the installed source under `src/siteplane` before relying on an API.

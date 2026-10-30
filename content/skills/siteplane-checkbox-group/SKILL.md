@@ -1,7 +1,7 @@
 ---
 name: siteplane-checkbox-group
 title: "Siteplane Checkbox Group"
-description: "Owns a set of related checkboxes as one array value, with an optional parent box that selects all."
+description: "Holds a set of related checkboxes as one array value, with an optional parent box that selects all."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -21,14 +21,14 @@ tags:
   - checkbox
   - multi-select
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: checkbox-group
   title: "Checkbox Group"
   group: "Forms & selection"
-  order: 15
+  order: 16
   docs: https://ui.siteplane.io/docs/components/checkbox-group/
   install: [checkbox-group]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Checkbox Group
 
-Use Checkbox Group when people may pick any number of options from a related list, such as notification channels, permissions or visible columns. It shares size and selection, and can show a mixed parent state.
+Checkbox Group lets people pick any number of related options, such as notification channels, permissions or visible columns. It shares size and selection across the boxes and can show a mixed parent state.
 
 ## Install
 
@@ -49,18 +49,18 @@ Import it from `@/siteplane/components/checkbox-group`. The project needs Sitepl
 
 ## When to pick it
 
-- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group instead when only one option may be chosen.
-- **vs [Combobox](https://uiskillbook.com/skills/siteplane-combobox):** Pick Combobox with `multiple` instead when the list is long enough to need search.
-- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group with `multiple` for compact tool options that act immediately rather than submit.
+- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group when people may choose only one option.
+- **vs [Combobox](https://uiskillbook.com/skills/siteplane-combobox):** Pick Combobox with `multiple` when the list is long enough to need search.
+- **vs [Toggle Group](https://uiskillbook.com/skills/siteplane-toggle-group):** Pick Toggle Group with `multiple` for compact tool options that act on press and do not submit.
 
 ## Rules
 
-- Give every Checkbox a unique `value`, and own selection with `value` and `onValueChange` when needed.
-- A select-all control is a Checkbox marked `parent`, with each child's value collected in `allValues`.
-- Render the Field as a Fieldset with a legend so the group is named and the Field `name` applies to each box.
-- Lay out horizontally with `className="flex-row gap-4"`; the default 8 px vertical gap is replaced by your utility.
+- Give each Checkbox a unique `value`. Control selection with `value` and `onValueChange` when needed.
+- For select-all, mark one Checkbox as `parent` and list each child's value in `allValues`.
+- Render the Field as a Fieldset with a legend. That names the group and applies the Field `name` to each box.
+- For a horizontal layout, use `className="flex-row gap-4"`. Your gap utility replaces the default 8 px vertical gap.
 
 ## Reference
 
 - [Checkbox Group docs](https://ui.siteplane.io/docs/components/checkbox-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/checkbox-group.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

@@ -23,14 +23,14 @@ tags:
   - layout
   - sidebar
   - sticky-header
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: dashboard-shell
   title: "Dashboard Shell"
   group: "Navigation"
-  order: 31
+  order: 32
   docs: https://ui.siteplane.io/docs/components/dashboard-shell/
   install: [dashboard-shell]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Dashboard Shell
 
-Use Dashboard Shell as the outer layout of an authenticated app or admin tool. It sets up the sidebar, header and main region so only the content scrolls, in either an inset or a push layout. Routing, auth and data stay in your app.
+Dashboard Shell is the outer layout for an authenticated app or admin tool. It sets up the sidebar, header and main region so only the content scrolls, in an inset or a push layout. Your app keeps routing, auth and data.
 
 ## Install
 
@@ -51,12 +51,12 @@ Import it from `@/siteplane/components/dashboard-shell`. The project needs Sitep
 
 ## When to pick it
 
-- **vs [Sidebar](https://uiskillbook.com/skills/siteplane-sidebar):** Compose Sidebar directly instead when you need a nonstandard layout the shell's parts do not cover.
-- **vs [Frame](https://uiskillbook.com/skills/siteplane-frame):** Use Frame inside the shell's main area to group panels; it is a surface, not a page layout.
+- **vs [Sidebar](https://uiskillbook.com/skills/siteplane-sidebar):** Compose Sidebar yourself for a nonstandard layout the shell's parts do not cover.
+- **vs [Frame](https://uiskillbook.com/skills/siteplane-frame):** Use Frame inside the shell's main area to group panels. Frame is a surface; the shell is the page layout.
 
 ## Rules
 
-- Use one DashboardShell per page and put the page content inside DashboardShellMain, which is the part that scrolls.
+- Use one DashboardShell per page. Put the page content in DashboardShellMain, the part that scrolls.
 - Place DashboardShellHeader as a direct child of DashboardShellInset so the sticky header works.
 - Set stickyHeader={false} when the whole page should scroll and the header should scroll away.
 - Set flush on DashboardShellMain for views that lay out their own panes edge to edge, such as list and detail.
@@ -65,4 +65,4 @@ Import it from `@/siteplane/components/dashboard-shell`. The project needs Sitep
 ## Reference
 
 - [Dashboard Shell docs](https://ui.siteplane.io/docs/components/dashboard-shell/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/dashboard-shell.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

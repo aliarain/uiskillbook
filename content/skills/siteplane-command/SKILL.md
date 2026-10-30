@@ -24,14 +24,14 @@ tags:
   - search
   - keyboard
   - actions
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: command
   title: "Command"
   group: "Navigation"
-  order: 25
+  order: 26
   docs: https://ui.siteplane.io/docs/components/command/
   install: [command]
 ---
@@ -40,7 +40,7 @@ siteplane:
 
 # Command
 
-Reach for Command when people need to find and run one action out of many by typing. It works as an inline list inside a page or panel, or as a palette that opens over everything. It suits power-user shortcuts, quick switchers and "go to" searches.
+Command lets people type to find and run one action out of many. Render it inline in a page or panel, or as a palette over the whole app. It fits power-user shortcuts, quick switchers and "go to" searches.
 
 ## Install
 
@@ -54,17 +54,17 @@ Import it from `@/siteplane/components/command`. The project needs Siteplane UI'
 
 - **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Pick Menu instead when the actions are few and fixed and scanning beats typing.
 - **vs [Autocomplete](https://uiskillbook.com/skills/siteplane-autocomplete):** Pick Autocomplete instead when the typed text fills a form field rather than triggering an action.
-- **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Use the CommandDialog parts rather than wrapping Command in your own Dialog, so the palette gets the right size and label.
+- **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Build palettes from the CommandDialog parts, which set the right size and label. Don't wrap Command in your own Dialog.
 
 ## Rules
 
 - Give CommandInput an aria-label that names what it searches; the default only says it searches commands.
-- Render CommandEmpty so a search with no match says so instead of showing a blank panel.
-- Treat CommandShortcut as a visual hint only and register the real key handler in your app.
+- Render CommandEmpty to show a message when a search finds no match.
+- CommandShortcut only draws the hint. Register the key handler in your app.
 - Wire the global shortcut that opens the palette yourself, for example with CommandDialog and controlled open state.
 - Group related items with CommandGroup and CommandGroupLabel so long lists stay scannable.
 
 ## Reference
 
 - [Command docs](https://ui.siteplane.io/docs/components/command/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/command.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

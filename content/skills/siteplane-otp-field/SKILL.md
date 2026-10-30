@@ -1,7 +1,7 @@
 ---
 name: siteplane-otp-field
 title: "Siteplane OTP Field"
-description: "A one-time-code entry with one slot per character, separate or joined, with paste and auto-advance handled."
+description: "One-time-code entry with a slot per character, separate or joined. It handles paste and auto-advance."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - otp
   - verification
   - auth
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: otp-field
   title: "OTP Field"
   group: "Forms & selection"
-  order: 9
+  order: 10
   docs: https://ui.siteplane.io/docs/components/otp-field/
   install: [otp-field]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # OTP Field
 
-Use OTP Field for verification, two-factor and recovery codes of a known length. It manages typing, pasting and deletion across slots and can submit the form once the code is complete.
+OTP Field takes verification, two-factor and recovery codes of a known length. It manages typing, pasting and deletion across slots, and can submit the form once the code is complete.
 
 ## Install
 
@@ -50,18 +50,18 @@ Import it from `@/siteplane/components/otp-field`. The project needs Siteplane U
 
 ## When to pick it
 
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input instead when the code length varies or the value is a password.
-- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field instead for a quantity rather than a code made of digits.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input when the code length varies or the value is a password.
+- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field when the digits form a quantity instead of a code.
 
 ## Rules
 
 - Set `length` and render exactly that many `OTPFieldInput` slots; `OTPFieldSeparator` does not count.
-- Label the field once; the first slot takes the Field label, so only name the following slots.
+- Label the field once. The first slot takes the Field label, so name only the slots after it.
 - Use `validationType="alphanumeric"` for recovery codes and `layout="joined"` for a single-input look.
 - Treat `onValueComplete` or `autoSubmit` as a trigger only, and verify the code with rate limits on the server.
-- Keep the label on top; OTP Field does not take a floating label.
+- Keep the label on top. OTP Field takes no floating label.
 
 ## Reference
 
 - [OTP Field docs](https://ui.siteplane.io/docs/components/otp-field/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/otp-field.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

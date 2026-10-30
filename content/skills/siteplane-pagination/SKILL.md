@@ -22,14 +22,14 @@ tags:
   - pagination
   - paging
   - tables
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: pagination
   title: "Pagination"
   group: "Navigation"
-  order: 28
+  order: 29
   docs: https://ui.siteplane.io/docs/components/pagination/
   install: [pagination]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Pagination
 
-Use Pagination below a table or list that is split into pages and where the page number matters, for example in shareable URLs. The app owns the page count, slicing and fetching; the component only renders the controls.
+Pagination sits below a paged table or list where the page number matters, for example in shareable URLs. Your app owns the page count, slicing and fetching. The component renders the controls.
 
 ## Install
 
@@ -51,18 +51,18 @@ Import it from `@/siteplane/components/pagination`. The project needs Siteplane 
 ## When to pick it
 
 - **vs [Button](https://uiskillbook.com/skills/siteplane-button):** Pick a Load more Button or infinite scroll instead when people browse a feed and never need to jump to a page.
-- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs instead when there are only a handful of named sections rather than numbered pages.
+- **vs [Tabs](https://uiskillbook.com/skills/siteplane-tabs):** Pick Tabs instead for a handful of named sections.
 - **vs [Table](https://uiskillbook.com/skills/siteplane-table):** Pair Pagination with Table; the table renders the current slice and the pagination moves between slices.
 
 ## Rules
 
 - Keep the current page in app state or the URL and set active on its PaginationLink so it carries aria-current page.
-- Disable PaginationPrevious and PaginationNext at the first and last page; the component does not compute bounds.
-- Pass real links through render when pages have URLs, so they can be opened in a new tab.
+- Disable PaginationPrevious and PaginationNext at the first and last page; you compute the bounds.
+- Pass real links through render when pages have URLs, so people can open them in a new tab.
 - Use variant="ghost" where space is tight; the arrows keep their accessible names without the visible text.
-- Set labels to translate the landmark and button names instead of patching the parts.
+- Translate the landmark and button names through labels; don't patch the parts.
 
 ## Reference
 
 - [Pagination docs](https://ui.siteplane.io/docs/components/pagination/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/pagination.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

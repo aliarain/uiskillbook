@@ -23,14 +23,14 @@ tags:
   - report
   - html-table
   - static
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: native-table
   title: "Native Table"
   group: "Data display"
-  order: 61
+  order: 62
   docs: https://ui.siteplane.io/docs/components/native-table/
   install: [native-table]
 ---
@@ -58,7 +58,7 @@ Import it from `@/siteplane/components/native-table`. The project needs Siteplan
 ## Rules
 
 - Name the table with `aria-label` or a `NativeTableCaption` placed first inside `NativeTable`.
-- The first cell that identifies a row should be a `NativeTableHead` carrying `scope="row"`.
+- Make the cell that identifies a row a `NativeTableHead` with `scope="row"`.
 - Use `tone` on `NativeTableRow` for `section`, `total` or `muted` rows, and turn off hover on section rows with `hoverable={false}`.
 - Set `align="end"` on number columns so digits line up, and on their headings too.
 - Set `minWidth` when columns need more room than a phone gives, so the table scrolls inside its container.
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/native-table`. The project needs Siteplan
 ## Reference
 
 - [Native Table docs](https://ui.siteplane.io/docs/components/native-table/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/native-table.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

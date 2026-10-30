@@ -23,14 +23,14 @@ tags:
   - file
   - upload
   - chat
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: attachment
   title: "Attachment"
   group: "Chat & AI"
-  order: 78
+  order: 79
   docs: https://ui.siteplane.io/docs/components/attachment/
   install: [attachment]
 ---
@@ -60,9 +60,9 @@ Import it from `@/siteplane/components/attachment`. The project needs Siteplane 
 - Give every `AttachmentAction` and `AttachmentTrigger` an `aria-label` that includes the file name.
 - Use `orientation="vertical"` with `AttachmentMedia variant="image"` for image thumbnails and `size="sm"` inside fields.
 - Wrap rows in `AttachmentGroup` with a `label` and stable keys, and move focus elsewhere before removing a card.
-- Remember the card uploads nothing; your app starts, retries and cancels uploads.
+- The card uploads nothing; your app starts, retries and cancels uploads.
 
 ## Reference
 
 - [Attachment docs](https://ui.siteplane.io/docs/components/attachment/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/attachment.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

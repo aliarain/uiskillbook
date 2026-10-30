@@ -23,14 +23,14 @@ tags:
   - sidebar
   - app-navigation
   - collapsible-rail
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: sidebar
   title: "Sidebar"
   group: "Navigation"
-  order: 30
+  order: 31
   docs: https://ui.siteplane.io/docs/components/sidebar/
   install: [sidebar]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Sidebar
 
-Use Sidebar for the primary navigation of an app with many sections, grouped under labels, with workspace and account menus at the ends. It handles desktop collapse, an optional resize rail and the mobile sheet for you. For a full page frame with header and scrolling content, start from Dashboard Shell.
+Sidebar holds the primary navigation of an app with many sections, grouped under labels, with workspace and account menus at the ends. It handles desktop collapse, an optional resize rail and the mobile sheet. For a full page frame with header and scrolling content, start from Dashboard Shell.
 
 ## Install
 
@@ -57,14 +57,14 @@ Import it from `@/siteplane/components/sidebar`. The project needs Siteplane UI'
 
 ## Rules
 
-- A single SidebarProvider holds the open state, so place both the Sidebar and its neighbouring content inside it.
+- Place the Sidebar and its neighbouring content inside one SidebarProvider, which holds the open state.
 - Read the sidebar_state cookie on the server and pass it as defaultOpen; the provider writes the cookie but never reads it.
 - Set active on the SidebarMenuButton for the current page and pass a router link through render.
 - Give each SidebarMenuButton a tooltip so the collapsed icon rail still names its destinations.
-- Turn off keyboardShortcut on any secondary sidebar so it does not fight the main one for Ctrl/Cmd+B.
-- Do not override the padding of SidebarHeader, SidebarGroup or SidebarFooter to remove the leading gutter.
+- Turn off keyboardShortcut on any secondary sidebar so only the main one answers Ctrl/Cmd+B.
+- Keep the padding on SidebarHeader, SidebarGroup and SidebarFooter; it draws the leading gutter.
 
 ## Reference
 
 - [Sidebar docs](https://ui.siteplane.io/docs/components/sidebar/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/sidebar.md))
-- Siteplane UI 1.7.0, Navigation. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Navigation. Read the installed source under `src/siteplane` before relying on an API.

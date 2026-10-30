@@ -22,14 +22,14 @@ tags:
   - listbox
   - single-choice
   - picker
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: list-box
   title: "List Box"
   group: "Forms & selection"
-  order: 22
+  order: 23
   docs: https://ui.siteplane.io/docs/components/list-box/
   install: [list-box]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # List Box
 
-Use List Box for a single choice from a short to medium list that should stay on screen, such as choosing a workspace or template with descriptions. It suits side panels and pickers inside dialogs.
+List Box holds a single choice from a short to medium list that stays on screen, such as a workspace or template with descriptions. It fits side panels and pickers inside dialogs.
 
 ## Install
 
@@ -50,20 +50,20 @@ Import it from `@/siteplane/components/list-box`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select instead when the options should hide in a popup until needed.
-- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group instead for a plain form question that must submit natively.
+- **vs [Select](https://uiskillbook.com/skills/siteplane-select):** Pick Select when the options should hide in a popup until needed.
+- **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group for a plain form question that must submit natively.
 - **vs [Combobox](https://uiskillbook.com/skills/siteplane-combobox):** Pick Combobox when the list needs text search.
-- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Pick Menu when the rows trigger actions instead of holding a selection.
+- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Pick Menu when the rows trigger actions and hold no selection.
 
 ## Rules
 
-- Give every `ListBoxItem` a stable string `value` and own selection with `value` and `onValueChange`.
+- Give each `ListBoxItem` a stable string `value` and control selection with `value` and `onValueChange`.
 - Name the list with a visible `FieldLabel` referenced by `aria-labelledby`, or an `aria-label`.
 - Set `textValue` on rich items so typeahead matches the title only.
-- Serialize the selection yourself; List Box does not submit a native form value and has no multiple mode.
+- Serialize the selection yourself. List Box submits no native form value and has no multiple mode.
 - Use `selectionAppearance="row"` when the check mark adds noise to rich rows.
 
 ## Reference
 
 - [List Box docs](https://ui.siteplane.io/docs/components/list-box/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/list-box.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

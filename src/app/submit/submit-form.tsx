@@ -90,7 +90,7 @@ export function SubmitForm() {
         <a href={`https://github.com/${REPO}`} target="_blank" rel="noreferrer" className="underline">
           {REPO}
         </a>
-        . We review every submission against the curation criteria above before it&apos;s added.
+        . We check every submission against the criteria above before we list it.
       </p>
     </Form>
   );

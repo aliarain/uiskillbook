@@ -1,7 +1,7 @@
 ---
 name: siteplane-field
 title: "Siteplane Field"
-description: "The wrapper that ties a control to its label, help text and validation messages, with top or floating labels."
+description: "Ties a control to its label, help text and validation messages, with top or floating labels."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - validation
   - floating-label
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: field
   title: "Field"
   group: "Forms & selection"
-  order: 11
+  order: 12
   docs: https://ui.siteplane.io/docs/components/field/
   install: [input]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Field
 
-Use Field around every form control that has a label, description or error. It owns validation timing, the required marker and the accessible links between the parts, and supports floating labels for compact forms.
+Wrap Field around each form control that has a label, description or error. It owns validation timing, the required marker and the accessible links between parts, and offers floating labels for compact forms.
 
 ## Install
 
@@ -50,20 +50,20 @@ The project needs Siteplane UI's one-time setup first: [installation](https://ui
 
 ## When to pick it
 
-- **vs [Label](https://uiskillbook.com/skills/siteplane-label):** Pick plain Label only for a control that needs a name and nothing else.
+- **vs [Label](https://uiskillbook.com/skills/siteplane-label):** Pick plain Label for a control that needs a name and nothing else.
 - **vs [Fieldset](https://uiskillbook.com/skills/siteplane-fieldset):** Pick Fieldset to group several Fields under one legend, or render a Field as a Fieldset for checkbox and radio groups.
 - **vs [Form](https://uiskillbook.com/skills/siteplane-form):** Pick Form as the outer boundary that submits Fields, sets form-wide validation mode and maps server errors.
 
 ## Rules
 
-- Keep `FieldLabel`, the control, `FieldDescription` and `FieldError` inside one `Field` so they are linked automatically.
+- Keep `FieldLabel`, the control, `FieldDescription` and `FieldError` inside one `Field`. Field links them for you.
 - Put `required` on the control and add `requiredIndicator` to the Field instead of typing an asterisk into the label.
-- Client-side checks go through `validate` and `validationMode`. When your app decides the error itself, mark Field as `invalid` and give FieldError `match`.
-- Use `labelPlacement="floating"` only with Input, Textarea, Select and single-select Combobox or Autocomplete, and never with a leading icon.
+- Run client-side checks through `validate` and `validationMode`. When your app decides the error itself, mark Field as `invalid` and give FieldError `match`.
+- Use `labelPlacement="floating"` only with Input, Textarea, Select and single-select Combobox or Autocomplete. Leave it off any control with a leading icon.
 - Change spacing with the `--field-gap` variable, not a `gap-*` utility, so FieldError stays aligned.
 - Install it with `input`; Field has no registry item of its own.
 
 ## Reference
 
 - [Field docs](https://ui.siteplane.io/docs/components/field/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/field.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - bar-chart
   - analytics
   - comparison
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: bar-chart
   title: "Bar Chart"
   group: "Charts"
-  order: 67
+  order: 68
   docs: https://ui.siteplane.io/docs/components/bar-chart/
   install: [bar-chart]
 ---
@@ -61,9 +61,9 @@ Import it from `@/siteplane/components/bar-chart`. The project needs Siteplane U
 - Format numbers with `formatValue` and categories with `formatX`, and set `locale` to match the page.
 - Use `palette="categorical"` for unrelated series and `negativeColor` on a series for values below zero.
 - Keep category keys stable between data sets so bars glide instead of jumping, and translate the screen-reader words with `labels`.
-- Do not expect click or selection events; the chart is a read-only focus stop.
+- The chart is a read-only focus stop with no click or selection events.
 
 ## Reference
 
 - [Bar Chart docs](https://ui.siteplane.io/docs/components/bar-chart/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/bar-chart.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

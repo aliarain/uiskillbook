@@ -23,14 +23,14 @@ tags:
   - banners
   - feedback
   - status
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: alert
   title: "Alert"
   group: "Feedback"
-  order: 81
+  order: 82
   docs: https://ui.siteplane.io/docs/components/alert/
   install: [alert]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Alert
 
-Use Alert to report the condition of a page, form or card when the notice must remain on screen until it is dealt with, like scheduled maintenance or a sync that failed. Place it inline, stretch it across the top of the page as a banner, or lay it across a card as a band.
+Alert reports the state of a page, form or card and stays on screen until someone deals with it, as with scheduled maintenance or a failed sync. Place it inline, as a banner across the top of the page, or as a band across a card.
 
 ## Install
 
@@ -57,13 +57,13 @@ Import it from `@/siteplane/components/alert`. The project needs Siteplane UI's 
 
 ## Rules
 
-- Pick variant for the tone and also state the status in the words, so color is not the only signal.
+- Pick variant for the tone and state the status in the text, so color is not the only signal.
 - Rely on the role the variant sets: error and warning interrupt as alerts, the others announce politely.
-- Make the icon the first child of Alert, ahead of the title, and it will occupy a separate column.
+- Make the icon the first child of Alert, ahead of the title, so it gets its own column.
 - Use layout="banner" for page-wide issues and layout="band" directly under a CardHeader for one card's problem.
 - Put buttons in AlertAction and connect their handlers in your app; use AlertClose for a dismiss control.
 
 ## Reference
 
 - [Alert docs](https://ui.siteplane.io/docs/components/alert/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/alert.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

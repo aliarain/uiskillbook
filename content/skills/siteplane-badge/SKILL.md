@@ -24,14 +24,14 @@ tags:
   - status
   - label
   - count
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: badge
   title: "Badge"
   group: "Data display"
-  order: 55
+  order: 56
   docs: https://ui.siteplane.io/docs/components/badge/
   install: [badge]
 ---
@@ -57,13 +57,13 @@ Import it from `@/siteplane/components/badge`. The project needs Siteplane UI's 
 
 ## Rules
 
-- Choose `variant` by meaning (`success`, `warning`, `error`, `info`, `accent`, `secondary` and so on) and always keep a visible word beside the colour.
+- Choose `variant` by meaning (`success`, `warning`, `error`, `info`, `accent`, `secondary` and so on) and keep a visible word beside the colour.
 - Use `profile="status"` for a coloured dot followed by the state in words, and `profile="count"` for a notification number that never truncates.
 - Give a count badge a contextual accessible name with hidden text, and hide decorative icons and dots from assistive technology.
-- Make a badge a link with `render`; otherwise it is a plain, non-interactive span and should not be used as a button.
+- Make a badge a link with `render`. Without it the badge is a plain, non-interactive span, so don't use it as a button.
 - Reserve `light` for the single announcement on a page, on an opaque variant.
 
 ## Reference
 
 - [Badge docs](https://ui.siteplane.io/docs/components/badge/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/badge.md))
-- Siteplane UI 1.7.0, Data display. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Data display. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - line-chart
   - trend
   - time-series
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: line-chart
   title: "Line Chart"
   group: "Charts"
-  order: 68
+  order: 69
   docs: https://ui.siteplane.io/docs/components/line-chart/
   install: [line-chart]
 ---
@@ -57,12 +57,12 @@ Import it from `@/siteplane/components/line-chart`. The project needs Siteplane 
 ## Rules
 
 - Pass `data`, the `x` key, `series` and a required `label`.
-- Use `Date` objects at midnight UTC for a time axis; text x values are treated as categories.
-- Keep `curve="monotone"` unless you have a reason, since it never overshoots the data; use `step` for values that jump.
+- Use `Date` objects at midnight UTC for a time axis; the chart treats text x values as categories.
+- Keep `curve="monotone"` because it never overshoots the data; use `step` for values that jump.
 - Write values with `formatValue` and set `locale`; missing values break the line rather than dropping to zero.
 - Use `height="fill"` with `minHeight` to fill a card's remaining height.
 
 ## Reference
 
 - [Line Chart docs](https://ui.siteplane.io/docs/components/line-chart/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/line-chart.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

@@ -143,7 +143,7 @@ export function SiteFooter() {
           <div className="col-span-2">
             <Logo className="w-fit" />
             <p className="mt-3 max-w-xs text-sm text-ink-2">
-              The field guide for building better interfaces with AI.
+              The field guide for building interfaces with AI.
             </p>
             <code className="mt-5 inline-block rounded-input border border-line bg-canvas px-2.5 py-1 font-mono text-xs text-ink-2">
               npx uiskillbook start

@@ -21,14 +21,14 @@ tags:
   - hover-card
   - link-preview
   - overlays
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: preview-card
   title: "Preview Card"
   group: "Overlays & disclosure"
-  order: 43
+  order: 44
   docs: https://ui.siteplane.io/docs/components/preview-card/
   install: [preview-card]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Preview Card
 
-Use Preview Card on links to people, projects or documents so readers can peek before opening them. The preview is extra information only. The link must make sense without it.
+Preview Card lets readers peek at linked people, projects or documents before opening them. Treat the preview as extra information. The link must make sense without it.
 
 ## Install
 
@@ -62,4 +62,4 @@ Import it from `@/siteplane/components/preview-card`. The project needs Siteplan
 ## Reference
 
 - [Preview Card docs](https://ui.siteplane.io/docs/components/preview-card/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/preview-card.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

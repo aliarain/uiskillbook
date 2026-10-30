@@ -22,14 +22,14 @@ tags:
   - toast
   - notifications
   - feedback
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: toast
   title: "Toast"
   group: "Feedback"
-  order: 87
+  order: 88
   docs: https://ui.siteplane.io/docs/components/toast/
   install: [toast]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Toast
 
-Use Toast for short feedback that should not block work, such as Saved, Upload complete or an undo prompt. One toast can follow a task from loading to success or error.
+Toast gives short feedback that doesn't block work, such as Saved, Upload complete or an undo prompt. One toast can follow a task from loading to success or error.
 
 ## Install
 
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/toast`. The project needs Siteplane UI's 
 ## Reference
 
 - [Toast docs](https://ui.siteplane.io/docs/components/toast/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/toast.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

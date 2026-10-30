@@ -22,14 +22,14 @@ tags:
   - empty-states
   - onboarding
   - zero-data
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: empty-state
   title: "Empty State"
   group: "Feedback"
-  order: 82
+  order: 83
   docs: https://ui.siteplane.io/docs/components/empty-state/
   install: [empty-state]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Empty State
 
-Use Empty State once loading has finished and a list, table or view has nothing to show. It covers first-run screens, searches with no matches and recoverable gaps. Your app decides which case applies and which action fits.
+Empty State appears once loading finishes and a list, table or view has nothing to show. It covers first-run screens, searches with no matches and recoverable gaps. Your app decides which case applies and which action fits.
 
 ## Install
 
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/empty-state`. The project needs Siteplane
 ## Reference
 
 - [Empty State docs](https://ui.siteplane.io/docs/components/empty-state/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/empty-state.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

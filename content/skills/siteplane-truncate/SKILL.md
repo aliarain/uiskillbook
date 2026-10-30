@@ -22,14 +22,14 @@ tags:
   - truncation
   - ellipsis
   - text-overflow
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: truncate
   title: "Truncate"
   group: "Layout & utilities"
-  order: 94
+  order: 95
   docs: https://ui.siteplane.io/docs/components/truncate/
   install: [truncate]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Truncate
 
-Use Truncate for titles, file names and descriptions that can outgrow their box, such as card titles or table cells. The element keeps the whole text for assistive technology, and a tooltip reveals it on hover.
+Truncate clips titles, file names and descriptions that can outgrow their box, such as card titles or table cells. Assistive technology still gets the whole text, and a tooltip shows it on hover.
 
 ## Install
 
@@ -58,10 +58,10 @@ Import it from `@/siteplane/components/truncate`. The project needs Siteplane UI
 - Nest Truncate within the element whose text it clips, like a CardTitle or a table cell, so the outer element and its styling stay intact.
 - Set lines for a multi-line clamp instead of a single line.
 - In table cells and other containers that expand to fit their content, cap it with a width class like max-w-56.
-- Never clip text that has to be read completely, for example error messages, instructions or legal copy.
+- Keep error messages, instructions and legal copy whole; people need every word.
 - Skip it for menu rows, Badge, Tag and Button labels, which already end in an ellipsis.
 
 ## Reference
 
 - [Truncate docs](https://ui.siteplane.io/docs/components/truncate/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/truncate.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

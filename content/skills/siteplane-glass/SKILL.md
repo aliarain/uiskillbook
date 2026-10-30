@@ -23,14 +23,14 @@ tags:
   - translucent
   - blur
   - overlay
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: glass
   title: "Glass"
   group: "Glass"
-  order: 98
+  order: 99
   docs: https://ui.siteplane.io/docs/components/glass/
   install: [button, card, popover, tooltip, menu, context-menu, dropdown-menu]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Glass
 
-Glass lets controls and cards float over photos, video, maps or colourful surfaces while staying legible. It is a `variant` on existing components rather than a component of its own.
+Glass lets controls and cards float over photos, video, maps or colourful surfaces while staying legible. You apply it as a `variant` on existing components.
 
 ## Install
 
@@ -64,4 +64,4 @@ The project needs Siteplane UI's one-time setup first: [installation](https://ui
 ## Reference
 
 - [Glass docs](https://ui.siteplane.io/docs/components/glass/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/glass.md))
-- Siteplane UI 1.7.0, Glass. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Glass. Read the installed source under `src/siteplane` before relying on an API.

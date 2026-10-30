@@ -22,14 +22,14 @@ tags:
   - context-menu
   - right-click
   - actions
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: context-menu
   title: "Context Menu"
   group: "Overlays & disclosure"
-  order: 34
+  order: 35
   docs: https://ui.siteplane.io/docs/components/context-menu/
   install: [context-menu]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Context Menu
 
-Use Context Menu for quick actions on an item people work with directly, such as a file, a canvas object or a row. It shares Menu's look and parts. Treat it as a shortcut, because many people never think to right-click.
+Context Menu offers quick actions on an item people work with in place, such as a file, a canvas object or a row. It shares Menu's look and parts. Treat it as a shortcut: many people never think to right-click.
 
 ## Install
 
@@ -57,12 +57,12 @@ Import it from `@/siteplane/components/context-menu`. The project needs Siteplan
 ## Rules
 
 - Never make the context menu the only path to an action; mirror it in a visible control.
-- For items that navigate, use ContextMenuLinkItem: it outputs an actual anchor and dismisses the menu on activation.
-- Do not wrap ContextMenuPopup in another portal; it already includes the portal and positioner.
+- Use ContextMenuLinkItem for items that navigate. It renders a real anchor and closes the menu when activated.
+- ContextMenuPopup includes the portal and positioner, so don't wrap it in another portal.
 - Group related items with ContextMenuGroup and ContextMenuGroupLabel, and move rare actions into a submenu.
-- Remember checkbox and radio items hold menu state and do not submit with a form.
+- Checkbox and radio items hold menu state and do not submit with a form.
 
 ## Reference
 
 - [Context Menu docs](https://ui.siteplane.io/docs/components/context-menu/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/context-menu.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

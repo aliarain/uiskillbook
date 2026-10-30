@@ -25,14 +25,14 @@ tags:
   - menu-button
   - morph
   - navigation
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: icon-morphs
   title: "Icon Morphs"
   group: "Animated"
-  order: 96
+  order: 97
   docs: https://ui.siteplane.io/docs/components/icon-morphs/
   install: [icon-morphs]
 ---
@@ -67,4 +67,4 @@ Import it from `@/siteplane/components/icon-morphs`. The project needs Siteplane
 ## Reference
 
 - [Icon Morphs docs](https://ui.siteplane.io/docs/components/icon-morphs/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/icon-morphs.md))
-- Siteplane UI 1.7.0, Animated. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Animated. Read the installed source under `src/siteplane` before relying on an API.

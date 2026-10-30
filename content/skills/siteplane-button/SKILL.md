@@ -1,7 +1,7 @@
 ---
 name: siteplane-button
 title: "Siteplane Button"
-description: "The kit's core action control: text, icon or both, with emphasis variants, sizes, loading state and link composition."
+description: "Action control for text, icons or both. Variants set emphasis, and it handles sizes, a loading state and rendering as a link."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -23,8 +23,8 @@ tags:
   - buttons
   - loading
   - icon-button
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: button
@@ -39,7 +39,7 @@ siteplane:
 
 # Button
 
-Use Button for any click-to-act control, from a primary form submit to a quiet row action or an avatar menu trigger. Its variants set emphasis, and its profiles cover special placements such as icon actions inside a field or links in running text.
+Button covers click-to-act controls, from a primary form submit to a quiet row action or an avatar menu trigger. Variants set emphasis. Profiles handle special placements such as an icon action inside a field or a link in running text.
 
 ## Install
 
@@ -51,21 +51,21 @@ Import it from `@/siteplane/components/button`. The project needs Siteplane UI's
 
 ## When to pick it
 
-- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle instead when the control holds an on/off pressed state rather than firing a one-time action.
-- **vs [Copy Button](https://uiskillbook.com/skills/siteplane-copy-button):** Pick Copy Button instead when the action writes a value to the clipboard, since it already handles the confirmation, failure and announcement.
-- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar instead when a row of related actions should share one tab stop with arrow-key movement between them.
-- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group to visually join several buttons, or a button and an input, into one segmented frame.
+- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle when the control holds an on/off pressed state. Button fires a one-time action.
+- **vs [Copy Button](https://uiskillbook.com/skills/siteplane-copy-button):** Pick Copy Button when the action writes a value to the clipboard. It handles the confirmation, the failure case and the screen reader announcement for you.
+- **vs [Toolbar](https://uiskillbook.com/skills/siteplane-toolbar):** Pick Toolbar when a row of related actions should share one tab stop and move with arrow keys.
+- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group to join several buttons, or a button and an input, into one segmented frame.
 
 ## Rules
 
-- Reserve `variant="accent"` for the single main action on a surface and use `default`, `outline` or `ghost` for the rest.
-- Navigate with `render={<a href=... />}` or a router link that forwards props and ref; `variant="link"` alone only changes the look.
-- Set `type="submit"` explicitly inside a form, because a plain Button defaults to `type="button"`.
-- Give every icon-only control a name: use `IconButton` with `label`, or `aria-label` on a square Button.
-- Use `loading` (or `LoadingButton` with an async `action`) to block repeat clicks during a request, and choose `aria-disabled` over `disabled` when the control must stay discoverable by Tab.
-- For icon buttons that sit in an InputGroup (show/hide, clear, open picker), apply `profile="field-action"` and `shape="square"` rather than hand-styling a ghost button.
+- Reserve `variant="accent"` for the one main action on a surface. Use `default`, `outline` or `ghost` for the rest.
+- To navigate, use `render={<a href=... />}` or a router link that forwards props and ref. `variant="link"` on its own changes the look and nothing else.
+- Inside a form, set `type="submit"` yourself. A plain Button defaults to `type="button"`.
+- Name icon-only controls: use `IconButton` with `label`, or put `aria-label` on a square Button.
+- `loading` (or `LoadingButton` with an async `action`) blocks repeat clicks during a request. Choose `aria-disabled` over `disabled` when the control must stay reachable by Tab.
+- Give icon buttons inside an InputGroup (show/hide, clear, open picker) `profile="field-action"` and `shape="square"` instead of hand-styling a ghost button.
 
 ## Reference
 
 - [Button docs](https://ui.siteplane.io/docs/components/button/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/button.md))
-- Siteplane UI 1.7.0, Actions. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Actions. Read the installed source under `src/siteplane` before relying on an API.

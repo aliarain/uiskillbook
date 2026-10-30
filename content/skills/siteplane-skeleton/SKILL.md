@@ -23,14 +23,14 @@ tags:
   - loading
   - placeholder
   - skeleton
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: skeleton
   title: "Skeleton"
   group: "Feedback"
-  order: 85
+  order: 86
   docs: https://ui.siteplane.io/docs/components/skeleton/
   install: [skeleton]
 ---
@@ -39,7 +39,7 @@ siteplane:
 
 # Skeleton
 
-Use Skeleton when you know the shape of what is coming, such as a card, a list row or table rows. Mirror the real layout so nothing shifts when the data arrives.
+Skeleton stands in for content whose shape you know, such as a card, a list row or table rows. Mirror the real layout so nothing shifts when the data arrives.
 
 ## Install
 
@@ -51,18 +51,18 @@ Import it from `@/siteplane/components/skeleton`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Spinner](https://uiskillbook.com/skills/siteplane-spinner):** Pick Spinner instead if you cannot predict how the result will be laid out, or if the wait happens within a control.
+- **vs [Spinner](https://uiskillbook.com/skills/siteplane-spinner):** Pick Spinner instead when you can't predict the result's layout or the wait happens inside a control.
 - **vs [Progress](https://uiskillbook.com/skills/siteplane-progress):** Pick Progress instead when you can measure how far along the work is.
 - **vs [Empty State](https://uiskillbook.com/skills/siteplane-empty-state):** Pick Empty State once loading has finished and there is nothing to show.
 
 ## Rules
 
 - Size each Skeleton with className to match the content that replaces it.
-- Mark the surrounding region as busy and announce loading there; skeletons are hidden from assistive technology.
+- Mark the surrounding region busy and announce loading there; assistive technology skips skeletons.
 - Remove the placeholders as soon as the real content renders.
-- Avoid skeletons for very short waits where a flash of grey is worse than nothing.
+- Skip skeletons for brief waits, where a flash of grey looks worse than nothing.
 
 ## Reference
 
 - [Skeleton docs](https://ui.siteplane.io/docs/components/skeleton/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/skeleton.md))
-- Siteplane UI 1.7.0, Feedback. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Feedback. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - calendar
   - date
   - booking
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: calendar
   title: "Calendar"
   group: "Date & color"
-  order: 45
+  order: 46
   docs: https://ui.siteplane.io/docs/components/calendar/
   install: [calendar]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Calendar
 
-Use Calendar when the date grid should stay on the page, for example a booking flow, a scheduling sidebar or a range picker with shortcuts. It shares one options object with every date picker in the kit.
+Calendar keeps the date grid on the page, for a booking flow, a scheduling sidebar or a range picker with shortcuts. It shares one options object with the kit's date pickers.
 
 ## Install
 
@@ -50,20 +50,20 @@ Import it from `@/siteplane/components/calendar`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker instead when the calendar should only open from a compact button.
-- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field instead when people mostly type the date, such as a birth date.
+- **vs [Date Picker](https://uiskillbook.com/skills/siteplane-date-picker):** Pick Date Picker when the calendar should open from a compact button.
+- **vs [Date Field](https://uiskillbook.com/skills/siteplane-date-field):** Pick Date Field when typing is the main path, as with a birth date.
 - **vs [Date Range Picker](https://uiskillbook.com/skills/siteplane-date-range-picker):** Pick Date Range Picker for a compact typed range field with a popover calendar.
 
 ## Rules
 
 - Choose `selectionMode` (single, multiple or range) first; it sets the shape of `value`.
 - Block days with `disabled` matchers and limit navigation with `startMonth` and `endMonth`.
-- Define shared `CalendarOptions` once and reuse them across Calendar and pickers' `calendarProps`.
+- Define shared `CalendarOptions` once and reuse them in Calendar and in each picker's `calendarProps`.
 - Control `month` alongside `value` when your own buttons, like Today, change the date.
-- Persist days deliberately, for example as `YYYY-MM-DD`, because values are local-midnight Date objects.
+- Values are local-midnight Date objects, so choose a storage format on purpose, for example `YYYY-MM-DD`.
 - Give it an `aria-label`; do not pass React Aria `CalendarDate` or `minValue` props.
 
 ## Reference
 
 - [Calendar docs](https://ui.siteplane.io/docs/components/calendar/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/calendar.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

@@ -1,7 +1,7 @@
 ---
 name: siteplane-slider
 title: "Siteplane Slider"
-description: "Pick a number or a range by dragging one or more thumbs along a track, with optional scale labels."
+description: "Pick a number or a range by dragging thumbs along a track, with optional scale labels."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,14 +22,14 @@ tags:
   - slider
   - range
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: slider
   title: "Slider"
   group: "Forms & selection"
-  order: 18
+  order: 19
   docs: https://ui.siteplane.io/docs/components/slider/
   install: [slider]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Slider
 
-Use Slider for values where relative position matters more than precision: volume, price ranges, storage limits, timeouts. Passing an array gives one thumb per value for ranges.
+Slider suits values where relative position matters more than precision: volume, price ranges, storage limits, timeouts. Pass an array for a range and you get one thumb per value.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/slider`. The project needs Siteplane UI's
 
 ## When to pick it
 
-- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field instead when people need to type an exact value.
-- **vs [Meter](https://uiskillbook.com/skills/siteplane-meter):** Pick Meter instead to show a value people cannot change.
-- **vs [Progress](https://uiskillbook.com/skills/siteplane-progress):** Pick Progress instead to show how far a task has got.
+- **vs [Number Field](https://uiskillbook.com/skills/siteplane-number-field):** Pick Number Field when people need to type an exact value.
+- **vs [Meter](https://uiskillbook.com/skills/siteplane-meter):** Pick Meter to show a value people cannot change.
+- **vs [Progress](https://uiskillbook.com/skills/siteplane-progress):** Pick Progress to show how far a task has got.
 
 ## Rules
 
-- Always name the slider with a Field label or `aria-label`; scale `labels` are not a name.
-- Pass an array to `value` or `defaultValue` for a range, and set `min` and `max` explicitly.
+- Name the slider with a Field label or `aria-label`. Scale `labels` do not count as a name.
+- For a range, pass an array to `value` or `defaultValue`. Set `min` and `max` yourself instead of relying on defaults.
 - Use `onValueCommitted` for expensive work and `onValueChange` for live display.
 - Show the current number with `SliderValue` when the exact value matters.
-- To include the slider in form data, set `name` on its Field. Range sliders post a separate entry for each thumb.
+- To include the slider in form data, set `name` on its Field. A range slider posts one entry per thumb.
 
 ## Reference
 
 - [Slider docs](https://ui.siteplane.io/docs/components/slider/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/slider.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

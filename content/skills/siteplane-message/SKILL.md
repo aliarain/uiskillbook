@@ -23,14 +23,14 @@ tags:
   - message
   - conversation
   - ai
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: message
   title: "Message"
   group: "Chat & AI"
-  order: 74
+  order: 75
   docs: https://ui.siteplane.io/docs/components/message/
   install: [message]
 ---
@@ -66,4 +66,4 @@ Import it from `@/siteplane/components/message`. The project needs Siteplane UI'
 ## Reference
 
 - [Message docs](https://ui.siteplane.io/docs/components/message/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/message.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

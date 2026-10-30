@@ -20,8 +20,8 @@ tags:
   - textarea
   - multiline
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: textarea
@@ -36,7 +36,7 @@ siteplane:
 
 # Textarea
 
-Use Textarea for descriptions, comments, bios and messages where the answer may wrap or contain paragraphs. It sizes itself to the text, so you set limits in lines rather than a fixed height.
+Textarea takes descriptions, comments, bios and messages that may wrap or run to paragraphs. It sizes itself to the text, so you set limits in lines instead of a fixed height.
 
 ## Install
 
@@ -48,9 +48,9 @@ Import it from `@/siteplane/components/textarea`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input instead when the answer fits on one line.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input when the answer fits on one line.
 - **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pick Input Group with InputGroupTextarea when the box needs a header, footer or corner action like a send button.
-- **vs [Prompt Input](https://uiskillbook.com/skills/siteplane-prompt-input):** Pick Prompt Input instead for a chat or AI composer with attachments and submit behavior built in.
+- **vs [Prompt Input](https://uiskillbook.com/skills/siteplane-prompt-input):** Pick Prompt Input for a chat or AI composer with attachments and submit behavior built in.
 
 ## Rules
 
@@ -63,4 +63,4 @@ Import it from `@/siteplane/components/textarea`. The project needs Siteplane UI
 ## Reference
 
 - [Textarea docs](https://ui.siteplane.io/docs/components/textarea/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/textarea.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

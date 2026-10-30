@@ -21,14 +21,14 @@ tags:
   - checkbox
   - boolean
   - forms
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: checkbox
   title: "Checkbox"
   group: "Forms & selection"
-  order: 14
+  order: 15
   docs: https://ui.siteplane.io/docs/components/checkbox/
   install: [checkbox]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Checkbox
 
-Use Checkbox for agreements, opt-ins and single options that are checked or not and submitted with a form. It also serves as each option in a Checkbox Group.
+Checkbox covers agreements, opt-ins and single options that are checked or not and submit with a form. It is also the option inside a Checkbox Group.
 
 ## Install
 
@@ -49,20 +49,20 @@ Import it from `@/siteplane/components/checkbox`. The project needs Siteplane UI
 
 ## When to pick it
 
-- **vs [Switch](https://uiskillbook.com/skills/siteplane-switch):** Pick Switch instead for a setting that takes effect immediately, like enabling notifications.
+- **vs [Switch](https://uiskillbook.com/skills/siteplane-switch):** Pick Switch for a setting that takes effect on change, like enabling notifications.
 - **vs [Checkbox Group](https://uiskillbook.com/skills/siteplane-checkbox-group):** Pick Checkbox Group when several related options share one name and selection.
 - **vs [Radio Group](https://uiskillbook.com/skills/siteplane-radio-group):** Pick Radio Group when exactly one option of a set must be chosen.
-- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle for a pressed tool state in a toolbar rather than a form value.
+- **vs [Toggle](https://uiskillbook.com/skills/siteplane-toggle):** Pick Toggle for a pressed tool state in a toolbar. Checkbox holds a form value.
 
 ## Rules
 
 - Wrap the box and its text in `FieldLabel` or `Label` so clicking the text toggles it.
-- Use `checked` with `onCheckedChange` only when the app owns the value; otherwise `defaultChecked`.
-- Set `uncheckedValue` when the server needs a value for the unchecked state; otherwise nothing is sent.
-- Remember `aria-invalid` only styles the box; real errors come from Field and FieldError.
+- Use `checked` with `onCheckedChange` only when the app owns the value. Otherwise use `defaultChecked`.
+- Set `uncheckedValue` when the server needs a value for the unchecked state. Without it, an unchecked box sends nothing.
+- `aria-invalid` only styles the box. Field and FieldError carry the error itself.
 - Use `Label variant="card"` for card-style options instead of rebuilding checked styles.
 
 ## Reference
 
 - [Checkbox docs](https://ui.siteplane.io/docs/components/checkbox/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/checkbox.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

@@ -16,6 +16,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOgImage({
     eyebrow: skill ? `Skill · ${skill.categories.map(categoryLabel).join(" · ")}` : "Skill",
     title: skill?.title ?? slug,
-    subtitle: skill ? `${skill.description} — by ${skill.author.name}` : undefined,
+    subtitle: skill ? `${skill.description} By ${skill.author.name}.` : undefined,
   });
 }

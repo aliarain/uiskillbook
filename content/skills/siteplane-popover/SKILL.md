@@ -22,14 +22,14 @@ tags:
   - popover
   - overlays
   - contextual
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: popover
   title: "Popover"
   group: "Overlays & disclosure"
-  order: 42
+  order: 43
   docs: https://ui.siteplane.io/docs/components/popover/
   install: [popover]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Popover
 
-Use Popover for small interactive content tied to a control, such as a quick feedback form, a notification list or a filter. The page stays usable behind it. It can also act as a click-to-open hint for info buttons.
+Popover holds small interactive content tied to a control, such as a quick feedback form, a notification list or a filter. People can still use the page behind it. It also works as a click-to-open hint for info buttons.
 
 ## Install
 
@@ -52,7 +52,7 @@ Import it from `@/siteplane/components/popover`. The project needs Siteplane UI'
 
 - **vs [Tooltip](https://uiskillbook.com/skills/siteplane-tooltip):** Pick Tooltip instead for a short, non-interactive label on hover or focus.
 - **vs [Dialog](https://uiskillbook.com/skills/siteplane-dialog):** Pick Dialog instead when the task needs the whole screen's focus.
-- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Pick Menu instead when the content is just a list of actions.
+- **vs [Menu](https://uiskillbook.com/skills/siteplane-menu):** Pick Menu instead when the content is only a list of actions.
 - **vs [Preview Card](https://uiskillbook.com/skills/siteplane-preview-card):** Pick Preview Card instead for a hover preview of a link's destination.
 
 ## Rules
@@ -60,9 +60,9 @@ Import it from `@/siteplane/components/popover`. The project needs Siteplane UI'
 - Set showCloseButton on PopoverPopup, or add PopoverClose, when the content is long enough that people look for a way out.
 - Use side and align to place it; it flips when there is no room.
 - Use tooltipStyle for an info hint that must open on tap as well as hover, adding openOnHover on the trigger.
-- Do not put a task that must be finished before continuing in a popover; it is not modal.
+- Popover is not modal, so keep tasks people must finish before continuing out of it.
 
 ## Reference
 
 - [Popover docs](https://ui.siteplane.io/docs/components/popover/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/popover.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

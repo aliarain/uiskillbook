@@ -22,14 +22,14 @@ tags:
   - prose
   - typography
   - ai
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: typeset
   title: "Typeset"
   group: "Chat & AI"
-  order: 80
+  order: 81
   docs: https://ui.siteplane.io/docs/components/typeset/
   install: [typeset]
 ---
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/typeset`. The project needs Siteplane UI'
 ## Reference
 
 - [Typeset docs](https://ui.siteplane.io/docs/components/typeset/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/typeset.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

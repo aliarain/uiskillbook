@@ -22,14 +22,14 @@ tags:
   - donut
   - pie-chart
   - distribution
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: pie-chart
   title: "Pie Chart"
   group: "Charts"
-  order: 70
+  order: 71
   docs: https://ui.siteplane.io/docs/components/pie-chart/
   install: [pie-chart]
 ---
@@ -58,10 +58,10 @@ Import it from `@/siteplane/components/pie-chart`. The project needs Siteplane U
 - Pass `data` items with a stable `id`, a `label` and a `value`, plus a required chart `label`.
 - Mark the unused remainder with `empty` so it takes the neutral colour.
 - Show a total with `centerValue` and `centerLabel` (format with `centerFormat`), or pass short custom `center` content.
-- Sort the data on purpose: slices are drawn in array order, starting at the top and going clockwise.
+- Choose the data order: the chart draws slices in array order, starting at the top and going clockwise.
 - Leave room around the chart when `popOut` is on, because the active share steps up to 10 px outside its box.
 
 ## Reference
 
 - [Pie Chart docs](https://ui.siteplane.io/docs/components/pie-chart/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/pie-chart.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

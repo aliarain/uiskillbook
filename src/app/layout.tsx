@@ -17,8 +17,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "UI Skillbook — The field guide for building better interfaces with AI",
-    template: "%s — UI Skillbook",
+    default: "UI Skillbook: the field guide for building interfaces with AI",
+    template: "%s | UI Skillbook",
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE_NAME,
     url: "/",
-    title: "UI Skillbook — The field guide for building better interfaces with AI",
+    title: "UI Skillbook: the field guide for building interfaces with AI",
     description: SITE_DESCRIPTION,
   },
   twitter: { card: "summary_large_image", creator: "@realaliarain" },

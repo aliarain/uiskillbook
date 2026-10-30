@@ -21,14 +21,14 @@ tags:
   - tooltip
   - hints
   - icon-buttons
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: tooltip
   title: "Tooltip"
   group: "Overlays & disclosure"
-  order: 44
+  order: 45
   docs: https://ui.siteplane.io/docs/components/tooltip/
   install: [tooltip]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Tooltip
 
-Use Tooltip to name icon buttons or add a brief, optional explanation to a control. It appears on hover and keyboard focus. Nothing essential should live only in a tooltip.
+Tooltip names icon buttons or adds a brief, optional explanation to a control. It appears on hover and keyboard focus. Put essential information in the page as well.
 
 ## Install
 
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/tooltip`. The project needs Siteplane UI'
 ## Reference
 
 - [Tooltip docs](https://ui.siteplane.io/docs/components/tooltip/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/tooltip.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

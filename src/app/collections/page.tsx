@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Collections",
-  description: "Skills grouped around the jobs you're actually trying to do.",
+  description: "Skills grouped by the job at hand, such as a dashboard or a landing page.",
   path: "/collections",
 });
 
@@ -16,7 +16,7 @@ export default function CollectionsPage() {
     <div className="mx-auto max-w-[820px] px-6 py-12">
       <h1 className="display text-4xl">Collections</h1>
       <p className="mt-2 text-ink-2">
-        Skills grouped around the jobs you&apos;re actually trying to do.
+        Skills grouped by the job at hand, such as a dashboard or a landing page.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

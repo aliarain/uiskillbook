@@ -1,7 +1,7 @@
 ---
 name: siteplane-copy-button
 title: "Siteplane Copy Button"
-description: "A button that puts a value on the clipboard and confirms success or failure visually and to screen readers."
+description: "Copies a value to the clipboard and confirms success or failure on screen and to screen readers."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -22,8 +22,8 @@ tags:
   - clipboard
   - copy
   - feedback
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: copy-button
@@ -38,7 +38,7 @@ siteplane:
 
 # Copy Button
 
-Use Copy Button next to things people paste elsewhere: invite links, API IDs, addresses, short tokens. It works as a bare icon after a value, a labelled text button, or an icon action inside an input group.
+Put Copy Button next to values people paste elsewhere, like invite links, API IDs, addresses and short tokens. It can be a bare icon after the value, a labelled text button, or an icon action inside an input group.
 
 ## Install
 
@@ -50,19 +50,19 @@ Import it from `@/siteplane/components/copy-button`. The project needs Siteplane
 
 ## When to pick it
 
-- **vs [Button](https://uiskillbook.com/skills/siteplane-button):** Pick Button instead when the action does something other than copying; Copy Button already owns the copied and failed states.
-- **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pair with Input Group when the value lives in a read-only field and the copy icon should sit at its end.
-- **vs [Code](https://uiskillbook.com/skills/siteplane-code):** Pick Code with `copyable` instead for a block of code, which places this button inside the block for you.
+- **vs [Button](https://uiskillbook.com/skills/siteplane-button):** Pick Button when the action does something besides copying. Copy Button owns the copied and failed states.
+- **vs [Input Group](https://uiskillbook.com/skills/siteplane-input-group):** Pair with Input Group when the value sits in a read-only field and the copy icon belongs at its end.
+- **vs [Code](https://uiskillbook.com/skills/siteplane-code):** For a code block, pick Code with `copyable`. It places this button inside the block for you.
 
 ## Rules
 
-- Name the icon-only form after what it copies via `labels.copy` or `aria-label`, for example "Copy invite link".
-- Always render the value visibly next to the button so people can select it by hand if the clipboard write fails.
-- Pass a function to `value` when the text must be fetched on press, and keep that request short because browsers only allow a copy shortly after the gesture.
-- Use `onCopyError` to tell people what to do next when copying is unavailable, such as on plain http.
-- Inside a field set `profile="field-action"`; inside a menu keep a `MenuItem` and call `useCopyToClipboard` from its handler.
+- Name the icon-only form after what it copies, through `labels.copy` or `aria-label`. Example: "Copy invite link".
+- Show the value next to the button so people can select it by hand if the clipboard write fails.
+- Pass a function to `value` to fetch the text on press. Keep that request short: browsers allow a copy only for a brief window after the gesture.
+- In `onCopyError`, tell people what to do next when copying is unavailable, such as on plain http.
+- In a field, set `profile="field-action"`. In a menu, keep a `MenuItem` and call `useCopyToClipboard` from its handler.
 
 ## Reference
 
 - [Copy Button docs](https://ui.siteplane.io/docs/components/copy-button/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/copy-button.md))
-- Siteplane UI 1.7.0, Actions. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Actions. Read the installed source under `src/siteplane` before relying on an API.

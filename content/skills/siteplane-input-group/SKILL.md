@@ -1,7 +1,7 @@
 ---
 name: siteplane-input-group
 title: "Siteplane Input Group"
-description: "A shared input surface with attached text, icons, buttons or a header and footer around an input or textarea."
+description: "One input surface with text, icons, buttons or a header and footer attached around an input or textarea."
 author:
   name: UI Skillbook
   url: https://uiskillbook.com
@@ -21,14 +21,14 @@ tags:
   - input-group
   - addons
   - password
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: input-group
   title: "Input Group"
   group: "Forms & selection"
-  order: 23
+  order: 24
   docs: https://ui.siteplane.io/docs/components/input-group/
   install: [input-group]
 ---
@@ -37,7 +37,7 @@ siteplane:
 
 # Input Group
 
-Use Input Group when a field needs something attached: a currency or protocol prefix, a search icon, a show-password action, an apply button, or a toolbar under a comment box. The group draws one frame around everything.
+Input Group attaches extras to a field: a currency or protocol prefix, a search icon, a show-password action, an apply button, or a toolbar under a comment box. It draws one frame around everything.
 
 ## Install
 
@@ -49,19 +49,19 @@ Import it from `@/siteplane/components/input-group`. The project needs Siteplane
 
 ## When to pick it
 
-- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group instead to join separate controls, like an input and a submit button, as segments with their own frames.
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick plain Input when nothing needs to attach to the field.
-- **vs [Prompt Input](https://uiskillbook.com/skills/siteplane-prompt-input):** Pick Prompt Input instead for a full chat composer.
+- **vs [Group](https://uiskillbook.com/skills/siteplane-group):** Pick Group to join separate controls, like an input and a submit button, as segments with their own frames.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick plain Input when nothing attaches to the field.
+- **vs [Prompt Input](https://uiskillbook.com/skills/siteplane-prompt-input):** Pick Prompt Input for a full chat composer.
 
 ## Rules
 
-- Use `InputGroupInput` or `InputGroupTextarea` inside the group; the group owns the surface and the inner control stays unstyled.
+- Put `InputGroupInput` or `InputGroupTextarea` inside the group. The group owns the surface and the inner control stays unstyled.
 - Place extras in `InputGroupAddon` with `align` set to inline-start, inline-end, block-start or block-end.
-- Use Button with `profile="field-action"` and `shape="square"` for icon actions, and keep a password toggle's label constant with `aria-pressed`.
-- Remember addon text is not part of the value or the label; name the field with Field and FieldLabel.
-- Compose Button directly; there is no InputGroupButton part.
+- For icon actions, use Button with `profile="field-action"` and `shape="square"`. Keep a password toggle's label constant and show its state with `aria-pressed`.
+- Addon text is not part of the value or the label. Name the field with Field and FieldLabel.
+- Compose Button directly. Input Group has no InputGroupButton part.
 
 ## Reference
 
 - [Input Group docs](https://ui.siteplane.io/docs/components/input-group/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/input-group.md))
-- Siteplane UI 1.7.0, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Forms & selection. Read the installed source under `src/siteplane` before relying on an API.

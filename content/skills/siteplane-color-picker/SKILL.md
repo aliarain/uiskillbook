@@ -22,14 +22,14 @@ tags:
   - color
   - picker
   - theming
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: color-picker
   title: "Color Picker"
   group: "Date & color"
-  order: 51
+  order: 52
   docs: https://ui.siteplane.io/docs/components/color-picker/
   install: [color-picker]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Color Picker
 
-Use Color Picker when people choose any custom color, such as a brand or theme color. It can also appear as the last swatch of a palette so a fixed set ends with a custom choice.
+Color Picker lets people choose any custom color, such as a brand or theme color. Placed as the last swatch of a palette, it ends a fixed set with a custom choice.
 
 ## Install
 
@@ -50,18 +50,18 @@ Import it from `@/siteplane/components/color-picker`. The project needs Siteplan
 
 ## When to pick it
 
-- **vs [Color Swatch Picker](https://uiskillbook.com/skills/siteplane-color-swatch-picker):** Pick Color Swatch Picker instead when the choice is limited to a fixed palette.
-- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input instead only if people paste hex values and never need visual picking.
+- **vs [Color Swatch Picker](https://uiskillbook.com/skills/siteplane-color-swatch-picker):** Pick Color Swatch Picker when the choice is limited to a fixed palette.
+- **vs [Input](https://uiskillbook.com/skills/siteplane-input):** Pick Input only if people paste hex values and never need to pick by eye.
 
 ## Rules
 
 - Expect lowercase hex strings from `onValueChange`; there is no alpha channel.
 - Keep an accessible name when hiding the value with `showValue={false}`.
 - Use `variant="swatch"` with `selected` to end a Color Swatch Picker row with a custom color.
-- Do not rely on `required` to block submission, because the picker always holds a color.
+- `required` will not block submission, because the picker always holds a color.
 - Use `readOnly` to show a fixed color and `disabled` to remove it from the form.
 
 ## Reference
 
 - [Color Picker docs](https://ui.siteplane.io/docs/components/color-picker/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/color-picker.md))
-- Siteplane UI 1.7.0, Date & color. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Date & color. Read the installed source under `src/siteplane` before relying on an API.

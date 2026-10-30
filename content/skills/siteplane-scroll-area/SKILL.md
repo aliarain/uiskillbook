@@ -22,14 +22,14 @@ tags:
   - scrolling
   - overflow
   - layout
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: scroll-area
   title: "Scroll Area"
   group: "Layout & utilities"
-  order: 91
+  order: 92
   docs: https://ui.siteplane.io/docs/components/scroll-area/
   install: [scroll-area]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Scroll Area
 
-Use Scroll Area when a fixed-size region inside the page has to scroll, such as a list in a card, a horizontal tag row or a panel with a pinned footer. Prefer letting the page itself scroll when it can.
+Scroll Area makes a fixed-size region inside the page scroll, such as a list in a card, a horizontal tag row or a panel with a pinned footer. Let the page scroll instead when it can.
 
 ## Install
 
@@ -56,12 +56,12 @@ Import it from `@/siteplane/components/scroll-area`. The project needs Siteplane
 ## Rules
 
 - Name the region with aria-label or aria-labelledby, since the viewport joins the tab order when it overflows.
-- Scrolling happens in the viewport, not the root, so use viewportRef to get or change the scroll offset.
-- Content that scrolls sideways needs its own width, for example w-max; also set scrollbarGutter to keep the scrollbar from overlapping it.
+- The viewport scrolls, so read or set the scroll offset through viewportRef.
+- Give sideways-scrolling content its own width, such as w-max, and set scrollbarGutter so the scrollbar doesn't overlap it.
 - Turn on fill for a flex-column child that must stretch to full height, such as one that pins a footer to the bottom.
-- Avoid nesting a scroll region where the page could simply scroll.
+- Don't nest a scroll region where the page itself could scroll.
 
 ## Reference
 
 - [Scroll Area docs](https://ui.siteplane.io/docs/components/scroll-area/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/scroll-area.md))
-- Siteplane UI 1.7.0, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Layout & utilities. Read the installed source under `src/siteplane` before relying on an API.

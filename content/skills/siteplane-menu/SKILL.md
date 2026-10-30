@@ -22,14 +22,14 @@ tags:
   - menu
   - actions
   - overflow-menu
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: menu
   title: "Menu"
   group: "Overlays & disclosure"
-  order: 35
+  order: 36
   docs: https://ui.siteplane.io/docs/components/menu/
   install: [menu]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Menu
 
-Use Menu for a short set of actions tied to a trigger, such as an account menu, the actions of a table row or a More button. It also holds checkbox and radio items for view options. It is the base that Dropdown Menu and Context Menu build on.
+Menu lists a short set of actions behind a trigger, such as an account menu, a table row's actions or a More button. It also holds checkbox and radio items for view options. Dropdown Menu and Context Menu build on it.
 
 ## Install
 
@@ -57,13 +57,13 @@ Import it from `@/siteplane/components/menu`. The project needs Siteplane UI's o
 
 ## Rules
 
-- Do not wrap MenuPopup in another portal; it already includes the portal, positioner and scrolling viewport.
+- MenuPopup includes the portal, positioner and scrolling viewport, so don't wrap it in another portal.
 - Set variant="destructive" on a MenuItem that deletes or removes something.
 - Use MenuCheckboxItem for independent toggles and MenuRadioGroup for one choice; neither submits with a form.
-- Use MenuLinkItem for rows that navigate so they are real links.
-- To launch a dialog from a menu item, control the dialog's open state yourself and mount it outside the menu, otherwise it unmounts when the menu closes.
+- Use MenuLinkItem for rows that navigate so they render as real links.
+- A menu item that launches a dialog needs the dialog mounted outside the menu, with its open state in your code. Mounted inside, the dialog unmounts when the menu closes.
 
 ## Reference
 
 - [Menu docs](https://ui.siteplane.io/docs/components/menu/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/menu.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

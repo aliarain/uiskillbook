@@ -22,14 +22,14 @@ tags:
   - disclosure
   - faq
   - expandable
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: accordion
   title: "Accordion"
   group: "Overlays & disclosure"
-  order: 32
+  order: 33
   docs: https://ui.siteplane.io/docs/components/accordion/
   install: [accordion]
 ---
@@ -38,7 +38,7 @@ siteplane:
 
 # Accordion
 
-Use Accordion for a list of peer sections that people open on demand, such as FAQs or groups of settings. It keeps long pages short while every heading stays visible.
+Accordion holds peer sections that people open on demand, such as FAQs or groups of settings. Long pages stay short and all headings stay visible.
 
 ## Install
 
@@ -55,13 +55,13 @@ Import it from `@/siteplane/components/accordion`. The project needs Siteplane U
 
 ## Rules
 
-- Turn on multiple to let more than one section stay expanded; either way, the value is an array of the expanded items.
+- Turn on multiple to let several sections stay open. In both modes the value is an array of the expanded items.
 - Give each AccordionItem a stable value when you control the open items with value and onValueChange.
 - Keep other interactive controls out of AccordionTrigger; put them in the panel.
-- Expect Tab to move between triggers and Enter or Space to toggle them; arrow keys do not move focus.
-- Avoid it when people need to compare content across sections, since closed sections hide it.
+- Tab moves between triggers and Enter or Space toggles them. Arrow keys do not move focus.
+- Skip it when people compare content across sections; closed sections hide that content.
 
 ## Reference
 
 - [Accordion docs](https://ui.siteplane.io/docs/components/accordion/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/accordion.md))
-- Siteplane UI 1.7.0, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Overlays & disclosure. Read the installed source under `src/siteplane` before relying on an API.

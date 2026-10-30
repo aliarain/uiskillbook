@@ -22,14 +22,14 @@ tags:
   - mini-chart
   - trend
   - kpi
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: sparkline
   title: "Sparkline"
   group: "Charts"
-  order: 72
+  order: 73
   docs: https://ui.siteplane.io/docs/components/sparkline/
   install: [sparkline]
 ---
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/sparkline`. The project needs Siteplane U
 ## Reference
 
 - [Sparkline docs](https://ui.siteplane.io/docs/components/sparkline/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/sparkline.md))
-- Siteplane UI 1.7.0, Charts. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Charts. Read the installed source under `src/siteplane` before relying on an API.

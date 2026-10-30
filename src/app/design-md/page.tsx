@@ -25,9 +25,7 @@ export default async function DesignMdIndexPage({
     <div className="mx-auto max-w-[1200px] px-6 py-12">
       <h1 className="display text-4xl">Design.md</h1>
       <p className="mt-2 max-w-2xl text-ink-2">
-        Drop-in DESIGN.md files that describe a brand&apos;s colors, type, spacing and components,
-        so your coding agent can work in that style. Independent write-ups, not official brand
-        assets.
+        DESIGN.md files that describe a brand&apos;s colors, type, spacing and components, so your coding agent can work in that style. We wrote them ourselves; the brands did not.
       </p>
 
       <nav aria-label="Filter by category" className="mt-8 flex flex-wrap gap-1.5">

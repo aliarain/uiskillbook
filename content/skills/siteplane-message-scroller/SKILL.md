@@ -24,14 +24,14 @@ tags:
   - scroll
   - thread
   - ai
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: message-scroller
   title: "Message Scroller"
   group: "Chat & AI"
-  order: 73
+  order: 74
   docs: https://ui.siteplane.io/docs/components/message-scroller/
   install: [message-scroller]
 ---
@@ -62,9 +62,9 @@ Import it from `@/siteplane/components/message-scroller`. The project needs Site
 - Mark the first row of each turn with `scrollAnchor`; that is normally the user's own message.
 - Turn on `autoScroll` to follow a growing reply, and set `busy` on `MessageScrollerContent` while a reply is pending.
 - Add `MessageScrollerButton` for the jump-to-latest control and use `useMessageScroller()` for custom jumps.
-- Load long histories in pages above the first row; rows are not virtualised.
+- Load long histories in pages above the first row; the scroller does not virtualise rows.
 
 ## Reference
 
 - [Message Scroller docs](https://ui.siteplane.io/docs/components/message-scroller/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/message-scroller.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.

@@ -22,14 +22,14 @@ tags:
   - agent
   - reasoning
   - tool-calls
-version: 1.7.0
-updated_at: "2026-10-29"
+version: 1.8.1
+updated_at: "2026-10-30"
 license: MIT
 siteplane:
   component: trace
   title: "Trace"
   group: "Chat & AI"
-  order: 77
+  order: 78
   docs: https://ui.siteplane.io/docs/components/trace/
   install: [trace]
 ---
@@ -64,4 +64,4 @@ Import it from `@/siteplane/components/trace`. The project needs Siteplane UI's 
 ## Reference
 
 - [Trace docs](https://ui.siteplane.io/docs/components/trace/), with every prop, part and example ([Markdown](https://ui.siteplane.io/docs-markdown/components/trace.md))
-- Siteplane UI 1.7.0, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
+- Siteplane UI 1.8.1, Chat & AI. Read the installed source under `src/siteplane` before relying on an API.
