@@ -115,6 +115,8 @@ export function designMdSummary(entry: DesignMd) {
     category: entry.category,
     website: entry.website ?? null,
     color: entry.color,
+    colors: entry.colors,
+    fonts: entry.fonts,
     origin: entry.origin,
     language: entry.language,
     source: entry.source

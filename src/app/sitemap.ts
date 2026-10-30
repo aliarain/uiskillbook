@@ -10,6 +10,7 @@ function latest(dates: string[]): Date {
   return new Date(dates.reduce((max, d) => (d > max ? d : max), "1970-01-01"));
 }
 
+/** Core pages. Design.md files and their hub pages are in /design-md/sitemap.xml. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const skills = getAllSkills();
   const chapters = getAllChapters();
@@ -48,15 +49,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(c.updated_at),
   }));
 
-  const designMdRoutes = designMds.map((d) => ({
-    url: `${SITE_URL}/design-md/${d.slug}`,
-    lastModified: new Date(d.updated_at),
-  }));
-
   const agentRoutes = AGENTS.filter((a) => a.slug !== "universal").map((a) => ({
     url: `${SITE_URL}/agents/${a.slug}`,
     lastModified: dated(getSkillsByAgent(a.slug)),
   }));
 
-  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...designMdRoutes, ...agentRoutes];
+  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...agentRoutes];
 }
