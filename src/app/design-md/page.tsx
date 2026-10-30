@@ -8,6 +8,7 @@ import {
   getDesignMdCategories,
   getDesignMdFonts,
   getDesignMdsByColor,
+  getOfficialDesignMds,
 } from "@/lib/design-md";
 import { FilterChip } from "@/components/filter-chip";
 import { DesignMdGrid, DesignMdPagination, paginate } from "@/components/design-md-grid";
@@ -52,6 +53,7 @@ export default async function DesignMdIndexPage({
   );
   const { page, pages, visible } = paginate(entries, params.page);
   const fonts = getDesignMdFonts();
+  const official = getOfficialDesignMds();
   const browsing = !q && !active && page === 1;
 
   return (
@@ -89,6 +91,29 @@ export default async function DesignMdIndexPage({
 
       {browsing && (
         <div className="mt-8 grid gap-6 border-y border-line py-6 lg:grid-cols-[1fr_2fr]">
+          <section aria-labelledby="official" className="lg:col-span-2">
+            <h2 id="official" className="label">
+              Official, published by the brand
+            </h2>
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {official.map((e) => (
+                <li key={e.slug}>
+                  <Link
+                    href={`/design-md/${e.slug}`}
+                    className="row flex items-center gap-2 rounded-button border border-line px-2.5 py-1.5 text-sm text-ink"
+                  >
+                    <span aria-hidden className="size-3 rounded-full" style={{ background: e.color }} />
+                    {e.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/design-md/official" className="link flex rounded-button px-2.5 py-1.5 text-sm">
+                  About official files
+                </Link>
+              </li>
+            </ul>
+          </section>
           <section aria-labelledby="by-color">
             <h2 id="by-color" className="label">
               Browse by color

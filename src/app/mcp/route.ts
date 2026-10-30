@@ -215,7 +215,8 @@ export async function POST(request: Request) {
       if (name === "get_design_md") {
         const slug = typeof args.slug === "string" ? args.slug.trim() : "";
         const entry = slug ? designMdDetail(slug) : null;
-        if (entry) return text(entry.content);
+        if (entry?.content) return text(entry.content);
+        if (entry) return text({ ...entry, note: `${entry.name} publishes its own DESIGN.md. Fetch it from official_url.` });
         const needle = slug.toLowerCase();
         const all = getAllDesignMds();
         const matches = (needle ? all.filter((d) => `${d.slug} ${d.name}`.toLowerCase().includes(needle)) : all)

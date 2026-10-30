@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import logoData from "../../content/design-md-logos.json";
 import importIndex from "../../content/design-md-imports/index.json";
 import tokenData from "../../content/design-md-tokens.json";
+import officialData from "../../content/design-md-official.json";
 
 const DESIGN_MD_DIR = path.join(process.cwd(), "content", "design-md");
 const IMPORTS_DIR = path.join(process.cwd(), "content", "design-md-imports", "files");
@@ -37,14 +38,29 @@ export type DesignMd = DesignMdFrontmatter & {
   /** Colors and font families the file declares, from scripts/design-md-tokens.mjs. */
   colors: DesignMdColor[];
   fonts: string[];
-  /** "original" entries are written by UI Skillbook; "community" ones are imported, credited and licensed. */
-  origin: "original" | "community";
+  /**
+   * "original" entries are written by UI Skillbook; "community" ones are imported, credited and licensed;
+   * "official" ones are link-only: the brand publishes the file and we don't copy it.
+   */
+  origin: "original" | "community" | "official";
+  /** The brand's own published DESIGN.md, when it has one (content/design-md-official.json). */
+  official?: { url: string };
   language: string;
   source?: DesignMdSource;
   /** Full-color Logoforge icon (CC0), from scripts/fetch-design-md-logos.mjs. */
   logo?: { light: string; dark?: string };
 };
 
+type OfficialEntry = {
+  slug: string;
+  name: string;
+  url: string;
+  website: string;
+  description?: string;
+  color?: string;
+  colors?: DesignMdColor[];
+  fonts?: string[];
+};
 type TokenRecord = Record<string, { colors: DesignMdColor[]; fonts: string[] }>;
 type LogoRecord = Record<string, { icon?: { file: string }; "icon-dark"?: { file: string } }>;
 type ImportEntry = { slug: string; name: string; description: string; color: string; category: string; language: string; source: DesignMdSource };
@@ -86,9 +102,35 @@ export function getAllDesignMds(): DesignMd[] {
     ...tokensFor(e.slug),
     updated_at: importIndex.importedAt,
   }));
-  // Our originals first, then the English collections, then the Japanese one, each A–Z.
-  const rank = (d: DesignMd) => (d.origin === "original" ? 0 : d.language === "en" ? (d.category === "Brands" ? 1 : 2) : 3);
-  cache = [...readOriginals(), ...imported].sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
+  const officials = officialData.entries as OfficialEntry[];
+  const local = [...readOriginals(), ...imported];
+  const bySlug = new Map(local.map((d) => [d.slug, d]));
+  // Brands we already cover link to their official file; the rest become link-only entries.
+  const linkOnly: DesignMd[] = [];
+  for (const o of officials) {
+    const existing = bySlug.get(o.slug);
+    if (existing) existing.official = { url: o.url };
+    else if (o.description && o.color)
+      linkOnly.push({
+        slug: o.slug,
+        name: o.name,
+        description: o.description,
+        website: o.website,
+        color: o.color,
+        colors: o.colors ?? [],
+        fonts: o.fonts ?? [],
+        category: "Brands",
+        icon: o.slug,
+        origin: "official",
+        official: { url: o.url },
+        language: "en",
+        updated_at: officialData.checkedAt,
+      });
+  }
+  // Our originals and official files first, then the English collections, then the Japanese one, each A–Z.
+  const rank = (d: DesignMd) =>
+    d.origin === "original" ? 0 : d.origin === "official" ? 1 : d.language === "en" ? (d.category === "Brands" ? 2 : 3) : 4;
+  cache = [...local, ...linkOnly].sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
   return cache;
 }
 
@@ -100,9 +142,26 @@ export function getDesignMdBySlug(slug: string): DesignMd | undefined {
   return getAllDesignMds().find((d) => d.slug === slug);
 }
 
-/** The file as stored, frontmatter included. */
+/** Brands whose own team publishes a DESIGN.md, ours or link-only. */
+export function getOfficialDesignMds(): DesignMd[] {
+  return getAllDesignMds().filter((d) => d.official);
+}
+
+/** A plain-text URL for an official file: GitHub blob links become raw.githubusercontent.com links. */
+export function officialRawUrl(url: string): string {
+  const m = url.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)\/blob\/(.+)$/);
+  return m ? `https://raw.githubusercontent.com/${m[1]}/${m[2]}` : url;
+}
+
+/** Whether we host the file's text. Official link-only entries don't. */
+export function hasDesignMdFile(entry: DesignMd): boolean {
+  return entry.origin !== "official";
+}
+
+/** The file as stored, frontmatter included. Not available for official link-only entries. */
 export function getDesignMdRaw(slug: string): string {
   const entry = getDesignMdBySlug(slug);
+  if (entry?.origin === "official") throw new Error(`${slug} is link-only; its DESIGN.md lives at ${entry.official?.url}`);
   const file =
     entry?.origin === "community"
       ? path.join(IMPORTS_DIR, `${slug}.md`)
@@ -258,4 +317,21 @@ export function getRelatedDesignMds(entry: DesignMd, count = 6): DesignMd[] {
     .sort((a, b) => b.score - a.score || a.gap - b.gap || a.other.name.localeCompare(b.other.name))
     .slice(0, count)
     .map(({ other }) => other);
+}
+
+/** Brand name without suffixes like "App" or "Inc", for spotting two files about one brand. */
+function brandKey(name: string): string {
+  return name
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/\b(app|apps|inc|ios|official|com|the|design|system)\b/g, "")
+    .replace(/[^a-z0-9\u3040-\u9fff\uac00-\ud7af]/g, "");
+}
+
+/** Other files about the same brand, e.g. our Linear write-up and the community Linear App file. */
+export function getSameBrandDesignMds(entry: DesignMd): DesignMd[] {
+  const key = brandKey(entry.name);
+  // Very short keys ("x", "lg") match unrelated brands.
+  if (key.length < 3) return [];
+  return getAllDesignMds().filter((d) => d.slug !== entry.slug && brandKey(d.name) === key);
 }

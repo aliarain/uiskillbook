@@ -17,7 +17,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const entry = getDesignMdBySlug(slug);
   const fonts = (entry?.fonts ?? []).map((f) => ogText(f)).filter(Boolean).slice(0, 3);
   return renderOgImage({
-    eyebrow: entry?.origin === "community" ? `DESIGN.md · ${entry.category}` : "DESIGN.md · UI Skillbook",
+    eyebrow:
+      entry?.origin === "official"
+        ? "DESIGN.md · Official"
+        : entry?.origin === "community"
+          ? `DESIGN.md · ${entry.category}`
+          : "DESIGN.md · UI Skillbook",
     title: `${ogText(entry?.name ?? slug, titleCase(slug))} DESIGN.md`,
     subtitle: entry ? ogText(entry.description) : undefined,
     swatches: entry ? [...new Set([entry.color.toLowerCase(), ...entry.colors.map((c) => c.hex)])].slice(0, 8) : undefined,

@@ -1,0 +1,93 @@
+{
+  "source": "https://github.com/VoltAgent/official-design-md",
+  "checkedAt": "2026-10-30",
+  "note": "DESIGN.md files published by the companies themselves. We link to them and never copy them. Descriptions, colors and fonts are our own notes from reading each file.",
+  "entries": [
+    {
+      "slug": "ant-design",
+      "name": "Ant Design",
+      "url": "https://ant.design/design.md",
+      "website": "https://ant.design",
+      "description": "Ant Group's enterprise React design system, documented by the Ant Design team: a #1677ff blue primary and a full semantic color scale.",
+      "color": "#1677ff",
+      "colors": [{ "hex": "#1677ff", "name": "primary" }, { "hex": "#4096ff" }, { "hex": "#0958d9" }, { "hex": "#e6f4ff" }, { "hex": "#ffffff", "name": "surface" }],
+      "fonts": []
+    },
+    {
+      "slug": "atlassian",
+      "name": "Atlassian",
+      "url": "https://atlassian.design/DESIGN.md",
+      "website": "https://atlassian.design"
+    },
+    {
+      "slug": "clerk",
+      "name": "Clerk",
+      "url": "https://clerk.com/design.md",
+      "website": "https://clerk.com"
+    },
+    {
+      "slug": "juspay-blend",
+      "name": "Juspay Blend",
+      "url": "https://github.com/juspay/blend-design-system/blob/dev/DESIGN.md",
+      "website": "https://github.com/juspay/blend-design-system",
+      "description": "Blend, the design system Juspay uses for its payment products: a bright blue primary, Inter Display type and tokens for light and dark themes.",
+      "color": "#2b7fff",
+      "colors": [{ "hex": "#2b7fff", "name": "primary" }, { "hex": "#eff6ff" }, { "hex": "#0e121b" }, { "hex": "#f5f7fa" }, { "hex": "#ffffff" }],
+      "fonts": ["Inter Display"]
+    },
+    {
+      "slug": "microsoft-fast",
+      "name": "Microsoft FAST",
+      "url": "https://github.com/microsoft/fast/blob/main/examples/design-system/DESIGN.md",
+      "website": "https://github.com/microsoft/fast",
+      "description": "The design system shared by Microsoft FAST's example apps, written as semantic CSS tokens for type, spacing, color and light and dark themes.",
+      "color": "#242424",
+      "colors": [{ "hex": "#242424" }, { "hex": "#1f1f1f" }, { "hex": "#fafafa" }, { "hex": "#ffffff" }],
+      "fonts": []
+    },
+    {
+      "slug": "mintlify",
+      "name": "Mintlify",
+      "url": "https://mintlify.com/design.md",
+      "website": "https://mintlify.com"
+    },
+    {
+      "slug": "nuxt",
+      "name": "Nuxt",
+      "url": "https://nuxt.com/design.md",
+      "website": "https://nuxt.com",
+      "description": "The Nuxt team's own DESIGN.md for nuxt.com: built on Nuxt UI and Tailwind CSS v4, dark by default, with the Nuxt green as its accent.",
+      "color": "#00dc82",
+      "colors": [{ "hex": "#00dc82", "name": "green-400" }, { "hex": "#0a0a0a", "name": "black" }, { "hex": "#effdf5", "name": "green-50" }, { "hex": "#ffffff", "name": "white" }],
+      "fonts": ["Inter", "Outfit"]
+    },
+    {
+      "slug": "oxide",
+      "name": "Oxide Computer",
+      "url": "https://github.com/oxidecomputer/design-system/blob/master/design.md",
+      "website": "https://oxide.computer",
+      "description": "Oxide's design system for its web surfaces: dark first, a green accent, uppercase monospace UI chrome and colors written in OKLCH.",
+      "color": "#00d892",
+      "colors": [{ "hex": "#00d892", "name": "green accent" }],
+      "fonts": ["SuisseIntl", "GT America Mono"]
+    },
+    {
+      "slug": "resend",
+      "name": "Resend",
+      "url": "https://resend.com/design.md",
+      "website": "https://resend.com"
+    },
+    {
+      "slug": "vercel",
+      "name": "Vercel",
+      "url": "https://vercel.com/design.md",
+      "website": "https://vercel.com"
+    },
+    {
+      "slug": "voltagent",
+      "name": "VoltAgent",
+      "url": "https://github.com/VoltAgent/voltagent/blob/main/DESIGN.md",
+      "website": "https://voltagent.dev"
+    }
+  ]
+}

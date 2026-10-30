@@ -23,7 +23,7 @@ export function DesignMdGrid({ entries, headingLevel = "h3" }: { entries: Design
               {entry.name}
             </Heading>
             <p className="truncate text-xs text-ink-3">
-              {entry.origin === "original" ? "UI Skillbook" : entry.category}
+              {entry.origin === "original" ? "UI Skillbook" : entry.origin === "official" ? "Official" : entry.category}
               {entry.fonts[0] && <> · {entry.fonts[0]}</>}
             </p>
             <p className="mt-1.5 line-clamp-2 text-sm text-ink-2" lang={entry.language}>
