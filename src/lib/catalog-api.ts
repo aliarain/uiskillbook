@@ -113,8 +113,13 @@ export function designMdSummary(entry: DesignMd) {
     name: entry.name,
     description: entry.description,
     category: entry.category,
-    website: entry.website,
+    website: entry.website ?? null,
     color: entry.color,
+    origin: entry.origin,
+    language: entry.language,
+    source: entry.source
+      ? { repo: entry.source.repo, license: entry.source.license, commit: entry.source.commit, url: entry.source.url }
+      : null,
     updated_at: entry.updated_at,
     url: `${SITE_URL}/design-md/${entry.slug}`,
     raw_url: `${SITE_URL}/design-md/${entry.slug}/raw`,

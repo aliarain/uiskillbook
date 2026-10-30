@@ -9,19 +9,13 @@
 // reviewed by hand, and the review is recorded in the submission issue.
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative } from "node:path";
-
-const root = process.argv[2];
-const asJson = process.argv.includes("--json");
-if (!root) {
-  console.error("usage: node scripts/scan-skill.mjs <skill-dir> [--json]");
-  process.exit(2);
-}
+import { fileURLToPath } from "node:url";
 
 const TEXT = new Set([".md", ".mdx", ".txt", ".json", ".yaml", ".yml", ".toml", ".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".sh", ".bash", ".zsh", ".ps1", ".rb", ".go", ".html", ".css", ".svg", ".csv", ""]);
 const SCRIPT = new Set([".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".sh", ".bash", ".zsh", ".ps1", ".rb", ".go"]);
 
 /** [severity, id, description, regex, appliesTo] — appliesTo: "all" | "prose" | "script" */
-const RULES = [
+export const RULES = [
   ["HIGH", "hidden-unicode", "Invisible or direction-changing Unicode (zero-width, bidi, tag characters)", /[​-‏‪-‮⁠-⁤⁦-⁩﻿]|\uDB40[\uDC00-\uDC7F]/u, "all"],
   ["HIGH", "override-instructions", "Tries to override the agent's or user's instructions", /\b(ignore|disregard|forget)\b[^.\n]{0,40}\b(previous|prior|above|all|system|user)\b[^.\n]{0,20}\b(instructions?|prompts?|rules)\b/i, "prose"],
   ["HIGH", "conceal-from-user", "Asks the agent to hide actions or output from the user", /\b(do not|don't|never)\b[^.\n]{0,30}\b(tell|inform|show|mention|reveal)\b[^.\n]{0,20}\b(the )?user\b/i, "prose"],
@@ -38,6 +32,20 @@ const RULES = [
   ["INFO", "outbound-url", "Outbound URL (listed for review)", /https?:\/\/[^\s)"'<>\]]+/g, "all"],
 ];
 
+/** Findings for one text file. `kind` is "script" or "prose". Used by the CLI and by importers. */
+export function scanText(text, kind = "prose", file = "") {
+  const out = [];
+  text.split("\n").forEach((line, i) => {
+    if (line.length > 2000) out.push({ severity: "MEDIUM", id: "minified-line", file, line: i + 1, text: `${line.length}-character line` });
+    for (const [severity, id, , re, scope] of RULES) {
+      if (scope !== "all" && scope !== kind) continue;
+      const matches = id === "outbound-url" ? line.match(re) ?? [] : re.test(line) ? [line.trim().slice(0, 160)] : [];
+      for (const t of matches) out.push({ severity, id, file, line: i + 1, text: t });
+    }
+  });
+  return out;
+}
+
 function walk(dir) {
   return readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);
@@ -45,6 +53,13 @@ function walk(dir) {
   });
 }
 
+function main() {
+const root = process.argv[2];
+const asJson = process.argv.includes("--json");
+if (!root) {
+  console.error("usage: node scripts/scan-skill.mjs <skill-dir> [--json]");
+  process.exit(2);
+}
 const findings = [];
 const files = walk(root);
 for (const path of files) {
@@ -56,15 +71,7 @@ for (const path of files) {
     continue;
   }
   const kind = SCRIPT.has(ext) ? "script" : "prose";
-  const lines = readFileSync(path, "utf8").split("\n");
-  lines.forEach((line, i) => {
-    if (line.length > 2000) findings.push({ severity: "MEDIUM", id: "minified-line", file: rel, line: i + 1, text: `${line.length}-character line` });
-    for (const [severity, id, , re, scope] of RULES) {
-      if (scope !== "all" && scope !== kind) continue;
-      const matches = id === "outbound-url" ? line.match(re) ?? [] : re.test(line) ? [line.trim().slice(0, 160)] : [];
-      for (const text of matches) findings.push({ severity, id, file: rel, line: i + 1, text });
-    }
-  });
+  findings.push(...scanText(readFileSync(path, "utf8"), kind, rel));
 }
 
 const order = { HIGH: 0, MEDIUM: 1, INFO: 2 };
@@ -84,3 +91,6 @@ if (asJson) {
   console.log(`\nOutbound hosts (${hosts.length}): ${hosts.join(", ")}`);
 }
 process.exit(counts.HIGH > 0 ? 1 : 0);
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();

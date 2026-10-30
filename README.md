@@ -149,7 +149,23 @@ Two ways in:
 Every submission is checked against the curation criteria on the
 [About page](https://www.uiskillbook.com/about) before it's added: concrete purpose,
 usable instruction (not generic AI filler), no duplicate of an existing skill,
-attribution preserved, source linked, license stated.
+attribution preserved, source linked, license stated. Submissions are also scanned with
+`node scripts/scan-skill.mjs <skill-dir>` (hidden instructions, credential access, network
+calls, risky scripts) and read by hand, and listings pin the reviewed commit.
+
+## Design.md files
+
+`content/design-md/` holds our own DESIGN.md write-ups. `content/design-md-imports/` holds
+community DESIGN.md files from MIT-licensed GitHub collections, refreshed with:
+
+```bash
+GITHUB_TOKEN=$(gh auth token) node scripts/import-design-md.mjs
+```
+
+The importer pins each collection to a commit, keeps its license in
+`content/design-md-imports/licenses/`, skips any file with a HIGH finding from the scanner,
+and records the source on every entry. Each community page credits its collection and links
+the license.
 
 ## Deployment
 
