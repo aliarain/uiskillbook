@@ -6,6 +6,8 @@ color: "#635BFF"
 category: Fintech
 icon: stripe
 updated_at: "2026-10-29"
+fonts:
+  - Söhne
 ---
 
 # Stripe — DESIGN.md

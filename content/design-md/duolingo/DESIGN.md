@@ -6,6 +6,9 @@ color: "#58CC02"
 category: Education
 icon: duolingo
 updated_at: "2026-10-29"
+fonts:
+  - Feather Bold
+  - DIN Round
 ---
 
 # Duolingo — DESIGN.md

@@ -167,6 +167,11 @@ The importer pins each collection to a commit, keeps its license in
 and records the source on every entry. Each community page credits its collection and links
 the license.
 
+`node scripts/design-md-tokens.mjs` reads the colors and font families each file declares into
+`content/design-md-tokens.json` (the importer runs it too). Pages show them as swatches, and
+they drive the font, color and group hub pages under `/design-md/font/*`, `/design-md/color/*`
+and `/design-md/group/*`. Design.md pages have their own sitemap at `/design-md/sitemap.xml`.
+
 ## Deployment
 
 The `main` branch is connected to a Vercel project — every push deploys

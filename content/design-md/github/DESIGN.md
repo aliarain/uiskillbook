@@ -6,6 +6,8 @@ color: "#1F2328"
 category: Developer tools
 icon: github
 updated_at: "2026-10-29"
+fonts:
+  - Mona Sans
 ---
 
 # GitHub — DESIGN.md

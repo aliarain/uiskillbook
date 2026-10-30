@@ -6,6 +6,8 @@ color: "#FF6363"
 category: Developer tools
 icon: raycast
 updated_at: "2026-10-29"
+fonts:
+  - Inter
 ---
 
 # Raycast — DESIGN.md

@@ -6,6 +6,8 @@ color: "#008060"
 category: Commerce
 icon: shopify
 updated_at: "2026-10-29"
+fonts:
+  - Inter
 ---
 
 # Shopify — DESIGN.md

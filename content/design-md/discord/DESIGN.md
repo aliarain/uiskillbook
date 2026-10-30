@@ -6,6 +6,8 @@ color: "#5865F2"
 category: Community
 icon: discord
 updated_at: "2026-10-29"
+fonts:
+  - gg sans
 ---
 
 # Discord — DESIGN.md

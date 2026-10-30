@@ -7,8 +7,10 @@
 // content/design-md entries always win.
 //
 //   GITHUB_TOKEN=$(gh auth token) node scripts/import-design-md.mjs
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+//   node scripts/import-design-md.mjs --reindex   # rebuild index.json from the stored files
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { scanText } from "./scan-skill.mjs";
+import { writeTokens } from "./design-md-tokens.mjs";
 
 const OUT = "content/design-md-imports";
 
@@ -50,10 +52,18 @@ async function pool(items, size, fn) {
 
 const slugify = (s) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const titleCase = (slug) => slug.split("-").map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(" ");
-const strip = (s) => s.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`>#|]/g, "").replace(/\s+/g, " ").trim();
+const strip = (s) => s.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`>|]/g, "").replace(/#(?![0-9a-f]{6}\b|[0-9a-f]{3}\b)/gi, "").replace(/\s+/g, " ").trim();
+
+/** Token references like `{colors.canvas}` read as noise in a summary; keep the hex that follows. */
+const cleanProse = (s) =>
+  strip(s.replace(/`?\{[\w.-]+\}`?\s*[—–:-]\s*/g, "").replace(/`?\{[\w.-]+\}`?/g, "").replace(/\(\s*\)/g, ""))
+    .replace(/\s+([,.)])/g, "$1")
+    .trim();
+const looksLikeCode = (p) => /[{};]\s*$|^\s*[./@:]|^\s*\w[\w-]*\s*:\s*\S+;|<\/?[a-z]/im.test(p);
 
 function meta(text, slug, language) {
-  const body = text.replace(/^---\n[\s\S]*?\n---\n/, "");
+  const front = text.match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? "";
+  const body = text.replace(/^---\n[\s\S]*?\n---\n/, "").replace(/```[\s\S]*?```/g, "");
   const h1 = body.match(/^#\s+(.+)$/m)?.[1];
   let name = h1 ? strip(h1) : "";
   name = name
@@ -66,7 +76,10 @@ function meta(text, slug, language) {
     .replace(/[\s:–—-]+$/, "")
     .trim();
   if (!name || name.length > 48) name = titleCase(slug);
-  const paragraphs = body.split(/\n\s*\n/).map((p) => p.trim());
+  const paragraphs = body
+    .split(/\n\s*\n/)
+    // A heading glued to its first paragraph still leaves the paragraph.
+    .map((p) => p.replace(/^(#{1,6} .*\n)+/, "").trim());
   const companyLine = paragraphs.find((p) => /のデザイン仕様書/.test(p) && !/このファイルは/.test(p));
   // Japanese files describe the company in the paragraph that names the spec;
   // without it, their other prose is measurement notes, so use a plain line.
@@ -74,16 +87,20 @@ function meta(text, slug, language) {
     const d = companyLine ? strip(companyLine) : `${name}のデザイン仕様書。`;
     return { name, description: d.length > 220 ? `${d.slice(0, 219)}…` : d, color: brandColor(body) };
   }
-  const paragraph = paragraphs
-    .find(
-      (p) =>
-        p &&
-        !/^[#|>`-]/.test(p) &&
-        !/^\d+\.\s/.test(p) &&
-        !/このファイルは/.test(p) &&
-        strip(p).length > 40
-    );
-  let description = paragraph ? strip(paragraph) : `${name} design language as a DESIGN.md file.`;
+  // Prefer the file's own one-line summary: a frontmatter description, or the tagline quoted under the title.
+  const declared = front.match(/^description:\s*["']?(.+?)["']?\s*$/m)?.[1];
+  const tagline = body.match(/^#\s+.+\n+((?:>\s?.*\n?)+)/m)?.[1]?.replace(/^>\s?/gm, " ");
+  const paragraph = paragraphs.find(
+    (p) =>
+      p &&
+      !/^[#|>`-]/.test(p) &&
+      !/^\d+\.\s/.test(p) &&
+      !/このファイルは/.test(p) &&
+      !looksLikeCode(p) &&
+      cleanProse(p).length > 40
+  );
+  const candidates = [declared, tagline, paragraph].map((c) => (c ? cleanProse(c) : "")).filter((c) => c.length > 40 && !looksLikeCode(c));
+  let description = candidates[0] ?? `${name}'s colors, typography and components, written as a DESIGN.md file for coding agents.`;
   if (description.length > 220) description = `${description.slice(0, 217).replace(/\s+\S*$/, "")}…`;
   return { name, description, color: brandColor(body) };
 }
@@ -108,6 +125,17 @@ function brandColor(body) {
 
 function qualityOk(text) {
   return text.length >= 1200 && /#[0-9a-f]{6}\b/i.test(text) && /typograph|font|書体|フォント/i.test(text);
+}
+
+// --reindex: recompute names, descriptions and colors from the files already
+// imported, without fetching anything.
+if (process.argv.includes("--reindex")) {
+  const index = JSON.parse(readFileSync(`${OUT}/index.json`, "utf8"));
+  for (const entry of index.entries) Object.assign(entry, meta(readFileSync(`${OUT}/files/${entry.slug}.md`, "utf8"), entry.slug, entry.language));
+  index.entries.sort((a, b) => a.name.localeCompare(b.name));
+  writeFileSync(`${OUT}/index.json`, `${JSON.stringify(index, null, 2)}\n`);
+  writeTokens();
+  process.exit(0);
 }
 
 const ours = new Set(readdirSync("content/design-md", { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name));
@@ -178,3 +206,4 @@ writeFileSync(
 );
 console.log(`\n${entries.length} imported. Skipped: ${skipped.duplicate} duplicates, ${skipped.quality} below the quality bar, ${skipped.unsafe.length} with HIGH scan findings.`);
 for (const u of skipped.unsafe) console.log(`  unsafe: ${u}`);
+writeTokens();

@@ -6,6 +6,8 @@ color: "#FF385C"
 category: Marketplace
 icon: airbnb
 updated_at: "2026-10-29"
+fonts:
+  - Airbnb Cereal
 ---
 
 # Airbnb — DESIGN.md

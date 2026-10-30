@@ -6,6 +6,9 @@ color: "#1D1D1F"
 category: Consumer
 icon: apple
 updated_at: "2026-10-29"
+fonts:
+  - SF Pro Display
+  - SF Pro Text
 ---
 
 # Apple — DESIGN.md

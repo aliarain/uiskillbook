@@ -6,6 +6,9 @@ color: "#1DB954"
 category: Media
 icon: spotify
 updated_at: "2026-10-29"
+fonts:
+  - Circular
+  - Spotify Mix
 ---
 
 # Spotify — DESIGN.md
