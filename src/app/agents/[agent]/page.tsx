@@ -21,10 +21,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { agent } = await params;
   if (!AGENTS.some((a) => a.slug === agent)) return {};
+  const label = agentLabel(agent);
+  const count = getSkillsByAgent(agent).length;
   return pageMetadata({
-    title: `UI Skillbook for ${agentLabel(agent)}`,
-    description: `UI skills, MCP and CLI setup for ${agentLabel(agent)}.`,
+    title: `UI skills for ${label}: ${count} ${count === 1 ? "skill" : "skills"}, MCP and CLI setup`,
+    description: `${count} UI ${count === 1 ? "skill" : "skills"} that work in ${label}, plus how to connect ${label} to UI Skillbook over MCP or the CLI.`,
     path: `/agents/${agent}`,
+    image: `/agents/${agent}/opengraph-image`,
   });
 }
 

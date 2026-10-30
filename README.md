@@ -172,6 +172,10 @@ the license.
 they drive the font, color and group hub pages under `/design-md/font/*`, `/design-md/color/*`
 and `/design-md/group/*`. Design.md pages have their own sitemap at `/design-md/sitemap.xml`.
 
+`content/design-md-official.json` lists DESIGN.md files that brands publish themselves (from
+[VoltAgent/official-design-md](https://github.com/VoltAgent/official-design-md)). We link to
+them and never copy them; brands we don't otherwise cover get a link-only page with our own notes.
+
 ## Deployment
 
 The `main` branch is connected to a Vercel project — every push deploys
