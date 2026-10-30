@@ -13,7 +13,10 @@ import {
   getDesignMdRaw,
   getOriginalDesignMds,
   getRelatedDesignMds,
+  getSameBrandDesignMds,
+  hasDesignMdFile,
   inkOn,
+  officialRawUrl,
   type DesignMd,
 } from "@/lib/design-md";
 import { markdownToHast } from "@/lib/markdown";
@@ -25,6 +28,8 @@ import { JsonLd } from "@/components/json-ld";
 import { MCP_URL, SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
 import { clip } from "@/lib/design-md-copy";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Badge } from "@/raptrx-ui/components/badge";
+import { Button } from "@/raptrx-ui/components/button";
 
 // Our originals are prerendered; the ~1,400 community files render on first
 // request and are then cached, which keeps the build short.
@@ -57,6 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${entry.name} DESIGN.md: colors, fonts and UI rules`,
     description: metaDescription(entry),
     path: `/design-md/${slug}`,
+    image: `/design-md/${slug}/opengraph-image`,
     type: "article",
   });
 }
@@ -66,16 +72,18 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
   const entry = getDesignMdBySlug(slug);
   if (!entry) notFound();
 
+  // Official link-only entries have no hosted text: the page links to the brand's file instead.
+  const hosted = hasDesignMdFile(entry);
   // The page header already shows the brand name, so drop the file's own H1.
-  const tree = await markdownToHast(getDesignMdBody(slug).replace(/^\s*# .*\n/, ""));
+  const tree = hosted ? await markdownToHast(getDesignMdBody(slug).replace(/^\s*# .*\n/, "")) : null;
   const group = designMdGroup(entry);
   const groupHref = `/design-md/group/${categorySlug(group)}`;
   const family = COLOR_FAMILIES.find((c) => c.slug === colorFamily(entry.color))!;
-  const raw = getDesignMdRaw(slug);
-  const agentPrompt = `Save the following as DESIGN.md in the project root and follow it for all UI work:\n\n${raw}`;
-  const related = getRelatedDesignMds(entry);
+  const raw = hosted ? getDesignMdRaw(slug) : null;
+  const sameBrand = getSameBrandDesignMds(entry);
+  const related = getRelatedDesignMds(entry).filter((r) => !sameBrand.includes(r));
   const url = `${SITE_URL}/design-md/${slug}`;
-  const rawUrl = `${SITE_URL}/design-md/${slug}.md`;
+  const rawUrl = hosted ? `${SITE_URL}/design-md/${slug}.md` : officialRawUrl(entry.official!.url);
 
   return (
     <div className="mx-auto max-w-[820px] px-6 py-12">
@@ -94,7 +102,9 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
               keywords: ["DESIGN.md", "design system", entry.name, ...entry.fonts].join(", "),
               publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
               encoding: { "@type": "MediaObject", contentUrl: rawUrl, encodingFormat: "text/markdown" },
-              ...(entry.source
+              ...(entry.origin === "official"
+                ? { author: { "@type": "Organization", name: entry.name, ...(entry.website && { url: entry.website }) }, isBasedOn: entry.official!.url }
+                : entry.source
                 ? {
                     author: { "@type": "Organization", name: entry.source.repo, url: `https://github.com/${entry.source.repo}` },
                     isBasedOn: entry.source.url,
@@ -144,11 +154,48 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
       </p>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <CopyButtons raw={raw} agentPrompt={agentPrompt} rawLabel="Copy DESIGN.md" />
-        <a href={`/design-md/${slug}.md`} className="link inline-block rounded-input py-1 text-sm">
-          Raw DESIGN.md
-        </a>
+        {raw ? (
+          <>
+            <CopyButtons
+              raw={raw}
+              agentPrompt={`Save the following as DESIGN.md in the project root and follow it for all UI work:\n\n${raw}`}
+              rawLabel="Copy DESIGN.md"
+            />
+            <a href={`/design-md/${slug}.md`} className="link inline-block rounded-input py-1 text-sm">
+              Raw DESIGN.md
+            </a>
+          </>
+        ) : (
+          <Button render={<a href={entry.official!.url} target="_blank" rel="noreferrer" />}>
+            Open the official DESIGN.md
+          </Button>
+        )}
       </div>
+
+      {entry.official && (
+        <aside className="mt-6 flex items-start gap-3 rounded-card border border-line bg-panel p-4 text-sm text-ink-2">
+          <Badge variant="accent">Official</Badge>
+          <p>
+            {hosted ? (
+              <>
+                {entry.name} also publishes its own DESIGN.md.{" "}
+                <a href={entry.official.url} target="_blank" rel="noreferrer" className="text-link underline-offset-2 hover:underline">
+                  Read the official file
+                </a>
+                . The file below is {entry.origin === "original" ? "our own write-up" : "a community write-up"}.
+              </>
+            ) : (
+              <>
+                {entry.name} publishes this DESIGN.md itself. We link to it rather than copy it, so it is always current. The
+                colors and fonts below are our notes from reading it.{" "}
+                <Link href="/design-md/official" className="text-link underline-offset-2 hover:underline">
+                  All official files
+                </Link>
+              </>
+            )}
+          </p>
+        </aside>
+      )}
 
       <section aria-labelledby="at-a-glance" className="mt-10 rounded-feature border border-line p-5 sm:p-6">
         <h2 id="at-a-glance" className="text-xl font-semibold tracking-[-0.01em] text-ink">
@@ -161,6 +208,21 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
               {group}
             </Link>
           </dd>
+          {sameBrand.length > 0 && (
+            <>
+              <dt className="text-ink-3">Also here</dt>
+              <dd className="flex flex-wrap gap-x-3 gap-y-1">
+                {sameBrand.map((d) => (
+                  <Link key={d.slug} href={`/design-md/${d.slug}`} className="text-link underline-offset-2 hover:underline">
+                    {d.name}{" "}
+                    <span className="text-ink-3">
+                      ({d.origin === "original" ? "our write-up" : d.origin === "official" ? "official" : "community file"})
+                    </span>
+                  </Link>
+                ))}
+              </dd>
+            </>
+          )}
           <dt className="text-ink-3">Main color</dt>
           <dd className="flex items-center gap-2">
             <span aria-hidden className="size-4 rounded-full border border-line" style={{ background: entry.color }} />
@@ -240,9 +302,11 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
         </aside>
       )}
 
-      <div lang={entry.language}>
-        <Markdown tree={tree} className="mt-10" />
-      </div>
+      {tree && (
+        <div lang={entry.language}>
+          <Markdown tree={tree} className="mt-10" />
+        </div>
+      )}
 
       <section aria-labelledby="use-with-agent" className="mt-12 rounded-feature border border-line bg-panel p-5 sm:p-6">
         <h2 id="use-with-agent" className="text-xl font-semibold tracking-[-0.01em] text-ink">
@@ -250,14 +314,16 @@ export default async function DesignMdDetailPage({ params }: { params: Promise<{
         </h2>
         <p className="mt-1 text-sm text-ink-2">
           Save the file as <code className="font-mono">DESIGN.md</code> in your project root, then ask your agent to follow
-          it for UI work. Or let the agent fetch it over MCP.
+          it for UI work.{hosted && " Or let the agent fetch it over MCP."}
         </p>
         <div className="mt-5 grid gap-4">
           <CopyCommand label="Download" command={`curl -o DESIGN.md ${rawUrl}`} event="copy-design-md-curl" />
-          <div className="grid gap-4 md:grid-cols-2">
-            <CopyCommand label="MCP server" command={MCP_URL} event="copy-mcp-url" />
-            <CopyCommand label="MCP tool call" command={`get_design_md({ "slug": "${slug}" })`} event="copy-design-md-mcp" />
-          </div>
+          {hosted && (
+            <div className="grid gap-4 md:grid-cols-2">
+              <CopyCommand label="MCP server" command={MCP_URL} event="copy-mcp-url" />
+              <CopyCommand label="MCP tool call" command={`get_design_md({ "slug": "${slug}" })`} event="copy-design-md-mcp" />
+            </div>
+          )}
         </div>
       </section>
 

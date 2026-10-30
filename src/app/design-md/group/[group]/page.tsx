@@ -33,6 +33,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     title: `${found.group.label} DESIGN.md files (${found.entries.length})`,
     description: `${found.entries.length} DESIGN.md files: ${INTROS[found.group.slug] ?? `the ${found.group.label} group.`} Including ${listNames(found.entries)}.`,
     path: `/design-md/group/${found.group.slug}${page > 1 ? `?page=${page}` : ""}`,
+    image: `/design-md/group/${found.group.slug}/opengraph-image`,
   });
 }
 

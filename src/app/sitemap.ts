@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getAllSkills, getSkillsByAgent } from "@/lib/skills";
+import { getAllSkills, getSkillsByAgent, getSkillsByCategory } from "@/lib/skills";
 import { getAllChapters } from "@/lib/chapters";
 import { getAllCollections } from "@/lib/collections";
 import { getAllDesignMds } from "@/lib/design-md";
-import { AGENTS } from "@/lib/taxonomy";
+import { AGENTS, CATEGORIES } from "@/lib/taxonomy";
 import { SITE_URL } from "@/lib/site";
 
 function latest(dates: string[]): Date {
@@ -49,10 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(c.updated_at),
   }));
 
+  const categoryRoutes = CATEGORIES.map((c) => ({
+    url: `${SITE_URL}/skills/category/${c.slug}`,
+    lastModified: dated(getSkillsByCategory(c.slug)),
+  }));
+
   const agentRoutes = AGENTS.filter((a) => a.slug !== "universal").map((a) => ({
     url: `${SITE_URL}/agents/${a.slug}`,
     lastModified: dated(getSkillsByAgent(a.slug)),
   }));
 
-  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...agentRoutes];
+  return [...staticRoutes, ...skillRoutes, ...chapterRoutes, ...collectionRoutes, ...categoryRoutes, ...agentRoutes];
 }

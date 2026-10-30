@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const hubs = [
     "/design-md/fonts",
+    "/design-md/official",
     ...getDesignMdCategories().map((c) => `/design-md/group/${c.slug}`),
     ...COLOR_FAMILIES.map((c) => `/design-md/color/${c.slug}`),
     ...getDesignMdFonts().map((f) => `/design-md/font/${encodeURIComponent(f.slug)}`),

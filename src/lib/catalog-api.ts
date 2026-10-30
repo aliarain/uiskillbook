@@ -118,20 +118,22 @@ export function designMdSummary(entry: DesignMd) {
     colors: entry.colors,
     fonts: entry.fonts,
     origin: entry.origin,
+    official_url: entry.official?.url ?? null,
     language: entry.language,
     source: entry.source
       ? { repo: entry.source.repo, license: entry.source.license, commit: entry.source.commit, url: entry.source.url }
       : null,
     updated_at: entry.updated_at,
     url: `${SITE_URL}/design-md/${entry.slug}`,
-    raw_url: `${SITE_URL}/design-md/${entry.slug}/raw`,
+    raw_url: entry.origin === "official" ? (entry.official?.url ?? null) : `${SITE_URL}/design-md/${entry.slug}/raw`,
   };
 }
 
 export function designMdDetail(slug: string) {
   const entry = getDesignMdBySlug(slug);
   if (!entry) return null;
-  return { ...designMdSummary(entry), content: getDesignMdRaw(slug) };
+  // Official link-only entries have no hosted text; official_url points at the brand's file.
+  return { ...designMdSummary(entry), content: entry.origin === "official" ? null : getDesignMdRaw(slug) };
 }
 
 export function searchCatalog(q: string, limit = 20) {

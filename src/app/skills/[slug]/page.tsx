@@ -122,7 +122,7 @@ export default async function SkillDetailPage({
               ]
             : [
                 { label: "Skills", href: "/skills" },
-                { label: categoryLabel(skill.categories[0]), href: `/skills?category=${skill.categories[0]}` },
+                { label: categoryLabel(skill.categories[0]), href: `/skills/category/${skill.categories[0]}` },
               ]
         }
       />

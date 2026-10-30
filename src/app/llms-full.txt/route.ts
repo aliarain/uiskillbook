@@ -31,6 +31,14 @@ export function GET() {
     ...getAllDesignMds()
       .filter((d) => d.origin === "original")
       .flatMap((d) => [`### ${d.name}`, `Source: ${SITE_URL}/design-md/${d.slug}`, "", getDesignMdRaw(d.slug).trim(), ""]),
+    "## Official Design.md files",
+    "",
+    "> Published by the brands themselves. Fetch each file from the brand's own link.",
+    "",
+    ...getAllDesignMds()
+      .filter((d) => d.official)
+      .map((d) => `- [${d.name}](${d.official!.url}): ${d.description}`),
+    "",
     "## Community Design.md files",
     "",
     "> Imported from MIT-licensed collections, credited on each page. Fetch the Markdown from the link.",

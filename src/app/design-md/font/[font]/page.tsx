@@ -19,6 +19,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     title: `${font.name} design systems: ${font.entries.length} DESIGN.md files`,
     description: `${font.entries.length} brand and app DESIGN.md files set in ${font.name}, including ${listNames(font.entries)}. Copy one for your coding agent.`,
     path: `/design-md/font/${font.slug}${page > 1 ? `?page=${page}` : ""}`,
+    image: `/design-md/font/${encodeURIComponent(font.slug)}/opengraph-image`,
   });
 }
 
